@@ -1,0 +1,28 @@
+{
+	"manifest_version": 2,
+	"name": "Play Midnight",
+	"version": "0.9.0",
+
+	"description": "A theme created for Google Play Music to give your eyes a break with a darker layout.",
+	"icons": {
+		"16": "icon16.png",
+		"48": "icon48.png",
+		"128": "icon128.png"
+	},
+
+	"content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+
+	"background": {
+		"page": "background.html"
+	},
+
+	"content_scripts": [
+		{
+			"matches": ["*://play.google.com/music/*"],
+			"run_at": "document_end",
+			"js": ["js/play-midnight.js"]
+		}
+	],
+
+	"web_accessible_resources": ["css/play-midnight.css", "images/*.png"]
+}
