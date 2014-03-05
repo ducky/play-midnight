@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Play Midnight",
-	"version": "0.9.2",
+	"version": "0.9.3",
 
 	"description": "A theme created for Google Play Music to give your eyes a break with a darker layout.",
 	"icons": {
@@ -18,5 +18,5 @@
 		}
 	],
 
-	"web_accessible_resources": ["css/play-midnight.css", "images/*.png"]
+	"web_accessible_resources": ["css/play-midnight.css", "images/*.png", "images/*.gif"]
 }

@@ -23,11 +23,15 @@ var PlayMidnight = {
 		var credits = document.createElement('ul');
 		credits.id = "play-midnight";
 
-		var creditsInner = document.createElement('li');
-		creditsInner.className = "nav-item-container";
-		creditsInner.innerHTML = "<a href=\"http://christieman.com/\">By Chris Tieman</a>";
+		var creditsMe = document.createElement('li');
+		creditsMe.className = "nav-item-container";
+		creditsMe.innerHTML = "<a href=\"http://christieman.com/\">By Chris Tieman</a>";
+		credits.appendChild(creditsMe);
 
-		credits.appendChild(creditsInner);
+		var creditsDonate = document.createElement('li');
+		creditsDonate.className = "nav-item-container";
+		creditsDonate.innerHTML = "<a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KHH9ZJH42FF4J\">Donate</a>";
+		credits.appendChild(creditsDonate);
 
 		var nav = document.getElementById('nav')
 		nav.appendChild(divider);
