@@ -22,17 +22,22 @@ body {
 
 /* GoogleOne Bar */
 #oneGoogleWrapper {
+	/* Main Background */
 	& > div > div {
 		background: lighten($primary, 10%);
 	}
 
-	.gb_sa {
+	/* Logo */
+	& > div > div > div:nth-child(2) > div span {
 		background-image: url('../images/play_logo_x2.png') !important;
 	}
 
-	.gb_q, .gb_Ca {
-		.gb_g {
-			background-image: url('../images/google-bar.png');
+	/* Google Play Icons */
+	& > div > div > div > div:nth-child(2) {
+		& > div:nth-child(2), & > div:nth-child(3) {
+			.gb_g {
+				background-image: url('../images/google-bar.png');
+			}
 		}
 	}
 
@@ -114,11 +119,6 @@ body {
 	border-bottom: 3px solid darken($primary, 5%);
 }
 
-/* Sidebar/Nav */
-#nav {
-	
-}
-
 /* Main Content */
 #main, .g-content {
 	background-color: $primary;
@@ -147,6 +147,10 @@ body {
 		}
 	}
 
+	.hover-overlay {
+		border-radius: 0;
+	}
+
 	.explicit {
 		background: transparent;
 		color: #600;
@@ -154,7 +158,7 @@ body {
 } 
 
 /* Sidebar/Nav */
-.nav-item-container, {
+.nav-item-container {
 	color: $font_primary;
 }
 
@@ -166,11 +170,11 @@ body {
 	border: 1px solid lighten($primary, 7%);
 }
 
-.nav-item-container:hover .playlistDropDown, .nav-item-container:hover .playlistDropDown:hover, .nav-item-container.selected:focus .playlistDropDown, .nav-item-container.selected:focus .playlistDropDown:hover {
+.nav-item-container:hover .playlistDropDown, .nav-item-container:hover .playlistDropDown:hover, .nav-item-container.selected:focus .playlistDropDown, .nav-item-container.selected:focus .playlistDropDown:hover, .playlistDragTarget {
 	background-color: lighten($primary, 8%);
 }
 
-.nav-item-container:hover .fade-out:after, .nav-item-container.selected:focus .fade-out:after {
+.nav-item-container:hover .fade-out:after, .nav-item-container.selected:focus .fade-out:after, .playlistDragTarget .fade-out:after {
 	@include background-image(linear-gradient(left, transparent 0%, lighten($primary, 8%) 100%));
 }
 
@@ -274,6 +278,12 @@ body {
 	background: lighten($primary, 5%);
 }
 
+.album-view .explicit,
+.song-row .explicit {
+	background: transparent;
+	color: #600;
+}
+
 .song-row .fade-out:after, .fade-out.gray:after {
 	@include background-image(linear-gradient(left, transparent 0%, $primary 100%));
 }
@@ -290,6 +300,10 @@ body {
 
 .song-row.hover [data-col="track"] .content {
 	color: $primary;
+}
+
+.song-row .stars:hover .rating-container.stars {
+	background: url('../images/btn_list_rating_star_off.png') left center repeat-x;
 }
 
 .song-row.currently-playing td, .song-row.currently-playing td[data-col="title"] {
@@ -504,9 +518,6 @@ body {
 }
 .song-row td[data-rating="undefined"] .rating-container.stars {
 	background: url('../images/btn_list_rating_star_off.png') left center repeat-x;
-}
-.song-row:hover .rating {
-	background: none !important;
 }
 .goog-menuitem .rating-container.stars li:hover {
 	background: url('../images/btn_list_rating_star_selected_hover.png') left center repeat-x;
@@ -799,8 +810,16 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 }
 
 /* Credits */
-#play-midnight a {
-	font-size: 14px;
-	color: #aaa;
-	text-decoration: none;
+#playMidnight-credits {
+	#play-midnight {
+		a {
+			font-size: 14px;
+			color: $font_primary;
+		}
+	}
+
+	a {
+		color: $font_secondary;
+		text-decoration: none;
+	}
 }

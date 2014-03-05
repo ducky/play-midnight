@@ -1,43 +1,66 @@
+jQuery(function($){
+
+
 var PlayMidnight = {
 	init: function() {
 		this.injectStyle();
+		this.updateFavicon();
 		this.addCredits();
 	},
 
 	injectStyle: function() {
-		var style = document.createElement('link');
-		style.rel = 'stylesheet';
-		style.type = 'text/css';
-		style.href = chrome.extension.getURL('css/play-midnight.css');
-		(document.head||document.documentElement).appendChild(style);
+		var style = $('<link>', {
+			rel: 'stylesheet',
+			type: 'text/css',
+			href: chrome.extension.getURL('css/play-midnight.css')
+		});
+		$('head').append(style);
+	},
+
+	updateFavicon: function() {
+		var iconUrl = chrome.extension.getURL('images/favicon.ico') + '?v=' + Date.now();
+
+		$('link[rel="SHORTCUT ICON"]').remove();
+		$('head').append( $('<link>', {
+			rel: 'shortcut icon',
+			href: iconUrl
+		}) );
 	},
 
 	addCredits: function() {
-		var divider = document.createElement('div');
-		divider.className = "nav-section-divider";
+		var midnightWrapper = $('<div>', {
+			id: 'playMidnight-credits',
+		});
 
-		var creditsHead = document.createElement('div');
-		creditsHead.className = "nav-section-header";
-		creditsHead.innerHTML = "PLAY MIDNIGHT";
+		var divider = $('<div', {
+			class: 'nav-section-divider'
+		});
+		midnightWrapper.append(divider);
 
-		var credits = document.createElement('ul');
-		credits.id = "play-midnight";
+		var creditsHead = $('<div>', {
+			class: 'nav-section-header',
+			html: 'PLAY MIDNIGHT - <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KHH9ZJH42FF4J">DONATE</a>'
+		});
+		midnightWrapper.append(creditsHead);
 
-		var creditsMe = document.createElement('li');
-		creditsMe.className = "nav-item-container";
-		creditsMe.innerHTML = "<a href=\"http://christieman.com/\">By Chris Tieman</a>";
-		credits.appendChild(creditsMe);
+		var credits = $('<ul>', {
+			id: 'play-midnight'
+		});
 
-		var creditsDonate = document.createElement('li');
-		creditsDonate.className = "nav-item-container";
-		creditsDonate.innerHTML = "<a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KHH9ZJH42FF4J\">Donate</a>";
-		credits.appendChild(creditsDonate);
+		var creditsMe = $('<li>', {
+			class: 'nav-item-container',
+			html: '<a href="http://christieman.com/">By Chris Tieman</a>'
+		});
+		credits.append(creditsMe);
 
-		var nav = document.getElementById('nav')
-		nav.appendChild(divider);
-		nav.appendChild(creditsHead);
-		nav.appendChild(credits);
+		midnightWrapper.append(credits);
+
+		if ( !$('#playMidnight-credits').length )
+			$('#nav').append(midnightWrapper)
 	}
 };
 
 PlayMidnight.init();
+
+
+});
