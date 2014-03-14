@@ -22,9 +22,11 @@ body {
 
 /* GoogleOne Bar */
 #oneGoogleWrapper {
+	position: relative;
+
 	/* Main Background */
 	& > div > div {
-		background: lighten($primary, 10%);
+		background: lighten($primary, 13%);
 	}
 
 	/* Logo */
@@ -32,32 +34,36 @@ body {
 		background-image: url('../images/play_logo_x2.png') !important;
 	}
 
-	/* Google Play Icons */
-	& > div > div > div > div:nth-child(2) {
-		& > div:nth-child(2), & > div:nth-child(3) {
-			.gb_g {
-				background-image: url('../images/google-bar.png');
+	& > div > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) {
+		/* Search Bar */
+		fieldset:nth-child(2) > div > div {
+			background: lighten($primary, 3%);
+			border: 1px solid darken($primary, 3%);
+			border-right: none;
+			border-radius: 2px 0 0 2px;
+
+			input[name="q"] {
+				color: darken($font_primary, 2%);
 			}
 		}
-	}
 
-	.gbqfqw {
-		background: lighten($primary, 3%);
-		border: 1px solid darken($primary, 3%);
-		border-right: none;
-		border-radius: 2px 0 0 2px;
-
-		input[name="q"] {
-			color: darken($font_primary, 2%);
+		/* Search Button */
+		div > button {
+			background: lighten($primary, 20%);
 		}
 	}
 
-	#gbqfb {
-		background: lighten($primary, 20%);
-	}
+	/* Plus and Share Links */
+	& > div > div > div:nth-child(1) {
+		& > div:nth-child(1) > div a,
+		& > div:nth-child(2) > div:nth-child(4) > div:nth-child(1) > a {
+			color: $font_primary !important;
+		}
 
-	#gb#gb a.gb_f, #gb#gb a.gb_r {
-		color: $font_primary;
+		/* Share Button */
+		& > div:nth-child(2) > div:nth-child(4) > div:nth-child(1) > a {
+			background: lighten($primary, 20%);
+		}
 	}
 }
 
@@ -175,11 +181,11 @@ body {
 }
 
 .nav-item-container:hover .fade-out:after, .nav-item-container.selected:focus .fade-out:after, .playlistDragTarget .fade-out:after {
-	@include background-image(linear-gradient(left, transparent 0%, lighten($primary, 8%) 100%));
+	@include background-image(linear-gradient(left, rgba(lighten($primary, 8%), 0) 0%, lighten($primary, 8%) 100%));
 }
 
 .fade-out:after, .now-playing-menu-wrapper.fade-out:after {
-	@include background-image(linear-gradient(left, transparent 0%, lighten($primary, 6%) 100%));
+	@include background-image(linear-gradient(left, rgba(lighten($primary, 6%), 0) 0%, lighten($primary, 6%) 100%));
 }
 
 #nav_collections .nav-item-container.selected, #nav_collections .nav-item-container.selected:focus, .nav-item-container.selected, .nav-item-container.selected:focus {
@@ -285,7 +291,7 @@ body {
 }
 
 .song-row .fade-out:after, .fade-out.gray:after {
-	@include background-image(linear-gradient(left, transparent 0%, $primary 100%));
+	@include background-image(linear-gradient(left, rgba($primary, 0) 0%, $primary 100%));
 }
 
 .song-row td, .song-row td[data-col="track"], .settings-devices-table td, .upload-music-page ul {
@@ -311,7 +317,7 @@ body {
 }
 
 .song-row.selected-song-row .fade-out:after, .song-row.hover .fade-out:after {
-	@include background-image(linear-gradient(left, transparent 0%, lighten($primary, 4%) 100%));
+	@include background-image(linear-gradient(left, rgba(lighten($primary, 4%), 0) 0%, lighten($primary, 4%) 100%));
 }
 
 /* Buttons */
@@ -607,6 +613,10 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 .song-row .hover-button[data-id="play"] {
 	background: no-repeat url('../images/play-sprites.png') -2816px -506px;
 	background-color: rgba(0,0,0,0.8);
+}
+.song-row [data-col="index"] .hover-button[data-id="play"], .song-row [data-col="track"] .hover-button[data-id="play"] {
+	background: no-repeat url('../images/play-sprites.png') -2816px -506px;
+	background-color: lighten($primary, 4%);
 }
 .song-row [data-col="track"] .hover-button[data-id="play"] {
 	background: no-repeat url('../images/play-sprites.png') -902px -130px;

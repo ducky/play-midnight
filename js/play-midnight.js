@@ -28,35 +28,31 @@ var PlayMidnight = {
 	},
 
 	addCredits: function() {
-		var midnightWrapper = $('<div>', {
-			id: 'playMidnight-credits',
-		});
+		var donateUrl = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KHH9ZJH42FF4J';
+		var personalUrl = 'http://christieman.com/';
 
 		var divider = $('<div', {
 			class: 'nav-section-divider'
 		});
-		midnightWrapper.append(divider);
 
-		var creditsHead = $('<div>', {
+		var header = $('<div>', {
 			class: 'nav-section-header',
-			html: 'PLAY MIDNIGHT - <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KHH9ZJH42FF4J">DONATE</a>'
-		});
-		midnightWrapper.append(creditsHead);
+			text: 'PLAY MIDNIGHT - '
+		}).append( $('<a>', { href: donateUrl, text: 'DONATE' }) );
 
-		var credits = $('<ul>', {
-			id: 'play-midnight'
-		});
-
-		var creditsMe = $('<li>', {
-			class: 'nav-item-container',
-			html: '<a href="http://christieman.com/">By Chris Tieman</a>'
-		});
-		credits.append(creditsMe);
-
-		midnightWrapper.append(credits);
+		var credits = $('<ul>', { id: 'play-midnight' })
+			.append( $('<li>', { class: 'nav-item-container' })
+				.append( $('<a>', {
+					href: personalUrl,
+					text: 'By Chris Tieman'
+				})));
 
 		if ( !$('#playMidnight-credits').length )
-			$('#nav').append(midnightWrapper)
+			$('#nav').append(
+				$('<div>', { id: 'playMidnight-credits', })
+					.append(divider)
+					.append(header)
+					.append(credits));
 	}
 };
 
