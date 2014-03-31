@@ -362,12 +362,22 @@ body {
 }
 
 /* Dialog Box */
-.simple-dialog-bg, .zoomable-image-dialog-bg, .regularLoadingOverlay {
+.simple-dialog-bg, .zoomable-image-dialog-bg {
 	background: lighten($primary, 15%);
 }
 
-.regularLoadingOverlay {
+.regularLoadingOverlay, .regular-loading-overlay {
+	-moz-opacity: .8;
+	opacity: .8;
+	filter: alpha(opacity=80);
 	background: lighten($primary, 15%) url('../images/ani_loading_dark_big.gif') no-repeat center center;
+}
+
+.ifl-loading-overlay {
+	-moz-opacity: .8;
+	opacity: .8;
+	filter: alpha(opacity=80);
+	background-color: lighten($primary, 15%);
 }
 
 .simple-dialog, .simple-dialog-title, .simple-dialog-content, .simple-dialog.more-text {
@@ -486,9 +496,6 @@ body {
 #player .flat-button[data-id="cast"] {
 	background: no-repeat url('../images/play-sprites.png') -5012px -1124px;
 }
-#player .flat-button[data-id="queue"] {
-	background: no-repeat url('../images/play-sprites.png') -1774px -934px;
-}
 .nav-item-container:hover .playlistDropDown, .nav-item-container:hover .playlistDropDown:hover, .nav-item-container.selected:focus .playlistDropDown, .nav-item-container.selected:focus .playlistDropDown:hover {
 	background: no-repeat url('../images/play-sprites.png') -1762px -564px;
 }
@@ -506,6 +513,9 @@ body {
 }
 #player .flat-button[data-id="queue"] {
 	background: no-repeat url('../images/play-sprites.png') -1774px -934px;
+}
+#player .flat-button[data-id="queue"].selected {
+    background-position: -2946px -156px;
 }
 #player .flat-button[data-id="show-miniplayer"] {
 	background: no-repeat url('../images/play-sprites.png') -1352px -1026px;
