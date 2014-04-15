@@ -460,23 +460,14 @@ body {
 #player .flat-button[data-id="shuffle"][value="NO_SHUFFLE"] {
 	background: no-repeat url('../images/play-sprites.png') -2310px -872px;
 }
-/*#player .flat-button[data-id="shuffle"][value="ALL_SHUFFLE"] {
-	background: no-repeat url('../images/play-sprites.png') -4548px -724px;
-}
-#player .flat-button[data-id="repeat"] {
-	background: no-repeat url('../images/play-sprites.png') -5060px -1300px;
-}*/
 #player .flat-button[data-id="repeat"][value="NO_REPEAT"] {
 	background: no-repeat url('../images/play-sprites.png') -5060px -1300px;
 }
-/*#player .flat-button[data-id="repeat"][value="LIST_REPEAT"] {
-	background: no-repeat url('../images/play-sprites.png') -3400px -1044px;
+#player .flat-button[data-id="cast"] {
+	background: no-repeat url('../images/play-sprites.png') -4997px -1110px;
 }
-#player .flat-button[data-id="repeat"][value="SINGLE_REPEAT"] {
-	background: no-repeat url('../images/play-sprites.png') -2946px -50px;
-}*/
 #player .connected[data-id="cast"] {
-	background: no-repeat url('../images/play-sprites.png') -4592px -1260px;
+	background: no-repeat url('../images/play-sprites.png') -4577px -1246px;
 }
 #volume_low {
 	background: no-repeat url('../images/play-sprites.png') -5830px -724px;
@@ -492,9 +483,6 @@ body {
 }
 #player .rating-container.thumbs [data-rating="1"] {
 	background: no-repeat url('../images/play-sprites.png') -3984px -976px;
-}
-#player .flat-button[data-id="cast"] {
-	background: no-repeat url('../images/play-sprites.png') -5012px -1124px;
 }
 .nav-item-container:hover .playlistDropDown, .nav-item-container:hover .playlistDropDown:hover, .nav-item-container.selected:focus .playlistDropDown, .nav-item-container.selected:focus .playlistDropDown:hover {
 	background: no-repeat url('../images/play-sprites.png') -1762px -564px;
@@ -692,6 +680,9 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 	#player .flat-button[data-id="cast"] {
 		background: no-repeat url('../images/play-sprites.png') -2860px -25px;
 	}
+	#player .connected[data-id="cast"] {
+    		background: no-repeat url('../images/play-sprites.png') -1900px -479px;
+    	}
 	 #player .flat-button[data-id="show-miniplayer"] {
 		background: no-repeat url('../images/play-sprites.png') -1824px 0;
 	}
