@@ -2,6 +2,10 @@ jQuery(function($){
 
 
 var PlayMidnight = {
+	defaults: {
+		favicon: true
+	},
+
 	init: function() {
 		this.injectStyle();
 		this.updateFavicon();
@@ -18,13 +22,18 @@ var PlayMidnight = {
 	},
 
 	updateFavicon: function() {
-		var iconUrl = chrome.extension.getURL('images/favicon.ico') + '?v=' + Date.now();
+		var pm = this;
+		chrome.storage.sync.get(pm.defaults, function( options ) {
+			if ( options.favicon === true ) {
+				var iconUrl = chrome.extension.getURL('images/favicon.ico') + '?v=' + Date.now();
 
-		$('link[rel="SHORTCUT ICON"]').remove();
-		$('head').append( $('<link>', {
-			rel: 'shortcut icon',
-			href: iconUrl
-		}) );
+				$('link[rel="SHORTCUT ICON"]').remove();
+				$('head').append( $('<link>', {
+					rel: 'shortcut icon',
+					href: iconUrl
+				}) );
+			}
+		});
 	},
 
 	addCredits: function() {

@@ -5,8 +5,6 @@
  *
  */
 
-@import 'compass';
-
 /* Colors */
 $accent: #fb8521; // Primary elements, play slider, loading
 $font_primary: #dcdcdc; // Titles
@@ -18,6 +16,7 @@ $border: #111;
 body {
 	background-color: $primary;
 	color: lighten($font_secondary, 8%);
+	-webkit-font-smoothing: antialiased;
 }
 
 /* GoogleOne Bar */
@@ -64,6 +63,46 @@ body {
 		& > div:nth-child(2) > div:nth-child(4) > div:nth-child(1) > a {
 			background: lighten($primary, 20%);
 		}
+	}
+}
+
+/* Scrollbar */
+::-webkit-scrollbar-thumb {
+	background-color: rgba( 255, 255, 255, 0.1 );
+	box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
+
+	&:horizontal {
+		box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset -1px 0 0 rgba(0, 0, 0, .07);
+	}
+
+	&:hover {
+		background-color: rgba( 255, 255, 255, 0.25 );
+		box-shadow: inset 1px 1px 1px rgba(0, 0, 0, .25);
+	}
+
+	&:active {
+		background-color: rgba( 255, 255, 255, 0.3 );
+		box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.35);
+	}
+}
+
+::-webkit-scrollbar-track {
+	&:hover {
+		background-color: rgba(0, 0, 0, .0);
+		box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1);
+	}
+
+	&:horizontal:hover {
+		box-shadow: inset 0 1px 0 rgba(0, 0, 0, .1);
+	}
+
+	&:active {
+		background-color: rgba(0, 0, 0, .05);
+		box-shadow: inset 1px 0 0 rgba(0, 0, 0, .14), inset -1px 0 0 rgba(0, 0, 0, .07);
+	}
+
+	&:horizontal:active {
+		box-shadow: inset 0 1px 0 rgba(0, 0, 0, .14), inset 0 -1px 0 rgba(0, 0, 0, .07);
 	}
 }
 
@@ -181,11 +220,11 @@ body {
 }
 
 .nav-item-container:hover .fade-out:after, .nav-item-container.selected:focus .fade-out:after, .playlistDragTarget .fade-out:after {
-	@include background-image(linear-gradient(left, rgba(lighten($primary, 8%), 0) 0%, lighten($primary, 8%) 100%));
+	background-image: linear-gradient( left, rgba(lighten($primary, 8%), 0) 0%, lighten($primary, 8%) 100% );
 }
 
 .fade-out:after, .now-playing-menu-wrapper.fade-out:after {
-	@include background-image(linear-gradient(left, rgba(lighten($primary, 6%), 0) 0%, lighten($primary, 6%) 100%));
+	background-image: linear-gradient( left, rgba(lighten($primary, 6%), 0) 0%, lighten($primary, 6%) 100% );
 }
 
 #nav_collections .nav-item-container.selected, #nav_collections .nav-item-container.selected:focus, .nav-item-container.selected, .nav-item-container.selected:focus {
@@ -291,7 +330,7 @@ body {
 }
 
 .song-row .fade-out:after, .fade-out.gray:after {
-	@include background-image(linear-gradient(left, rgba($primary, 0) 0%, $primary 100%));
+	background-image: linear-gradient(left, rgba($primary, 0) 0%, $primary 100% );
 }
 
 .song-row td, .song-row td[data-col="track"], .settings-devices-table td, .upload-music-page ul {
@@ -317,7 +356,7 @@ body {
 }
 
 .song-row.selected-song-row .fade-out:after, .song-row.hover .fade-out:after {
-	@include background-image(linear-gradient(left, rgba(lighten($primary, 4%), 0) 0%, lighten($primary, 4%) 100%));
+	background-image: linear-gradient(left, rgba(lighten($primary, 4%), 0) 0%, lighten($primary, 4%) 100% );
 }
 
 /* Buttons */
@@ -393,7 +432,7 @@ body {
 	background: lighten($primary, 3%);
 	border: 1px solid darken($primary, 3%);
 	color: darken($font_primary, 2%);
-	@include box-shadow(0 2px 2px lighten($primary,5%));
+	box-shadow: 0 2px 2px lighten($primary,5%);
 
 	&:focus {
 		outline: none;
