@@ -14,25 +14,62 @@
 		
 		<a href="#" id="save" class="button pull-right">Save Changes</a>
 
-		<div id="status" class="status pull-right">Options Updated!</div>
+		<div id="status" class="status pull-right">Options Updated! Feel free to close this page.</div>
 	</header>
 
 	<section class="options">
 		<h3>General Options</h3>
 		
-		<div class="option">
-			<label>
-				<div class="checkbox">
-					<input type="checkbox" id="favicon" class="showFavicon" />
-					<label for="favicon"></label>
-				</div>
-				Use 'Play Midnight' Dark Favicon <span class="text-muted">(Icon that shows on your Google Play tab in Chrome)</span>
-			</label>
+		<div class="options-group">
+			<div class="option">
+				<label>
+					<div class="checkbox">
+						<input type="checkbox" id="favicon" class="showFavicon" />
+						<label for="favicon"></label>
+					</div>
+					Use 'Play Midnight' Dark Favicon <span class="text-muted">(Icon that shows on your Google Play tab in Chrome)</span>
+				</label>
+			</div>
 		</div>
 
-		<h3>Color Options</h3>
-		<div class="option">
-			<p class="text-muted">Future section, any suggestions welcome!</p>
+		<h3>Theme Color</h3>
+		<div class="options-group">
+			<div class="option accent default">
+				<label>
+					<div class="checkbox">
+						<input type="radio" id="default" class="theme-color" name="theme-color" />
+						<label for="default"></label>
+					</div>
+					Orange <em>(Default)</em>
+				</label>
+			</div>
+			<div class="option accent blue">
+				<label>
+					<div class="checkbox">
+						<input type="radio" id="blue" class="theme-color" name="theme-color" />
+						<label for="blue"></label>
+					</div>
+					Blue
+				</label>
+			</div>
+			<div class="option accent green">
+				<label>
+					<div class="checkbox">
+						<input type="radio" id="green" class="theme-color" name="theme-color" />
+						<label for="green"></label>
+					</div>
+					Green
+				</label>
+			</div>
+			<div class="option accent red">
+				<label>
+					<div class="checkbox">
+						<input type="radio" id="red" class="theme-color" name="theme-color" />
+						<label for="red"></label>
+					</div>
+					Red
+				</label>
+			</div>
 		</div>
 	</section>
 

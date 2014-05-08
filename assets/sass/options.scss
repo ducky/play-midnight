@@ -1,4 +1,7 @@
-$accent: #fb8521; // Primary elements, play slider, loading
+$accent-default: #fb8521;
+$accent-blue: #3179a1;
+$accent-green: #4c9014;
+$accent-red: #a61a2b;
 $font_primary: #dcdcdc; // Titles
 $font_secondary: #666; // Secondary information
 $primary: #141517; // Main backgrounds
@@ -50,23 +53,7 @@ p {
 label {
 	cursor: pointer;
 	user-select: none;
-}
-
-.text-muted {
-	color: darken($font_secondary, 4%);
-	font-style: italic;
-}
-
-.text-center {
-	text-align: center;
-}
-
-.pull-right {
-	float: right;
-}
-
-.inline {
-	display: inline-block;
+	display: block;
 }
 
 button, .button {
@@ -90,12 +77,61 @@ button, .button {
 	border: none;
 	color: white;
 	border-radius: 2px;
-	background-color: $accent;
+	background-color: $accent-default;
+	opacity: 0.7;
+	transition: opacity 0.5s;
 
 	&:hover {
-		background-color: lighten( $accent, 5% );
+		opacity: 1;
 		text-decoration: none;
 	}
+}
+
+.accent {
+	font-weight: bold;
+	opacity: 0.5;
+	transition: opacity 0.5s;
+
+	&.selected {
+		opacity: 1;
+	}
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.default {
+	background: $accent-default;
+}
+
+.blue {
+	background: $accent-blue;
+}
+
+.green {
+	background: $accent-green;
+}
+
+.red {
+	background: $accent-red;
+}
+
+.text-muted {
+	color: darken($font_secondary, 4%);
+	font-style: italic;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.pull-right {
+	float: right;
+}
+
+.inline {
+	display: inline-block;
 }
 
 .checkbox {
@@ -135,6 +171,10 @@ button, .button {
 }
 
 .checkbox input[type=checkbox]:checked + label:after {
+	opacity: 1;
+}
+
+.checkbox input[type=radio]:checked + label:after {
 	opacity: 1;
 }
 
@@ -180,7 +220,11 @@ section {
 	overflow: auto;
 
 	.option {
-		padding: 20px 25px;
+		cursor: pointer;
+
+		& > label {
+			padding: 20px 25px;
+		}
 	}
 }
 

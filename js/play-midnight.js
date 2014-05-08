@@ -3,37 +3,51 @@ jQuery(function($){
 
 var PlayMidnight = {
 	defaults: {
-		favicon: true
+		favicon: true,
+		theme: 'default'
+	},
+
+	settings: {
 	},
 
 	init: function() {
-		this.injectStyle();
-		this.updateFavicon();
-		this.addCredits();
+		var pm = this;
+		this.getDefaults(function() {
+			pm.injectStyle();
+			pm.updateFavicon();
+			pm.addCredits();
+		});
+	},
+
+	getDefaults: function(fn) {
+		var pm = this;
+		chrome.storage.sync.get(pm.defaults, function( options ) {
+			pm.settings = options;
+
+			fn();
+		});
 	},
 
 	injectStyle: function() {
+		var theme = this.settings.theme;
 		var style = $('<link>', {
 			rel: 'stylesheet',
 			type: 'text/css',
-			href: chrome.extension.getURL('css/play-midnight.css')
+			href: chrome.extension.getURL( 'css/play-midnight-' + theme + '.css')
 		});
 		$('head').append(style);
 	},
 
 	updateFavicon: function() {
-		var pm = this;
-		chrome.storage.sync.get(pm.defaults, function( options ) {
-			if ( options.favicon === true ) {
-				var iconUrl = chrome.extension.getURL('images/favicon.ico') + '?v=' + Date.now();
+		if ( this.settings.favicon === true ) {
+			var iconUrl = chrome.extension.getURL('images/favicon.ico') + '?v=' + Date.now();
 
-				$('link[rel="SHORTCUT ICON"]').remove();
-				$('head').append( $('<link>', {
-					rel: 'shortcut icon',
-					href: iconUrl
-				}) );
-			}
-		});
+			$('link[rel="SHORTCUT ICON"]').remove();
+			$('head').append( $('<link>', {
+				rel: 'shortcut icon',
+				href: iconUrl
+			}) );
+		}
 	},
 
 	addCredits: function() {
