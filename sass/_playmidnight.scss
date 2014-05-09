@@ -15,14 +15,14 @@ $border: #111;
 
 // Variables
 $short_name: 'default' !default;
-$spritesheet_url: '../images/play-sprites-' + $short_name + '.png';
+$spritesheet_url: '../images/sprites/play-sprites-' + $short_name + '.png';
 $spritesheet_dimensions: 3079px 727px; // Retina Size
 
 // Directories
 $sprites_thumbs: '../images/thumbs/';
 $sprites_stars: '../images/stars/';
 $sprites_iflr: '../images/iflr/';
-
+$sprites_animations: '../images/animators/';
 
 
 // Main Background
@@ -37,6 +37,7 @@ body {
 // GoogleOne Bar
 #oneGoogleWrapper {
 	position: relative;
+	z-index: 999;
 
 	// Main Background
 	& > div > div {
@@ -450,7 +451,7 @@ body {
 	-moz-opacity: .8;
 	opacity: .8;
 	filter: alpha(opacity=80);
-	background: lighten($primary, 15%) url('../images/ani_loading_dark_big.gif') no-repeat center center;
+	background: lighten($primary, 15%) url( $sprites_animations + 'ani_loading_dark_big.gif') no-repeat center center;
 }
 
 .ifl-loading-overlay {
@@ -494,16 +495,16 @@ body {
 
 // Sprites
 .song-row .song-indicator {
-	background-image: url('../images/ani_equalizer_black.gif');
+	background-image: url( $sprites_animations + 'ani_equalizer_black.gif');
 }
 .card[data-playback-status="playing"] .overlay-icon {
-	background: url('../images/ani_equalizer_white.gif');
+	background: url( $sprites_animations + 'ani_equalizer_white.gif');
 }
 .goog-menuheader .spinner {
-	background: transparent url('../images/ani_loading_dark.gif') no-repeat center center;
+	background: transparent url( $sprites_animations + 'ani_loading_dark.gif') no-repeat center center;
 }
 .song-row .song-indicator[data-playback-status="loading"] {
-	background: url('../images/ani_loading_dark.gif');
+	background: url( $sprites_animations + 'ani_loading_dark.gif');
 	background-color: inherit;
 }
 .song-row [data-col="track"] .hover-button[data-id="play"] {
@@ -980,16 +981,16 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 		background-size: 13px 20px;
 	}
 	.clearLoadingOverlay {
-		background: transparent url('../images/ani_loading_dark_big_x2.gif') no-repeat center center;
+		background: transparent url( $sprites_animations + 'ani_loading_dark_big_x2.gif') no-repeat center center;
 	}
 	.regularLoadingOverlay {
-		background: transparent url('../images/ani_loading_dark_big_x2.gif') no-repeat center center;
+		background: transparent url( $sprites_animations + 'ani_loading_dark_big_x2.gif') no-repeat center center;
 	}
 	.card[data-playback-status="playing"] .overlay-icon {
-		background: transparent url('../images/ani_equalizer_white_x2.gif');
+		background: transparent url( $sprites_animations + 'ani_equalizer_white_x2.gif');
 	}
 	.card[data-playback-status="loading"] .overlay-icon {
-		background: transparent url('../images/ani_loading_white_x2.gif');
+		background: transparent url( $sprites_animations + 'ani_loading_white_x2.gif');
 	}
 
 
@@ -1064,8 +1065,6 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 	}
 }
 
-
-
 // Credits
 #playMidnight-credits {
 	#play-midnight {
@@ -1080,3 +1079,5 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 		text-decoration: none;
 	}
 }
+
+@import 'playmidnight-options';
