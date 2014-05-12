@@ -754,9 +754,6 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 #player .flat-button[data-id="repeat"][value="SINGLE_REPEAT"] {
 	background: no-repeat url( $spritesheet_url ) -2946px -50px;
 }
-#player .connected[data-id="cast"] {
-	background: no-repeat url( $spritesheet_url ) -4592px -1260px;
-}
 #player .flat-button[data-id="shuffle"][value="ALL_SHUFFLE"] {
 	background: no-repeat url( $spritesheet_url ) -4548px -724px;
 }
@@ -830,10 +827,6 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 	}
 	#player .flat-button[data-id="cast"] {
 		background: no-repeat url( $spritesheet_url ) -2860px -25px;
-		background-size: $spritesheet_dimensions;
-	}
-	#player .connected[data-id="cast"] {
-		background: no-repeat url( $spritesheet_url ) -1900px -479px;
 		background-size: $spritesheet_dimensions;
 	}
 	 #player .flat-button[data-id="show-miniplayer"] {

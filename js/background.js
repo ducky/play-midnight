@@ -5,12 +5,14 @@ function showNotification(type, version) {
 	switch ( type ) {
 		case 'install':
 			subtitle = 'Thanks for installing Play Midnight!';
-			notificationText = 'Modify settings (including color changes) by clicking the Play Midnight icon located on the right side of your URL bar while viewing Google Play Music.';
+			notificationText = 'Play Midnight settings are built right into Google Play Music. Look for the Play Midnight icon below your Google+ picture.';
 			break;
 		case 'update':
-			if ( version === '1.1.0' ) {
-				subtitle = 'Play Midnight Updated!';
-				notificationText = 'Modify settings (including color changes) by clicking the Play Midnight icon located on the right side of your URL bar while viewing Google Play Music.';
+			subtitle = 'Play Midnight Updated!';
+			if ( version === '1.2.0' ) {
+				notificationText = 'Play Midnight settings are now built right into Google Play Music. Look for the Play Midnight icon below your Google+ picture.';
+			} else {
+				return;
 			}
 			break;
 		default:
@@ -26,33 +28,6 @@ function showNotification(type, version) {
 	};
 	chrome.notifications.create('pm', opt, function() {});
 }
-
-function openOrFocusOptionsPage() {
-	var optionsUrl = chrome.extension.getURL('assets/options.html');
-	
-	chrome.tabs.query({}, function(extensionTabs) {
-		var found = false;
-		for (var i=0; i < extensionTabs.length; i++) {
-			if (optionsUrl === extensionTabs[i].url) {
-				found = true;
-				chrome.tabs.update(extensionTabs[i].id, {"selected": true});
-			}
-		}
-		
-		if ( !found ) {
-			chrome.tabs.create ( { url: "assets/options.html" } );
-		}
-	});
-}
-chrome.pageAction.onClicked.addListener(openOrFocusOptionsPage);
-
-function checkURL(tabId, info, tab) {
-	var url = new RegExp( '^https?://play.google.com/music/listen' );
-	if ( url.test( tab.url ) ) {
-		chrome.pageAction.show(tabId);
-	}
-}
-chrome.tabs.onUpdated.addListener(checkURL);
 
 function checkInstall(details) {
 	var thisVersion = chrome.runtime.getManifest().version;
