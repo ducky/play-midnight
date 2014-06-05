@@ -183,8 +183,7 @@ $border: #111;
 		border-radius: 4px;
 
 		box-shadow: inset 0px 1px 1px darken($primary, 5%), 0px 1px 0px lighten($primary, 2%);
-
-		background: linear-gradient(top, darken($primary, 1%) 0%, darken($primary, 3%) 100%);
+		background: linear-gradient(to bottom, darken($primary, 1%) 0%, darken($primary, 3%) 100%);
 	}
 
 	.checkbox label:after {
@@ -201,6 +200,10 @@ $border: #111;
 		border-right: none;
 
 		transform: rotate(-45deg);
+	}
+
+	.checkbox input {
+		visibility: hidden;
 	}
 
 	.checkbox input[type=checkbox]:checked + label:after {

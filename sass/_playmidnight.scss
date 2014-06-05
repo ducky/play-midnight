@@ -250,11 +250,11 @@ body {
 }
 
 .nav-item-container:hover .fade-out:after, .nav-item-container.selected:focus .fade-out:after, .playlistDragTarget .fade-out:after {
-	background-image: linear-gradient( left, rgba(lighten($primary, 8%), 0) 0%, lighten($primary, 8%) 100% );
+	background: linear-gradient( to right, rgba(lighten($primary, 8%), 0) 0%, lighten($primary, 8%) 100% );
 }
 
 .fade-out:after, .now-playing-menu-wrapper.fade-out:after {
-	background-image: linear-gradient( left, rgba(lighten($primary, 6%), 0) 0%, lighten($primary, 6%) 100% );
+	background: linear-gradient( to right, rgba(lighten($primary, 6%), 0) 0%, lighten($primary, 6%) 100% );
 }
 
 #nav_collections .nav-item-container.selected, #nav_collections .nav-item-container.selected:focus, .nav-item-container.selected, .nav-item-container.selected:focus {
@@ -335,7 +335,7 @@ body {
 	background-color: lighten($primary, 8%);
 }
 
-#player .flat-button:hover, #volume:hover, #volume.simulated-hover, #player .rating-container.thumbs li.selected:hover, #player .rating-container.thumbs li:hover {
+#player .flat-button:active, #player .flat-button:focus, #player .flat-button:hover, #volume:hover, #volume.simulated-hover, #player .rating-container.thumbs li.selected:hover, #player .rating-container.thumbs li:hover {
 	background-color: lighten($primary, 8%) !important;
 }
 
@@ -366,7 +366,7 @@ body {
 }
 
 .song-row .fade-out:after, .fade-out.gray:after {
-	background-image: linear-gradient(left, rgba($primary, 0) 0%, $primary 100% );
+	background-image: linear-gradient(to right, rgba($primary, 0) 0%, $primary 100% );
 }
 
 .song-row td, .song-row td[data-col="track"], .settings-devices-table td, .upload-music-page ul {
@@ -386,7 +386,7 @@ body {
 	color: $font_primary;
 }
 .song-row.selected-song-row .fade-out:after, .song-row.hover .fade-out:after {
-	background-image: linear-gradient(left, rgba(lighten($primary, 4%), 0) 0%, lighten($primary, 4%) 100% );
+	background-image: linear-gradient(to right, rgba(lighten($primary, 4%), 0) 0%, lighten($primary, 4%) 100% );
 }
 
 
@@ -651,6 +651,9 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 }
 .descending .sort-icon {
 	background: no-repeat url( $spritesheet_url ) -6120px 0;
+}
+.goog-menuitem .get-link {
+	background: no-repeat url( $spritesheet_url ) -212px -1184px;
 }
 .queue-details button[data-id="refresh"] .icon {
 	background: no-repeat url( $spritesheet_url ) -3774px -706px;
@@ -972,6 +975,10 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 	.song-row .stars:hover .rating-container.stars {
 		background: url( $sprites_stars + "btn_list_rating_star_off_2x.png") left center repeat-x;
 		background-size: 13px 20px;
+	}
+	.goog-menuitem .get-link {
+		background: no-repeat url( $spritesheet_url ) -627px -513px;
+		background-size: $spritesheet_dimensions;
 	}
 	.clearLoadingOverlay {
 		background: transparent url( $sprites_animations + 'ani_loading_dark_big_x2.gif') no-repeat center center;
