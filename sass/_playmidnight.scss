@@ -191,7 +191,7 @@ body {
 
 
 // Main Content
-#main, .g-content {
+#content, #main, .g-content {
 	background-color: $primary;
 }
 
@@ -245,11 +245,11 @@ body {
 	border: 1px solid lighten($primary, 7%);
 }
 
-.nav-item-container:hover .playlistDropDown, .nav-item-container:hover .playlistDropDown:hover, .nav-item-container.selected:focus .playlistDropDown, .nav-item-container.selected:focus .playlistDropDown:hover, .playlistDragTarget {
+#nav_collections .nav-item-container:focus, .nav-item-container:focus, .nav-item-container:hover, .nav-item-container:hover .playlistDropDown, .nav-item-container:hover .playlistDropDown:hover, .nav-item-container.selected:focus .playlistDropDown, .nav-item-container.selected:focus .playlistDropDown:hover, .playlistDragTarget {
 	background-color: lighten($primary, 8%);
 }
 
-.nav-item-container:hover .fade-out:after, .nav-item-container.selected:focus .fade-out:after, .playlistDragTarget .fade-out:after {
+.nav-item-container:focus .fade-out:after, .nav-item-container:hover .fade-out:after, .nav-item-container.selected:focus .fade-out:after, .playlistDragTarget .fade-out:after {
 	background: linear-gradient( to right, rgba(lighten($primary, 8%), 0) 0%, lighten($primary, 8%) 100% );
 }
 
