@@ -295,7 +295,7 @@ body {
 	background: lighten($primary, 10%);
 }
 
-#played_slider {
+#played_slider, #slider .played-progress {
 	background: $accent;
 }
 
@@ -447,7 +447,7 @@ body {
 	background: lighten($primary, 15%);
 }
 
-.regularLoadingOverlay, .regular-loading-overlay {
+.regularLoadingOverlay, .regular-loading-overlay, #loading-overlay[data-type="full-loading-overlay"], #loading-overlay[data-type="regular-loading-overlay"] {
 	-moz-opacity: .8;
 	opacity: .8;
 	filter: alpha(opacity=80);
