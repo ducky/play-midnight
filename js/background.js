@@ -1,7 +1,7 @@
 function showNotification(type, version) {
 	var notificationText = '';
 	var subtitle = '';
-	
+
 	switch ( type ) {
 		case 'install':
 			subtitle = 'Thanks for installing Play Midnight!';
@@ -11,6 +11,8 @@ function showNotification(type, version) {
 			subtitle = 'Play Midnight Updated!';
 			if ( version === '1.2.0' ) {
 				notificationText = 'Play Midnight settings are now built right into Google Play Music. Look for the Play Midnight icon below your Google+ picture.';
+			} else if ( version === '1.2.7' ) {
+				notificationText = 'Themes have been updated to work with the new Songza integration for Google Play!';
 			} else {
 				return;
 			}
