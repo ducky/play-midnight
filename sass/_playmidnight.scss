@@ -5,7 +5,6 @@
  *
  */
 
-
 // Colors
 $accent: #fb8521 !default; // Primary elements, play slider, loading
 $font_primary: #dcdcdc; // Titles
@@ -29,16 +28,12 @@ $sprites_animations: '../images/animators/';
 body {
 	background-color: $primary;
 	color: lighten($font_secondary, 8%);
-	-webkit-font-smoothing: antialiased;
 }
 
 
 
 // GoogleOne Bar
 #oneGoogleWrapper {
-	position: relative;
-	z-index: 999;
-
 	// Main Background
 	& > div > div {
 		background: lighten($primary, 13%);
@@ -1124,19 +1119,4 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 	}
 }
 
-// Credits
-#playMidnight-credits {
-	#play-midnight {
-		a {
-			font-size: 14px;
-			color: $font_primary;
-		}
-	}
-
-	a {
-		color: $font_secondary;
-		text-decoration: none;
-	}
-}
-
-@import 'playmidnight-options';
+@import 'options';

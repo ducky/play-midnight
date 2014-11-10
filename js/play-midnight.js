@@ -3,6 +3,7 @@ jQuery(function($){
 var PlayMidnightOptions = {
 	defaults: {
 		favicon: true,
+		styled: true,
 		theme: 'default'
 	},
 
@@ -17,13 +18,18 @@ var PlayMidnightOptions = {
 		var self = this;
 
 		var favIcon = $('#play-midnight-options #favicon');
+		var styled = $('#play-midnight-options #styled');
 		var themeColor = $('#play-midnight-options #' + options.theme + '.theme-color');
 
 		if ( options.favicon ) {
 			favIcon.prop( 'checked', true ).closest('.option').addClass('selected');
 		}
 
-		themeColor.attr( 'checked', true ).closest('.option').addClass('selected');
+		if ( options.styled ) {
+			styled.prop( 'checked', true ).closest('.option').addClass('selected');
+		}
+
+		themeColor.prop( 'checked', true ).closest('.option').addClass('selected');
 
 		$('#play-midnight-options #save').addClass( options.theme );
 		$('#play-midnight-options .option').on('click', function() {
@@ -41,11 +47,13 @@ var PlayMidnightOptions = {
 
 	save: function( callback ) {
 		var favicon = $('#play-midnight-options #favicon').is(':checked');
+		var styled = $('#play-midnight-options #styled').is(':checked');
 		var theme = $('#play-midnight-options .theme-color:checked').attr('id');
 		var status = $('#play-midnight-options #status');
-		
+
 		chrome.storage.sync.set( {
 			favicon: favicon,
+			styled: styled,
 			theme: theme
 		}, function( ) {
 			status.fadeIn(500, function() {
@@ -93,13 +101,23 @@ var PlayMidnight = {
 	},
 
 	injectStyle: function() {
-		var theme = this.options.theme;
-		var style = $('<link>', {
-			rel: 'stylesheet',
-			type: 'text/css',
-			href: chrome.extension.getURL( 'css/play-midnight-' + theme + '.css')
-		});
-		$('head').append(style);
+		var style = null;
+		if ( this.options.styled === true ) {
+			var theme = this.options.theme;
+			style = $('<link>', {
+				rel: 'stylesheet',
+				type: 'text/css',
+				href: chrome.extension.getURL( 'css/play-midnight-' + theme + '.css')
+			});
+			$('head').append(style);
+		} else {
+			style = $('<link>', {
+				rel: 'stylesheet',
+				type: 'text/css',
+				href: chrome.extension.getURL( 'css/play-midnight-options.css')
+			});
+			$('head').append(style);
+		}
 	},
 
 	injectOptions: function( callback ) {
@@ -122,7 +140,7 @@ var PlayMidnight = {
 			});
 
 			$('#headerBar .nav-bar').prepend( button );
-			
+
 			callback();
 		});
 	},
