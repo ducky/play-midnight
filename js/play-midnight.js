@@ -97,7 +97,9 @@ var PlayMidnight = {
 				});
 			});
 		});
+
 		this.addCredits();
+		this.addSortOptions();
 	},
 
 	injectStyle: function() {
@@ -184,6 +186,39 @@ var PlayMidnight = {
 					.append(header)
 					.append(credits));
 		}
+	},
+
+	addSortOptions: function() {
+		// Add a link directly to Recent
+		$('<a data-type="recent" class="nav-item-container tooltip" href="">Recent</a>')
+			.insertAfter('#nav_collections a:first-child');
+
+		// Add sort links to the header
+		function toggleRecentUI() {
+			if ( $(this).children('.tab-text:contains(Recent)').length ) {
+				$(this).append([
+					'<div id="recent-sort">',
+						'<label><input type="radio" name="recent-sort" value="0" selected><span>All</span></label>',
+						'<label><input type="radio" name="recent-sort" value="2"><span>Added</span></label>',
+						'<label><input type="radio" name="recent-sort" value="3"><span>Played</span></label>',
+						'<label><input type="radio" name="recent-sort" value="5"><span>Created</span></label>',
+					'</div>'
+				].join(''));
+			} else {
+				$('#recent-sort').remove();
+			}
+			$(this).one('DOMSubtreeModified', toggleRecentUI);
+		}
+
+		$('#breadcrumbs').one('DOMSubtreeModified', toggleRecentUI);
+
+		$('#breadcrumbs').on('click', 'input', function() {
+			var reason = parseInt($(this).val());
+			var selector = (reason == 0 ? '*' : '[data-reason=' + reason + ']');
+			var $cards = $('#music-content .card');
+			$cards.filter(selector).show();
+			$cards.not(selector).hide();
+		});
 	}
 };
 
