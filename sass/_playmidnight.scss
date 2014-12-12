@@ -1130,8 +1130,8 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 	}
 
 	span {
-		color: white;
 		opacity: 0.5;
+		color: white;
 	}
 
 	input:checked + span {
@@ -1140,7 +1140,7 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 
 	label {
 		cursor: pointer;
-		margin: 0 12px;
+		padding: 6px 12px;
 	}
 }
 
