@@ -189,29 +189,36 @@ var PlayMidnight = {
 	},
 
 	addSortOptions: function() {
-		// Add a link directly to Recent
+		// Add a link directly to Recent, after the first "Listen Now" link
 		$('<a data-type="recent" class="nav-item-container tooltip" href="">Recent</a>')
 			.insertAfter('#nav_collections a:first-child');
 
 		// Add sort links to the header
 		function toggleRecentUI() {
-			if ( $(this).children('.tab-text:contains(Recent)').length ) {
+			// Only add them if "Recent" string is present and we're not already in this view.
+			if ( $(this).children('.tab-text:contains(Recent)').length
+				&& ! $(this).children('#recent-sort').length ) {
 				$(this).append([
 					'<div id="recent-sort">',
-						'<label><input type="radio" name="recent-sort" value="0" selected><span>All</span></label>',
+						'<label><input type="radio" name="recent-sort" value="0" checked><span>All</span></label>',
 						'<label><input type="radio" name="recent-sort" value="2"><span>Added</span></label>',
 						'<label><input type="radio" name="recent-sort" value="3"><span>Played</span></label>',
 						'<label><input type="radio" name="recent-sort" value="5"><span>Created</span></label>',
 					'</div>'
 				].join(''));
+
+			// Otherwise remove the UI completely.
 			} else {
 				$('#recent-sort').remove();
 			}
 			$(this).one('DOMSubtreeModified', toggleRecentUI);
 		}
 
+		// Make sure this only fires once or else we would be in an infinite loop,
+		// since the function itself modifies the DOM subtree.
 		$('#breadcrumbs').one('DOMSubtreeModified', toggleRecentUI);
 
+		// Filter toggling behavior
 		$('#breadcrumbs').on('click', 'input', function() {
 			var reason = parseInt($(this).val());
 			var selector = (reason == 0 ? '*' : '[data-reason=' + reason + ']');
