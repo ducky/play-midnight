@@ -1121,27 +1121,8 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 
 // Sorting UI
 #recent-sort {
-	display: inline-block;
 	vertical-align: top;
 	margin: 0 24px;
-
-	input {
-		display: none;
-	}
-
-	span {
-		opacity: 0.5;
-		color: white;
-	}
-
-	input:checked + span {
-		opacity: 1;
-	}
-
-	label {
-		cursor: pointer;
-		padding: 6px 12px;
-	}
 }
 
 
