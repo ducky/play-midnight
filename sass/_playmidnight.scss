@@ -433,7 +433,9 @@ body {
 	background-color: $accent !important;
 	color: #fff;
 
-	&:hover {
+	&:hover,
+	&:focus,
+	&:active {
 		background-color: lighten( $accent, 8% ) !important;
 		box-shadow: none;
 	}
@@ -1109,28 +1111,8 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 
 // Sorting UI
 #recent-sort {
-	display: inline-block;
 	vertical-align: top;
 	margin: 0 24px;
-
-	input {
-		display: none;
-	}
-
-	span {
-		color: white;
-		opacity: 0.5;
-	}
-
-	input:checked + span {
-		opacity: 1;
-	}
-
-	label {
-		cursor: pointer;
-		margin: 0 12px;
-	}
 }
-
 
 @import 'options';
