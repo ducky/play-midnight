@@ -4,6 +4,7 @@ var PlayMidnightOptions = {
 	defaults: {
 		favicon: true,
 		styled: true,
+		recentActivity: true,
 		theme: 'default'
 	},
 
@@ -19,6 +20,7 @@ var PlayMidnightOptions = {
 
 		var favIcon = $('#play-midnight-options #favicon');
 		var styled = $('#play-midnight-options #styled');
+		var recentActivity = $('#play-midnight-options #recentActivity');
 		var themeColor = $('#play-midnight-options #' + options.theme + '.theme-color');
 
 		if ( options.favicon ) {
@@ -27,6 +29,10 @@ var PlayMidnightOptions = {
 
 		if ( options.styled ) {
 			styled.prop( 'checked', true ).closest('.option').addClass('selected');
+		}
+
+		if ( options.recentActivity ) {
+			recentActivity.prop( 'checked', true ).closest('.option').addClass('selected');
 		}
 
 		themeColor.prop( 'checked', true ).closest('.option').addClass('selected');
@@ -48,12 +54,14 @@ var PlayMidnightOptions = {
 	save: function( callback ) {
 		var favicon = $('#play-midnight-options #favicon').is(':checked');
 		var styled = $('#play-midnight-options #styled').is(':checked');
+		var recentActivity = $('#play-midnight-options #recentActivity').is(':checked');
 		var theme = $('#play-midnight-options .theme-color:checked').attr('id');
 		var status = $('#play-midnight-options #status');
 
 		chrome.storage.sync.set( {
 			favicon: favicon,
 			styled: styled,
+			recentActivity: recentActivity,
 			theme: theme
 		}, function( ) {
 			status.fadeIn(500, function() {
@@ -96,10 +104,12 @@ var PlayMidnight = {
 					$('#play-midnight-options').removeClass('show');
 				});
 			});
+			if ( self.options.recentActivity === true ) {
+				self.addSortOptions();
+			}
 		});
 
 		this.addCredits();
-		this.addSortOptions();
 	},
 
 	injectStyle: function() {
@@ -190,14 +200,13 @@ var PlayMidnight = {
 
 	addSortOptions: function() {
 		// Add a link directly to Recent, after the first "Listen Now" link
-		$('<a data-type="recent" class="nav-item-container tooltip" href="">Recent</a>')
-			.insertAfter('#nav_collections a:first-child');
+		$('<a data-type="recent" class="nav-item-container tooltip" href="">Recent Activity</a>')
+			.insertAfter('#nav_collections a:nth-child(2)');
 
 		// Add sort links to the header
 		function toggleRecentUI() {
 			// Only add them if "Recent" string is present and we're not already in this view.
-			if ( $(this).children('.tab-text:contains(Recent)').length
-				&& ! $(this).children('#recent-sort').length ) {
+			if ( $(this).children('.tab-text:contains(Recent)').length && ! $(this).children('#recent-sort').length ) {
 				$(this).append([
 					'<div id="recent-sort">',
 						'<label><input type="radio" name="recent-sort" value="0" checked><span>All</span></label>',
@@ -221,7 +230,7 @@ var PlayMidnight = {
 		// Filter toggling behavior
 		$('#breadcrumbs').on('click', 'input', function() {
 			var reason = parseInt($(this).val());
-			var selector = (reason == 0 ? '*' : '[data-reason=' + reason + ']');
+			var selector = (reason === 0 ? '*' : '[data-reason=' + reason + ']');
 			var $cards = $('#music-content .card');
 			$cards.filter(selector).show();
 			$cards.not(selector).hide();

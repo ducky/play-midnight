@@ -13,6 +13,8 @@ function showNotification(type, version) {
 				notificationText = 'Play Midnight settings are now built right into Google Play Music. Look for the Play Midnight icon below your Google+ picture.';
 			} else if ( version === '1.2.7' ) {
 				notificationText = 'Themes have been updated to work with the new Songza integration for Google Play!';
+			} else if ( version === '1.3.0' ) {
+				notificationText = 'Recent Activity has been added to sidebar for easier access, including filtering (via Ben Knight). Enable/Disable in Options.';
 			} else {
 				return;
 			}
