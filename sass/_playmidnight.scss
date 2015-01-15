@@ -1116,7 +1116,7 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 }
 
 // Card Overrides
-.card {
+.g-content > .card {
 	&[data-size='small'] {
 		width: 19%;
 		margin: 0.5%;
@@ -1144,6 +1144,7 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 		}
 
 		.radio-overlay {
+			position: static;
 			width: 100%;
 			height: 100%;
 			background: hsla(0, 0%, 0%, 0.5);
