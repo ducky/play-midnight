@@ -1118,7 +1118,7 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 // Card Overrides
 .g-content > .card {
 	&[data-size='small'] {
-		width: 19%;
+		width: 15.6666666%;
 		margin: 0.5%;
 
 		// Use the aspect ratio hack to prevent layout changes as the album images load.
