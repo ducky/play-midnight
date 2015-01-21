@@ -170,10 +170,6 @@ body {
 	color: #fff;
 }
 
-.subscription .music-banner-title {
-	margin-top: 5px;
-}
-
 .subscription #music-banner-subtitle {
 	color: #fff;
 }
@@ -272,7 +268,7 @@ body {
 	background: linear-gradient( to right, rgba(lighten($primary, 6%), 0) 0%, lighten($primary, 6%) 100% );
 }
 
-#nav_collections .nav-item-container.selected, #nav_collections .nav-item-container.selected:focus, .nav-item-container.selected, .nav-item-container.selected:focus {
+#nav_collections .nav-item-container.selected, #nav_collections .nav-item-container.selected:focus, .nav-item-container.selected, .nav-item-container.selected:focus, #nav:not(.material) #nav_collections .nav-item-container.selected {
 	color: $font_primary;
 	background: lighten($primary, 8%);
 	border-left: 3px solid $accent;
@@ -352,16 +348,20 @@ body {
 	background: lighten($primary, 6%);
 }
 
+#player:not(.material) [data-id="now-playing-menu"],
 #player [data-id="now-playing-menu"] {
 	background-color: lighten($primary, 6%);
 	border: 1px solid lighten($primary, 6%);
 }
 
+#player:not(.material) [data-id="now-playing-menu"]:focus,
+#player:not(.material) [data-id="now-playing-menu"]:hover,
 .song-row .hover-button[data-id="menu"]:hover,
 #player [data-id="now-playing-menu"]:hover {
 	border-color: lighten($primary, 8%);
 }
 
+#player:not(.material) [data-id="now-playing-menu"]:active,
 #player [data-id="now-playing-menu"]:active {
 	background-color: lighten($primary, 8%);
 }
@@ -390,10 +390,11 @@ body {
 	background: lighten($primary, 5%);
 }
 
+.card .explicit,
 .album-view .explicit,
 .song-row .explicit {
 	background: transparent;
-	color: #600;
+	color: darken($accent, 10%);
 }
 
 .song-row .fade-out:after, .fade-out.gray:after {
