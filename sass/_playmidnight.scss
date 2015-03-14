@@ -201,6 +201,40 @@ body {
 
 
 
+// Buttons
+.button:not(.primary) {
+	background-color: #43474E !important;
+	color: #ccc !important;
+}
+
+.button:not(.primary):hover,
+.button:not(.primary):focus {
+	background-color: #2C2C2C !important;
+	color: #ccc !important;
+}
+
+#music-content .button:not(.primary) {
+	background-color: #2C2C2C !important;
+}
+
+#music-content .button:not(.primary):hover,
+#music-content .button:not(.primary):focus {
+	background-color: #43474E !important;
+}
+
+.button:not(.primary) .icon,
+.button:not(.primary) img,
+.button:not(.primary) #extra-links-anchor,
+.button:not(.primary) .extra-links-dropdown {
+	-webkit-filter: invert(100%); /* Invert dark icons -> light icons */
+}
+
+.button:not(.primary):active {
+	box-shadow: inset 0 2px 0 rgba(221, 221, 221, 0.15) !important;
+}
+
+
+
 // Main Content
 #content, #main, .g-content, div.nerd-panel, #music-content {
 	background-color: $primary;
