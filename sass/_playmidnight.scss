@@ -273,6 +273,13 @@ body {
 		background: transparent;
 		color: #600;
 	}
+
+	img[src$="default_artist_art.png"],
+	img[src$="default_album_art_big_card.png"],
+	img[src$="default_album_art_song_row.png"],
+	img[src$="default_album_med.png"] {
+		-webkit-filter: invert(100%);
+	}
 }
 
 
