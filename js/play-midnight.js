@@ -1,4 +1,4 @@
-jQuery(function($){
+(function($){
 
 var PlayMidnightOptions = {
 	defaults: {
@@ -159,13 +159,16 @@ var PlayMidnight = {
 
 	updateFavicon: function() {
 		if ( this.options.favicon === true ) {
-			var iconUrl = chrome.extension.getURL('images/favicon.ico') + '?v=' + Date.now();
+			// Window Load to Prevent Old Favicon from Overwriting
+			$(window).load(function() {
+				var iconUrl = chrome.extension.getURL('images/favicon.ico') + '?v=' + Date.now();
 
-			$('link[rel="SHORTCUT ICON"]').remove();
-			$('head').append( $('<link>', {
-				rel: 'shortcut icon',
-				href: iconUrl
-			}) );
+				$('link[rel="SHORTCUT ICON"], link[href="favicon.ico"]').remove();
+				$('head').append( $('<link>', {
+					rel: 'shortcut icon',
+					href: iconUrl
+				}) );
+			});
 		}
 	},
 
@@ -216,8 +219,7 @@ var PlayMidnight = {
 		function toggleRecentUI() {
 			// Only add them if "Recent" string is present and we're not already in this view.
 			// Otherwise remove the UI completely.
-			if ( $(this).children('.tab-text:contains(Recent)').length
-				&& ! $(this).children('#recent-sort').length ) {
+			if ( $(this).children('.tab-text:contains(Recent)').length && ! $(this).children('#recent-sort').length ) {
 				$(this).append(sortHtml);
 			} else {
 				$('#recent-sort').remove();
@@ -233,7 +235,7 @@ var PlayMidnight = {
 		$('#breadcrumbs').on('click', 'a', function() {
 			var $this = $(this);
 			var reason = parseInt($this.data('reason'));
-			var selector = (reason == 0 ? '*' : '[data-reason=' + reason + ']');
+			var selector = (reason === 0 ? '*' : '[data-reason=' + reason + ']');
 			var $cards = $('#music-content .card');
 
 			$this.addClass('selected').siblings().removeClass('selected');
@@ -245,5 +247,4 @@ var PlayMidnight = {
 
 PlayMidnight.init();
 
-
-});
+})(jQuery);
