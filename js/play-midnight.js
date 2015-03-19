@@ -186,12 +186,9 @@ var PlayMidnight = {
 			$('body').append( options );
 
 			// Create Play Midnight Button w/ Logo
-			var button = $('<button />', {
-				id: 'btn-pm-options',
-				class: 'button small vertical-align'
-			}).append( $('<img />', {
-				src: chrome.extension.getURL('icon48.png')
-			})).append( '<span>Play Midnight Options</span>' );
+			var button = $('<button />', { id: 'btn-pm-options', class: 'button small vertical-align' })
+				.append( $('<img />', { src: chrome.extension.getURL('icon48.png') }))
+				.append( '<span>Play Midnight Options</span>' );
 
 			// Show Options on Click
 			button.on( 'click', function() {
