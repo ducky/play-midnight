@@ -30,6 +30,10 @@ body {
 	color: lighten($font_secondary, 8%);
 }
 
+a.primary {
+	color: $accent;
+}
+
 
 
 // GoogleOne Bar
@@ -228,13 +232,18 @@ body {
 			color: $accent;
 		}
 	}
+}
 
-	img[src$="default_artist_art.png"],
-	img[src$="default_album_art_big_card.png"],
-	img[src$="default_album_art_song_row.png"],
-	img[src$="default_album_med.png"] {
-		filter: invert(100%);
-	}
+img[src$="default_artist_art.png"],
+img[src$="default_album_art_big_card.png"],
+img[src$="default_album_art_song_row.png"],
+img[src$="default_album_med.png"],
+.queue-details .empty-image {
+	filter: invert(100%);
+}
+
+.queue-details .fade {
+	z-index: 1;
 }
 
 
@@ -361,7 +370,13 @@ body {
 	background-color: lighten($primary, 8%);
 }
 
-#player .flat-button:active, #player .flat-button:focus, #player .flat-button:hover, #volume:hover, #volume.simulated-hover, #player .rating-container.thumbs li.selected:hover, #player .rating-container.thumbs li:hover {
+#player .flat-button:active,
+#player .flat-button:focus,
+#player .flat-button:hover,
+#volume:hover,
+#volume.simulated-hover,
+#player .rating-container.thumbs li.selected:hover,
+#player .rating-container.thumbs li:hover {
 	background-color: lighten($primary, 8%) !important;
 }
 
@@ -383,6 +398,10 @@ body {
 
 .song-table th:hover {
 	background: lighten($primary, 5%);
+}
+
+.song-table[data-type="srbm"] {
+	border-top: none;
 }
 
 .card .explicit,
@@ -415,6 +434,9 @@ body {
 .song-row.selected-song-row .fade-out:after, .song-row.hover .fade-out:after {
 	background-image: linear-gradient(to right, rgba(lighten($primary, 4%), 0) 0%, lighten($primary, 4%) 100% );
 }
+.song-row [data-col="radio"] {
+	color: $accent;
+}
 
 .upload-progress-row {
 	td {
@@ -436,6 +458,10 @@ body {
 	filter: grayscale(100%);
 }
 
+.song-drag-images {
+	border: 1px solid lighten($primary, 5%);
+}
+
 
 // Playlist
 .playlist-view .description {
@@ -448,7 +474,7 @@ body {
 
 
 // Buttons
-.button, .simple-dialog-buttons button, .button.small {
+.button, .simple-dialog-buttons button, .button.small, .download-location-picker-select-location-button {
 	background-color: lighten($primary, 15%) !important;
 	color: $font_primary !important;
 	cursor: pointer;
@@ -579,6 +605,15 @@ body {
 		outline: none;
 		border: 1px solid lighten($primary, 10%);
 	}
+}
+
+.jfk-checkbox-disabled, .jfk-checkbox-clearOutline.jfk-checkbox-disabled {
+	background-color: lighten($primary, 5%);
+	border: 1px solid lighten($primary, 15%);
+}
+
+.jfk-checkbox-checked .jfk-checkbox-checkmark {
+	filter: invert(100%);
 }
 
 
