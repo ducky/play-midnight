@@ -287,9 +287,17 @@ img[src$="default_album_med.png"],
 	background: lighten($primary, 6%);
 	border-top: 1px solid #000;
 	color: $font_primary;
+
+	.transfer-status-num-transferred-tracks {
+		color: $accent;
+	}
 }
 
-
+.transfer-status-indicator-uploading-icon {
+	background: url('https://play.google.com/music/ic_upload_arrow.png') no-repeat center;
+	animation: arrow-up 1s ease-in-out 0s infinite;
+	filter: grayscale(100%);
+}
 
 // Standard Page Headers
 .section-header, .cluster .header .title, .settings-cluster .header .title, .recommended-header {
@@ -495,15 +503,10 @@ img[src$="default_album_med.png"],
 		}
 	}
 }
-
-// #music-content .button:not(.primary) {
-// 	background-color: #2C2C2C !important;
-
-// 	&:hover,
-// 	&:focus {
-// 		background-color: #43474E !important;
-// 	}
-// }
+#unsubscribe-playlist-button .playlist-subscribed,
+#unsubscribe-playlist-button .playlist-unsubscribe {
+	color: $font_primary;
+}
 
 .button.primary, button.goog-buttonset-default, .edit-playlist .goog-buttonset-default, .simple-dialog-buttons button.goog-buttonset-default:hover, .simple-dialog-buttons button.goog-buttonset-default:focus {
 	background-color: $accent !important;
@@ -908,6 +911,13 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 .card .action-container .play-radio-icon {
     background: no-repeat url( $spritesheet_url ) -3400px -910px;
 }
+#unsubscribe-playlist-button .icon {
+    filter: invert(0%) grayscale(100%);
+}
+#unsubscribe-playlist-button:hover .icon {
+    background: no-repeat url( $spritesheet_url ) -4592px -1018px;
+    filter: invert(0%);
+}
 
 // Unique Sprites
 .goog-menuitem .rating-container.stars li:hover {
@@ -1104,6 +1114,12 @@ table:not(.multiple-selected) .song-row.hover .hover-button[data-id="menu"], tab
 		background: no-repeat url( $spritesheet_url ) -1155px -109px;
 		background-size: $spritesheet_dimensions;
 	}
+	#unsubscribe-playlist-button:hover .icon {
+	    background: no-repeat url( $spritesheet_url ) -2020px -488px;
+	    background-size: $spritesheet_dimensions;
+	}
+
+	// Unique Sprites
 	.song-row td[data-rating="undefined"] .rating-container.stars {
 		background: url( $sprites_stars + 'btn_list_rating_star_off_2x.png') left center repeat-x;
 		background-size: 13px 20px;
