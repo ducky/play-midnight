@@ -1,0 +1,34 @@
+
+body,
+body.material {
+	background-color: $background_dark;
+	color: $font_primary;
+
+	-webkit-font-smoothing: antialiased;
+}
+
+// Top Toolbar
+core-toolbar#material-app-bar {
+	background-color: $color_accent;
+}
+
+core-header-panel#content-container.transparent {
+	#material-one-middle .material-search {
+		background-color: rgba($background_dark, 0.3);
+	}
+}
+
+core-header-panel #music-content.material .material-cover {
+	background: $color_accent;
+}
+
+#nav,
+core-header-panel#nav-container {
+	background: $background_nav;
+	background-color: $background_nav;
+}
+
+// Icons
+sj-icon-button {
+	color: $font_primary;
+}

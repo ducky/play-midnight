@@ -1,0 +1,49 @@
+#player {
+	background: $background_player;
+	color: $font_primary;
+}
+
+#player.material .player-rating-container {
+	background: $background_player;
+}
+
+#player.material:hover #material-player-progress::shadow #sliderContainer:not(.disabled) #sliderBar::shadow #progressContainer {
+	background: lighten($background_player, 5%);
+}
+
+paper-slider::shadow #sliderBar::shadow #progressContainer {
+	background: $background_light;
+}
+
+#sliderBar::shadow #activeProgress,
+paper-slider::shadow #sliderKnobInner,
+paper-slider::shadow #sliderBar::shadow #activeProgress {
+	background: $color_accent;
+}
+
+paper-slider::shadow .ring > #sliderKnob > #sliderKnobInner {
+	background: $background_player;
+	border: 2px solid $background_light;
+}
+
+#player.material .material-player-middle sj-icon-button[data-id="play-pause"][disabled] {
+	opacity: 0.75;
+}
+
+#player.material .material-player-middle sj-icon-button[data-id="repeat"][value="LIST_REPEAT"],
+#player.material .material-player-middle sj-icon-button[data-id="repeat"][value="SINGLE_REPEAT"],
+#player.material .material-player-middle sj-icon-button[data-id="shuffle"][value="ALL_SHUFFLE"] {
+	color: $color_accent;
+}
+
+#player.material .material-player-middle sj-icon-button[data-id="play-pause"]:not([disabled]) {
+	color: $color_accent;
+}
+
+#player.material .material-player-middle sj-icon-button[data-id="play-pause"]::shadow core-icon {
+	g {
+		path:nth-child(2) {
+			fill: $background_player;
+		}
+	}
+}

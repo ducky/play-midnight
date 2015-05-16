@@ -1,0 +1,60 @@
+// Scrollbar
+::-webkit-scrollbar {
+	width: 8px;
+	background: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-track {
+	background-color: rgba(255,255,255,0.05);
+
+	&:hover {
+		background-color: rgba(255,255,255,0.1);
+	}
+
+	&:active {
+		background-color: rgba(255,255,255,0.07);
+	}
+}
+
+::-webkit-scrollbar-thumb {
+	border: none;
+	background-color: rgba(255,255,255,0.15);
+	border-radius: 5px;
+
+	&:hover {
+		background-color: rgba(255,255,255,0.2);
+	}
+
+	&:active {
+		background-color: rgba(255,255,255,0.18);
+	}
+}
+
+
+// Loading Overlay
+#loading-overlay.material,
+#loading-overlay.material[data-type="full-loading-overlay"],
+#loading-overlay.material[data-type="regular-loading-overlay"] {
+	background: rgba(lighten($background_dark, 15%), 0.8);
+
+	paper-spinner::shadow .circle {
+		border-color: $color_accent;
+	}
+}
+
+
+// Explicit
+.explicit,
+.material-card .explicit {
+	background: $color_accent;
+	color: $background_card;
+}
+
+
+// Fade Gradient
+.fade-out:after,
+.material .fade-out:after,
+.material .fade-out.gray:after {
+	background: linear-gradient( to right, rgba($background_dark, 0) 0%, rgba($background_dark, 0.999) 100% );
+	background-image: linear-gradient( to right, rgba($background_dark, 0) 0%, rgba($background_dark, 0.999) 100% );
+}

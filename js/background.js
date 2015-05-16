@@ -9,12 +9,8 @@ function showNotification(type, version) {
 			break;
 		case 'update':
 			subtitle = 'Play Midnight Updated!';
-			if ( version === '1.2.0' ) {
-				notificationText = 'Play Midnight settings are now built right into Google Play Music. Look for the Play Midnight icon below your Google+ picture.';
-			} else if ( version === '1.2.7' ) {
-				notificationText = 'Themes have been updated to work with the new Songza integration for Google Play!';
-			} else if ( version === '1.3.0' ) {
-				notificationText = 'Recent Activity has been added to sidebar for easier access, including filtering (via Ben Knight). Enable/Disable in Options.';
+			if ( version === '2.0.0' ) {
+				notificationText = 'Play Midnight has been mostly updated for Google Material UI, bear with me while I tackle some bugs.';
 			} else {
 				return;
 			}

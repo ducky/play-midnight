@@ -1,0 +1,22 @@
+
+$color_accent: #fb8521 !default;
+$color_accent: #3179a1;
+
+// Theme Colors
+$background_dark: #141517;
+$background_light: #dcdcdc;
+
+// App-Area Specific
+$background_nav: lighten($background_dark, 3%);
+$background_page: lighten($background_dark, 3%);
+$background_card: $background_page;
+$background_player: lighten($background_dark, 5%);
+$background_menu: lighten($background_dark, 5%);
+
+// Font Colors
+$font_primary: #dcdcdc;
+$font_secondary: #666;
+
+// Stuff
+// $primary: #141517;
+// $border: #111;

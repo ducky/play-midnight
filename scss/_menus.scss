@@ -1,0 +1,50 @@
+.goog-menu,
+.goog-menuitem,
+.now-playing-menu .goog-menuitem,
+.now-playing-menu .goog-submenu,
+.now-playing-menu .goog-submenu .goog-submenu-arrow {
+	background-color: $background_menu;
+	color: $font_primary;
+}
+
+.goog-menuitem {
+	&:hover {
+		background: lighten($background_menu, 3%);
+	}
+}
+
+.goog-menuheader {
+	color: $font_secondary;
+}
+
+.goog-menuitem, .now-playing-menu .goog-menuitem .goog-menuitem-content, .goog-menuitem-content, .extra-links-menu .goog-menuitem-content {
+	color: $font_primary;
+}
+
+.material .goog-menu {
+	.goog-menuitem {
+		.goog-menuitem-content {
+			color: $font_primary;
+		}
+
+		&:hover {
+			background: lighten($background_menu, 3%);
+
+			.goog-menuitem-content {
+				color: lighten($font_primary, 3%);
+			}
+		}
+	}
+
+	.goog-menuseparator {
+		background: lighten($background_menu, 2%) !important;
+	}
+}
+
+.goog-menuseparator {
+	border-top: 1px solid darken($background_menu, 5%);
+}
+
+// .goog-menuitem-highlight .goog-menuitem-content .goog-submenu-arrow, .goog-menuitem-highlight .goog-menuitem-content {
+// 	color: #fff !important;
+// }

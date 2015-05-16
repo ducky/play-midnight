@@ -6,18 +6,18 @@
 		argv = require('yargs').argv,
 		$ = require('gulp-load-plugins')({
 			rename: {
-				'gulp-ruby-sass': 'sass',
-				'gulp-minify-css': 'minifycss',
+				'gulp-sass': 'sass',
+				'gulp-minify-css': 'minifycss'
 			},
 			lazy: false
 		});
 
 	/* Combine Sass / Libraries */
 	gulp.task('styles', function() {
-		var style = $.sass('scss/', { style: 'compact', sourcemap: false });
+		var style = gulp.src('scss/*.scss');
 
 		return style
-			.on('error', function (error) { console.error('Error', error.message); })
+			.pipe($.sass({ outputStyle: 'compressed', errLogToConsole: true }))
 			.pipe($.autoprefixer({ browsers: ['last 2 version'] }))
 			.pipe($.if(argv.prod, $.minifycss()))
 			.pipe(gulp.dest('css'))
@@ -57,6 +57,10 @@
 		gulp.watch('scss/**/*.scss', ['styles']);
 		gulp.watch('js/**/play-midnight.js', ['scripts-main']);
 		gulp.watch('js/**/background.js', ['scripts-bg']);
+
+		// $.livereload.listen();
+
+		// gulp.watch(['**/*.js', '**/*.scss']).on('change', $.livereload.changed);
 	});
 
 	/* Default Task */
