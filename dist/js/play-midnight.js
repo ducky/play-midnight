@@ -56,26 +56,22 @@ var PlayMidnightUtilities = (function(){
 
 	PMUtils.empty = function(element) {
 		while (element.lastChild) {
-		    elmenet.removeChild(elmenet.lastChild);
+		    element.removeChild(element.lastChild);
 		}
 	};
 
-	PMUtils.transitionEnd = function() {
-		var i,
-				el = document.createElement('div'),
-				transitions = {
-					'transition':'transitionend',
-					'OTransition':'otransitionend',  // oTransitionEnd in very old Opera
-					'MozTransition':'transitionend',
-					'WebkitTransition':'webkitTransitionEnd'
-				};
-
-		for (i in transitions) {
-			if (transitions.hasOwnProperty(i) && el.style[i] !== undefined) {
-				return transitions[i];
+	PMUtils.isClicked = function(element, target) {
+		// console.log(target);
+		while (element.parentNode) {
+			// console.log(element);
+			if (element === target) {
+				return true;
 			}
+			element = element.parentNode;
 		}
-	}();
+
+		return false;
+	};
 
 	PMUtils.remove = function(element) {
 		var ele;
@@ -157,6 +153,7 @@ var PlayMidnightOptions = (function(_){
   var PMOptions = {};
 
   var _injected = false,
+      _menuOpen = false,
       _backdrop = document.createElement('div'),
       _modal = document.createElement('div'),
       _cb;
@@ -194,52 +191,39 @@ var PlayMidnightOptions = (function(_){
         document.body.appendChild(optionsPage);
 
         menuList.appendChild(menuItem);
-        menuItem.addEventListener('click', function() {
+        menuItem.addEventListener('click', function(e) {
+          if (!_menuOpen) {
+            e.stopPropagation();
+          }
+
           showOptions();
-        }, true);
+        }, false);
     });
   };
 
 
-
+  function handleClick(e) {
+    if (_menuOpen &&!_.isClicked(e.target, _templates.optionsPage.element)) {
+      hideOptions();
+    }
+  }
 
   // Show Options Page
   function showOptions() {
-    var optionsPage = _templates.optionsPage.element;
+    document.addEventListener('click', handleClick, false);
+    _templates.optionsPage.element.classList.add('visible');
+    _menuOpen = true;
+  }
 
-    optionsPage.classList.toggle('visible');
+  function hideOptions() {
+    document.removeEventListener('click', handleClick);
+    _templates.optionsPage.element.classList.remove('visible');
+    _menuOpen = false;
   }
 
   // Show Options
   PMOptions.show = showOptions;
-
-  // Hide Options
-  PMOptions.hide = function() {
-    _backdrop.classList.remove('modal-show');
-    if (typeof _cb === 'function' && _cb) {
-      _cb();
-    }
-  };
-
-
-
-
-  // Inject Options to DOM
-  function injectOptions() {
-    if (_injected || document.body.contains(_backdrop) || document.body.contains(_modal)) {
-      return;
-    }
-
-    _backdrop.appendChild(_modal);
-    document.body.appendChild(_backdrop);
-
-    _injected = true;
-
-    // Trigger Window getting styles for css3
-    return window.getComputedStyle(_backdrop).height;
-  }
-
-
+  PMOptions.hide = hideOptions;
 
 
   // Parse Template html to fix relative paths
@@ -553,6 +537,9 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 				});
 			}).catch(function() {
 				_.log('No notification template exists for version: %s', VERSION_NUMBER);
+				chrome.storage.sync.set({ lastRun: VERSION_NUMBER }, function() {
+					_options.lastRun = VERSION_NUMBER;
+				});
 			});
 		}
 	}
@@ -593,7 +580,7 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 			injectStyle();
 
 			window.addEventListener('load', function() {
-				//PMOptions.create();
+				PMOptions.create();
 				updateFavicon();
 				checkNotification();
 			});

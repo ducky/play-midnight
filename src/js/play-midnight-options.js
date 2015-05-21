@@ -5,6 +5,7 @@ var PlayMidnightOptions = (function(_){
   var PMOptions = {};
 
   var _injected = false,
+      _menuOpen = false,
       _backdrop = document.createElement('div'),
       _modal = document.createElement('div'),
       _cb;
@@ -42,52 +43,39 @@ var PlayMidnightOptions = (function(_){
         document.body.appendChild(optionsPage);
 
         menuList.appendChild(menuItem);
-        menuItem.addEventListener('click', function() {
+        menuItem.addEventListener('click', function(e) {
+          if (!_menuOpen) {
+            e.stopPropagation();
+          }
+
           showOptions();
-        }, true);
+        }, false);
     });
   };
 
 
-
+  function handleClick(e) {
+    if (_menuOpen &&!_.isClicked(e.target, _templates.optionsPage.element)) {
+      hideOptions();
+    }
+  }
 
   // Show Options Page
   function showOptions() {
-    var optionsPage = _templates.optionsPage.element;
+    document.addEventListener('click', handleClick, false);
+    _templates.optionsPage.element.classList.add('visible');
+    _menuOpen = true;
+  }
 
-    optionsPage.classList.toggle('visible');
+  function hideOptions() {
+    document.removeEventListener('click', handleClick);
+    _templates.optionsPage.element.classList.remove('visible');
+    _menuOpen = false;
   }
 
   // Show Options
   PMOptions.show = showOptions;
-
-  // Hide Options
-  PMOptions.hide = function() {
-    _backdrop.classList.remove('modal-show');
-    if (typeof _cb === 'function' && _cb) {
-      _cb();
-    }
-  };
-
-
-
-
-  // Inject Options to DOM
-  function injectOptions() {
-    if (_injected || document.body.contains(_backdrop) || document.body.contains(_modal)) {
-      return;
-    }
-
-    _backdrop.appendChild(_modal);
-    document.body.appendChild(_backdrop);
-
-    _injected = true;
-
-    // Trigger Window getting styles for css3
-    return window.getComputedStyle(_backdrop).height;
-  }
-
-
+  PMOptions.hide = hideOptions;
 
 
   // Parse Template html to fix relative paths

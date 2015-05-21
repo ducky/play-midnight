@@ -253,7 +253,7 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 			injectStyle();
 
 			window.addEventListener('load', function() {
-				//PMOptions.create();
+				PMOptions.create();
 				updateFavicon();
 				checkNotification();
 			});

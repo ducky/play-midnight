@@ -56,26 +56,22 @@ var PlayMidnightUtilities = (function(){
 
 	PMUtils.empty = function(element) {
 		while (element.lastChild) {
-		    elmenet.removeChild(elmenet.lastChild);
+		    element.removeChild(element.lastChild);
 		}
 	};
 
-	PMUtils.transitionEnd = function() {
-		var i,
-				el = document.createElement('div'),
-				transitions = {
-					'transition':'transitionend',
-					'OTransition':'otransitionend',  // oTransitionEnd in very old Opera
-					'MozTransition':'transitionend',
-					'WebkitTransition':'webkitTransitionEnd'
-				};
-
-		for (i in transitions) {
-			if (transitions.hasOwnProperty(i) && el.style[i] !== undefined) {
-				return transitions[i];
+	PMUtils.isClicked = function(element, target) {
+		// console.log(target);
+		while (element.parentNode) {
+			// console.log(element);
+			if (element === target) {
+				return true;
 			}
+			element = element.parentNode;
 		}
-	}();
+
+		return false;
+	};
 
 	PMUtils.remove = function(element) {
 		var ele;
