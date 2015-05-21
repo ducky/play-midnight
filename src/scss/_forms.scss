@@ -1,0 +1,42 @@
+$background_page_hover: lighten($background_page, 3%);
+
+paper-action-dialog {
+	background: $background_page;
+  color: $font_primary;
+
+	&::shadow h1 {
+		color: $font_primary;
+	}
+
+  input {
+    color: $font_secondary;
+  }
+
+  paper-input-decorator {
+    &::shadow .focused-underline {
+      background: $color_accent;
+    }
+
+    &[focused]::shadow .floated-label .label-text {
+      color: $color_accent;
+    }
+  }
+
+  .unfocused-underline {
+    background: $background_page_hover;
+  }
+
+  sj-paper-button {
+    color: $color_accent;
+  }
+}
+
+.material-share-options #sharing-option-label {
+  color: $font_primary;
+}
+
+.error,
+.label-text,
+.material-share-options #sharing-option-description {
+  color: $font_secondary;
+}

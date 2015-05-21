@@ -1,6 +1,7 @@
 $background_menu_hover: lighten($background_menu, 3%);
 
-#queue-overlay {
+#queue-overlay,
+paper-dialog {
 	background: $background_menu;
 
   .song-row td,

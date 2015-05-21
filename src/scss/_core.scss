@@ -80,10 +80,13 @@ core-header-panel#nav-container {
 }
 
 // Icons
+html /deep/ core-icon,
 core-icon,
 sj-icon-button,
 .header-row core-icon[icon="sort"],
-.nav-item-container core-icon {
+.nav-item-container core-icon,
+#player .now-playing-actions sj-icon-button,
+#player.material .now-playing-actions sj-icon-button {
 	color: $font_primary;
 }
 

@@ -17,6 +17,12 @@ sj-paper-button.material-primary,
 }
 
 // Toggle Button
-paper-toggle-button::shadow [checked] .toggle {
-	background: $color_accent;
+paper-toggle-button::shadow [checked] {
+	.toggle {
+		background: $color_accent;
+	}
+
+	.toggle-ink {
+		color: $color_accent;
+	}
 }

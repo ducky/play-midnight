@@ -33,9 +33,11 @@
 
 // Loading Overlay
 #loading-overlay.material,
+.core-overlay-backdrop.core-opened,
 #loading-overlay.material[data-type="full-loading-overlay"],
 #loading-overlay.material[data-type="regular-loading-overlay"] {
 	background: rgba(lighten($background_dark, 15%), 0.8);
+	opacity: 1;
 
 	paper-spinner::shadow .circle {
 		border-color: $color_accent;
