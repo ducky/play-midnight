@@ -1,0 +1,78 @@
+#play-midnight-modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(lighten($background_dark, 15%), 0.8);
+  z-index: 900;
+  transition: all 0.5s;
+  visibility: hidden;
+  opacity: 0;
+
+  &.modal-show {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+#play-midnight-modal {
+  position: absolute;
+  background: $background_menu;
+  top: calc(20vh - 25px);
+  left: calc((100vw - 700px - 70px) / 2);
+  width: 700px;
+  height: calc(60vh - 50px);
+  border-radius: 3px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+  z-index: 1000;
+  padding: 35px 25px;
+  transition: all 0.75s;
+  transform: scale3d(0.5,0.5,0.5);
+  opacity: 0;
+
+  .modal-show & {
+    transform: scale3d(1, 1, 1);
+    opacity: 1;
+  }
+
+  .play-midnight-notification {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    .content {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      overflow-y: auto;
+
+      .image-header {
+        text-align: center;
+
+        img {
+          width: 85px;
+        }
+      }
+
+      p {
+        max-width: 550px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+      }
+
+      li {
+        margin-bottom: 5px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .modal-footer {
+        margin-top: 25px;
+      }
+    }
+  }
+}

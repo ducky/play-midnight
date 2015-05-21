@@ -1,0 +1,92 @@
+$background_nav_hover: lighten($background_nav, 3%);
+
+body,
+body.material,
+#music-content {
+	background-color: $background_dark;
+	color: $font_primary;
+
+	-webkit-font-smoothing: antialiased;
+}
+
+.material a,
+.material .simple-dialog a,
+.material .nav-item-container,
+.music-source-empty-message {
+	color: $font_primary;
+}
+
+.material a.primary {
+	color: $color_accent;
+}
+
+.nav-item-container,
+.material .nav-item-container,
+#nav_collections .nav-item-container,
+.material #nav_collections .nav-item-container {
+	&:focus,
+	&:hover,
+	&.selected,
+	&.selected:focus,
+	&.selected:hover {
+		background: $background_nav_hover;
+
+		.fade-out:after {
+			background: linear-gradient( to right, rgba($background_nav_hover, 0) 0%, rgba($background_nav_hover, 0.999) 100% );
+		}
+	}
+
+	&.selected {
+		color: $color_accent;
+		border-left: 2px solid $color_accent;
+
+		core-icon {
+			color: $color_accent;
+		}
+	}
+
+	.fade-out:after {
+		background: linear-gradient( to right, rgba($background_nav, 0) 0%, rgba($background_nav, 0.999) 100% );
+	}
+}
+
+.material .nav-section-divider {
+	border-bottom: 1px solid $background_nav_hover;
+}
+
+// Top Toolbar
+core-toolbar#material-app-bar {
+	background-color: $color_accent;
+}
+
+core-header-panel#content-container.transparent {
+	#material-one-middle .material-search {
+		background-color: rgba($background_dark, 0.3);
+	}
+}
+
+core-header-panel #music-content.material .material-cover {
+	background: $color_accent;
+}
+
+#nav,
+.nav-toolbar,
+core-header-panel#nav-container {
+	background: $background_nav;
+}
+
+.my-devices-card .device-list-item:not(:last-child) {
+	border-bottom: 1px solid $background_nav;
+}
+
+// Icons
+core-icon,
+sj-icon-button,
+.header-row core-icon[icon="sort"],
+.nav-item-container core-icon {
+	color: $font_primary;
+}
+
+div.icon {
+	filter: invert(100%);
+}

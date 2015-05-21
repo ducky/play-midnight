@@ -1,0 +1,32 @@
+$background_menu_hover: lighten($background_menu, 3%);
+
+#queue-overlay {
+	background: $background_menu;
+
+  .song-row td,
+  .upload-progress-row td,
+  .material .song-row td,
+  .material .upload-progress-row td {
+  	background: $background_menu;
+  	color: $font_primary;
+
+		.fade-out:after {
+			background: linear-gradient( to right, rgba($background_menu, 0) 0%, rgba($background_menu, 0.999) 100% );
+		}
+  }
+
+	.song-row.hover td,
+	.material .song-row.hover td,
+	.song-row.selected-song-row td,
+	.material .song-row.selected-song-row td {
+		background: $background_menu_hover !important;
+
+		.fade-out:after {
+			background: linear-gradient( to right, rgba($background_menu_hover, 0) 0%, rgba($background_menu_hover, 0.999) 100% );
+		}
+	}
+
+	&:after {
+		border-color: transparent transparent $background_menu $background_menu;
+	}
+}

@@ -1,0 +1,22 @@
+$background_disabled: lighten($background_page, 3%);
+
+.button.primary,
+sj-paper-button.material-primary,
+.simple-dialog-buttons button.goog-buttonset-default {
+	background: $color_accent;
+
+	[disabled] {
+		background: $background_disabled;
+		color: $font_secondary;
+	}
+}
+
+// Chevron Icons
+.cluster.material-cluster .lane-button core-icon {
+	color: $color_accent;
+}
+
+// Toggle Button
+paper-toggle-button::shadow [checked] .toggle {
+	background: $color_accent;
+}
