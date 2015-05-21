@@ -210,6 +210,9 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 				});
 			}).catch(function() {
 				_.log('No notification template exists for version: %s', VERSION_NUMBER);
+				chrome.storage.sync.set({ lastRun: VERSION_NUMBER }, function() {
+					_options.lastRun = VERSION_NUMBER;
+				});
 			});
 		}
 	}
