@@ -26,14 +26,16 @@
 
 	/* Main Script / Libraries */
 	gulp.task('scripts-main', function() {
-		var notify = gulp.src('src/js/play-midnight-notify.js'),
+		var modal = gulp.src('src/js/play-midnight-modal.js'),
+				options = gulp.src('src/js/play-midnight-options.js'),
 				utils = gulp.src('src/js/play-midnight-utils.js'),
 				script = gulp.src('src/js/play-midnight.js'),
 				merged;
 
 		merged = new Merge({ objectMode: true });
 		merged.queue(utils);
-		merged.queue(notify);
+		merged.queue(options);
+		merged.queue(modal);
 		merged.queue(script);
 
 		return merged.done()
