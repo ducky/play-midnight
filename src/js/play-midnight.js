@@ -1,5 +1,5 @@
 // _ references Utilities
-var PlayMidnight = (function(_, Notify){
+var PlayMidnight = (function(_, PMOptions, PMModal){
 	'use strict';
 
 	// Our Friend
@@ -8,10 +8,10 @@ var PlayMidnight = (function(_, Notify){
 	// Dev Mode: Use CSS File rather than inline <style> (inline allows dynamic accent colors)
 	var _dev = false;
 
-	var VERSION_NUMBER = '2.0.0';
+	var VERSION_NUMBER = '2.0.1';
 
 	// Reset Options when version less than
-	var _resetOptions = '2.0.0';
+	var _resetOptions = '2.0.1';
 
 	// Default Options
 	var _options = {
@@ -51,20 +51,6 @@ var PlayMidnight = (function(_, Notify){
 	};
 
 
-	// Various Templates
-	var _templates = {
-		menuItem: {
-			url: chrome.extension.getURL('dist/templates/options-menu.html'),
-			html: ''
-		},
-
-		optionsPage: {
-			url: chrome.extension.getURL('dist/templates/options.html'),
-			html: ''
-		}
-	};
-
-
 	// Replace Rules
 	var _replaceRules = [
 		{
@@ -83,12 +69,16 @@ var PlayMidnight = (function(_, Notify){
 	PM.optionsShown = false;
 
 
+
+
 	// Load User Options from Chrome Storage
 	function loadOptions(cb) {
 		chrome.storage.sync.get(_options, function(options) {
 			checkUpdated(options, cb);
 		});
 	}
+
+
 
 
 	// Check if Play Midnight has Updated, Reset options if needed
@@ -107,9 +97,8 @@ var PlayMidnight = (function(_, Notify){
 		} else if (_.versionCompare(options.version, _resetOptions) === -1) {
 			console.log('PLAY MIDNIGHT: Outdated Options, Resetting Some (User Version: %s, Required Version: %s)', options.version, _resetOptions);
 
-			var skip = ['accents', 'verbose'];
 			for (var key in _options) {
-				if (options[key] === undefined || skip.indexOf(key) === -1) {
+				if (options[key] === undefined) {
 					console.log('Setting %s to default: %s', key, JSON.stringify(_options[key]));
 					options[key] = _options[key];
 				} else {
@@ -141,6 +130,8 @@ var PlayMidnight = (function(_, Notify){
 			}
 		}
 	}
+
+
 
 
 	// Inject Stylesheet
@@ -185,56 +176,6 @@ var PlayMidnight = (function(_, Notify){
 	}
 
 
-	// Inject options page and menu item
-	function injectOptions() {
-		var menuList = document.querySelector('#nav_collections'),
-				menuItem;
-
-		function doInject() {
-			_.$http.get(_templates.menuItem.url).then(function(html) {
-				_templates.menuItem.html = html;
-				_templates.menuItem.element = _.createElement(html);
-
-				menuItem = _templates.menuItem.element;
-				menuList.appendChild(menuItem);
-				menuItem.addEventListener('click', function() {
-					showOptions();
-				}, true);
-			});
-		}
-
-		_.$http.get(_templates.optionsPage.url).then(function(html) {
-			_templates.optionsPage.html = html;
-			_templates.optionsPage.element = _.createElement(html);
-
-			doInject();
-		});
-	}
-
-
-	// Show Options Page
-	function showOptions() {
-		if (PM.optionsShown) {
-			return;
-		}
-
-		var coreToolbar = document.querySelector('core-toolbar#material-app-bar'),
-				currentTitle = document.querySelector('#material-breadcrumbs .tab-text'),
-				headerBar = document.querySelector('.material-header-bar.bottom'),
-				mainContent = document.querySelector('#music-content'),
-				currentPage = document.querySelector('#music-content > .g-content'),
-				pageItem;
-
-		currentPage.style.opacity = 0;
-		currentTitle.textContent = 'Play Midnight';
-		coreToolbar.className = '';
-		headerBar.classList.remove('visible');
-		pageItem = _templates.optionsPage.element.innerHTML;
-		currentPage.innerHTML = pageItem;
-		currentPage.style.opacity = 1;
-		PM.optionsShown = true;
-	}
-
 
 	// Update Favicon
 	function updateFavicon() {
@@ -255,13 +196,14 @@ var PlayMidnight = (function(_, Notify){
 	}
 
 
+
 	// Display Notification if new one exists
 	function checkNotification() {
 		if (_options.lastRun === undefined || _options.lastRun === null || _.versionCompare(_options.lastRun, VERSION_NUMBER) === -1) {
 			var notificationUrl = chrome.extension.getURL('dist/templates/notifications/' + VERSION_NUMBER + '.html');
 
 			_.$http.get(notificationUrl).then(function(template) {
-				Notify.show(template, function() {
+				PMModal.show(template, function() {
 					chrome.storage.sync.set({ lastRun: VERSION_NUMBER }, function() {
 						_options.lastRun = VERSION_NUMBER;
 					});
@@ -273,279 +215,55 @@ var PlayMidnight = (function(_, Notify){
 	}
 
 
+
+
+	// Configuration
+	function config() {
+		_.setVerbose(_options.verbose || _dev);
+
+		if (_.verbose()) {
+			_.log('PLAY MIDNIGHT: Verbose Mode ENABLED');
+			_.log('===========================================');
+			_.log('PLAY MIDNIGHT: Loaded User Options');
+
+			for (var key in _options) {
+				_.log('%s: %s', key.toString().toUpperCase(), JSON.stringify(_options[key]));
+			}
+
+			chrome.storage.onChanged.addListener(function(changes) {
+				_.log('PLAY MIDNIGHT: Option Changed!');
+
+				for (var key in changes) {
+					_.log('%s: %s', key.toString().toUpperCase(), JSON.stringify(changes[key]));
+				}
+			});
+		}
+	}
+
+
+
+
 	// Yay Initialize!
 	function init() {
 		loadOptions(function() {
-			_.setVerbose(_options.verbose || _dev);
-
-			if (_.verbose()) {
-				_.log('PLAY MIDNIGHT: Verbose Mode ENABLED');
-				_.log('===========================================');
-				_.log('PLAY MIDNIGHT: Loaded User Options');
-
-				for (var key in _options) {
-					_.log('%s: %s', key.toString().toUpperCase(), JSON.stringify(_options[key]));
-				}
-
-				chrome.storage.onChanged.addListener(function(changes) {
-					_.log('PLAY MIDNIGHT: Option Changed!');
-
-					for (var key in changes) {
-						_.log('%s: %s', key.toString().toUpperCase(), JSON.stringify(changes[key]));
-					}
-				});
-			}
-
+			config();
 			injectStyle();
 
 			window.addEventListener('load', function() {
-				//injectOptions();
+				//PMOptions.create();
 				updateFavicon();
 				checkNotification();
 			});
 		});
 	}
 
+
+
 	// Load Play Midnight
 	init();
 
+
+
 	// Return Object for Modularity
 	return PM;
-})(PlayMidnightUtilities, PlayMidnightNotify);
-
-	// // Load Options from Chrome Storage
-	// // Proceed with Callback Function
-	// PM.loadOptions: function( callback ) {
-	// 	var self = this;
-
-	// 	// Sync options from storage, use defaults as Initial Values
-	// 	chrome.storage.sync.get( self.defaults, function( options ) {
-	// 		if (callback && typeof callback === 'function') {
-	// 			callback( options );
-	// 		}
-	// 	});
-	// },
-
-	// 	// Populate Options Page (Checkboxes)
-	// 	populate: function( options ) {
-	// 		var self = this;
-
-	// 		var favIcon = $('#play-midnight-options #favicon');
-	// 		var styled = $('#play-midnight-options #styled');
-	// 		var recentActivity = $('#play-midnight-options #recentActivity');
-	// 		var themeColor = $('#play-midnight-options #' + options.theme + '.theme-color');
-
-	// 		if ( options.favicon ) {
-	// 			favIcon.prop( 'checked', true ).closest('.option').addClass('selected');
-	// 		}
-
-	// 		if ( options.styled ) {
-	// 			styled.prop( 'checked', true ).closest('.option').addClass('selected');
-	// 		}
-
-	// 		if ( options.recentActivity ) {
-	// 			recentActivity.prop( 'checked', true ).closest('.option').addClass('selected');
-	// 		}
-
-	// 		themeColor.prop( 'checked', true ).closest('.option').addClass('selected');
-
-	// 		$('#play-midnight-options #save').addClass( options.theme );
-	// 		$('#play-midnight-options .option').on('click', function() {
-	// 			self.doSelect(this);
-	// 		});
-	// 	},
-
-	// 	// Update Classes on Checkbox Select
-	// 	doSelect: function( ele ) {
-	// 		var option = $(ele);
-	// 		var group = option.closest('.options-group');
-
-	// 		group.find('.selected').removeClass('selected');
-	// 		option.addClass('selected');
-	// 	},
-
-	// 	// Save Settings to Chrome Storage
-	// 	save: function( callback ) {
-	// 		// Get All Settings Values
-	// 		var favicon = $('#play-midnight-options #favicon').is(':checked');
-	// 		var styled = $('#play-midnight-options #styled').is(':checked');
-	// 		var recentActivity = $('#play-midnight-options #recentActivity').is(':checked');
-	// 		var theme = $('#play-midnight-options .theme-color:checked').attr('id');
-	// 		var status = $('#play-midnight-options #status');
-
-	// 		// Saving to Chrome Storage
-	// 		chrome.storage.sync.set( {
-	// 			favicon: favicon,
-	// 			styled: styled,
-	// 			recentActivity: recentActivity,
-	// 			theme: theme
-	// 		}, function( ) {
-	// 			// Show Status, then call Callback function
-	// 			status.fadeIn(500, function() {
-	// 				setTimeout(function() {
-	// 					status.fadeOut(500, function() {
-	// 						if (callback && typeof callback === 'function') {
-	// 							callback();
-	// 						}
-	// 					});
-	// 				}, 800);
-	// 			});
-	// 		});
-	// 	}
-	// };
-
-	// 	// Load Play Midnight Options
-	// 	PlayMidnightOptions.load(function( options ) {
-	// 		self.options = options;
-
-	// 		// Inject Stylesheet
-	// 		self.injectStyle();
-
-	// 		// Wait for DOM Before Appending/Updating
-	// 		$(window).load(function() {
-	// 			// Apply New Favicon
-	// 			self.updateFavicon();
-
-	// 			// Inject Options Template
-	// 			self.injectOptions(function() {
-	// 				// Populate Options Template Values
-	// 				PlayMidnightOptions.populate( self.options );
-
-	// 				// Save Options, Refresh Page
-	// 				$('#play-midnight-options #save').on( 'click', function(e) {
-	// 					e.preventDefault();
-
-	// 					PlayMidnightOptions.save( function() {
-	// 						location.reload(true);
-	// 					} );
-	// 				});
-
-	// 				// Hide Options
-	// 				$('#play-midnight-options #cancel').on( 'click', function(e) {
-	// 					e.preventDefault();
-
-	// 					$('#play-midnight-options').removeClass('show');
-	// 				});
-	// 			});
-
-	// 			// Add Recent Activity/Sorting
-	// 			self.addSortOptions();
-
-	// 			// Add Personal Credits
-	// 			self.addCredits();
-	// 		});
-	// 	});
-	// },
-
-
-		// style = $('<link>', {
-		// 	rel: 'stylesheet',
-		// 	type: 'text/css',
-		// 	href: chrome.extension.getURL( 'css/play-midnight.css')
-		// });
-		// $('head').append(style);
-
-		// // Load Themed Stylesheet
-		// if ( _options.styled ) {
-		// 	var theme = _options.theme;
-		// 	style = $('<link>', {
-		// 		rel: 'stylesheet',
-		// 		type: 'text/css',
-		// 		href: chrome.extension.getURL( 'css/play-midnight-' + theme + '.css')
-		// 	});
-		// 	$('head').append(style);
-
-		// // Load Minimal Stylesheet for Options Page and Play Midnight Button
-		// } else {
-		// 	style = $('<link>', {
-		// 		rel: 'stylesheet',
-		// 		type: 'text/css',
-		// 		href: chrome.extension.getURL( 'css/play-midnight-options.css')
-		// 	});
-		// 	$('head').append(style);
-		// }
-	// }
-
-	// // Inject Options Template
-	// injectOptions: function( callback ) {
-	// 	// Create Options Div
-	// 	var options = $('<div />', {
-	// 		id: 'play-midnight-options',
-	// 	});
-
-	// 	// Load Options Template from Extension
-	// 	$.get(chrome.extension.getURL( 'assets/options.html'), function(htmls) {
-	// 		// Set Options Div HTML
-	// 		options.html( htmls );
-
-	// 		// Append to Body
-	// 		$('body').append( options );
-
-	// 		// Create Play Midnight Button w/ Logo
-	// 		var button = $('<button />', { id: 'btn-pm-options', class: 'button small vertical-align' })
-	// 			.append( $('<img />', { src: chrome.extension.getURL('icon48.png') }))
-	// 			.append( '<span>Play Midnight Options</span>' );
-
-	// 		// Show Options on Click
-	// 		button.on( 'click', function() {
-	// 			$('#play-midnight-options').addClass('show');
-	// 		});
-
-	// 		// Append Button to Navbar
-	// 		$('#headerBar .nav-bar').prepend( button );
-
-	// 		// Callback Function
-	// 		if (callback && typeof callback === 'function') {
-	// 			callback();
-	// 		}
-	// 	});
-	// }
-
-	// // Update Favicon to Play Midnight version
-	// function updateFavicon() {
-	// 	if ( !_options.favicon ) {
-	// 		return;
-	// 	}
-
-	// 	// Load Newest Icon with Timestamp to prevent Caching
-	// 	var iconUrl = chrome.extension.getURL('images/favicon.ico') + '?v=' + Date.now();
-
-	// 	// Remove Old Favicon
-	// 	$('link[rel="SHORTCUT ICON"], link[href="favicon.ico"]').remove();
-
-	// 	// Add New Favicon
-	// 	$('head').append( $('<link>', {
-	// 		rel: 'shortcut icon',
-	// 		href: iconUrl
-	// 	}) );
-	// }
-
-	// // Add Personal Credits
-	// function addCredits() {
-	// 	var donateUrl = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KHH9ZJH42FF4J';
-	// 	var personalUrl = 'http://christieman.com/';
-
-	// 	var divider = $('<div', {
-	// 		class: 'nav-section-divider'
-	// 	});
-
-	// 	var header = $('<div>', {
-	// 		class: 'nav-section-header',
-	// 		text: 'PLAY MIDNIGHT - '
-	// 	}).append( $('<a>', { href: donateUrl, text: 'DONATE' }) );
-
-	// 	var credits = $('<ul>', { id: 'play-midnight' })
-	// 		.append( $('<li>', { class: 'nav-item-container' })
-	// 			.append( $('<a>', {
-	// 				href: personalUrl,
-	// 				text: 'By Chris Tieman'
-	// 			})));
-
-	// 	if ( !$('#playMidnight-credits').length ) {
-	// 		$('#nav').append(
-	// 			$('<div>', { id: 'playMidnight-credits', })
-	// 				.append(divider)
-	// 				.append(header)
-	// 				.append(credits));
-	// 	}
-	// }
+})(PlayMidnightUtilities, PlayMidnightOptions, PlayMidnightModal);
