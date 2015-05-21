@@ -45,7 +45,9 @@
 
 // Explicit
 .explicit,
-.material-card .explicit {
+.material-card .explicit,
+.material .song-row .explicit,
+.album-view .material-container-details .info .title .explicit {
 	background: $color_accent;
 	color: $background_card;
 }

@@ -35,4 +35,4 @@ function checkInstall(details) {
 	showNotification( details.reason, thisVersion );
 }
 
-chrome.runtime.onInstalled.addListener(checkInstall);
+//chrome.runtime.onInstalled.addListener(checkInstall);

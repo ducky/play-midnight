@@ -24,6 +24,10 @@
 		}
 	}
 
+	.details sj-icon-button.menu-anchor {
+		color: $font_primary;
+	}
+
 	// Feeling Lucky
 	&[data-size="small"][data-type="imfl"] .title {
 		color: $font_primary;
@@ -32,7 +36,6 @@
 	&[data-size="small"][data-type="imfl"] .sub-title {
 		color: $font_secondary;
 	}
-
 
 	// Gradient Fade
 	.fade-out:after,

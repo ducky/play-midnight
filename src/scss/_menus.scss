@@ -1,3 +1,23 @@
+// Upload Music Dialog
+.upload-dialog-bg {
+	background: rgba(lighten($background_dark, 15%), 0.8);
+}
+
+.upload-dialog {
+	background: $background_page;
+
+	.upload-dialog-title {
+		background: $color_accent;
+		color: $font_primary;
+	}
+
+	.upload-dialog-content {
+		color: $font_primary;
+	}
+}
+
+
+// Context Menus
 .goog-menu,
 .goog-menuitem,
 .now-playing-menu .goog-menuitem,
@@ -17,8 +37,16 @@
 	color: $font_secondary;
 }
 
-.goog-menuitem, .now-playing-menu .goog-menuitem .goog-menuitem-content, .goog-menuitem-content, .extra-links-menu .goog-menuitem-content {
+.goog-menuitem,
+.now-playing-menu .goog-menuitem .goog-menuitem-content,
+.goog-menuitem-content,
+.extra-links-menu .goog-menuitem-content {
 	color: $font_primary;
+}
+
+.goog-menuitem-highlight .goog-menuitem-content .goog-submenu-arrow,
+.goog-menuitem-highlight .goog-menuitem-content {
+	color: $font_primary !important;
 }
 
 .material .goog-menu {
