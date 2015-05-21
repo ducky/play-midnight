@@ -13,7 +13,7 @@
 	},
 
 	"background": {
-		"scripts": ["js/background.js"],
+		"scripts": ["dist/js/background.js"],
 		"persistent": false
 	},
 
@@ -26,9 +26,9 @@
 		{
 			"matches": ["*://play.google.com/music/listen*"],
 			"run_at": "document_end",
-			"js": ["js/play-midnight.js"]
+			"js": ["dist/js/play-midnight.js"]
 		}
 	],
 
-	"web_accessible_resources": ["css/*", "css/play-midnight-*.css", "js/*", "images/*", "icon48.png", "assets/*"]
+	"web_accessible_resources": ["dist/*"]
 }
