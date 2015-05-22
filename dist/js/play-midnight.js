@@ -496,7 +496,7 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 	// Dev Mode: Use CSS File rather than inline <style> (inline allows dynamic accent colors)
 	var _dev = false;
 
-	var VERSION_NUMBER = '2.0.1';
+	var VERSION_NUMBER = '2.0.2';
 
 	// Reset Options when version less than
 	var _resetOptions = '2.0.1';
