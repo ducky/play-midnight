@@ -193,16 +193,14 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 	function checkNotification() {
 		var notificationUrl;
 
-		if (_.versionCompare(_options.lastRun, VERSION_NUMBER) > -1) {
-			_.log('Already on Current Version (v%s), Skipping Modal', _options.lastRun);
-			return;
-		}
-
 		// First Run
 		if (_options.lastRun === undefined || _options.lastRun === null) {
 			notificationUrl = chrome.extension.getURL('dist/templates/notifications/default.html');
-		} else if (_.versionCompare(_options.lastRun, VERSION_NUMBER) === -1) {
+		} else if (_.versionCompare(_options.lastRun, VERSION_NUMBER) < 0) {
 			notificationUrl = chrome.extension.getURL('dist/templates/notifications/' + VERSION_NUMBER + '.html');
+		} else {
+			_.log('Already on Current Version (v%s), Skipping Modal', _options.lastRun);
+			return;
 		}
 
 		_.$http.get(notificationUrl).then(function(template) {

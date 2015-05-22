@@ -31,3 +31,16 @@ paper-toggle-button::shadow [checked] {
 		color: $color_accent;
 	}
 }
+
+// Playlist button
+#unsubscribe-playlist-button,
+sj-paper-button#unsubscribe-playlist-button {
+	.playlist-subscribed,
+	.icon[icon="add-circle"] {
+		color: $color_accent;
+	}
+
+	.playlist-unsubscribe {
+		color: $font_primary;
+	}
+}
