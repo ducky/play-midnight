@@ -6,20 +6,28 @@ var PlayMidnightUtilities = (function(){
 
 	var _verbose = false;
 
+
+	// Check if Verbose
 	PMUtils.verbose = function() {
 		return _verbose;
 	};
 
+
+	// Set Verbose
 	PMUtils.setVerbose = function(verbose) {
 		_verbose = verbose;
 	};
 
+
+	// Log to console if verbose
 	PMUtils.log = function() {
 		if (_verbose) {
 			console.log.apply(console, arguments);
 		}
 	};
 
+
+	// Sample stub $http Utility
 	PMUtils.$http = function(){
 		var core = {
 			ajax : function (method, url, args) {
@@ -54,16 +62,18 @@ var PlayMidnightUtilities = (function(){
 		};
 	}();
 
+
+	// Empty Node
 	PMUtils.empty = function(element) {
 		while (element.lastChild) {
 		    element.removeChild(element.lastChild);
 		}
 	};
 
-	PMUtils.isClicked = function(element, target) {
-		// console.log(target);
-		while (element.parentNode) {
-			// console.log(element);
+
+	// Check if Nodes Match
+	PMUtils.nodesMatch = function(element, target) {
+		while (element) {
 			if (element === target) {
 				return true;
 			}
@@ -72,7 +82,11 @@ var PlayMidnightUtilities = (function(){
 
 		return false;
 	};
+	// Alias for Nodes Match
+	PMUtils.isClicked = PMUtils.nodesMatch;
 
+
+	// Remove Element from DOM
 	PMUtils.remove = function(element) {
 		var ele;
 
@@ -91,10 +105,14 @@ var PlayMidnightUtilities = (function(){
 		}
 	};
 
+
+	// Insert Element After Node
 	PMUtils.insertAfter = function(newNode, referenceNode) {
 		referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 	};
 
+
+	// Create Element from html string
 	PMUtils.createElement = function(html) {
 		var temp = document.createElement('div');
 
@@ -102,6 +120,11 @@ var PlayMidnightUtilities = (function(){
 		return temp.childNodes[0];
 	};
 
+
+	// Return Comparison of version compare
+	// -1: a < b
+	// 0: a === b
+	// 1: a > b
 	PMUtils.versionCompare = function(a, b) {
 		if (a === b) {
 			return 0;
@@ -133,6 +156,12 @@ var PlayMidnightUtilities = (function(){
 		return 0;
 	};
 
+
+	//
+	// Private Helpers
+	//
+
+	// Check if node is a nodeList
 	function isNodeList(nodes) {
 		var stringRepr = Object.prototype.toString.call(nodes);
 
@@ -142,101 +171,142 @@ var PlayMidnightUtilities = (function(){
 			(nodes.length === 0 || (typeof nodes[0] === "object" && nodes[0].nodeType > 0));
 	}
 
+
 	// Return Object for Modularity
 	return PMUtils;
 })();
 
-var PlayMidnightOptions = (function(_){
-  'use strict';
+var PlayMidnightInjector = (function(_){
+    'use strict';
 
-  // Our Friend
-  var PMOptions = {};
-
-  var _injected = false,
-      _menuOpen = false,
-      _backdrop = document.createElement('div'),
-      _modal = document.createElement('div'),
-      _cb;
+    // Our Friend
+    var PMInjector = {};
 
 
-  // Various Templates
-  var _templates = {
-    menuItem: {
-      url: chrome.extension.getURL('dist/templates/options-menu.html'),
-      html: ''
-    },
+    // Load Options Templates and Inject
+    function loadTemplates(_temps, cb) {
+        var promises = [],
+            templates = [],
+            template;
 
-    optionsPage: {
-      url: chrome.extension.getURL('dist/templates/options.html'),
-      html: ''
+        // Array Of Templates
+        if (Array.isArray(_temps) && _temps.length > 0) {
+            // Load Up Promises
+            for (var i = 0, len = _temps.length; i < len; i++) {
+                if (!_temps[i] || !_temps[i].hasOwnProperty('url')) {
+                    continue;
+                }
+
+                promises.push(
+                    _.$http.get(_temps[i].url)
+                );
+            }
+
+            // No Templates had URLS
+            if (!promises.length) {
+                if (typeof cb === 'function') {
+                    cb(templates);
+                }
+                return;
+            }
+
+            // Load ALL Templates before injecting
+            Promise.all(promises)
+                .then(function(templateHtml) {
+                    // Populate Returned Templates
+                    for (var i = 0, len = _temps.length; i < len; i++) {
+                        template = _temps[i];
+
+                        templates.push({
+                            url: template.url,
+                            target: template.target || 'body',
+                            events: template.events || function() {},
+                            html: templateHtml[i] || '',
+                            element: _.createElement(templateHtml[i]) || document.createElement('div')
+                        });
+                    }
+
+                    if (typeof cb === 'function') {
+                        _.log(templates);
+                        cb(templates);
+                    }
+                });
+
+        // Single Template
+        } else {
+            // No Template or Template URL
+            if (!_temps || !_temps.hasOwnProperty('url')) {
+                if (typeof cb === 'function') {
+                    cb(templates);
+                }
+                return;
+            }
+
+            // Load Single Template
+            _.$http.get(_temps.url)
+                .then(function(templateHtml) {
+                    templates.push({
+                        url: _temps.url,
+                        target: _temps.target || 'body',
+                        events: _temps.events || function() {},
+                        html: templateHtml || '',
+                        element: _.createElement(templateHtml) || document.createElement('div')
+                    });
+
+                    if (typeof cb === 'function') {
+                        cb(templates);
+                    }
+                });
+        }
     }
-  };
 
 
+    // Load Options Templates and Inject
+    function injectTemplates(_temps, cb) {
+        var target,
+            template;
 
-  PMOptions.create = function() {
-    var menuList = document.querySelector('#nav_collections'),
-        optionsPage,
-        menuItem;
+        _.log('Starting Load Templates: %s', JSON.stringify(_temps));
+        loadTemplates(_temps, function(templates) {
+            _.log('Injecting Templates');
 
-    Promise.all([_.$http.get(_templates.optionsPage.url), _.$http.get(_templates.menuItem.url)])
-      .then(function(templates) {
-        _templates.optionsPage.html = templates[0];
-        _templates.optionsPage.element = _.createElement(_templates.optionsPage.html);
-        _templates.menuItem.html = templates[1];
-        _templates.menuItem.element = _.createElement(_templates.menuItem.html);
-        optionsPage = _templates.optionsPage.element;
-        menuItem = _templates.menuItem.element;
+            if (!templates.length) {
+                _.log('No Templates loaded?');
+            }
 
-        document.body.appendChild(optionsPage);
+            for (var i = 0, len = templates.length; i < len; i++) {
+                template = templates[i];
 
-        menuList.appendChild(menuItem);
-        menuItem.addEventListener('click', function(e) {
-          if (!_menuOpen) {
-            e.stopPropagation();
-          }
+                target = document.querySelector(template.target);
+                target.appendChild(template.element);
 
-          showOptions();
-        }, false);
-    });
-  };
+                // Register Events, If Given
+                if (typeof template.events === 'function') {
+                    template.events(template.element);
+                }
+            }
 
-
-  function handleClick(e) {
-    if (_menuOpen &&!_.isClicked(e.target, _templates.optionsPage.element)) {
-      hideOptions();
+            if (typeof cb === 'function') {
+                cb(templates);
+            }
+        });
     }
-  }
-
-  // Show Options Page
-  function showOptions() {
-    document.addEventListener('click', handleClick, false);
-    _templates.optionsPage.element.classList.add('visible');
-    _menuOpen = true;
-  }
-
-  function hideOptions() {
-    document.removeEventListener('click', handleClick);
-    _templates.optionsPage.element.classList.remove('visible');
-    _menuOpen = false;
-  }
-
-  // Show Options
-  PMOptions.show = showOptions;
-  PMOptions.hide = hideOptions;
 
 
-  // Parse Template html to fix relative paths
-  function parseTemplate(template) {
-    template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
+    // Parse Template html to fix relative paths
+    function parseTemplate(template) {
+        template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
 
-    return _.createElement(template);
-  }
+        return _.createElement(template);
+    }
 
 
+    // Add to utils
+    _.inject = injectTemplates;
 
-  // Return Object for Modularity
-  return PMOptions;
+
+    // Return Object for Modularity
+    return PMInjector;
 })(PlayMidnightUtilities);
 
 var PlayMidnightModal = (function(_){
@@ -246,9 +316,9 @@ var PlayMidnightModal = (function(_){
 	var PMModal = {};
 
 	var _injected = false,
-			_backdrop = document.createElement('div'),
-			_modal = document.createElement('div'),
-			_cb;
+		_backdrop = document.createElement('div'),
+		_modal = document.createElement('div'),
+		_cb;
 
 	// Setup
 	_backdrop.id = 'play-midnight-modal-backdrop';
@@ -257,7 +327,7 @@ var PlayMidnightModal = (function(_){
 
 
 	// Show Modal
-  PMModal.show = function(templateHtml, cb) {
+	PMModal.show = function(templateHtml, cb) {
 		var template = parseTemplate(templateHtml);
 
 		_cb = cb;
@@ -269,15 +339,15 @@ var PlayMidnightModal = (function(_){
 
 		document.body.classList.add('modal-show');
 
-    _modal.querySelector('.confirm-btn').addEventListener('click', function(e) {
-      e.preventDefault();
+		_modal.querySelector('.confirm-btn').addEventListener('click', function(e) {
+			e.preventDefault();
 
 			document.body.classList.remove('modal-show');
 			if (typeof _cb === 'function' && _cb) {
-        _cb();
-      }
-    });
-  };
+				_cb();
+			}
+		});
+	};
 
 
 
@@ -312,16 +382,108 @@ var PlayMidnightModal = (function(_){
 
 
 	// Parse Template html to fix relative paths
-  function parseTemplate(template) {
-    template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
+	function parseTemplate(template) {
+		template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
+		//template = template.replace(/\{VERSION_NUMBER\}/, VERSION_NUMBER);
 
-    return _.createElement(template);
-  }
+		return _.createElement(template);
+	}
 
 
 
 	// Return Object for Modularity
 	return PMModal;
+})(PlayMidnightUtilities);
+
+var PlayMidnightOptions = (function(_){
+    'use strict';
+
+    // Our Friend
+    var PMOptions = {};
+
+    var _injected = false,
+        _menuOpen = false,
+        _backdrop = document.createElement('div'),
+        _modal = document.createElement('div'),
+        _cb;
+
+
+    // Various Templates
+    var _templates = [];
+
+    _templates.push({
+        name: 'optionsPage',
+        url: chrome.extension.getURL('dist/templates/options.html'),
+        target: 'body'
+    });
+
+    _templates.push({
+        name: 'menuItem',
+        url: chrome.extension.getURL('dist/templates/options-menu.html'),
+        target: '#nav_collections',
+        events: function(ele) {
+            ele.addEventListener('click', function(e) {
+                // Prevent Click Bubbling to Document
+                if (!_menuOpen) {
+                    e.stopPropagation();
+                }
+
+                showOptions();
+            }, false);
+        }
+    });
+
+
+    // Load Options Templates and Inject
+    function createOptions() {
+        _.inject(_templates, function(injected) {
+            // for (var i = 0, len = injected.length; i < len; i++) {
+            //     template = injected[i];
+            // }
+        });
+    }
+
+
+    // Listener for Document.click when Menu is open
+    function handleClick(e) {
+        if (_menuOpen &&!_.isClicked(e.target, _templates.optionsPage.element)) {
+            hideOptions();
+        }
+    }
+
+
+    // Show Options Page
+    function showOptions() {
+        document.addEventListener('click', handleClick, false);
+        _templates.optionsPage.element.classList.add('visible');
+        _menuOpen = true;
+    }
+
+
+    // Hide Options Page
+    function hideOptions() {
+        document.removeEventListener('click', handleClick);
+        _templates.optionsPage.element.classList.remove('visible');
+        _menuOpen = false;
+    }
+
+
+    // Parse Template html to fix relative paths
+    function parseTemplate(template) {
+        template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
+
+        return _.createElement(template);
+    }
+
+
+    // Add Options to Object
+    PMOptions.create = createOptions;
+    PMOptions.show = showOptions;
+    PMOptions.hide = hideOptions;
+
+
+    // Return Object for Modularity
+    return PMOptions;
 })(PlayMidnightUtilities);
 
 // _ references Utilities
@@ -389,13 +551,6 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 	];
 
 
-	// Expose to Outside World
-	PM.version = VERSION_NUMBER;
-	PM.options = _options;
-	PM.optionsShown = false;
-
-
-
 
 	// Load User Options from Chrome Storage
 	function loadOptions(cb) {
@@ -403,7 +558,6 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 			checkUpdated(options, cb);
 		});
 	}
-
 
 
 
@@ -525,23 +679,33 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 
 	// Display Notification if new one exists
 	function checkNotification() {
-		// if (_options.lastRun === undefined || _options.lastRun === null || _.versionCompare(_options.lastRun, VERSION_NUMBER) === -1) {
-			// var notificationUrl = chrome.extension.getURL('dist/templates/notifications/' + VERSION_NUMBER + '.html');
-			var notificationUrl = chrome.extension.getURL('dist/templates/notifications/2.0.0.html');
+		var notificationUrl;
 
-			_.$http.get(notificationUrl).then(function(template) {
-				PMModal.show(template, function() {
-					chrome.storage.sync.set({ lastRun: VERSION_NUMBER }, function() {
-						_options.lastRun = VERSION_NUMBER;
-					});
-				});
-			}).catch(function() {
-				_.log('No notification template exists for version: %s', VERSION_NUMBER);
+		if (_.versionCompare(_options.lastRun, VERSION_NUMBER) > -1) {
+			_.log('Already on Current Version (v%s), Skipping Modal', _options.lastRun);
+			return;
+		}
+
+		// First Run
+		if (_options.lastRun === undefined || _options.lastRun === null) {
+			notificationUrl = chrome.extension.getURL('dist/templates/notifications/default.html');
+		} else if (_.versionCompare(_options.lastRun, VERSION_NUMBER) === -1) {
+			notificationUrl = chrome.extension.getURL('dist/templates/notifications/' + VERSION_NUMBER + '.html');
+		}
+
+		_.$http.get(notificationUrl).then(function(template) {
+			_.log('Show notification for version: %s', VERSION_NUMBER);
+			PMModal.show(template, function() {
 				chrome.storage.sync.set({ lastRun: VERSION_NUMBER }, function() {
 					_options.lastRun = VERSION_NUMBER;
 				});
 			});
-		// }
+		}).catch(function() {
+			_.log('No notification template exists for version: %s', VERSION_NUMBER);
+			chrome.storage.sync.set({ lastRun: VERSION_NUMBER }, function() {
+				_options.lastRun = VERSION_NUMBER;
+			});
+		});
 	}
 
 
@@ -580,7 +744,7 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 			injectStyle();
 
 			window.addEventListener('load', function() {
-				PMOptions.create();
+				//PMOptions.create();
 				updateFavicon();
 				checkNotification();
 			});
@@ -592,6 +756,11 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 	// Load Play Midnight
 	init();
 
+
+	// Expose to Outside World
+	PM.version = VERSION_NUMBER;
+	PM.options = _options;
+	PM.optionsShown = false;
 
 
 	// Return Object for Modularity

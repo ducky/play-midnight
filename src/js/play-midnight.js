@@ -63,13 +63,6 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 	];
 
 
-	// Expose to Outside World
-	PM.version = VERSION_NUMBER;
-	PM.options = _options;
-	PM.optionsShown = false;
-
-
-
 
 	// Load User Options from Chrome Storage
 	function loadOptions(cb) {
@@ -77,7 +70,6 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 			checkUpdated(options, cb);
 		});
 	}
-
 
 
 
@@ -199,23 +191,33 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 
 	// Display Notification if new one exists
 	function checkNotification() {
-		// if (_options.lastRun === undefined || _options.lastRun === null || _.versionCompare(_options.lastRun, VERSION_NUMBER) === -1) {
-			// var notificationUrl = chrome.extension.getURL('dist/templates/notifications/' + VERSION_NUMBER + '.html');
-			var notificationUrl = chrome.extension.getURL('dist/templates/notifications/2.0.0.html');
+		var notificationUrl;
 
-			_.$http.get(notificationUrl).then(function(template) {
-				PMModal.show(template, function() {
-					chrome.storage.sync.set({ lastRun: VERSION_NUMBER }, function() {
-						_options.lastRun = VERSION_NUMBER;
-					});
-				});
-			}).catch(function() {
-				_.log('No notification template exists for version: %s', VERSION_NUMBER);
+		if (_.versionCompare(_options.lastRun, VERSION_NUMBER) > -1) {
+			_.log('Already on Current Version (v%s), Skipping Modal', _options.lastRun);
+			return;
+		}
+
+		// First Run
+		if (_options.lastRun === undefined || _options.lastRun === null) {
+			notificationUrl = chrome.extension.getURL('dist/templates/notifications/default.html');
+		} else if (_.versionCompare(_options.lastRun, VERSION_NUMBER) === -1) {
+			notificationUrl = chrome.extension.getURL('dist/templates/notifications/' + VERSION_NUMBER + '.html');
+		}
+
+		_.$http.get(notificationUrl).then(function(template) {
+			_.log('Show notification for version: %s', VERSION_NUMBER);
+			PMModal.show(template, function() {
 				chrome.storage.sync.set({ lastRun: VERSION_NUMBER }, function() {
 					_options.lastRun = VERSION_NUMBER;
 				});
 			});
-		// }
+		}).catch(function() {
+			_.log('No notification template exists for version: %s', VERSION_NUMBER);
+			chrome.storage.sync.set({ lastRun: VERSION_NUMBER }, function() {
+				_options.lastRun = VERSION_NUMBER;
+			});
+		});
 	}
 
 
@@ -254,7 +256,7 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 			injectStyle();
 
 			window.addEventListener('load', function() {
-				PMOptions.create();
+				//PMOptions.create();
 				updateFavicon();
 				checkNotification();
 			});
@@ -266,6 +268,11 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 	// Load Play Midnight
 	init();
 
+
+	// Expose to Outside World
+	PM.version = VERSION_NUMBER;
+	PM.options = _options;
+	PM.optionsShown = false;
 
 
 	// Return Object for Modularity
