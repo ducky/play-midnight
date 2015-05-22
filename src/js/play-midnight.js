@@ -199,8 +199,9 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 
 	// Display Notification if new one exists
 	function checkNotification() {
-		if (_options.lastRun === undefined || _options.lastRun === null || _.versionCompare(_options.lastRun, VERSION_NUMBER) === -1) {
-			var notificationUrl = chrome.extension.getURL('dist/templates/notifications/' + VERSION_NUMBER + '.html');
+		// if (_options.lastRun === undefined || _options.lastRun === null || _.versionCompare(_options.lastRun, VERSION_NUMBER) === -1) {
+			// var notificationUrl = chrome.extension.getURL('dist/templates/notifications/' + VERSION_NUMBER + '.html');
+			var notificationUrl = chrome.extension.getURL('dist/templates/notifications/2.0.0.html');
 
 			_.$http.get(notificationUrl).then(function(template) {
 				PMModal.show(template, function() {
@@ -214,7 +215,7 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 					_options.lastRun = VERSION_NUMBER;
 				});
 			});
-		}
+		// }
 	}
 
 

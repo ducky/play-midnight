@@ -1,0 +1,276 @@
+$accents: 'default' #fb8521, 'blue' #3179a1, 'green' #4c9014, 'red' #a61a2b, 'purple' #3e0c6e, 'midnight' #43474e;
+$default: #fb8521;
+$font_primary: #dcdcdc; // Titles
+$font_secondary: #666; // Secondary information
+$primary: #141517; // Main backgrounds
+$border: #111;
+
+body {
+	-webkit-font-smoothing: antialiased;
+}
+
+#oneGoogleWrapper {
+	position: relative;
+	z-index: 999;
+}
+
+// Credits
+#playMidnight-credits {
+	#play-midnight {
+		a {
+			font-size: 14px;
+			color: $font_primary;
+		}
+	}
+
+	a {
+		color: $font_secondary;
+		text-decoration: none;
+	}
+}
+
+#btn-pm-options {
+	float: right;
+	padding: 0 20px;
+	overflow: hidden;
+
+	img {
+		height: 20px;
+		vertical-align: bottom;
+		margin: 4px 0;
+		width: auto;
+		display: inline-block;
+	}
+
+	span {
+		display: inline-block;
+		padding: 0;
+		width: 0px;
+		opacity: 0;
+		transition: padding 0.5s, width 0.5s, opacity 0.5s;
+	}
+
+	&:hover {
+		span {
+			width: 140px;
+			padding-left: 8px;
+			opacity: 1;
+		}
+	}
+}
+
+#play-midnight-options {
+	position: absolute;
+	background: $primary;
+	top: 60px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 900;
+	font-family: 'Roboto', 'sans-serif';
+	font-weight: 300;
+	font-size: 16px;
+	color: $font_primary;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+	transition: transform 0.8s;
+	transform: translateY(-100%);
+
+	&.show {
+		transform: translateY(0);
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-weight: 300;
+		background: lighten($primary, 6%);
+		margin: 0;
+		padding: 15px 25px;
+
+		span {
+			font-weight: 100;
+		}
+
+		.subtitle {
+			font-size: 14px;
+		}
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	p {
+		margin: 0;
+	}
+
+	label {
+		cursor: pointer;
+		user-select: none;
+		display: block;
+	}
+
+	.options-group {
+		a:hover {
+			text-decoration: none;
+		}
+
+		&.single .option {
+			opacity: 0.5;
+			transition: opacity 0.5s;
+
+			&.selected {
+				opacity: 1;
+			}
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+
+	.accent {
+		font-weight: bold;
+	}
+
+	@each $accent in $accents {
+		.#{nth($accent, 1)} {
+			background: nth($accent, 2);
+		}
+	}
+
+	.text-muted {
+		color: darken($font_secondary, 4%);
+		font-style: italic;
+	}
+
+	.text-center {
+		text-align: center;
+	}
+
+	.pull-right {
+		float: right;
+	}
+
+	.inline {
+		display: inline-block;
+	}
+
+	.checkbox {
+		display: inline-block;
+		width: 20px;
+		margin-right: 10px;
+		position: relative;
+	}
+
+	.checkbox label {
+		cursor: pointer;
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		top: 0;
+		border-radius: 4px;
+
+		box-shadow: inset 0px 1px 1px darken($primary, 5%), 0px 1px 0px lighten($primary, 2%);
+		background: linear-gradient(to bottom, darken($primary, 1%) 0%, darken($primary, 3%) 100%);
+	}
+
+	.checkbox label:after {
+		opacity: 0;
+		content: '';
+		position: absolute;
+		width: 9px;
+		height: 5px;
+		background: transparent;
+		top: 5px;
+		left: 4px;
+		border: 3px solid lighten($font_secondary, 5%);
+		border-top: none;
+		border-right: none;
+
+		transform: rotate(-45deg);
+	}
+
+	.checkbox input {
+		visibility: hidden;
+	}
+
+	.checkbox input[type=checkbox]:checked + label:after {
+		opacity: 1;
+	}
+
+	.checkbox input[type=radio]:checked + label:after {
+		opacity: 1;
+	}
+
+	header {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 75px;
+		background: lighten($primary, 10%);
+		padding: 15px 25px;
+		z-index: 99;
+		box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), 0 2px 2px rgba(0,0,0,0.3);
+
+		.logo {
+			height: 40px;
+			width: auto;
+			vertical-align: bottom;
+			margin-right: 10px;
+		}
+
+		h1 {
+			background: none;
+			padding: 0;
+		}
+
+		.button {
+			margin-top: 3px;
+		}
+
+		.status {
+			display: none;
+			font-style: italic;
+			margin: 9px 25px;
+			color: darken($font_primary, 10%);
+		}
+	}
+
+	section {
+		position: absolute;
+		top: 75px;
+		bottom: 40px;
+		left: 0;
+		right: 0;
+		overflow: auto;
+
+		.option {
+			cursor: pointer;
+
+			& > label {
+				padding: 20px 25px;
+			}
+		}
+	}
+
+	footer {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 40px;
+		line-height: 40px;
+		background: lighten($primary, 1%);
+		font-size: 14px;
+	}
+
+}

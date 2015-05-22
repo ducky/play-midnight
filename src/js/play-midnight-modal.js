@@ -15,7 +15,6 @@ var PlayMidnightModal = (function(_){
 
 
 
-
 	// Show Modal
   PMModal.show = function(templateHtml, cb) {
 		var template = parseTemplate(templateHtml);
@@ -27,12 +26,12 @@ var PlayMidnightModal = (function(_){
 		_.empty(_modal);
 		_modal.appendChild(template);
 
-		_backdrop.classList.add('modal-show');
+		document.body.classList.add('modal-show');
 
     _modal.querySelector('.confirm-btn').addEventListener('click', function(e) {
       e.preventDefault();
 
-			_backdrop.classList.remove('modal-show');
+			document.body.classList.remove('modal-show');
 			if (typeof _cb === 'function' && _cb) {
         _cb();
       }
@@ -59,7 +58,7 @@ var PlayMidnightModal = (function(_){
 			return;
 		}
 
-		_backdrop.appendChild(_modal);
+		document.body.appendChild(_modal);
 		document.body.appendChild(_backdrop);
 
 		_injected = true;
