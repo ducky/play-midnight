@@ -26,7 +26,7 @@
 
 	/* Main Script / Libraries */
 	gulp.task('scripts-main', function() {
-		var libs = libs = gulp.src(['src/js/play-midnight-*', '!src/js/play-midnight-utils.js', '!src/js/play-midnight.js']),
+		var libs = gulp.src(['src/js/play-midnight-*', '!src/js/play-midnight-utils.js', '!src/js/play-midnight.js']),
 			utils = gulp.src('src/js/play-midnight-utils.js'),
 			script = gulp.src('src/js/play-midnight.js'),
 			merged;
