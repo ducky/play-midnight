@@ -8,7 +8,7 @@ paper-dialog {
   .upload-progress-row td,
   .material .song-row td,
   .material .upload-progress-row td {
-  	background: $background_menu;
+  	background-color: $background_menu;
   	color: $font_primary;
 
 		.fade-out:after {
@@ -20,7 +20,7 @@ paper-dialog {
 	.material .song-row.hover td,
 	.song-row.selected-song-row td,
 	.material .song-row.selected-song-row td {
-		background: $background_menu_hover !important;
+		background-color: $background_menu_hover !important;
 
 		.fade-out:after {
 			background: linear-gradient( to right, rgba($background_menu_hover, 0) 0%, rgba($background_menu_hover, 0.999) 100% );

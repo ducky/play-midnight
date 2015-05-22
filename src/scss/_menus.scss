@@ -1,3 +1,59 @@
+paper-dialog {
+	&::shadow {
+		h1,
+		.content {
+			color: $font_primary;
+		}
+	}
+
+	h1,
+	.content {
+		color: $font_primary;
+	}
+}
+
+.simple-dialog-bg {
+	background: rgba(lighten($background_dark, 15%), 0.8);
+}
+
+.simple-dialog {
+	background: $background_page;
+	border: 1px solid $border_page;
+
+	.simple-dialog-title {
+		background: $background_page;
+		color: $font_primary;
+	}
+
+	.simple-dialog-content {
+		background: $background_page;
+		color: $font_primary;
+
+		.browseSubtext {
+			color: $font_primary;
+			margin-bottom: 5px;
+		}
+	}
+
+	.edit-section {
+		div:first-child {
+			margin-bottom: 5px;
+		}
+	}
+
+	input[type="text"],
+	textarea{
+		color: $font_primary;
+		background: transparent;
+		border: none;
+		border-bottom: 1px solid $font_secondary;
+
+		&:focus {
+			outline: none;
+		}
+	}
+}
+
 // Upload Music Dialog
 .upload-dialog-bg {
 	background: rgba(lighten($background_dark, 15%), 0.8);

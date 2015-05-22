@@ -14,6 +14,10 @@ $background_card: $background_page;
 $background_player: lighten($background_dark, 5%);
 $background_menu: lighten($background_dark, 5%);
 
+$border_nav: darken($background_nav, 2%);
+$border_page: darken($background_page, 2%);
+$border_menu: darken($background_menu, 2%);
+
 // Font Colors
 $font_primary: #dcdcdc;
 $font_secondary: #666;

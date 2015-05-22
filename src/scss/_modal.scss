@@ -23,7 +23,11 @@
 }
 
 #play-midnight-modal {
-  position: absolute;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  flex-basis: auto;
+  flex: 1;
   background: $background_menu;
   top: calc(20vh - 25px);
   left: calc((100vw - 700px) / 2);
@@ -33,14 +37,15 @@
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
   z-index: 1000;
   padding: 24px;
-  display: flex;
   transition: all 0.75s;
   transform: scale3d(0.9,0.9,0.9);
   opacity: 0;
+  visibility: hidden;
 
   .modal-show & {
     transform: scale3d(1, 1, 1);
     opacity: 1;
+    visibility: visible;
   }
 
   .play-midnight-notification {

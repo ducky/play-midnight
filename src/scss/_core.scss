@@ -66,7 +66,7 @@ core-header-panel#content-container.transparent {
 }
 
 core-header-panel #music-content.material .material-cover {
-	background: $color_accent;
+	background-color: $color_accent;
 }
 
 #nav,
@@ -80,7 +80,6 @@ core-header-panel#nav-container {
 }
 
 // Icons
-html /deep/ core-icon,
 core-icon,
 sj-icon-button,
 .header-row core-icon[icon="sort"],

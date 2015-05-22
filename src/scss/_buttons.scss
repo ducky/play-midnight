@@ -1,4 +1,5 @@
 $background_disabled: lighten($background_page, 3%);
+$color_accent_hover: lighten($color_accent, 3%);
 
 .button.primary,
 sj-paper-button.material-primary,
@@ -8,6 +9,10 @@ sj-paper-button.material-primary,
 	[disabled] {
 		background: $background_disabled;
 		color: $font_secondary;
+	}
+
+	&:hover {
+		background: $color_accent_hover !important;
 	}
 }
 

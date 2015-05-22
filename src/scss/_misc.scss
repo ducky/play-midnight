@@ -31,6 +31,13 @@
 }
 
 
+// Album Art
+.albumImage {
+	border: 1px solid $border_page;
+	background: $background_page;
+}
+
+
 // Loading Overlay
 #loading-overlay.material,
 .core-overlay-backdrop.core-opened,
