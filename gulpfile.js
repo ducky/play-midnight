@@ -2,15 +2,15 @@
 	'use strict';
 
 	var gulp = require('gulp'),
-		Merge = require('streamqueue'),
-		argv = require('yargs').argv,
-		$ = require('gulp-load-plugins')({
-			rename: {
-				'gulp-sass': 'sass',
-				'gulp-minify-css': 'minifycss'
-			},
-			lazy: false
-		});
+	Merge = require('streamqueue'),
+	argv = require('yargs').argv,
+	$ = require('gulp-load-plugins')({
+		rename: {
+			'gulp-sass': 'sass',
+			'gulp-minify-css': 'minifycss'
+		},
+		lazy: false
+	});
 
 	/* Combine Sass / Libraries */
 	gulp.task('styles', function() {
@@ -26,16 +26,14 @@
 
 	/* Main Script / Libraries */
 	gulp.task('scripts-main', function() {
-		var modal = gulp.src('src/js/play-midnight-modal.js'),
-				options = gulp.src('src/js/play-midnight-options.js'),
-				utils = gulp.src('src/js/play-midnight-utils.js'),
-				script = gulp.src('src/js/play-midnight.js'),
-				merged;
+		var libs = libs = gulp.src(['src/js/play-midnight-*', '!src/js/play-midnight-utils.js', '!src/js/play-midnight.js']),
+			utils = gulp.src('src/js/play-midnight-utils.js'),
+			script = gulp.src('src/js/play-midnight.js'),
+			merged;
 
 		merged = new Merge({ objectMode: true });
 		merged.queue(utils);
-		merged.queue(options);
-		merged.queue(modal);
+		merged.queue(libs);
 		merged.queue(script);
 
 		return merged.done()
@@ -52,11 +50,11 @@
 		var script = gulp.src('src/js/background.js');
 
 		return script
-			.pipe($.jshint())
-			.pipe($.jshint.reporter('default'))
-			.pipe($.if(argv.prod, $.uglify()))
-			.pipe(gulp.dest('dist/js'))
-			.pipe($.notify({ message: 'Background Scripts Task Completed' }));
+		.pipe($.jshint())
+		.pipe($.jshint.reporter('default'))
+		.pipe($.if(argv.prod, $.uglify()))
+		.pipe(gulp.dest('dist/js'))
+		.pipe($.notify({ message: 'Background Scripts Task Completed' }));
 	});
 
 	/* Images Script */
@@ -64,8 +62,8 @@
 		var images = gulp.src('src/images/**/*');
 
 		return images
-			.pipe(gulp.dest('dist/images'))
-			.pipe($.notify({ message: 'Images Task Completed' }));
+		.pipe(gulp.dest('dist/images'))
+		.pipe($.notify({ message: 'Images Task Completed' }));
 	});
 
 	/* HTML Script */
@@ -73,8 +71,8 @@
 		var html = gulp.src('src/**/*.html');
 
 		return html
-			.pipe(gulp.dest('dist'))
-			.pipe($.notify({ message: 'HTML Task Completed' }));
+		.pipe(gulp.dest('dist'))
+		.pipe($.notify({ message: 'HTML Task Completed' }));
 	});
 
 	/* Watch File Changes */
