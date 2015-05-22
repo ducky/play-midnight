@@ -6,20 +6,28 @@ var PlayMidnightUtilities = (function(){
 
 	var _verbose = false;
 
+
+	// Check if Verbose
 	PMUtils.verbose = function() {
 		return _verbose;
 	};
 
+
+	// Set Verbose
 	PMUtils.setVerbose = function(verbose) {
 		_verbose = verbose;
 	};
 
+
+	// Log to console if verbose
 	PMUtils.log = function() {
 		if (_verbose) {
 			console.log.apply(console, arguments);
 		}
 	};
 
+
+	// Sample stub $http Utility
 	PMUtils.$http = function(){
 		var core = {
 			ajax : function (method, url, args) {
@@ -54,16 +62,18 @@ var PlayMidnightUtilities = (function(){
 		};
 	}();
 
+
+	// Empty Node
 	PMUtils.empty = function(element) {
 		while (element.lastChild) {
 		    element.removeChild(element.lastChild);
 		}
 	};
 
-	PMUtils.isClicked = function(element, target) {
-		// console.log(target);
-		while (element.parentNode) {
-			// console.log(element);
+
+	// Check if Nodes Match
+	PMUtils.nodesMatch = function(element, target) {
+		while (element) {
 			if (element === target) {
 				return true;
 			}
@@ -72,7 +82,11 @@ var PlayMidnightUtilities = (function(){
 
 		return false;
 	};
+	// Alias for Nodes Match
+	PMUtils.isClicked = PMUtils.nodesMatch;
 
+
+	// Remove Element from DOM
 	PMUtils.remove = function(element) {
 		var ele;
 
@@ -91,10 +105,14 @@ var PlayMidnightUtilities = (function(){
 		}
 	};
 
+
+	// Insert Element After Node
 	PMUtils.insertAfter = function(newNode, referenceNode) {
 		referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 	};
 
+
+	// Create Element from html string
 	PMUtils.createElement = function(html) {
 		var temp = document.createElement('div');
 
@@ -102,6 +120,11 @@ var PlayMidnightUtilities = (function(){
 		return temp.childNodes[0];
 	};
 
+
+	// Return Comparison of version compare
+	// -1: a < b
+	// 0: a === b
+	// 1: a > b
 	PMUtils.versionCompare = function(a, b) {
 		if (a === b) {
 			return 0;
@@ -133,6 +156,12 @@ var PlayMidnightUtilities = (function(){
 		return 0;
 	};
 
+
+	//
+	// Private Helpers
+	//
+
+	// Check if node is a nodeList
 	function isNodeList(nodes) {
 		var stringRepr = Object.prototype.toString.call(nodes);
 
@@ -141,6 +170,7 @@ var PlayMidnightUtilities = (function(){
 			nodes.hasOwnProperty('length') &&
 			(nodes.length === 0 || (typeof nodes[0] === "object" && nodes[0].nodeType > 0));
 	}
+
 
 	// Return Object for Modularity
 	return PMUtils;
