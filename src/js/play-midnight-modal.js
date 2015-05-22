@@ -5,9 +5,9 @@ var PlayMidnightModal = (function(_){
 	var PMModal = {};
 
 	var _injected = false,
-			_backdrop = document.createElement('div'),
-			_modal = document.createElement('div'),
-			_cb;
+		_backdrop = document.createElement('div'),
+		_modal = document.createElement('div'),
+		_cb;
 
 	// Setup
 	_backdrop.id = 'play-midnight-modal-backdrop';
@@ -16,7 +16,7 @@ var PlayMidnightModal = (function(_){
 
 
 	// Show Modal
-  PMModal.show = function(templateHtml, cb) {
+	PMModal.show = function(templateHtml, cb) {
 		var template = parseTemplate(templateHtml);
 
 		_cb = cb;
@@ -28,15 +28,15 @@ var PlayMidnightModal = (function(_){
 
 		document.body.classList.add('modal-show');
 
-    _modal.querySelector('.confirm-btn').addEventListener('click', function(e) {
-      e.preventDefault();
+		_modal.querySelector('.confirm-btn').addEventListener('click', function(e) {
+			e.preventDefault();
 
 			document.body.classList.remove('modal-show');
 			if (typeof _cb === 'function' && _cb) {
-        _cb();
-      }
-    });
-  };
+				_cb();
+			}
+		});
+	};
 
 
 
@@ -71,11 +71,11 @@ var PlayMidnightModal = (function(_){
 
 
 	// Parse Template html to fix relative paths
-  function parseTemplate(template) {
-    template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
+	function parseTemplate(template) {
+		template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
 
-    return _.createElement(template);
-  }
+		return _.createElement(template);
+	}
 
 
 
