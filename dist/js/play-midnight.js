@@ -176,327 +176,17 @@ var PlayMidnightUtilities = (function(){
 	return PMUtils;
 })();
 
-var PlayMidnightInjector = (function(_){
-    'use strict';
-
-    // Our Friend
-    var PMInjector = {};
-
-
-    // Load Options Templates and Inject
-    function loadTemplates(_temps, cb) {
-        var promises = [],
-            templates = [],
-            template;
-
-        // Array Of Templates
-        if (Array.isArray(_temps) && _temps.length > 0) {
-            // Load Up Promises
-            for (var i = 0, len = _temps.length; i < len; i++) {
-                if (!_temps[i] || !_temps[i].hasOwnProperty('url')) {
-                    continue;
-                }
-
-                promises.push(
-                    _.$http.get(_temps[i].url)
-                );
-            }
-
-            // No Templates had URLS
-            if (!promises.length) {
-                if (typeof cb === 'function') {
-                    cb(templates);
-                }
-                return;
-            }
-
-            // Load ALL Templates before injecting
-            Promise.all(promises)
-                .then(function(templateHtml) {
-                    // Populate Returned Templates
-                    for (var i = 0, len = _temps.length; i < len; i++) {
-                        template = _temps[i];
-
-                        templates.push({
-                            url: template.url,
-                            target: template.target || 'body',
-                            events: template.events || function() {},
-                            html: templateHtml[i] || '',
-                            element: _.createElement(templateHtml[i]) || document.createElement('div')
-                        });
-                    }
-
-                    if (typeof cb === 'function') {
-                        _.log(templates);
-                        cb(templates);
-                    }
-                });
-
-        // Single Template
-        } else {
-            // No Template or Template URL
-            if (!_temps || !_temps.hasOwnProperty('url')) {
-                if (typeof cb === 'function') {
-                    cb(templates);
-                }
-                return;
-            }
-
-            // Load Single Template
-            _.$http.get(_temps.url)
-                .then(function(templateHtml) {
-                    templates.push({
-                        url: _temps.url,
-                        target: _temps.target || 'body',
-                        events: _temps.events || function() {},
-                        html: templateHtml || '',
-                        element: _.createElement(templateHtml) || document.createElement('div')
-                    });
-
-                    if (typeof cb === 'function') {
-                        cb(templates);
-                    }
-                });
-        }
-    }
-
-
-    // Load Options Templates and Inject
-    function injectTemplates(_temps, cb) {
-        var target,
-            template;
-
-        _.log('Starting Load Templates: %s', JSON.stringify(_temps));
-        loadTemplates(_temps, function(templates) {
-            _.log('Injecting Templates');
-
-            if (!templates.length) {
-                _.log('No Templates loaded?');
-            }
-
-            for (var i = 0, len = templates.length; i < len; i++) {
-                template = templates[i];
-
-                target = document.querySelector(template.target);
-                target.appendChild(template.element);
-
-                // Register Events, If Given
-                if (typeof template.events === 'function') {
-                    template.events(template.element);
-                }
-            }
-
-            if (typeof cb === 'function') {
-                cb(templates);
-            }
-        });
-    }
-
-
-    // Parse Template html to fix relative paths
-    function parseTemplate(template) {
-        template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
-
-        return _.createElement(template);
-    }
-
-
-    // Add to utils
-    _.inject = injectTemplates;
-
-
-    // Return Object for Modularity
-    return PMInjector;
-})(PlayMidnightUtilities);
-
-var PlayMidnightModal = (function(_){
-	'use strict';
-
-	// Our Friend
-	var PMModal = {};
-
-	var _injected = false,
-		_backdrop = document.createElement('div'),
-		_modal = document.createElement('div'),
-		_cb;
-
-	// Setup
-	_backdrop.id = 'play-midnight-modal-backdrop';
-	_modal.id = 'play-midnight-modal';
-
-
-
-	// Show Modal
-	PMModal.show = function(templateHtml, cb) {
-		var template = parseTemplate(templateHtml);
-
-		_cb = cb;
-
-		injectModal();
-
-		_.empty(_modal);
-		_modal.appendChild(template);
-
-		document.body.classList.add('modal-show');
-
-		_modal.querySelector('.confirm-btn').addEventListener('click', function(e) {
-			e.preventDefault();
-
-			document.body.classList.remove('modal-show');
-			if (typeof _cb === 'function' && _cb) {
-				_cb();
-			}
-		});
-	};
-
-
-
-
-	// Hide Modal
-	PMModal.hide = function() {
-		_backdrop.classList.remove('modal-show');
-		if (typeof _cb === 'function' && _cb) {
-			_cb();
-		}
-	};
-
-
-
-
-	// Inject Modal to DOM
-	function injectModal() {
-		if (_injected || document.body.contains(_backdrop) || document.body.contains(_modal)) {
-			return;
-		}
-
-		document.body.appendChild(_modal);
-		document.body.appendChild(_backdrop);
-
-		_injected = true;
-
-		// Trigger Window getting styles for css3
-		return window.getComputedStyle(_backdrop).height;
-	}
-
-
-
-
-	// Parse Template html to fix relative paths
-	function parseTemplate(template) {
-		template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
-		//template = template.replace(/\{VERSION_NUMBER\}/, VERSION_NUMBER);
-
-		return _.createElement(template);
-	}
-
-
-
-	// Return Object for Modularity
-	return PMModal;
-})(PlayMidnightUtilities);
-
-var PlayMidnightOptions = (function(_){
-    'use strict';
-
-    // Our Friend
-    var PMOptions = {};
-
-    var _injected = false,
-        _menuOpen = false,
-        _backdrop = document.createElement('div'),
-        _modal = document.createElement('div'),
-        _cb;
-
-
-    // Various Templates
-    var _templates = [];
-
-    _templates.push({
-        name: 'optionsPage',
-        url: chrome.extension.getURL('dist/templates/options.html'),
-        target: 'body'
-    });
-
-    _templates.push({
-        name: 'menuItem',
-        url: chrome.extension.getURL('dist/templates/options-menu.html'),
-        target: '#nav_collections',
-        events: function(ele) {
-            ele.addEventListener('click', function(e) {
-                // Prevent Click Bubbling to Document
-                if (!_menuOpen) {
-                    e.stopPropagation();
-                }
-
-                showOptions();
-            }, false);
-        }
-    });
-
-
-    // Load Options Templates and Inject
-    function createOptions() {
-        _.inject(_templates, function(injected) {
-            // for (var i = 0, len = injected.length; i < len; i++) {
-            //     template = injected[i];
-            // }
-        });
-    }
-
-
-    // Listener for Document.click when Menu is open
-    function handleClick(e) {
-        if (_menuOpen &&!_.isClicked(e.target, _templates.optionsPage.element)) {
-            hideOptions();
-        }
-    }
-
-
-    // Show Options Page
-    function showOptions() {
-        document.addEventListener('click', handleClick, false);
-        _templates.optionsPage.element.classList.add('visible');
-        _menuOpen = true;
-    }
-
-
-    // Hide Options Page
-    function hideOptions() {
-        document.removeEventListener('click', handleClick);
-        _templates.optionsPage.element.classList.remove('visible');
-        _menuOpen = false;
-    }
-
-
-    // Parse Template html to fix relative paths
-    function parseTemplate(template) {
-        template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
-
-        return _.createElement(template);
-    }
-
-
-    // Add Options to Object
-    PMOptions.create = createOptions;
-    PMOptions.show = showOptions;
-    PMOptions.hide = hideOptions;
-
-
-    // Return Object for Modularity
-    return PMOptions;
-})(PlayMidnightUtilities);
-
 // _ references Utilities
-var PlayMidnight = (function(_, PMOptions, PMModal){
+var PlayMidnight = (function(_){
 	'use strict';
 
 	// Our Friend
 	var PM = {};
 
 	// Dev Mode: Use CSS File rather than inline <style> (inline allows dynamic accent colors)
-	var _dev = false;
+	var _dev = true;
 
-	var VERSION_NUMBER = '2.0.2';
+	var VERSION_NUMBER = '2.0.3';
 
 	// Reset Options when version less than
 	var _resetOptions = '2.0.1';
@@ -684,8 +374,12 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 		// First Run
 		if (_options.lastRun === undefined || _options.lastRun === null) {
 			notificationUrl = chrome.extension.getURL('dist/templates/notifications/default.html');
+
+        // New Version
 		} else if (_.versionCompare(_options.lastRun, VERSION_NUMBER) < 0) {
 			notificationUrl = chrome.extension.getURL('dist/templates/notifications/' + VERSION_NUMBER + '.html');
+
+        // Current Version
 		} else {
 			_.log('Already on Current Version (v%s), Skipping Modal', _options.lastRun);
 			return;
@@ -693,10 +387,10 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 
 		_.$http.get(notificationUrl).then(function(template) {
 			_.log('Show notification for version: %s', VERSION_NUMBER);
-			PMModal.show(template, function() {
-				chrome.storage.sync.set({ lastRun: VERSION_NUMBER }, function() {
-					_options.lastRun = VERSION_NUMBER;
-				});
+			PM.Modal.show(template, function() {
+				// chrome.storage.sync.set({ lastRun: VERSION_NUMBER }, function() {
+				// 	_options.lastRun = VERSION_NUMBER;
+				// });
 			});
 		}).catch(function() {
 			_.log('No notification template exists for version: %s', VERSION_NUMBER);
@@ -742,7 +436,7 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 			injectStyle();
 
 			window.addEventListener('load', function() {
-				//PMOptions.create();
+				PM.Options.create();
 				updateFavicon();
 				checkNotification();
 			});
@@ -751,16 +445,315 @@ var PlayMidnight = (function(_, PMOptions, PMModal){
 
 
 
-	// Load Play Midnight
-	init();
-
-
 	// Expose to Outside World
 	PM.version = VERSION_NUMBER;
 	PM.options = _options;
 	PM.optionsShown = false;
+    PM.init = init;
 
 
 	// Return Object for Modularity
 	return PM;
-})(PlayMidnightUtilities, PlayMidnightOptions, PlayMidnightModal);
+})(PlayMidnightUtilities);
+
+var PlayMidnightInjector = (function(_){
+    'use strict';
+
+    // Our Friend
+    var PMInjector = {};
+
+
+    // Load Options Templates and Inject
+    function loadTemplates(_temps, cb) {
+        var promises = [];
+
+        // Invalid Templates
+        if (!_temps || typeof _temps !== 'object') {
+            if (typeof cb === 'function') {
+                cb(_temps);
+            }
+            return;
+        }
+
+        // Load Up Promises
+        for (var key in _temps) {
+            console.log(_temps[key]);
+            if (!_temps[key] || !_temps[key].hasOwnProperty('url')) {
+                continue;
+            }
+
+            promises.push(
+                _.$http.get(_temps[key].url)
+            );
+        }
+
+        console.log(promises);
+        // No Templates had URLS
+        if (!promises.length) {
+            console.log('No promises created');
+            if (typeof cb === 'function') {
+                cb(_temps);
+            }
+            return;
+        }
+
+        // Load ALL Templates before injecting
+        Promise.all(promises)
+            .then(function(templateHtml) {
+                // Populate Returned Templates
+                var i = 0;
+                for (var key in _temps) {
+                    _temps[key].html = parseTemplate(templateHtml[i]) || '';
+                    _temps[key].element = _.createElement(_temps[key].html) || document.createElement('div');
+                    i++;
+                }
+
+                if (typeof cb === 'function') {
+                    _.log(_temps);
+                    cb(_temps);
+                }
+            });
+    }
+
+
+    // Load Options Templates and Inject
+    function injectTemplates(_temps, cb) {
+        var target;
+
+        _.log('Starting Load Templates: %s', JSON.stringify(_temps));
+        loadTemplates(_temps, function(templates) {
+            _.log('Injecting Templates');
+
+            // No Templates?
+            if (!templates || typeof templates !== 'object') {
+                _.log('No Templates loaded?');
+                if (typeof cb === 'function') {
+                    cb();
+                }
+                return;
+            }
+
+            for (var key in templates) {
+                target = document.querySelector(templates[key].target);
+                target.appendChild(templates[key].element);
+
+                // Register Events, If Given
+                if (typeof templates[key].events === 'function') {
+                    templates[key].events(templates[key].element);
+                }
+            }
+
+            if (typeof cb === 'function') {
+                cb();
+            }
+        });
+    }
+
+
+    // Parse Template html to fix relative paths
+    function parseTemplate(template) {
+        template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
+
+        return template;
+    }
+
+
+    // Add to utils
+    _.inject = injectTemplates;
+
+
+    // Return Object for Modularity
+    return PMInjector;
+})(PlayMidnightUtilities);
+
+var PlayMidnightModal = (function(_, PlayMidnight){
+	'use strict';
+
+	// Our Friend
+	var PMModal = {};
+
+	var _injected = false,
+		_backdrop = document.createElement('div'),
+		_modal = document.createElement('div'),
+		_cb;
+
+	// Setup
+	_backdrop.id = 'play-midnight-modal-backdrop';
+	_modal.id = 'play-midnight-modal';
+
+
+
+	// Show Modal
+	PMModal.show = function(templateHtml, cb) {
+		var template = parseTemplate(templateHtml);
+
+		_cb = cb;
+
+		injectModal();
+
+		_.empty(_modal);
+		_modal.appendChild(template);
+
+		document.body.classList.add('modal-show');
+
+		_modal.querySelector('.confirm-btn').addEventListener('click', function(e) {
+			e.preventDefault();
+
+			document.body.classList.remove('modal-show');
+			if (typeof _cb === 'function' && _cb) {
+				_cb();
+			}
+		});
+	};
+
+
+
+
+	// Hide Modal
+	PMModal.hide = function() {
+		_backdrop.classList.remove('modal-show');
+		if (typeof _cb === 'function' && _cb) {
+			_cb();
+		}
+	};
+
+
+
+
+	// Inject Modal to DOM
+	function injectModal() {
+		if (_injected || document.body.contains(_backdrop) || document.body.contains(_modal)) {
+			return;
+		}
+
+		document.body.appendChild(_modal);
+		document.body.appendChild(_backdrop);
+
+		_injected = true;
+
+		// Trigger Window getting styles for css3
+		return window.getComputedStyle(_backdrop).height;
+	}
+
+
+
+
+	// Parse Template html to fix relative paths
+	function parseTemplate(template) {
+		template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
+		//template = template.replace(/\{VERSION_NUMBER\}/, VERSION_NUMBER);
+
+		return _.createElement(template);
+	}
+
+
+	// Add To Core
+	PlayMidnight.Modal = PMModal;
+
+
+	// Return Object for Modularity
+	return PMModal;
+})(PlayMidnightUtilities, PlayMidnight);
+
+var PlayMidnightOptions = (function(_, PlayMidnight){
+    'use strict';
+
+    // Our Friend
+    var PMOptions = {};
+
+    var _injected = false,
+        _menuOpen = false,
+        _backdrop = document.createElement('div'),
+        _modal = document.createElement('div'),
+        _cb;
+
+
+    // Various Templates
+    var _templates = {};
+
+    _templates.optionsPage = {
+        name: 'optionsPage',
+        url: chrome.extension.getURL('dist/templates/options.html'),
+        target: 'body'
+    };
+
+    _templates.menuItem = {
+        name: 'menuItem',
+        url: chrome.extension.getURL('dist/templates/options-menu.html'),
+        target: '#nav_collections',
+        events: function(ele) {
+            ele.addEventListener('click', function(e) {
+                // Prevent Click Bubbling to Document
+                if (!_menuOpen) {
+                    e.stopPropagation();
+                }
+
+                showOptions();
+            }, false);
+        }
+    };
+
+
+    // Load Options Templates and Inject
+    function createOptions() {
+        console.log(_templates);
+        _.inject(_templates, function() {
+            console.log(_templates);
+            // for (var i = 0, len = injected.length; i < len; i++) {
+            //     template = injected[i];
+            // }
+        });
+    }
+
+
+    // Listener for Document.click when Menu is open
+    function handleClick(e) {
+        if (_menuOpen &&!_.isClicked(e.target, _templates.optionsPage.element)) {
+            hideOptions();
+        }
+    }
+
+
+    // Show Options Page
+    function showOptions() {
+        document.addEventListener('click', handleClick, false);
+        document.body.classList.add('is-pm-options');
+        _menuOpen = true;
+    }
+
+
+    // Hide Options Page
+    function hideOptions() {
+        document.removeEventListener('click', handleClick);
+        document.body.classList.remove('is-pm-options');
+        _menuOpen = false;
+    }
+
+
+    // Parse Template html to fix relative paths
+    function parseTemplate(template) {
+        template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
+
+        return _.createElement(template);
+    }
+
+
+    // Add Options to Object
+    PMOptions.create = createOptions;
+    PMOptions.show = showOptions;
+    PMOptions.hide = hideOptions;
+
+
+    // Add To Core
+    PlayMidnight.Options = PMOptions;
+
+
+    // Return Object for Modularity
+    return PMOptions;
+})(PlayMidnightUtilities, PlayMidnight);
+
+(function(PlayMidnight){
+	'use strict';
+
+	PlayMidnight.init();
+})(PlayMidnight);

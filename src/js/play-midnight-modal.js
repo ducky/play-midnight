@@ -1,4 +1,4 @@
-var PlayMidnightModal = (function(_){
+var PlayMidnightModal = (function(_, PlayMidnight){
 	'use strict';
 
 	// Our Friend
@@ -79,7 +79,10 @@ var PlayMidnightModal = (function(_){
 	}
 
 
+	// Add To Core
+	PlayMidnight.Modal = PMModal;
+
 
 	// Return Object for Modularity
 	return PMModal;
-})(PlayMidnightUtilities);
+})(PlayMidnightUtilities, PlayMidnight);

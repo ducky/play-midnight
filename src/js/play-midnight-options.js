@@ -1,4 +1,4 @@
-var PlayMidnightOptions = (function(_){
+var PlayMidnightOptions = (function(_, PlayMidnight){
     'use strict';
 
     // Our Friend
@@ -12,15 +12,15 @@ var PlayMidnightOptions = (function(_){
 
 
     // Various Templates
-    var _templates = [];
+    var _templates = {};
 
-    _templates.push({
+    _templates.optionsPage = {
         name: 'optionsPage',
         url: chrome.extension.getURL('dist/templates/options.html'),
         target: 'body'
-    });
+    };
 
-    _templates.push({
+    _templates.menuItem = {
         name: 'menuItem',
         url: chrome.extension.getURL('dist/templates/options-menu.html'),
         target: '#nav_collections',
@@ -34,12 +34,14 @@ var PlayMidnightOptions = (function(_){
                 showOptions();
             }, false);
         }
-    });
+    };
 
 
     // Load Options Templates and Inject
     function createOptions() {
-        _.inject(_templates, function(injected) {
+        console.log(_templates);
+        _.inject(_templates, function() {
+            console.log(_templates);
             // for (var i = 0, len = injected.length; i < len; i++) {
             //     template = injected[i];
             // }
@@ -58,7 +60,7 @@ var PlayMidnightOptions = (function(_){
     // Show Options Page
     function showOptions() {
         document.addEventListener('click', handleClick, false);
-        _templates.optionsPage.element.classList.add('visible');
+        document.body.classList.add('is-pm-options');
         _menuOpen = true;
     }
 
@@ -66,7 +68,7 @@ var PlayMidnightOptions = (function(_){
     // Hide Options Page
     function hideOptions() {
         document.removeEventListener('click', handleClick);
-        _templates.optionsPage.element.classList.remove('visible');
+        document.body.classList.remove('is-pm-options');
         _menuOpen = false;
     }
 
@@ -85,6 +87,10 @@ var PlayMidnightOptions = (function(_){
     PMOptions.hide = hideOptions;
 
 
+    // Add To Core
+    PlayMidnight.Options = PMOptions;
+
+
     // Return Object for Modularity
     return PMOptions;
-})(PlayMidnightUtilities);
+})(PlayMidnightUtilities, PlayMidnight);
