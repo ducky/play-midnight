@@ -54,24 +54,6 @@ paper-dialog {
 	}
 }
 
-// Upload Music Dialog
-.upload-dialog-bg {
-	background: rgba(lighten($background_dark, 15%), 0.8);
-}
-
-.upload-dialog {
-	background: $background_page;
-
-	.upload-dialog-title {
-		background: $color_accent;
-		color: $font_primary;
-	}
-
-	.upload-dialog-content {
-		color: $font_primary;
-	}
-}
-
 
 // Context Menus
 .goog-menu,
@@ -105,7 +87,7 @@ paper-dialog {
 	color: $font_primary !important;
 }
 
-.material .goog-menu {
+.goog-menu {
 	.goog-menuitem {
 		.goog-menuitem-content {
 			color: $font_primary;

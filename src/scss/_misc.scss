@@ -30,6 +30,29 @@
 }
 
 
+// Upload Music Dialog
+.upload-dialog-bg {
+	background: rgba(lighten($background_dark, 15%), 0.8);
+}
+
+.upload-dialog {
+	background: $background_page;
+
+	.upload-dialog-title-close {
+		cursor: pointer;
+	}
+
+	.upload-dialog-title {
+		background: $color_accent;
+		color: $font_primary;
+	}
+
+	.upload-dialog-content {
+		color: $font_primary;
+	}
+}
+
+
 // Explicit
 .explicit,
 .material-card .explicit,

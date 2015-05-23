@@ -8,12 +8,17 @@
         	color: $font_primary;
         }
 
-		.hover-button[data-id="play"],
 		.song-indicator[data-playback-status="paused"],
 		.song-indicator[data-playback-status="playing"],
 		.rating-container.thumbs li {
 			background-color: transparent;
 			filter: invert(100%);
+		}
+
+		&.currently-playing {
+			img {
+				visibility: hidden;
+			}
 		}
 
         &.currently-playing td[data-col="title"] {
