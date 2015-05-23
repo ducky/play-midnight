@@ -4,6 +4,7 @@
   "description": "Play Midnight Gulp Dependencies",
   "author": "Chris Tieman",
   "devDependencies": {
+    "del": "^1.2.0",
     "gulp": "^3.8.10",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-cache": "^0.2.4",
