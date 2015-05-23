@@ -2,14 +2,19 @@
 	'use strict';
 
 	var gulp = require('gulp'),
-	Merge = require('streamqueue'),
-	argv = require('yargs').argv,
-	$ = require('gulp-load-plugins')({
-		rename: {
-			'gulp-sass': 'sass',
-			'gulp-minify-css': 'minifycss'
-		},
-		lazy: false
+		Merge = require('streamqueue'),
+		argv = require('yargs').argv,
+		del = require('del'),
+		$ = require('gulp-load-plugins')({
+			rename: {
+				'gulp-sass': 'sass',
+				'gulp-minify-css': 'minifycss'
+			},
+			lazy: false
+		});
+
+	gulp.task('clean', function() {
+		return del('../Dist/Chrome');
 	});
 
 	/* Combine Sass / Libraries */
@@ -25,14 +30,16 @@
 	});
 
 	/* Main Script / Libraries */
-	gulp.task('scripts-main', function() {
-		var libs = gulp.src(['src/js/play-midnight-*', '!src/js/play-midnight-utils.js', '!src/js/play-midnight.js']),
+	gulp.task('scripts', function() {
+		var libs = gulp.src(['src/js/play-midnight-*', '!src/js/play-midnight-utils.js', '!src/js/play-midnight-core.js', '!src/js/play-midnight.js']),
 			utils = gulp.src('src/js/play-midnight-utils.js'),
+			core = gulp.src('src/js/play-midnight-core.js'),
 			script = gulp.src('src/js/play-midnight.js'),
 			merged;
 
 		merged = new Merge({ objectMode: true });
 		merged.queue(utils);
+		merged.queue(core);
 		merged.queue(libs);
 		merged.queue(script);
 
@@ -66,13 +73,14 @@
 	/* Watch File Changes */
 	gulp.task('watch', function() {
 		gulp.watch('src/scss/**/*.scss', ['styles']);
-		gulp.watch('src/js/**/play-midnight*.js', ['scripts-main']);
+		gulp.watch('src/js/**/play-midnight*.js', ['scripts']);
 		gulp.watch('src/images/**/*', ['images']);
 		gulp.watch('src/**/*.html', ['html']);
 	});
 
 	/* Default Task */
-	gulp.task('default', function() {
-		gulp.start('styles', 'scripts-main', 'scripts-bg', 'images', 'html');
+	gulp.task('default', ['build']);
+	gulp.task('build', ['clean'], function() {
+		//gulp.start('styles', 'scripts-main', 'scripts-bg', 'images', 'html');
 	});
 }());
