@@ -45,18 +45,6 @@
 			.pipe($.notify({ message: 'Main Scripts Task Completed' }));
 	});
 
-	/* Background Script */
-	gulp.task('scripts-bg', function() {
-		var script = gulp.src('src/js/background.js');
-
-		return script
-		.pipe($.jshint())
-		.pipe($.jshint.reporter('default'))
-		.pipe($.if(argv.prod, $.uglify()))
-		.pipe(gulp.dest('dist/js'))
-		.pipe($.notify({ message: 'Background Scripts Task Completed' }));
-	});
-
 	/* Images Script */
 	gulp.task('images', function() {
 		var images = gulp.src('src/images/**/*');
@@ -79,7 +67,6 @@
 	gulp.task('watch', function() {
 		gulp.watch('src/scss/**/*.scss', ['styles']);
 		gulp.watch('src/js/**/play-midnight*.js', ['scripts-main']);
-		gulp.watch('src/js/**/background.js', ['scripts-bg']);
 		gulp.watch('src/images/**/*', ['images']);
 		gulp.watch('src/**/*.html', ['html']);
 	});

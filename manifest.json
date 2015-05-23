@@ -12,11 +12,6 @@
 		"128": "icon128.png"
 	},
 
-	"background": {
-		"scripts": ["dist/js/background.js"],
-		"persistent": false
-	},
-
 	"permissions": [
 		"storage",
 		"notifications"
