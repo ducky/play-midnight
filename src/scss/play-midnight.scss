@@ -7,13 +7,34 @@
 
 // Play Midnight Styles
 @import 'core';
-@import 'menus';
+@import 'nav';
 @import 'loading';
 @import 'cards';
 @import 'player';
 @import 'page';
+@import 'song-table';
 @import 'queue';
 @import 'forms';
 
+// Gross, but Google uses material class in places but not others, so a safety fallback
+.material {
+    // Random Gradients/Helpers
+    @import 'buttons';
+    @import 'misc';
+
+    // Play Midnight Styles
+    @import 'core';
+    @import 'nav';
+    @import 'menus';
+    @import 'loading';
+    @import 'cards';
+    @import 'player';
+    @import 'page';
+    @import 'song-table';
+    @import 'queue';
+    @import 'forms';
+}
+
+// Play Midnight Elements
 @import 'modal';
 @import 'pm-options';

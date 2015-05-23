@@ -38,8 +38,7 @@
 	}
 
 	// Gradient Fade
-	.fade-out:after,
-	.material .fade-out:after {
+	.fade-out:after {
 		background: linear-gradient( to right, rgba($background_card, 0) 0%, rgba($background_card, 0.999) 100% );
 	}
 }

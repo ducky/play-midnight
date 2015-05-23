@@ -1,0 +1,70 @@
+.song-table {
+	.song-row {
+        background: $background_page;
+        color: $font_primary;
+
+        td {
+            background: $background_page;
+        	color: $font_primary;
+        }
+
+		.hover-button[data-id="play"],
+		.song-indicator[data-playback-status="paused"],
+		.song-indicator[data-playback-status="playing"],
+		.rating-container.thumbs li {
+			background-color: transparent;
+			filter: invert(100%);
+		}
+
+        &.currently-playing td[data-col="title"] {
+        	color: $font_primary;
+        }
+
+		&.hover,
+		&.hover td {
+			background: $background_page_hover;
+		}
+
+        &.hover,
+    	&.currently-playing {
+            [data-col="index"],
+    		[data-col="track"] {
+    			.content {
+    				font-size: 0;
+    			}
+    		}
+    	}
+
+        &.selected-song-row td {
+        	background: $background_page_hover !important;
+        }
+
+        .fade-out:after {
+        	background: linear-gradient( to right, rgba($background_page, 0) 0%, rgba($background_page, 0.999) 100% );
+        }
+
+        &.hover .fade-out:after,
+        &.selected-song-row .fade-out:after, {
+        	background: linear-gradient( to right, rgba($background_page_hover, 0) 0%, rgba($background_page_hover, 0.999) 100% );
+        }
+	}
+
+    th,
+    [data-col="title"],
+    &.mini [data-col="song-details"] .song-title {
+    	color: $font_primary;
+    }
+}
+
+.upload-progress-row td {
+	background: $background_page;
+	color: $font_primary;
+}
+
+.cluster-text-protection {
+	background: $background_dark;
+
+	&:before {
+		background: $background_dark;
+	}
+}

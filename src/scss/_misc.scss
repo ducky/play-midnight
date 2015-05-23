@@ -1,32 +1,10 @@
-// Scrollbar
-::-webkit-scrollbar {
-	width: 8px;
-	background: rgba(0, 0, 0, 0);
-}
+// Visualizer Card
+.visualizercard {
+	background: $background_page;
+	color: $font_primary;
 
-::-webkit-scrollbar-track {
-	background-color: rgba(255,255,255,0.05);
-
-	&:hover {
-		background-color: rgba(255,255,255,0.1);
-	}
-
-	&:active {
-		background-color: rgba(255,255,255,0.07);
-	}
-}
-
-::-webkit-scrollbar-thumb {
-	border: none;
-	background-color: rgba(255,255,255,0.15);
-	border-radius: 5px;
-
-	&:hover {
-		background-color: rgba(255,255,255,0.2);
-	}
-
-	&:active {
-		background-color: rgba(255,255,255,0.18);
+	.label {
+		color: $font_primary;
 	}
 }
 
@@ -39,8 +17,8 @@
 
 
 // Loading Overlay
-#loading-overlay.material,
 .core-overlay-backdrop.core-opened,
+#loading-overlay.material,
 #loading-overlay.material[data-type="full-loading-overlay"],
 #loading-overlay.material[data-type="regular-loading-overlay"] {
 	background: rgba(lighten($background_dark, 15%), 0.8);

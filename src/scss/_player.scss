@@ -36,6 +36,10 @@ paper-slider::shadow .ring > #sliderKnob > #sliderKnobInner {
 	color: $color_accent;
 }
 
+#player.material sj-icon-button[data-id="cast"]::shadow core-icon[aria-label="cast-connected"] {
+	color: $color_accent;
+}
+
 #player.material .material-player-middle sj-icon-button[data-id="play-pause"]:not([disabled]) {
 	color: $color_accent;
 }
