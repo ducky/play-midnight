@@ -1,3 +1,4 @@
+/*global require */
 (function(){
 	'use strict';
 
@@ -15,6 +16,11 @@
 
 	gulp.task('clean', function() {
 		return del('../Dist/Chrome');
+	});
+
+	gulp.task('copy', function() {
+		return gulp.src('src/**/*.json')
+			.pipe(gulp.dest('dist'));
 	});
 
 	/* Combine Sass / Libraries */
@@ -76,6 +82,7 @@
 		gulp.watch('src/js/**/play-midnight*.js', ['scripts']);
 		gulp.watch('src/images/**/*', ['images']);
 		gulp.watch('src/**/*.html', ['html']);
+		gulp.watch('src/**/*.json', ['copy']);
 	});
 
 	/* Default Task */
