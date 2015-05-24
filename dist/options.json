@@ -1,0 +1,112 @@
+{
+    "version": {
+        "type": "string",
+        "default": "{VERSION_NUMBER}"
+    },
+
+    "lastRun": {
+        "type": "string",
+        "default": null
+    },
+
+    "general": {
+        "type": "section",
+        "title": "General",
+        "options": {
+            "enabled": {
+                "type": "boolean",
+                "default": true,
+                "title": "Enable Play Midnight",
+                "description": "This will temporarily disable/enable Play Midnight if you don't want it on all the time"
+            },
+
+            "favicon": {
+                "type": "boolean",
+                "default": true,
+                "title": "Show Play Midnight Favicon",
+                "description": "This is the icon that shows on your Google Play tab in the browser"
+            },
+
+            "fab": {
+                "type": "boolean",
+                "default": true,
+                "title": "Show Play Midnight Fab Icon",
+                "description": "Enable the Fab icon for quick access to Play Midnight settings"
+            }
+        }
+    },
+
+    "customize": {
+        "type": "section",
+        "title": "Customize",
+        "options": {
+            "queue": {
+                "type": "boolean",
+                "default": true,
+                "title": "Enable Larger Queue",
+                "description": "Makes the now playing queue span across your screen further to prevent cutting off song titles"
+            },
+
+            "accents": {
+                "type": "array",
+                "single": "accent",
+                "createable": true,
+                "default": {
+                    "name": "Play Music (Default)",
+                    "color": "#fb8521"
+                },
+                "collection": [
+                    {
+                        "name": "Play Music (Default)",
+                        "color": "#fb8521"
+                    },
+                    {
+                        "name": "Blue Abyss",
+                        "color": "#3179a1"
+                    },
+                    {
+                        "name": "Midnight Oil",
+                        "color": "#4f0f8d"
+                    },
+                    {
+                        "name": "Rusty Spoon",
+                        "color": "#4c9014"
+                    },
+                    {
+                        "name": "Spartan Crimson",
+                        "color": "#a61a2b"
+                    }
+                ],
+                "title": "Accent Colors",
+                "description": "Customize the accent color to your heart\"s content",
+                "note": "Currently accepts colors in hex/rgb format (#XXX, #XXXXXX, rgb(X,X,X))"
+            }
+        }
+    },
+
+    "tidbits": {
+        "type": "section",
+        "title": "Tidbits",
+        "options": {
+            "verbose": {
+                "type": "boolean",
+                "default": false,
+                "title": "Play Midnight VERBOSE Mode",
+                "description": "Enables verbose mode, logging all the fun developer notes to the console to see what Play Midnight is up to"
+            }
+        }
+    },
+
+    "message": {
+        "type": "section",
+        "title": "Message",
+        "options": {
+            "thanks": {
+                "type": "string",
+                "visible": "true",
+                "saved": "false",
+                "description": "Enables verbose mode, logging all the fun developer notes to the console to see what Play Midnight is up to"
+            }
+        }
+    }
+}
