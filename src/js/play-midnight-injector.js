@@ -1,4 +1,4 @@
-/*global Promise, PlayMidnightUtilities, chrome */
+/*global Promise, PlayMidnightUtilities */
 var PlayMidnightInjector = (function(_){
     'use strict';
 
@@ -108,7 +108,7 @@ var PlayMidnightInjector = (function(_){
 
     // Parse Template html to fix relative paths
     function parseTemplate(template) {
-        template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
+        template = template.replace(/\{CHROME_DIR\}/, _.browser.url('/dist'));
 
         return template;
     }

@@ -1,5 +1,52 @@
-/* global Promise */
-var PlayMidnightUtilities = (function(){
+/* global chrome, firefox */
+var PlayMidnightBrowser = (function(){
+	'use strict';
+
+	// Our Friend
+	var BR = {};
+
+    var _browser = (chrome !== undefined) ? 'chrome' : 'firefox';
+    console.log('Browser Found: %s', _browser);
+
+	// Save To Storage
+	BR.save = function(data, cb) {
+        if (_browser === 'chrome') {
+            chrome.storage.sync.set(data, cb);
+        } else {
+            // Firefox
+            return;
+        }
+	};
+
+
+	// Get From Storage
+	BR.get = function(data, cb) {
+        if (_browser === 'chrome') {
+            chrome.storage.sync.get(data, cb);
+        } else {
+            // Firefox
+            return;
+        }
+	};
+
+
+	// Get Full URL
+	BR.url = function(url) {
+        if (_browser === 'chrome') {
+            return chrome.extension.getURL(url);
+        } else {
+            // Firefox
+            return;
+        }
+	};
+
+
+	// Return Object for Modularity
+	return BR;
+})();
+
+/* global PlayMidnightBrowser, Promise */
+var PlayMidnightUtilities = (function(Browser){
 	'use strict';
 
 	// Our Friend
@@ -7,6 +54,9 @@ var PlayMidnightUtilities = (function(){
 
 	var _verbose = false;
 
+
+	// Add Browser Save/Get/URL Tools
+	PMUtils.browser = Browser;
 
 	// Check if Verbose
 	PMUtils.verbose = function() {
@@ -69,7 +119,7 @@ var PlayMidnightUtilities = (function(){
 		if (typeof a !== 'object' || typeof b !== 'object') {
 			return false;
 		}
-		
+
 	    var aProps = Object.getOwnPropertyNames(a);
 	    var bProps = Object.getOwnPropertyNames(b);
 
@@ -226,7 +276,7 @@ var PlayMidnightUtilities = (function(){
 
 	// Return Object for Modularity
 	return PMUtils;
-})();
+})(PlayMidnightBrowser);
 
 /*global Promise, chrome, PlayMidnightUtilities */
 // _ references Utilities
@@ -256,7 +306,7 @@ var PlayMidnight = (function(_){
 	// Favicon Attributes
 	var _favicon = {
 		// Load Newest Icon with Timestamp to prevent Caching
-		url: chrome.extension.getURL('dist/images/favicon.ico') + '?v=' + Date.now()
+		url: _.browser.url('dist/images/favicon.ico') + '?v=' + Date.now()
 	};
 
 
@@ -264,7 +314,7 @@ var PlayMidnight = (function(_){
 	var _stylesheets = {
 		main: {
 			id: 'play-midnight-stylesheet',
-			url: chrome.extension.getURL('dist/css/play-midnight.css'),
+			url: _.browser.url('dist/css/play-midnight.css'),
 			html: '',
 			enabled: function() {
 				return _userOptions.enabled;
@@ -273,7 +323,7 @@ var PlayMidnight = (function(_){
 
 		options: {
 			id: 'play-midnight-options',
-			url: chrome.extension.getURL('dist/css/play-midnight-options.css'),
+			url: _.browser.url('dist/css/play-midnight-options.css'),
 			html: ''
 		}
 	};
@@ -294,7 +344,7 @@ var PlayMidnight = (function(_){
 
 	// Load User Options from Chrome Storage
 	function loadOptions(cb) {
-		_.$http.get(chrome.extension.getURL('dist/options.json'))
+		_.$http.get(_.browser.url('dist/options.json'))
 			.then(function(options) {
 				_optionsGraph = JSON.parse(options);
 				_defaultOptions = parseOptions(_optionsGraph);
@@ -306,7 +356,7 @@ var PlayMidnight = (function(_){
 					}
 				}
 
-				chrome.storage.sync.get(_defaultOptions, function(options) {
+				_.browser.get(_defaultOptions, function(options) {
 					checkUpdated(options, cb);
 				});
 			});
@@ -354,7 +404,7 @@ var PlayMidnight = (function(_){
 				_.log('PLAY MIDNIGHT: Nuking All Options to Default');
 			}
 
-			chrome.storage.sync.set(_defaultOptions, function() {
+			_.browser.save(_defaultOptions, function() {
 				_userOptions = _defaultOptions;
 				if (cb && typeof cb === 'function') {
 					cb();
@@ -377,7 +427,7 @@ var PlayMidnight = (function(_){
 				}
 			}
 
-			chrome.storage.sync.set(options, function() {
+			_.browser.save(options, function() {
 				_userOptions = options;
 				if (cb && typeof cb === 'function') {
 					cb();
@@ -389,7 +439,7 @@ var PlayMidnight = (function(_){
 		} else if (_.versionCompare(options.version, VERSION_NUMBER) === -1) {
 			_.log('PLAY MIDNIGHT: Updated to version %s', VERSION_NUMBER);
 
-			chrome.storage.sync.set({ version: VERSION_NUMBER }, function() {
+			_.browser.save({ version: VERSION_NUMBER }, function() {
 				_userOptions.version = VERSION_NUMBER;
 				if (cb && typeof cb === 'function') {
 					cb();
@@ -534,11 +584,11 @@ var PlayMidnight = (function(_){
 
 		// First Run
 		if (_userOptions.lastRun === undefined || _userOptions.lastRun === null) {
-			notificationUrl = chrome.extension.getURL('dist/templates/notifications/default.html');
+			notificationUrl = _.browser.url('dist/templates/notifications/default.html');
 
         // New Version
 		} else if (_.versionCompare(_userOptions.lastRun, VERSION_NUMBER) < 0) {
-			notificationUrl = chrome.extension.getURL('dist/templates/notifications/' + VERSION_NUMBER + '.html');
+			notificationUrl = _.browser.url('dist/templates/notifications/' + VERSION_NUMBER + '.html');
 
         // Current Version
 		} else {
@@ -549,13 +599,13 @@ var PlayMidnight = (function(_){
 		_.$http.get(notificationUrl).then(function(template) {
 			_.log('Show notification for version: %s', VERSION_NUMBER);
 			PM.Modal.show(template, function() {
-				chrome.storage.sync.set({ lastRun: VERSION_NUMBER }, function() {
+				_.browser.save({ lastRun: VERSION_NUMBER }, function() {
 					_userOptions.lastRun = VERSION_NUMBER;
 				});
 			});
 		}).catch(function() {
 			_.log('No notification template exists for version: %s', VERSION_NUMBER);
-			chrome.storage.sync.set({ lastRun: VERSION_NUMBER }, function() {
+			_.browser.save({ lastRun: VERSION_NUMBER }, function() {
 				_userOptions.lastRun = VERSION_NUMBER;
 			});
 		});
@@ -631,7 +681,7 @@ var PlayMidnight = (function(_){
 	return PM;
 })(PlayMidnightUtilities);
 
-/*global Promise, PlayMidnightUtilities, chrome */
+/*global Promise, PlayMidnightUtilities */
 var PlayMidnightInjector = (function(_){
     'use strict';
 
@@ -741,7 +791,7 @@ var PlayMidnightInjector = (function(_){
 
     // Parse Template html to fix relative paths
     function parseTemplate(template) {
-        template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
+        template = template.replace(/\{CHROME_DIR\}/, _.browser.url('/dist'));
 
         return template;
     }
@@ -830,7 +880,7 @@ var PlayMidnightModal = (function(_, PlayMidnight){
 
 	// Parse Template html to fix relative paths
 	function parseTemplate(template) {
-		template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
+		template = template.replace(/\{CHROME_DIR\}/, _.browser.url('/dist'));
 		//template = template.replace(/\{VERSION_NUMBER\}/, VERSION_NUMBER);
 
 		return _.createElement(template);
@@ -845,7 +895,7 @@ var PlayMidnightModal = (function(_, PlayMidnight){
 	return PMModal;
 })(PlayMidnightUtilities, PlayMidnight);
 
-/*global PlayMidnightUtilities, PlayMidnight, chrome */
+/*global PlayMidnightUtilities, PlayMidnight */
 var PlayMidnightOptions = (function(_, PlayMidnight){
     'use strict';
 
@@ -864,13 +914,13 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
 
     _templates.optionsPage = {
         name: 'optionsPage',
-        url: chrome.extension.getURL('dist/templates/options.html'),
+        url: _.browser.url('dist/templates/options.html'),
         target: 'body'
     };
 
     _templates.menuItem = {
         name: 'menuItem',
-        url: chrome.extension.getURL('dist/templates/options-menu.html'),
+        url: _.browser.url('dist/templates/options-menu.html'),
         target: '#nav .nav-section:last-child',
         append: 1,
         events: function(ele) {
@@ -887,7 +937,7 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
 
     _templates.fabIcon = {
         name: 'fabIcon',
-        url: chrome.extension.getURL('dist/templates/options-fab.html'),
+        url: _.browser.url('dist/templates/options-fab.html'),
         target: 'core-header-panel#content-container',
         enabled: function() {
             var userOptions = PlayMidnight.getUserOptions();
@@ -956,7 +1006,7 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
             }
         }
 
-        chrome.storage.sync.set(options, function(options) {
+        _.browser.save(options, function(options) {
             saveDialog.classList.add('visible');
             setTimeout(function() {
                 saveDialog.classList.remove('visible');
@@ -1162,7 +1212,7 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
 
     // Parse Template html to fix relative paths
     function parseTemplate(template) {
-        template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
+        template = template.replace(/\{CHROME_DIR\}/, _.browser.url('/dist'));
 
         return _.createElement(template);
     }

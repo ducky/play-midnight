@@ -1,5 +1,5 @@
-/* global Promise */
-var PlayMidnightUtilities = (function(){
+/* global PlayMidnightBrowser, Promise */
+var PlayMidnightUtilities = (function(Browser){
 	'use strict';
 
 	// Our Friend
@@ -7,6 +7,9 @@ var PlayMidnightUtilities = (function(){
 
 	var _verbose = false;
 
+
+	// Add Browser Save/Get/URL Tools
+	PMUtils.browser = Browser;
 
 	// Check if Verbose
 	PMUtils.verbose = function() {
@@ -69,7 +72,7 @@ var PlayMidnightUtilities = (function(){
 		if (typeof a !== 'object' || typeof b !== 'object') {
 			return false;
 		}
-		
+
 	    var aProps = Object.getOwnPropertyNames(a);
 	    var bProps = Object.getOwnPropertyNames(b);
 
@@ -226,4 +229,4 @@ var PlayMidnightUtilities = (function(){
 
 	// Return Object for Modularity
 	return PMUtils;
-})();
+})(PlayMidnightBrowser);

@@ -37,13 +37,15 @@
 
 	/* Main Script / Libraries */
 	gulp.task('scripts', function() {
-		var libs = gulp.src(['src/js/play-midnight-*', '!src/js/play-midnight-utils.js', '!src/js/play-midnight-core.js', '!src/js/play-midnight.js']),
+		var libs = gulp.src(['src/js/play-midnight-*', '!src/js/play-midnight-browser.js', '!src/js/play-midnight-utils.js', '!src/js/play-midnight-core.js', '!src/js/play-midnight.js']),
+			browser = gulp.src('src/js/play-midnight-browser.js'),
 			utils = gulp.src('src/js/play-midnight-utils.js'),
 			core = gulp.src('src/js/play-midnight-core.js'),
 			script = gulp.src('src/js/play-midnight.js'),
 			merged;
 
 		merged = new Merge({ objectMode: true });
+		merged.queue(browser);
 		merged.queue(utils);
 		merged.queue(core);
 		merged.queue(libs);

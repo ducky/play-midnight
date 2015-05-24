@@ -1,4 +1,4 @@
-/*global PlayMidnightUtilities, PlayMidnight, chrome */
+/*global PlayMidnightUtilities, PlayMidnight */
 var PlayMidnightOptions = (function(_, PlayMidnight){
     'use strict';
 
@@ -17,13 +17,13 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
 
     _templates.optionsPage = {
         name: 'optionsPage',
-        url: chrome.extension.getURL('dist/templates/options.html'),
+        url: _.browser.url('dist/templates/options.html'),
         target: 'body'
     };
 
     _templates.menuItem = {
         name: 'menuItem',
-        url: chrome.extension.getURL('dist/templates/options-menu.html'),
+        url: _.browser.url('dist/templates/options-menu.html'),
         target: '#nav .nav-section:last-child',
         append: 1,
         events: function(ele) {
@@ -40,7 +40,7 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
 
     _templates.fabIcon = {
         name: 'fabIcon',
-        url: chrome.extension.getURL('dist/templates/options-fab.html'),
+        url: _.browser.url('dist/templates/options-fab.html'),
         target: 'core-header-panel#content-container',
         enabled: function() {
             var userOptions = PlayMidnight.getUserOptions();
@@ -109,7 +109,7 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
             }
         }
 
-        chrome.storage.sync.set(options, function(options) {
+        _.browser.save(options, function(options) {
             saveDialog.classList.add('visible');
             setTimeout(function() {
                 saveDialog.classList.remove('visible');
@@ -315,7 +315,7 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
 
     // Parse Template html to fix relative paths
     function parseTemplate(template) {
-        template = template.replace(/\{CHROME_DIR\}/, chrome.extension.getURL('/dist'));
+        template = template.replace(/\{CHROME_DIR\}/, _.browser.url('/dist'));
 
         return _.createElement(template);
     }

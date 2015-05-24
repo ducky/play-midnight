@@ -26,7 +26,7 @@ var PlayMidnight = (function(_){
 	// Favicon Attributes
 	var _favicon = {
 		// Load Newest Icon with Timestamp to prevent Caching
-		url: chrome.extension.getURL('dist/images/favicon.ico') + '?v=' + Date.now()
+		url: _.browser.url('dist/images/favicon.ico') + '?v=' + Date.now()
 	};
 
 
@@ -34,7 +34,7 @@ var PlayMidnight = (function(_){
 	var _stylesheets = {
 		main: {
 			id: 'play-midnight-stylesheet',
-			url: chrome.extension.getURL('dist/css/play-midnight.css'),
+			url: _.browser.url('dist/css/play-midnight.css'),
 			html: '',
 			enabled: function() {
 				return _userOptions.enabled;
@@ -43,7 +43,7 @@ var PlayMidnight = (function(_){
 
 		options: {
 			id: 'play-midnight-options',
-			url: chrome.extension.getURL('dist/css/play-midnight-options.css'),
+			url: _.browser.url('dist/css/play-midnight-options.css'),
 			html: ''
 		}
 	};
@@ -64,7 +64,7 @@ var PlayMidnight = (function(_){
 
 	// Load User Options from Chrome Storage
 	function loadOptions(cb) {
-		_.$http.get(chrome.extension.getURL('dist/options.json'))
+		_.$http.get(_.browser.url('dist/options.json'))
 			.then(function(options) {
 				_optionsGraph = JSON.parse(options);
 				_defaultOptions = parseOptions(_optionsGraph);
@@ -76,7 +76,7 @@ var PlayMidnight = (function(_){
 					}
 				}
 
-				chrome.storage.sync.get(_defaultOptions, function(options) {
+				_.browser.get(_defaultOptions, function(options) {
 					checkUpdated(options, cb);
 				});
 			});
@@ -124,7 +124,7 @@ var PlayMidnight = (function(_){
 				_.log('PLAY MIDNIGHT: Nuking All Options to Default');
 			}
 
-			chrome.storage.sync.set(_defaultOptions, function() {
+			_.browser.save(_defaultOptions, function() {
 				_userOptions = _defaultOptions;
 				if (cb && typeof cb === 'function') {
 					cb();
@@ -147,7 +147,7 @@ var PlayMidnight = (function(_){
 				}
 			}
 
-			chrome.storage.sync.set(options, function() {
+			_.browser.save(options, function() {
 				_userOptions = options;
 				if (cb && typeof cb === 'function') {
 					cb();
@@ -159,7 +159,7 @@ var PlayMidnight = (function(_){
 		} else if (_.versionCompare(options.version, VERSION_NUMBER) === -1) {
 			_.log('PLAY MIDNIGHT: Updated to version %s', VERSION_NUMBER);
 
-			chrome.storage.sync.set({ version: VERSION_NUMBER }, function() {
+			_.browser.save({ version: VERSION_NUMBER }, function() {
 				_userOptions.version = VERSION_NUMBER;
 				if (cb && typeof cb === 'function') {
 					cb();
@@ -304,11 +304,11 @@ var PlayMidnight = (function(_){
 
 		// First Run
 		if (_userOptions.lastRun === undefined || _userOptions.lastRun === null) {
-			notificationUrl = chrome.extension.getURL('dist/templates/notifications/default.html');
+			notificationUrl = _.browser.url('dist/templates/notifications/default.html');
 
         // New Version
 		} else if (_.versionCompare(_userOptions.lastRun, VERSION_NUMBER) < 0) {
-			notificationUrl = chrome.extension.getURL('dist/templates/notifications/' + VERSION_NUMBER + '.html');
+			notificationUrl = _.browser.url('dist/templates/notifications/' + VERSION_NUMBER + '.html');
 
         // Current Version
 		} else {
@@ -319,13 +319,13 @@ var PlayMidnight = (function(_){
 		_.$http.get(notificationUrl).then(function(template) {
 			_.log('Show notification for version: %s', VERSION_NUMBER);
 			PM.Modal.show(template, function() {
-				chrome.storage.sync.set({ lastRun: VERSION_NUMBER }, function() {
+				_.browser.save({ lastRun: VERSION_NUMBER }, function() {
 					_userOptions.lastRun = VERSION_NUMBER;
 				});
 			});
 		}).catch(function() {
 			_.log('No notification template exists for version: %s', VERSION_NUMBER);
-			chrome.storage.sync.set({ lastRun: VERSION_NUMBER }, function() {
+			_.browser.save({ lastRun: VERSION_NUMBER }, function() {
 				_userOptions.lastRun = VERSION_NUMBER;
 			});
 		});
