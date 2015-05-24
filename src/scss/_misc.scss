@@ -9,6 +9,24 @@
 }
 
 
+// Google Labs
+.labs-card {
+	.lab-list-item {
+		.lab-name {
+			font-weight: 700;
+		}
+
+		.lab-description {
+			color: $font_primary;
+		}
+
+		&:not(:last-child) {
+			border-bottom: 1px solid $border_page;
+		}
+	}
+}
+
+
 // Album Art
 .albumImage {
 	border: 1px solid $border_page;

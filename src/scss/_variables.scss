@@ -1,7 +1,4 @@
-
-$color_accent: #fb8521 !default;
-$color_accent: '{COLOR_ACCENT}';
-$color_accent: #3179a1;
+$color_accent: #fb8521;
 
 // Theme Colors
 $background_dark: #141517;
@@ -14,10 +11,10 @@ $background_card: $background_page;
 $background_player: lighten($background_dark, 5%);
 $background_menu: lighten($background_dark, 5%);
 
-$border_nav: darken($background_nav, 2%);
-$border_page: darken($background_page, 2%);
-$border_menu: darken($background_menu, 2%);
+$border_nav: darken($background_nav, 5%);
+$border_page: darken($background_page, 5%);
+$border_menu: darken($background_menu, 5%);
 
 // Font Colors
 $font_primary: #dcdcdc;
-$font_secondary: #666;
+$font_secondary: #888;
