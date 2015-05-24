@@ -1,3 +1,4 @@
+/*global PlayMidnight, chrome */
 (function(PlayMidnight){
 	'use strict';
 

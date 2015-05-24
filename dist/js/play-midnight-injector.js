@@ -79,10 +79,6 @@ var PlayMidnightInjector = (function(_){
 
             for (var key in templates) {
                 if (templates.hasOwnProperty(key)) {
-                    if (templates[key].hasOwnProperty('enabled') && !templates[key].enabled()) {
-                        continue;
-                    }
-
                     target = document.querySelector(templates[key].target);
 
                     if (templates[key].hasOwnProperty('append')) {
@@ -90,7 +86,7 @@ var PlayMidnightInjector = (function(_){
                     } else {
                         target.appendChild(templates[key].element);
                     }
-                    _.garbage(window.getComputedStyle(templates[key].element).height);
+                    console.log(window.getComputedStyle(templates[key].element).height);
 
                     // Register Events, If Given
                     if (typeof templates[key].events === 'function') {

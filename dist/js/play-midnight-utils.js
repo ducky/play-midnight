@@ -64,37 +64,6 @@ var PlayMidnightUtilities = (function(){
 	}();
 
 
-	// Check (Vaguely) for Object equality
-	PMUtils.equalObjects = function(a, b) {
-		if (typeof a !== 'object' || typeof b !== 'object') {
-			return false;
-		}
-		
-	    var aProps = Object.getOwnPropertyNames(a);
-	    var bProps = Object.getOwnPropertyNames(b);
-
-	    if (aProps.length !== bProps.length) {
-	        return false;
-	    }
-
-	    for (var i = 0; i < aProps.length; i++) {
-	        var propName = aProps[i];
-
-	        if (a[propName] !== b[propName]) {
-	            return false;
-	        }
-	    }
-
-	    return true;
-	};
-
-
-	// Title Case
-	PMUtils.toTitleCase = function(str) {
-		return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-	};
-
-
 	// Empty Node
 	PMUtils.empty = function(element) {
 		while (element.lastChild) {
@@ -153,20 +122,6 @@ var PlayMidnightUtilities = (function(){
 	};
 
 
-	// Get Parent with class/id
-	PMUtils.getParentElement = function(el, search) {
-	    while (el.parentNode) {
-	        if (el.classList.contains(search) || el.id === search) {
-				return el;
-			}
-
-	        el = el.parentNode;
-	    }
-
-		return document.createElement('div'); // returns an Array []
-	};
-
-
 	// Return Comparison of version compare
 	// -1: a < b
 	// 0: a === b
@@ -200,12 +155,6 @@ var PlayMidnightUtilities = (function(){
 		}
 
 		return 0;
-	};
-
-
-	// Eat Fake Function Call (CSS3 Transitions with getComputedStyle)
-	PMUtils.garbage = function() {
-		return true;
 	};
 
 
