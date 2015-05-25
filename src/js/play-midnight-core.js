@@ -8,7 +8,7 @@ var PlayMidnight = (function(_){
 	// Dev Mode: Use CSS File rather than inline <style> (inline allows dynamic accent colors)
 	var _dev = false;
 
-	var VERSION_NUMBER = '2.1.0';
+	var VERSION_NUMBER = '2.1.1';
 
 	// Reset Options when version less than
 	var _resetOptions = '2.1.0';
@@ -314,7 +314,7 @@ var PlayMidnight = (function(_){
 	function checkNotification() {
 		var notificationUrl = _.browser.url('dist/templates/notifications/' + VERSION_NUMBER + '.html');
 
-        // No New Version
+		// No New Version
 		if (typeof _userOptions.lastRun === 'string' && _.versionCompare(_userOptions.lastRun, VERSION_NUMBER) > -1) {
 			_.log('Already on Current Version (v%s), Skipping Modal', _userOptions.lastRun);
 			return;
@@ -328,6 +328,16 @@ var PlayMidnight = (function(_){
 				});
 			});
 		}).catch(function() {
+			if (_userOptions.lastRun !== null) {
+				_.log('No new notification for Current Version (v%s), Skipping Modal', VERSION_NUMBER);
+
+				_.browser.save({ lastRun: VERSION_NUMBER }, function() {
+					_userOptions.lastRun = VERSION_NUMBER;
+				});
+
+				return;
+			}
+
 			_.log('No notification template exists for version %s, loading default', VERSION_NUMBER);
 
 			notificationUrl = _.browser.url('dist/templates/notifications/default.html');
