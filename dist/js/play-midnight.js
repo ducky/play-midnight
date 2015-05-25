@@ -287,13 +287,13 @@ var PlayMidnight = (function(_){
 	// Dev Mode: Use CSS File rather than inline <style> (inline allows dynamic accent colors)
 	var _dev = false;
 
-	var VERSION_NUMBER = '2.0.3';
+	var VERSION_NUMBER = '2.1.0';
 
 	// Reset Options when version less than
-	var _resetOptions = '2.0.2';
+	var _resetOptions = '2.1.0';
 
 	// Nuke All Options
-	var _nukeOptions = '2.0.3';
+	var _nukeOptions = '2.1.0';
 
 	// All Options Defined
 	var _optionsGraph = {}; // Full Options Tree (options.json)
