@@ -47,6 +47,11 @@ core-header-panel#nav-container {
 	background: $background_nav;
 }
 
+core-header-panel#nav-container #nav {
+	position: absolute;
+	margin-top: -50px;
+}
+
 .my-devices-card .device-list-item:not(:last-child) {
 	border-bottom: 1px solid $border_page;
 }

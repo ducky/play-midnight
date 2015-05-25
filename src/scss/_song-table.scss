@@ -8,6 +8,12 @@
         	color: $font_primary;
         }
 
+		[data-col="index"] .hover-button[data-id="play"],
+		[data-col="track"] .hover-button[data-id="play"] {
+			filter: invert(100%);
+			background-color: transparent;
+		}
+
 		.song-indicator[data-playback-status="paused"],
 		.song-indicator[data-playback-status="playing"],
 		.rating-container.thumbs li {
@@ -41,7 +47,7 @@
     	}
 
         &.selected-song-row td {
-        	background: $background_page_hover !important;
+        	background-color: $background_page_hover !important;
         }
 
         .fade-out:after {
