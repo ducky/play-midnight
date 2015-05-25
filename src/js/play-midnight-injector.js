@@ -1,5 +1,5 @@
-/*global Promise, PlayMidnightUtilities */
-var PlayMidnightInjector = (function(_){
+/*global Promise, PlayMidnight, PlayMidnightUtilities */
+var PlayMidnightInjector = (function(_, PM){
     'use strict';
 
     // Our Friend
@@ -53,7 +53,6 @@ var PlayMidnightInjector = (function(_){
                 }
 
                 if (typeof cb === 'function') {
-                    _.log(_temps);
                     cb(_temps);
                 }
             });
@@ -64,7 +63,7 @@ var PlayMidnightInjector = (function(_){
     function injectTemplates(_temps, cb) {
         var target;
 
-        _.log('Starting Load Templates: %s', JSON.stringify(_temps));
+        _.log('Starting Load Templates');
         loadTemplates(_temps, function(templates) {
             _.log('Injecting Templates');
 
@@ -108,7 +107,8 @@ var PlayMidnightInjector = (function(_){
 
     // Parse Template html to fix relative paths
     function parseTemplate(template) {
-        template = template.replace(/\{CHROME_DIR\}/, _.browser.url('/dist'));
+        template = template.replace(/\{CHROME_DIR\}/g, _.browser.url('/dist'));
+        template = template.replace(/\{VERSION_NUMBER\}/g, PM.version);
 
         return template;
     }
@@ -120,4 +120,4 @@ var PlayMidnightInjector = (function(_){
 
     // Return Object for Modularity
     return PMInjector;
-})(PlayMidnightUtilities);
+})(PlayMidnightUtilities, PlayMidnight);

@@ -7,7 +7,6 @@ var PlayMidnightUtilities = (function(Browser){
 
 	var _verbose = false;
 
-
 	// Add Browser Save/Get/URL Tools
 	PMUtils.browser = Browser;
 

@@ -1,5 +1,4 @@
 /*global Promise, chrome, PlayMidnightUtilities */
-// _ references Utilities
 var PlayMidnight = (function(_){
 	'use strict';
 
@@ -12,7 +11,7 @@ var PlayMidnight = (function(_){
 	var VERSION_NUMBER = '2.0.3';
 
 	// Reset Options when version less than
-	var _resetOptions = '2.0.3';
+	var _resetOptions = '2.0.2';
 
 	// Nuke All Options
 	var _nukeOptions = '2.0.3';
@@ -38,6 +37,15 @@ var PlayMidnight = (function(_){
 			html: '',
 			enabled: function() {
 				return _userOptions.enabled;
+			}
+		},
+
+		accents: {
+			id: 'play-midnight-accents',
+			url: _.browser.url('dist/css/play-midnight-accents.css'),
+			html: '',
+			enabled: function() {
+				return (_userOptions.enabled === false && _userOptions.accentsOnly);
 			}
 		},
 
@@ -103,6 +111,10 @@ var PlayMidnight = (function(_){
 					_parsed[option.single] = rules[option.default] || option.default;
 					_parsed[key] = option.collection;
 				} else {
+					if (option.type === 'string' && option.saved === false) {
+						continue;
+					}
+
 					_parsed[key] = rules[option.default] || option.default;
 				}
 			}
@@ -227,7 +239,7 @@ var PlayMidnight = (function(_){
 						continue;
 					}
 
-					if (_userOptions.enabled) {
+					if (_userOptions.enabled || _userOptions.accentsOnly) {
 						for (var i = 0, len = _replaceRules.length; i < len; i++) {
 							rule = _replaceRules[i];
 							replace = rule.replace();
@@ -300,18 +312,10 @@ var PlayMidnight = (function(_){
 
 	// Display Notification if new one exists
 	function checkNotification() {
-		var notificationUrl;
+		var notificationUrl = _.browser.url('dist/templates/notifications/' + VERSION_NUMBER + '.html');
 
-		// First Run
-		if (_userOptions.lastRun === undefined || _userOptions.lastRun === null) {
-			notificationUrl = _.browser.url('dist/templates/notifications/default.html');
-
-        // New Version
-		} else if (_.versionCompare(_userOptions.lastRun, VERSION_NUMBER) < 0) {
-			notificationUrl = _.browser.url('dist/templates/notifications/' + VERSION_NUMBER + '.html');
-
-        // Current Version
-		} else {
+        // No New Version
+		if (typeof _userOptions.lastRun === 'string' && _.versionCompare(_userOptions.lastRun, VERSION_NUMBER) > -1) {
 			_.log('Already on Current Version (v%s), Skipping Modal', _userOptions.lastRun);
 			return;
 		}
@@ -324,9 +328,18 @@ var PlayMidnight = (function(_){
 				});
 			});
 		}).catch(function() {
-			_.log('No notification template exists for version: %s', VERSION_NUMBER);
-			_.browser.save({ lastRun: VERSION_NUMBER }, function() {
-				_userOptions.lastRun = VERSION_NUMBER;
+			_.log('No notification template exists for version %s, loading default', VERSION_NUMBER);
+
+			notificationUrl = _.browser.url('dist/templates/notifications/default.html');
+			_.$http.get(notificationUrl).then(function(template) {
+				_.log('Show Default Notification', VERSION_NUMBER);
+				PM.Modal.show(template, function() {
+					_.browser.save({ lastRun: VERSION_NUMBER }, function() {
+						_userOptions.lastRun = VERSION_NUMBER;
+					});
+				});
+			}).catch(function() {
+				_.log('Failed to load Default Notification');
 			});
 		});
 	}
@@ -360,9 +373,6 @@ var PlayMidnight = (function(_){
 			});
 		}
 	}
-
-
-
 
 	// Yay Initialize!
 	function init() {

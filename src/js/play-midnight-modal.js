@@ -73,8 +73,8 @@ var PlayMidnightModal = (function(_, PlayMidnight){
 
 	// Parse Template html to fix relative paths
 	function parseTemplate(template) {
-		template = template.replace(/\{CHROME_DIR\}/, _.browser.url('/dist'));
-		//template = template.replace(/\{VERSION_NUMBER\}/, VERSION_NUMBER);
+		template = template.replace(/\{CHROME_DIR\}/g, _.browser.url('/dist'));
+		template = template.replace(/\{VERSION_NUMBER\}/g, PlayMidnight.version);
 
 		return _.createElement(template);
 	}

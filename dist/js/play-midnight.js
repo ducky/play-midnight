@@ -5,8 +5,8 @@ var PlayMidnightBrowser = (function(){
 	// Our Friend
 	var BR = {};
 
+	// Get Browser
     var _browser = (chrome !== undefined) ? 'chrome' : 'firefox';
-    console.log('Browser Found: %s', _browser);
 
 	// Save To Storage
 	BR.save = function(data, cb) {
@@ -53,7 +53,6 @@ var PlayMidnightUtilities = (function(Browser){
 	var PMUtils = {};
 
 	var _verbose = false;
-
 
 	// Add Browser Save/Get/URL Tools
 	PMUtils.browser = Browser;
@@ -279,7 +278,6 @@ var PlayMidnightUtilities = (function(Browser){
 })(PlayMidnightBrowser);
 
 /*global Promise, chrome, PlayMidnightUtilities */
-// _ references Utilities
 var PlayMidnight = (function(_){
 	'use strict';
 
@@ -292,7 +290,7 @@ var PlayMidnight = (function(_){
 	var VERSION_NUMBER = '2.0.3';
 
 	// Reset Options when version less than
-	var _resetOptions = '2.0.3';
+	var _resetOptions = '2.0.2';
 
 	// Nuke All Options
 	var _nukeOptions = '2.0.3';
@@ -318,6 +316,15 @@ var PlayMidnight = (function(_){
 			html: '',
 			enabled: function() {
 				return _userOptions.enabled;
+			}
+		},
+
+		accents: {
+			id: 'play-midnight-accents',
+			url: _.browser.url('dist/css/play-midnight-accents.css'),
+			html: '',
+			enabled: function() {
+				return (_userOptions.enabled === false && _userOptions.accentsOnly);
 			}
 		},
 
@@ -383,6 +390,10 @@ var PlayMidnight = (function(_){
 					_parsed[option.single] = rules[option.default] || option.default;
 					_parsed[key] = option.collection;
 				} else {
+					if (option.type === 'string' && option.saved === false) {
+						continue;
+					}
+
 					_parsed[key] = rules[option.default] || option.default;
 				}
 			}
@@ -507,7 +518,7 @@ var PlayMidnight = (function(_){
 						continue;
 					}
 
-					if (_userOptions.enabled) {
+					if (_userOptions.enabled || _userOptions.accentsOnly) {
 						for (var i = 0, len = _replaceRules.length; i < len; i++) {
 							rule = _replaceRules[i];
 							replace = rule.replace();
@@ -580,18 +591,10 @@ var PlayMidnight = (function(_){
 
 	// Display Notification if new one exists
 	function checkNotification() {
-		var notificationUrl;
+		var notificationUrl = _.browser.url('dist/templates/notifications/' + VERSION_NUMBER + '.html');
 
-		// First Run
-		if (_userOptions.lastRun === undefined || _userOptions.lastRun === null) {
-			notificationUrl = _.browser.url('dist/templates/notifications/default.html');
-
-        // New Version
-		} else if (_.versionCompare(_userOptions.lastRun, VERSION_NUMBER) < 0) {
-			notificationUrl = _.browser.url('dist/templates/notifications/' + VERSION_NUMBER + '.html');
-
-        // Current Version
-		} else {
+        // No New Version
+		if (typeof _userOptions.lastRun === 'string' && _.versionCompare(_userOptions.lastRun, VERSION_NUMBER) > -1) {
 			_.log('Already on Current Version (v%s), Skipping Modal', _userOptions.lastRun);
 			return;
 		}
@@ -604,9 +607,18 @@ var PlayMidnight = (function(_){
 				});
 			});
 		}).catch(function() {
-			_.log('No notification template exists for version: %s', VERSION_NUMBER);
-			_.browser.save({ lastRun: VERSION_NUMBER }, function() {
-				_userOptions.lastRun = VERSION_NUMBER;
+			_.log('No notification template exists for version %s, loading default', VERSION_NUMBER);
+
+			notificationUrl = _.browser.url('dist/templates/notifications/default.html');
+			_.$http.get(notificationUrl).then(function(template) {
+				_.log('Show Default Notification', VERSION_NUMBER);
+				PM.Modal.show(template, function() {
+					_.browser.save({ lastRun: VERSION_NUMBER }, function() {
+						_userOptions.lastRun = VERSION_NUMBER;
+					});
+				});
+			}).catch(function() {
+				_.log('Failed to load Default Notification');
 			});
 		});
 	}
@@ -640,9 +652,6 @@ var PlayMidnight = (function(_){
 			});
 		}
 	}
-
-
-
 
 	// Yay Initialize!
 	function init() {
@@ -681,8 +690,8 @@ var PlayMidnight = (function(_){
 	return PM;
 })(PlayMidnightUtilities);
 
-/*global Promise, PlayMidnightUtilities */
-var PlayMidnightInjector = (function(_){
+/*global Promise, PlayMidnight, PlayMidnightUtilities */
+var PlayMidnightInjector = (function(_, PM){
     'use strict';
 
     // Our Friend
@@ -736,7 +745,6 @@ var PlayMidnightInjector = (function(_){
                 }
 
                 if (typeof cb === 'function') {
-                    _.log(_temps);
                     cb(_temps);
                 }
             });
@@ -747,7 +755,7 @@ var PlayMidnightInjector = (function(_){
     function injectTemplates(_temps, cb) {
         var target;
 
-        _.log('Starting Load Templates: %s', JSON.stringify(_temps));
+        _.log('Starting Load Templates');
         loadTemplates(_temps, function(templates) {
             _.log('Injecting Templates');
 
@@ -791,7 +799,8 @@ var PlayMidnightInjector = (function(_){
 
     // Parse Template html to fix relative paths
     function parseTemplate(template) {
-        template = template.replace(/\{CHROME_DIR\}/, _.browser.url('/dist'));
+        template = template.replace(/\{CHROME_DIR\}/g, _.browser.url('/dist'));
+        template = template.replace(/\{VERSION_NUMBER\}/g, PM.version);
 
         return template;
     }
@@ -803,7 +812,7 @@ var PlayMidnightInjector = (function(_){
 
     // Return Object for Modularity
     return PMInjector;
-})(PlayMidnightUtilities);
+})(PlayMidnightUtilities, PlayMidnight);
 
 /*global PlayMidnightUtilities, PlayMidnight, chrome */
 var PlayMidnightModal = (function(_, PlayMidnight){
@@ -880,8 +889,8 @@ var PlayMidnightModal = (function(_, PlayMidnight){
 
 	// Parse Template html to fix relative paths
 	function parseTemplate(template) {
-		template = template.replace(/\{CHROME_DIR\}/, _.browser.url('/dist'));
-		//template = template.replace(/\{VERSION_NUMBER\}/, VERSION_NUMBER);
+		template = template.replace(/\{CHROME_DIR\}/g, _.browser.url('/dist'));
+		template = template.replace(/\{VERSION_NUMBER\}/g, PlayMidnight.version);
 
 		return _.createElement(template);
 	}
@@ -960,10 +969,10 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
     function createOptions() {
         _.inject(_templates, function() {
             var userOptions = PlayMidnight.getUserOptions(),
-                options = PlayMidnight.getOptionsGraph(),
+                optionsGraph = PlayMidnight.getOptionsGraph(),
                 optionsPage = _templates.optionsPage.element,
                 optionsContainer = _templates.optionsPage.element.querySelector('section.options .options-container'),
-                frag = buildOptions(options, userOptions),
+                frag = buildOptions(optionsGraph, userOptions),
                 items;
 
             optionsContainer.appendChild(frag);
@@ -985,8 +994,8 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
 
         for (var i = 0; i < toSave.length; i++) {
             var ele = toSave[i];
-            var type = ele.dataset.type;
-            var key = ele.dataset.key;
+            var type = ele.type;
+            var key = ele.key;
 
             if (type === 'boolean') {
                 var checked = ele.querySelector('paper-toggle-button::shadow #toggleContainer').hasAttribute('checked');
@@ -994,19 +1003,20 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
             }
 
             if (type === 'array') {
-                console.log(ele);
-                var radio = ele.querySelector('input:checked');
-                console.log(radio);
-                var selected = _.getParentElement(radio, 'collection-item');
-                var index = selected.dataset.index;
-                var singleKey = selected.dataset.key;
+                var radio = ele.querySelector('.collection input:checked');
+                var selected = ele.querySelector('.collection-item.selected');
+                var singleKey = ele.single;
 
-                options[key] = userOptions[key];
-                options[singleKey] = JSON.parse(JSON.stringify(userOptions[key][index]));
+                delete selected.item.selected;
+
+                options[key] = ele.collection;
+                options[singleKey] = JSON.parse(JSON.stringify(selected.item));
             }
         }
 
         _.browser.save(options, function(options) {
+            _.log('Options Saved Successfully!');
+
             saveDialog.classList.add('visible');
             setTimeout(function() {
                 saveDialog.classList.remove('visible');
@@ -1043,6 +1053,15 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
                     ele = buildBoolean(key, option, values);
                     fragment.appendChild(ele);
                 }
+
+                if (option.type === 'string') {
+                    if (option.visible !== true) {
+                        continue;
+                    }
+
+                    ele = buildString(option);
+                    fragment.appendChild(ele);
+                }
             }
         }
 
@@ -1055,7 +1074,6 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
         var fragment = document.createDocumentFragment();
 
         var title = _.createElement('<h3 class="play-midnight-section-title"></h3>');
-        title.classList.add('play-midnight-section-title');
         title.innerText = option.title;
 
         var content = buildOptions(option.options, values);
@@ -1067,100 +1085,244 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
     }
 
 
+    // Build string
+    function buildString(option) {
+        var text = _.createElement('<div class="play-midnight-text-area"></div>');
+        text.innerHTML = option.description;
+
+        return text;
+    }
+
+
     // Build Array
     function buildArray(key, option, values) {
         var fragment = document.createDocumentFragment();
 
+        var singleKey = option.single;
+        var collection = [];
+        var collectionEle = _.createElement('<div class="collection"></div>');
+
+        // Full Container
+        var container = _.createElement('<div class="play-midnight-collection"></div>');
+        container.type = option.type;
+        container.key = key;
+        container.single = singleKey;
+        container.default = option.default;
+        container.collection = collection;
+        container.collectionEle = collectionEle;
+
         // Build Header
-        var details = _.createElement('<div class="play-midnight-option full"><div class="option-info"><div class="option-name"></div><div class="option-description"></div></div></div>');
+        var details = _.createElement('<div class="details"><div class="option-info"><div class="option-name"></div><div class="option-description"></div></div></div>');
         var title = document.createTextNode(option.title);
         var description = document.createTextNode(option.description);
         details.querySelector('.option-name').appendChild(title);
         details.querySelector('.option-description').appendChild(description);
 
-        fragment.appendChild(details);
+        if (option.createable === true) {
+            var button = _.createElement('<sj-paper-button class="material-primary" role="button"><svg viewBox="0 0 24 24" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" fit="" style="pointer-events: none; display: block;"><g><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></g></svg></sj-paper-button>');
+            var form = buildForm(singleKey, option);
 
-        // Build Collection
-        var collectionEle = _.createElement('<div class="play-midnight-collection"></div>');
-        collectionEle.dataset.type = option.type;
-        collectionEle.dataset.key = key;
-
-        var singleKey = option.single;
-        var collection = values[key];
-        for (var i = 0, len = collection.length; i < len; i++) {
-            var singleItem = collection[i];
-
-            var collectionItem = _.createElement('<div class="collection-item"><label><input type="radio" /><div class="fields"></div></label></div>');
-            collectionItem.classList.add(singleKey);
-            collectionItem.dataset.index = i;
-            collectionItem.dataset.key = singleKey;
-            collectionItem.dataset.collection = key;
-
-            var radio = collectionItem.querySelector('input');
-            radio.name = singleKey;
-
-            if (_.equalObjects(singleItem, values[singleKey])) {
-                collectionItem.classList.add('selected');
-                radio.checked = true;
-            }
-
-            // Build Up Keys
-            for (var metaKey in singleItem) {
-                if (singleItem.hasOwnProperty(metaKey)) {
-                    var meta = singleItem[metaKey];
-
-                    if (metaKey === 'color') {
-                        collectionItem.style.background = meta;
-                    }
-
-                    var itemField = _.createElement('<div class="field"></div>');
-                    itemField.classList.add('field-' + metaKey);
-                    itemField.innerText = meta;
-
-                    collectionItem.querySelector('.fields').appendChild(itemField);
-                }
-            }
-
-            collectionItem.addEventListener('click', function(e) {
-                this.parentNode.querySelector('.selected').classList.remove('selected');
-                this.classList.add('selected');
-                this.querySelector('input').checked = true;
+            button.addEventListener('click', function() {
+                form.classList.toggle('visible');
             });
 
-            collectionEle.appendChild(collectionItem);
+            details.appendChild(button);
+
+            container.appendChild(details);
+            container.appendChild(form);
+        } else {
+            container.appendChild(details);
         }
 
-        fragment.appendChild(collectionEle);
+        // Build Collection
+        var initialCollection = values[key];
+        for (var i = 0, len = initialCollection.length; i < len; i++) {
+            var item = initialCollection[i];
+            item.selected = _.equalObjects(item, values[singleKey]);
+
+            createCollectionItem(item, collection, collectionEle, singleKey);
+        }
+
+        container.appendChild(collectionEle);
+        fragment.appendChild(container);
 
         return fragment;
-
-        // Create Field
-        // <div class="create"></div>
-        // if (option.createable === true) {
-        //     baby = option.collection[0].data;
-        //     field = _.createElement('<h4 class="subtitle">Add New ' + _.toTitleCase(option.single) + '</h4>');
-        //
-        //     form = temp.querySelector('.create');
-        //     form.id = 'pm-option-' + key;
-        //
-        //     form.appendChild(field);
-        //
-        //     for (var iKey in baby) {
-        //         if (baby.hasOwnProperty(iKey)) {
-        //             field = _.createElement('<paper-input-decorator label=""><input type="text" is="core-input" autofocus="" placeholder="" aria-label="Name" no-focus=""></paper-input-decorator>');
-        //
-        //             field.setAttribute('label', _.toTitleCase(iKey));
-        //             field.querySelector('input').id = iKey;
-        //
-        //             form.appendChild(field);
-        //         }
-        //     }
-        //
-        //     form.appendChild(_.createElement('<div class="form-action"><sj-paper-button class="material-primary" role="button" tabindex="0" no-focus="">Create</sj-paper-button></div>'));
-        // }
-
-
     }
+
+
+    function createCollectionItem(item, collection, collectionEle, key) {
+        if (collection.indexOf(item) > -1) {
+            return;
+        }
+
+        var collectionItem = _.createElement('<div class="collection-item"><div class="remove-item"></div><input type="radio" /><div class="fields"></div></div>');
+        collectionItem.classList.add(key);
+        collectionItem.item = item;
+
+        var radio = collectionItem.querySelector('input');
+        radio.name = key;
+
+        if (item.selected === true) {
+            collectionItem.classList.add('selected');
+            radio.checked = true;
+        }
+
+        // Build Up Keys
+        for (var metaKey in item) {
+            if (item.hasOwnProperty(metaKey)) {
+                var meta = item[metaKey];
+
+                if (metaKey === 'selected') {
+                    continue;
+                }
+
+                if (metaKey === 'color') {
+                    collectionItem.style.background = meta;
+                }
+
+                var itemField = _.createElement('<div class="field"></div>');
+                itemField.classList.add('field-' + metaKey);
+                itemField.innerText = meta;
+
+                collectionItem.querySelector('.fields').appendChild(itemField);
+            }
+        }
+
+        collection.push(item);
+        collectionEle.appendChild(collectionItem);
+
+        _.log('New Accent: %s', JSON.stringify(item));
+        _.log('Collection: %s', JSON.stringify(collection));
+
+        var deleteBtn = collectionItem.querySelector('.remove-item');
+        deleteBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+
+            var item = this.parentNode;
+            removeFromCollection(item);
+        });
+
+        collectionItem.addEventListener('click', function(e) {
+            var selected = this.parentNode.querySelector('.selected');
+
+            if (selected) {
+                selected.classList.remove('selected');
+            }
+
+            this.classList.add('selected');
+            this.querySelector('input').checked = true;
+        });
+    }
+
+
+    // Build Form
+    function buildForm(key, option) {
+        var form = _.createElement('<form class="add-new" action="javascript:;"></form>');
+        form.key = key;
+
+        var title = _.createElement('<h4 class="subtitle">Add New ' + _.toTitleCase(option.single) + '</h4>');
+        form.appendChild(title);
+
+        var singleOption = option.default;
+
+        for (var meta in singleOption) {
+            if (singleOption.hasOwnProperty(meta)) {
+                var field = _.createElement('<div class="play-midnight-input"><paper-input-decorator label="" floatinglabel><input type="text" is="core-input" autofocus="" placeholder="" aria-label="" no-focus=""></paper-input-decorator></div>');
+                var input = field.querySelector('paper-input-decorator');
+                input.setAttribute('label', _.toTitleCase(meta));
+                input.setAttribute('aria-label', _.toTitleCase(meta));
+                input.querySelector('input').id = meta;
+
+                if (meta === 'color') {
+                    input.setAttribute('label', 'Color - #xxx, #xxxxxx, rgb(x,x,x)');
+                    input.setAttribute('aria-label', 'Color - #xxx, #xxxxxx, rgb(x,x,x)');
+                }
+
+                form.appendChild(field);
+            }
+        }
+
+        var button = _.createElement('<div class="form-action"><sj-paper-button class="material-primary" role="button" tabindex="0" no-focus=""></sj-paper-button></div>');
+        button.querySelector('sj-paper-button').innerText = 'Create ' + _.toTitleCase(option.single);
+
+        button.addEventListener('click', function() {
+            var fields = form.querySelectorAll('input');
+
+            if (addToCollection(form)) {
+                for (var i = 0; i < fields.length; i++) {
+                    var input = fields[i];
+
+                    input.value = '';
+                    input.setAttribute('no-focus', '');
+                }
+
+                form.classList.remove('visible');
+            }
+        });
+
+        form.appendChild(button);
+
+        return form;
+    }
+
+
+    // Add To Collection
+    function addToCollection(form) {
+        var collectionDiv = _.getParentElement(form, 'play-midnight-collection');
+        var inputs = form.querySelectorAll('input');
+        var collection = collectionDiv.collection;
+        var collectionEle = collectionDiv.collectionEle;
+        var key = form.key;
+        var item = {};
+
+        for (var i = 0; i < inputs.length; i++) {
+            var ele = inputs[i];
+            var meta = ele.id;
+            var val = ele.value;
+
+            item[meta] = val;
+
+            if (val.length < 1) {
+                return false;
+            }
+
+            if (meta === 'color') {
+                if (!/(?:^#[a-fA-F\d]{6}$)|(?:^#[a-fA-F\d]{3}$)|(?:^rgb\([ ]*?([\d]{1,3})[ ]*?,[ ]*?([\d]{1,3})[ ]*?,[ ]*?([\d]{1,3})[ ]*?\)$)/.test(val)) {
+                    return false;
+                }
+            }
+        }
+
+        createCollectionItem(item, collection, collectionEle, key);
+        return true;
+    }
+
+
+    // Remove From Collection
+    function removeFromCollection(single) {
+        var collectionDiv = _.getParentElement(single, 'play-midnight-collection');
+        var key = collectionDiv.single;
+        var collection = collectionDiv.collection;
+        var collectionEle = collectionDiv.collectionEle;
+        var collectionDefault = collectionDiv.default;
+        var selected = single.classList.contains('selected');
+
+        _.log('Removed Accent: %s', JSON.stringify(single.item));
+
+        _.remove(single);
+        collection.splice(collection.indexOf(single.item), 1);
+
+        if (collectionEle.children.length < 1) {
+            createCollectionItem(collectionDefault, collection, collectionEle, key);
+        }
+
+        if (selected) {
+            collectionEle.children[0].click();
+        }
+
+        _.log('Collection: %s', JSON.stringify(collection));
+    }
+
 
 
     // Build Boolean
@@ -1172,8 +1334,8 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
         var description = document.createTextNode(option.description);
         details.querySelector('.option-name').appendChild(title);
         details.querySelector('.option-description').appendChild(description);
-        details.dataset.type = option.type;
-        details.dataset.key = key;
+        details.key = key;
+        details.type = option.type;
 
         var checkbox = details.querySelector('paper-toggle-button');
         checkbox.setAttribute('data-id', key);
@@ -1188,7 +1350,7 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
 
     // Listener for Document.click when Menu is open
     function handleClick(e) {
-        if (_menuOpen &&!_.isClicked(e.target, _templates.optionsPage.element)) {
+        if (_menuOpen && !_.isClicked(e.target, _templates.optionsPage.element)) {
             hideOptions();
         }
     }
@@ -1212,7 +1374,8 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
 
     // Parse Template html to fix relative paths
     function parseTemplate(template) {
-        template = template.replace(/\{CHROME_DIR\}/, _.browser.url('/dist'));
+        template = template.replace(/\{CHROME_DIR\}/g, _.browser.url('/dist'));
+        template = template.replace(/\{VERSION_NUMBER\}/g, _.browser.url('/dist'));
 
         return _.createElement(template);
     }
