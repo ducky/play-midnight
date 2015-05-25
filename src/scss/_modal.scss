@@ -25,13 +25,12 @@
 #play-midnight-modal {
     position: fixed;
     display: flex;
-    align-items: stretch;
-    flex-direction: column;
+    flex-flow: column;
     background: darken($background_menu, 3%);
-    top: calc(20vh - 25px);
+    top: calc(20vh);
     left: calc((100vw - 700px) / 2);
     width: 700px;
-    height: calc(60vh - 30px);
+    height: calc(60vh);
     border-radius: 3px;
     box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
     z-index: 1000;
@@ -79,6 +78,8 @@
 		background: lighten($background_dark, 8%);
 		border-bottom: 1px solid $border_page;
 		padding: 15px 25px;
+        min-height: min-content;
+        min-height: auto;
 
 		.pm-logo {
 			height: 75px;
@@ -102,6 +103,7 @@
         text-align: center;
         overflow: auto;
         padding: 24px 15px;
+        max-height: 100%;
 
         .text-center {
             text-align: center;
@@ -164,6 +166,8 @@
         border-top: 1px solid $border_menu;
         background: $background_page;
         box-shadow: 0 -5px 15px 0px rgba(0,0,0,0.12);
+        min-height: min-content;
+        min-height: auto;
     }
 }
 
