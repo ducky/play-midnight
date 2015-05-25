@@ -5,8 +5,8 @@ var PlayMidnightBrowser = (function(){
 	// Our Friend
 	var BR = {};
 
+	// Get Browser
     var _browser = (chrome !== undefined) ? 'chrome' : 'firefox';
-    console.log('Browser Found: %s', _browser);
 
 	// Save To Storage
 	BR.save = function(data, cb) {
