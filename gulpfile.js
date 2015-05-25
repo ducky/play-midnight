@@ -15,7 +15,48 @@
 		});
 
 	gulp.task('clean', function() {
-		return del('../Dist/Chrome');
+		return del('../Dist/Chrome', {
+			force: true
+		});
+	});
+
+	gulp.task('dist', function() {
+		// CSS
+		gulp.src('src/scss/*.scss')
+			.pipe($.sass({ outputStyle: 'compressed', errLogToConsole: true }))
+			.pipe($.autoprefixer({ browsers: ['last 2 version'] }))
+			.pipe($.minifycss())
+			.pipe(gulp.dest('../Dist/Chrome/dist/css'));
+
+		// JS
+		var libs = gulp.src(['src/js/play-midnight-*', '!src/js/play-midnight-browser.js', '!src/js/play-midnight-utils.js', '!src/js/play-midnight-core.js', '!src/js/play-midnight.js']),
+			browser = gulp.src('src/js/play-midnight-browser.js'),
+			utils = gulp.src('src/js/play-midnight-utils.js'),
+			core = gulp.src('src/js/play-midnight-core.js'),
+			script = gulp.src('src/js/play-midnight.js'),
+			merged;
+
+		merged = new Merge({ objectMode: true });
+		merged.queue(browser);
+		merged.queue(utils);
+		merged.queue(core);
+		merged.queue(libs);
+		merged.queue(script);
+
+		merged.done()
+			.pipe($.jshint())
+			.pipe($.jshint.reporter('default'))
+			.pipe($.concat('play-midnight.js'))
+			.pipe($.uglify())
+			.pipe(gulp.dest('../Dist/Chrome/dist/js'));
+
+		// Other
+		gulp.src(['src/**/*.html', 'src/**/*.json', 'src/**/*.{png,ico,jpg,gif}'])
+			.pipe(gulp.dest('../Dist/Chrome/dist'));
+
+		return gulp.src(['manifest.json', '*.png'])
+			.pipe(gulp.dest('../Dist/Chrome'))
+			.pipe($.notify({ message: 'Build Task Completed' }));
 	});
 
 	gulp.task('copy', function() {
@@ -90,6 +131,6 @@
 	/* Default Task */
 	gulp.task('default', ['build']);
 	gulp.task('build', ['clean'], function() {
-		//gulp.start('styles', 'scripts-main', 'scripts-bg', 'images', 'html');
+		gulp.start('dist');
 	});
 }());
