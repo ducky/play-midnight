@@ -7,13 +7,11 @@ var PlayMidnightModal = (function(_, PlayMidnight){
 
 	var _injected = false,
 		_backdrop = document.createElement('div'),
-		_modal = document.createElement('div'),
+		_modal,
 		_cb;
 
 	// Setup
 	_backdrop.id = 'play-midnight-modal-backdrop';
-	_modal.id = 'play-midnight-modal';
-
 
 
 	// Show Modal
@@ -22,10 +20,10 @@ var PlayMidnightModal = (function(_, PlayMidnight){
 
 		_cb = cb;
 
-		injectModal();
+		_modal = template;
+		_modal.id = 'play-midnight-modal';
 
-		_.empty(_modal);
-		_modal.appendChild(template);
+		injectModal();
 
 		document.body.classList.add('modal-show');
 
