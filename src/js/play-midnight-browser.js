@@ -1,4 +1,4 @@
-/* global chrome, firefox */
+/* global self, chrome */
 var PlayMidnightBrowser = (function(){
 	'use strict';
 
@@ -6,15 +6,23 @@ var PlayMidnightBrowser = (function(){
 	var BR = {};
 
 	// Get Browser
-    var _browser = (chrome !== undefined) ? 'chrome' : 'firefox';
+    var _browser = 'chrome';
+
+	BR.isFireFox = function() {
+		return _browser === 'firefox';
+	};
+
+	BR.isChrome = function() {
+		return _browser === 'chrome';
+	};
 
 	// Save To Storage
 	BR.save = function(data, cb) {
         if (_browser === 'chrome') {
             chrome.storage.sync.set(data, cb);
         } else {
-            // Firefox
-            return;
+			self.port.emit('save', data);
+			self.port.on('saved', cb);
         }
 	};
 
@@ -24,8 +32,8 @@ var PlayMidnightBrowser = (function(){
         if (_browser === 'chrome') {
             chrome.storage.sync.get(data, cb);
         } else {
-            // Firefox
-            return;
+			self.port.emit('retrieve', data);
+			self.port.on('retrieved', cb);
         }
 	};
 
@@ -35,9 +43,19 @@ var PlayMidnightBrowser = (function(){
         if (_browser === 'chrome') {
             return chrome.extension.getURL(url);
         } else {
-            // Firefox
-            return;
+			url = url.replace(/^\//, '');
+            return self.options.pluginUrl + url;
         }
+	};
+
+
+	// Option Changed
+	BR.changed = function(cb) {
+		if (_browser === 'chrome') {
+			return chrome.storage.onChanged.addListener(cb);
+		} else {
+			return;
+		}
 	};
 
 

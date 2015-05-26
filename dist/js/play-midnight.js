@@ -1,4 +1,4 @@
-/* global chrome, firefox */
+/* global self, chrome */
 var PlayMidnightBrowser = (function(){
 	'use strict';
 
@@ -6,15 +6,23 @@ var PlayMidnightBrowser = (function(){
 	var BR = {};
 
 	// Get Browser
-    var _browser = (chrome !== undefined) ? 'chrome' : 'firefox';
+    var _browser = 'chrome';
+
+	BR.isFireFox = function() {
+		return _browser === 'firefox';
+	};
+
+	BR.isChrome = function() {
+		return _browser === 'chrome';
+	};
 
 	// Save To Storage
 	BR.save = function(data, cb) {
         if (_browser === 'chrome') {
             chrome.storage.sync.set(data, cb);
         } else {
-            // Firefox
-            return;
+			self.port.emit('save', data);
+			self.port.on('saved', cb);
         }
 	};
 
@@ -24,8 +32,8 @@ var PlayMidnightBrowser = (function(){
         if (_browser === 'chrome') {
             chrome.storage.sync.get(data, cb);
         } else {
-            // Firefox
-            return;
+			self.port.emit('retrieve', data);
+			self.port.on('retrieved', cb);
         }
 	};
 
@@ -35,9 +43,19 @@ var PlayMidnightBrowser = (function(){
         if (_browser === 'chrome') {
             return chrome.extension.getURL(url);
         } else {
-            // Firefox
-            return;
+			url = url.replace(/^\//, '');
+            return self.options.pluginUrl + url;
         }
+	};
+
+
+	// Option Changed
+	BR.changed = function(cb) {
+		if (_browser === 'chrome') {
+			return chrome.storage.onChanged.addListener(cb);
+		} else {
+			return;
+		}
 	};
 
 
@@ -293,7 +311,7 @@ var PlayMidnight = (function(_){
 	var _resetOptions = '2.1.0';
 
 	// Nuke All Options
-	var _nukeOptions = '2.1.0';
+	var _nukeOptions = '2.1.2';
 
 	// All Options Defined
 	var _optionsGraph = {}; // Full Options Tree (options.json)
@@ -593,7 +611,7 @@ var PlayMidnight = (function(_){
 	function checkNotification() {
 		var notificationUrl = _.browser.url('dist/templates/notifications/' + VERSION_NUMBER + '.html');
 
-        // No New Version
+		// No New Version
 		if (typeof _userOptions.lastRun === 'string' && _.versionCompare(_userOptions.lastRun, VERSION_NUMBER) > -1) {
 			_.log('Already on Current Version (v%s), Skipping Modal', _userOptions.lastRun);
 			return;
@@ -607,6 +625,16 @@ var PlayMidnight = (function(_){
 				});
 			});
 		}).catch(function() {
+			if (_userOptions.lastRun !== null) {
+				_.log('No new notification for Current Version (v%s), Skipping Modal', VERSION_NUMBER);
+
+				_.browser.save({ lastRun: VERSION_NUMBER }, function() {
+					_userOptions.lastRun = VERSION_NUMBER;
+				});
+
+				return;
+			}
+
 			_.log('No notification template exists for version %s, loading default', VERSION_NUMBER);
 
 			notificationUrl = _.browser.url('dist/templates/notifications/default.html');
@@ -823,13 +851,11 @@ var PlayMidnightModal = (function(_, PlayMidnight){
 
 	var _injected = false,
 		_backdrop = document.createElement('div'),
-		_modal = document.createElement('div'),
+		_modal,
 		_cb;
 
 	// Setup
 	_backdrop.id = 'play-midnight-modal-backdrop';
-	_modal.id = 'play-midnight-modal';
-
 
 
 	// Show Modal
@@ -838,10 +864,10 @@ var PlayMidnightModal = (function(_, PlayMidnight){
 
 		_cb = cb;
 
-		injectModal();
+		_modal = template;
+		_modal.id = 'play-midnight-modal';
 
-		_.empty(_modal);
-		_modal.appendChild(template);
+		injectModal();
 
 		document.body.classList.add('modal-show');
 
