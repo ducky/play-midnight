@@ -27,6 +27,22 @@
 }
 
 
+// Shortcuts Table
+.shortcuts-table {
+	color: $font_primary;
+
+	td,
+	th {
+		border-bottom: 1px solid $border_page;
+	}
+}
+
+
+// Suggested Query
+.suggested-query {
+	color: $font_primary;
+}
+
 // Album Art
 .albumImage {
 	border: 1px solid $border_page;

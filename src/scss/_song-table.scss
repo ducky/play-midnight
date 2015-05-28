@@ -1,12 +1,12 @@
 .song-table {
 	.song-row {
-        background: $background_page;
-        color: $font_primary;
+		background: $background_page;
+		color: $font_primary;
 
-        td {
-            background: $background_page;
-        	color: $font_primary;
-        }
+		td {
+			background: $background_page;
+			color: $font_primary;
+		}
 
 		[data-col="index"] .hover-button[data-id="play"],
 		[data-col="track"] .hover-button[data-id="play"] {
@@ -15,6 +15,7 @@
 		}
 
 		.song-indicator[data-playback-status="paused"],
+		.song-indicator[data-playback-status="loading"],
 		.song-indicator[data-playback-status="playing"],
 		.rating-container.thumbs li {
 			background-color: transparent;
@@ -22,49 +23,45 @@
 		}
 
 		&.currently-playing {
-			img {
-				visibility: hidden;
+			td[data-col="title"] {
+				color: $font_primary;
 			}
 		}
-
-        &.currently-playing td[data-col="title"] {
-        	color: $font_primary;
-        }
 
 		&.hover,
 		&.hover td {
 			background: $background_page_hover;
 		}
 
-        &.hover,
-    	&.currently-playing {
-            [data-col="index"],
-    		[data-col="track"] {
-    			.content {
-    				font-size: 0;
-    			}
-    		}
-    	}
+		&.hover,
+		&.currently-playing {
+			[data-col="index"],
+			[data-col="track"] {
+				.content {
+					font-size: 0;
+				}
+			}
+		}
 
-        &.selected-song-row td {
-        	background-color: $background_page_hover !important;
-        }
+		&.selected-song-row td {
+			background-color: $background_page_hover !important;
+		}
 
-        .fade-out:after {
-        	background: linear-gradient( to right, rgba($background_page, 0) 0%, rgba($background_page, 0.999) 100% );
-        }
+		.fade-out:after {
+			background: linear-gradient( to right, rgba($background_page, 0) 0%, rgba($background_page, 0.999) 100% );
+		}
 
-        &.hover .fade-out:after,
-        &.selected-song-row .fade-out:after, {
-        	background: linear-gradient( to right, rgba($background_page_hover, 0) 0%, rgba($background_page_hover, 0.999) 100% );
-        }
+		&.hover .fade-out:after,
+		&.selected-song-row .fade-out:after, {
+			background: linear-gradient( to right, rgba($background_page_hover, 0) 0%, rgba($background_page_hover, 0.999) 100% );
+		}
 	}
 
-    th,
-    [data-col="title"],
-    &.mini [data-col="song-details"] .song-title {
-    	color: $font_primary;
-    }
+	th,
+	[data-col="title"],
+	&.mini [data-col="song-details"] .song-title {
+		color: $font_primary;
+	}
 }
 
 .upload-progress-row td {

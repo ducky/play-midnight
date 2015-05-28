@@ -4,6 +4,14 @@ $background_menu_hover: lighten($background_menu, 3%);
 paper-dialog {
 	background: $background_menu;
 
+	.song-row {
+		&.currently-playing {
+			img {
+				visibility: hidden;
+			}
+		}
+	}
+
   .song-row td,
   .upload-progress-row td {
   	background-color: $background_menu;
