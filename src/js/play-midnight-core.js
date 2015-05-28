@@ -73,21 +73,21 @@ var PlayMidnight = (function(_){
 	// Load User Options from Chrome Storage
 	function loadOptions(cb) {
 		_.$http.get(_.browser.url('dist/options.json'))
-			.then(function(options) {
-				_optionsGraph = JSON.parse(options);
-				_defaultOptions = parseOptions(_optionsGraph);
+		.then(function(options) {
+			_optionsGraph = JSON.parse(options);
+			_defaultOptions = parseOptions(_optionsGraph);
 
-				_.log('Default Options Loaded');
-				for (var key in _defaultOptions) {
-					if (_defaultOptions.hasOwnProperty(key)) {
-						_.log('%s: %s', key.toString().toUpperCase(), JSON.stringify(_defaultOptions[key]));
-					}
+			_.log('Default Options Loaded');
+			for (var key in _defaultOptions) {
+				if (_defaultOptions.hasOwnProperty(key)) {
+					_.log('%s: %s', key.toString().toUpperCase(), JSON.stringify(_defaultOptions[key]));
 				}
+			}
 
-				_.browser.get(_defaultOptions, function(options) {
-					checkUpdated(options, cb);
-				});
+			_.browser.get(_defaultOptions, function(options) {
+				checkUpdated(options, cb);
 			});
+		});
 	}
 
 
@@ -144,7 +144,7 @@ var PlayMidnight = (function(_){
 				return;
 			});
 
-		// Version Older Than Required Reset (For Resetting to add new options)
+			// Version Older Than Required Reset (For Resetting to add new options)
 		} else if (_.versionCompare(options.version, _resetOptions) === -1) {
 			_.log('PLAY MIDNIGHT: Options Update, Forcing Reset');
 
@@ -167,7 +167,7 @@ var PlayMidnight = (function(_){
 				return;
 			});
 
-		// Update Version Number
+			// Update Version Number
 		} else if (_.versionCompare(options.version, VERSION_NUMBER) === -1) {
 			_.log('PLAY MIDNIGHT: Updated to version %s', VERSION_NUMBER);
 
@@ -179,7 +179,7 @@ var PlayMidnight = (function(_){
 				return;
 			});
 
-		// Options All Good
+			// Options All Good
 		} else {
 			_userOptions = options;
 			if (cb && typeof cb === 'function') {
@@ -217,12 +217,12 @@ var PlayMidnight = (function(_){
 							continue;
 						}
 
-                        temp = link.cloneNode();
+						temp = link.cloneNode();
 
 						temp.href = stylesheet.url;
 						document.head.appendChild(temp);
-                    }
-                }
+					}
+				}
 
 				return;
 			}
@@ -266,17 +266,17 @@ var PlayMidnight = (function(_){
 		}
 
 		Promise.all(promises)
-            .then(function(stylesheets) {
-				var i = 0;
-				for (var key in _stylesheets) {
-					if (_stylesheets.hasOwnProperty(key)) {
-                        _stylesheets[key].html = stylesheets[i] || '';
-                        i++;
-                    }
-                }
+		.then(function(stylesheets) {
+			var i = 0;
+			for (var key in _stylesheets) {
+				if (_stylesheets.hasOwnProperty(key)) {
+					_stylesheets[key].html = stylesheets[i] || '';
+					i++;
+				}
+			}
 
-				doInject();
-			});
+			doInject();
+		});
 	}
 
 
@@ -414,7 +414,7 @@ var PlayMidnight = (function(_){
 	PM.version = VERSION_NUMBER;
 	PM.getUserOptions = getUserOptions;
 	PM.getOptionsGraph = getOptionsGraph;
-    PM.init = init;
+	PM.init = init;
 
 
 	// Return Object for Modularity
