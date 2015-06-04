@@ -3,10 +3,12 @@
 		background: $background_page;
 		color: $font_primary;
 
-		td {
-			background: $background_page;
-			color: $font_primary;
-		}
+        td,
+		.content,
+		.title-right-items {
+            background: $background_page;
+        	color: $font_primary;
+        }
 
 		[data-col="index"] .hover-button[data-id="play"],
 		[data-col="track"] .hover-button[data-id="play"] {
@@ -29,7 +31,9 @@
 		}
 
 		&.hover,
-		&.hover td {
+		&.hover td,
+		&.hover .content,
+		&.hover .title-right-items {
 			background: $background_page_hover;
 		}
 
@@ -43,9 +47,11 @@
 			}
 		}
 
-		&.selected-song-row td {
-			background-color: $background_page_hover !important;
-		}
+        &.selected-song-row td,
+		&.selected-song-row .content,
+		&.selected-song-row .title-right-items {
+        	background-color: $background_page_hover !important;
+        }
 
 		.fade-out:after {
 			background: linear-gradient( to right, rgba($background_page, 0) 0%, rgba($background_page, 0.999) 100% );

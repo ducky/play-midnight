@@ -12,18 +12,24 @@ paper-dialog {
 		}
 	}
 
-  .song-row td,
-  .upload-progress-row td {
-  	background-color: $background_menu;
-  	color: $font_primary;
+	.song-row td,
+	.song-row .content,
+	.song-row .title-right-items,
+	.upload-progress-row td {
+		background-color: $background_menu;
+		color: $font_primary;
 
 		.fade-out:after {
 			background: linear-gradient( to right, rgba($background_menu, 0) 0%, rgba($background_menu, 0.999) 100% );
 		}
-  }
+	}
 
 	.song-row.hover td,
-	.song-row.selected-song-row td {
+	.song-row.selected-song-row td,
+	.song-row.hover .content,
+	.song-row.selected-song-row .content,
+	.song-row.hover .title-right-items,
+	.song-row.selected-song-row .title-right-items {
 		background-color: $background_menu_hover !important;
 
 		.fade-out:after {
@@ -33,5 +39,9 @@ paper-dialog {
 
 	&:after {
 		border-color: transparent transparent $background_menu $background_menu;
+	}
+
+	#mini-queue-details .imfl-image {
+		filter: grayscale(100%);
 	}
 }

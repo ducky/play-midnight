@@ -13,8 +13,7 @@
 	},
 
 	"permissions": [
-		"storage",
-		"notifications"
+		"storage"
 	],
 
 	"content_scripts": [
