@@ -26,10 +26,10 @@
     position: fixed;
     display: flex;
     flex-flow: column;
-    top: calc(25vh);
+    top: calc(20vh);
     left: calc((100vw - 700px) / 2);
     width: 700px;
-    height: calc(50vh);
+    height: calc(60vh);
     background: darken($background_menu, 3%);
     border-radius: 3px;
     box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
@@ -73,7 +73,7 @@
         text-align: center;
 		background: lighten($background_dark, 8%);
         background: $color_accent;
-        color: $background_dark;
+        color: #fff;
 		border-bottom: 1px solid $border_page;
 		padding: 15px 25px;
 
