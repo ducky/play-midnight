@@ -310,6 +310,17 @@ var PlayMidnight = (function(_){
 	}
 
 
+	// Update Sidebar
+	function updateSidebar() {
+		if (!_userOptions.sidebar) {
+			return;
+		}
+
+		document.body.classList.add('pm-static-sidebar');
+		document.querySelector('#left-nav-open-button').click();
+	}
+
+
 	// Display Notification if new one exists
 	function checkNotification() {
 		var notificationUrl = _.browser.url('dist/templates/notifications/' + VERSION_NUMBER + '.html');
@@ -396,6 +407,7 @@ var PlayMidnight = (function(_){
 				PM.Options.create();
 				updateFavicon();
 				updateQueue();
+				updateSidebar();
 				checkNotification();
 			});
 		});

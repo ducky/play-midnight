@@ -385,6 +385,13 @@
 	}
 }
 
+.pm-static-sidebar {
+	#left-nav-open-button,
+	#left-nav-close-button {
+		display: none;
+	}
+}
+
 #queue-overlay {
 	&::shadow #scroller {
 		max-height: auto;
