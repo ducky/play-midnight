@@ -323,6 +323,11 @@ var PlayMidnight = (function(_){
 
 	// Display Notification if new one exists
 	function checkNotification() {
+		if (!_userOptions.notify) {
+			_.log('Notifications are disabled via user options, skipping check');
+			return;
+		}
+
 		var notificationUrl = _.browser.url('dist/templates/notifications/' + VERSION_NUMBER + '.html');
 
 		// No New Version
