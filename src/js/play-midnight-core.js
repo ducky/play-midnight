@@ -8,7 +8,7 @@ var PlayMidnight = (function(_){
 	// Dev Mode: Use CSS File rather than inline <style> (inline allows dynamic accent colors)
 	var _dev = false;
 
-	var VERSION_NUMBER = '2.1.4';
+	var VERSION_NUMBER = '2.1.5';
 
 	// Reset Options when version less than
 	var _resetOptions = '2.1.0';
