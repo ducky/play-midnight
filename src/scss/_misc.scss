@@ -86,6 +86,26 @@
 	}
 }
 
+.upload-dialog-dragover {
+	border-color: $color_accent;
+
+	.upload-dialog-graphic {
+		filter: grayscale(100%);
+	}
+
+	.upload-dialog-description {
+		color: $color_accent !important;
+	}
+}
+
+
+// Uploading Indicator
+.material-transfer-radial-upload-overlay,
+.material-transfer-radial-download-overlay,
+.material-transfer-radial-processing-overlay {
+	background: $color_accent;
+}
+
 
 // Explicit
 .explicit,

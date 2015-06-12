@@ -1,5 +1,11 @@
 @import 'variables';
 
+.material-transfer-radial-upload-overlay,
+.material-transfer-radial-download-overlay,
+.material-transfer-radial-processing-overlay {
+	background: $color_accent;
+}
+
 .button.primary,
 sj-paper-button.material-primary,
 .simple-dialog-buttons button.goog-buttonset-default {
@@ -113,6 +119,14 @@ paper-action-dialog {
 .upload-dialog {
 	.upload-dialog-title {
 		background: $color_accent;
+	}
+}
+
+.upload-dialog-dragover {
+	border-color: $color_accent;
+
+	.upload-dialog-description {
+		color: $color_accent !important;
 	}
 }
 
