@@ -33,6 +33,10 @@ core-header-panel#content-container {
 
 
 // Options Toolbar
+#sliding_action_bar_container,
+#sliding_action_bar_container.material {
+	background: $background_menu;
+}
 
 
 // Icons
