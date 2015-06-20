@@ -3,7 +3,6 @@ $background_disabled: lighten($background_page, 3%);
 .button.primary,
 sj-paper-button.material-primary,
 .simple-dialog-buttons button.goog-buttonset-default {
-	background: $color_accent;
 	opacity: 0.9;
 
 	[disabled] {
@@ -12,47 +11,13 @@ sj-paper-button.material-primary,
 	}
 
 	&:hover {
-		background: $color_accent !important;
 		opacity: 1;
-	}
-}
-
-// Chevron Icons
-.cluster.material-cluster .lane-button core-icon {
-	color: $color_accent;
-}
-
-// Toggle Button
-paper-toggle-button::shadow [checked] {
-	.toggle {
-		background: $color_accent;
-	}
-
-	.toggle-ink {
-		color: $color_accent;
-	}
-}
-
-// Checkbox
-paper-checkbox::shadow {
-	#checkbox.checked {
-		background-color: $color_accent;
-		border-color: $color_accent;
-	}
-
-	#ink[checked] {
-		color: $color_accent;
 	}
 }
 
 // Playlist button
 #unsubscribe-playlist-button,
 sj-paper-button#unsubscribe-playlist-button {
-	.playlist-subscribed,
-	.icon[icon="add-circle"] {
-		color: $color_accent;
-	}
-
 	.playlist-unsubscribe {
 		color: $font_primary;
 	}

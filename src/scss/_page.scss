@@ -1,17 +1,11 @@
 $background_page_hover: lighten($background_page, 3%);
 $background_page_border: lighten($background_page, 2%);
 
-.solid-hero core-image#material-hero-image {
-	background-color: $color_accent !important;
-}
-
 core-drawer-panel core-image#material-hero-image {
 	background: $background_dark;
 }
 
 .material-detail-view .material-container-details .read-more-button {
-	color: $color_accent;
-
 	&:hover {
 		background: $background_page_hover;
 	}
@@ -61,8 +55,6 @@ core-drawer-panel core-image#material-hero-image {
 
 // Page Play Button (Top Right)
 .material-container-details sj-fab {
-	background: $color_accent;
-
 	&::shadow core-icon {
 		g {
 			path:nth-child(1) {

@@ -1,15 +1,5 @@
 $background_page_hover: lighten($background_page, 3%);
 
-paper-input-decorator {
-	&::shadow .focused-underline {
-		background: $color_accent;
-	}
-
-	&[focused]::shadow .floated-label .label-text {
-		color: $color_accent;
-	}
-}
-
 // Popup Dialog
 paper-action-dialog {
 	background: $background_page;
@@ -23,23 +13,11 @@ paper-action-dialog {
 		color: $font_secondary;
 	}
 
-	paper-input-decorator {
-		&::shadow .focused-underline {
-			background: $color_accent;
-		}
-
-		&[focused]::shadow .floated-label .label-text {
-			color: $color_accent;
-		}
-	}
-
 	.unfocused-underline {
 		background: $background_page_hover;
 	}
 
 	sj-paper-button {
-		color: $color_accent;
-
 		&[disabled] {
 			background: $background_page_hover;
 		}

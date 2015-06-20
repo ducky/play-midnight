@@ -15,12 +15,6 @@ paper-slider::shadow #sliderBar::shadow #progressContainer {
 	background: $background_light;
 }
 
-#sliderBar::shadow #activeProgress,
-paper-slider::shadow #sliderKnobInner,
-paper-slider::shadow #sliderBar::shadow #activeProgress {
-	background: $color_accent;
-}
-
 paper-slider::shadow .ring > #sliderKnob > #sliderKnobInner {
 	background: $background_player;
 	border: 2px solid $background_light;
@@ -28,20 +22,6 @@ paper-slider::shadow .ring > #sliderKnob > #sliderKnobInner {
 
 #player.material .material-player-middle sj-icon-button[data-id="play-pause"][disabled] {
 	opacity: 0.75;
-}
-
-#player.material .material-player-middle sj-icon-button[data-id="repeat"][value="LIST_REPEAT"],
-#player.material .material-player-middle sj-icon-button[data-id="repeat"][value="SINGLE_REPEAT"],
-#player.material .material-player-middle sj-icon-button[data-id="shuffle"][value="ALL_SHUFFLE"] {
-	color: $color_accent;
-}
-
-#player.material sj-icon-button[data-id="cast"]::shadow core-icon[aria-label="cast-connected"] {
-	color: $color_accent;
-}
-
-#player.material .material-player-middle sj-icon-button[data-id="play-pause"]:not([disabled]) {
-	color: $color_accent;
 }
 
 #player.material .material-player-middle sj-icon-button[data-id="play-pause"]::shadow core-icon {

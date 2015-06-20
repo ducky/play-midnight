@@ -16,18 +16,11 @@ a,
 .nav-item-container,
 .music-source-empty-message {
 	color: $font_primary;
-
-	&.primary {
-		color: $color_accent;
-	}
 }
 
 
 
 // Top Toolbar
-core-toolbar#material-app-bar {
-	background-color: $color_accent;
-}
 
 core-header-panel#content-container.transparent {
 	#material-one-middle .material-search {
@@ -35,9 +28,6 @@ core-header-panel#content-container.transparent {
 	}
 }
 
-core-header-panel #music-content.material .material-cover {
-	background-color: $color_accent;
-}
 
 
 

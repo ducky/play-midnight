@@ -1,0 +1,193 @@
+// Uploading Music
+.material-transfer-radial-upload-overlay,
+.material-transfer-radial-download-overlay,
+.material-transfer-radial-processing-overlay {
+	background: $color_accent;
+}
+
+// Chevron Icons
+.cluster.material-cluster .lane-button core-icon {
+	color: $color_accent;
+}
+
+// Toggle Button
+paper-toggle-button::shadow [checked] {
+	.toggle {
+		background: $color_accent;
+	}
+
+	.toggle-ink {
+		color: $color_accent;
+	}
+}
+
+// Checkbox
+paper-checkbox::shadow {
+	#checkbox.checked {
+		background-color: $color_accent;
+		border-color: $color_accent;
+	}
+
+	#ink[checked] {
+		color: $color_accent;
+	}
+}
+
+// Buttons
+.button.primary,
+sj-paper-button.material-primary,
+.simple-dialog-buttons button.goog-buttonset-default {
+	background: $color_accent;
+
+	&:hover {
+		background: $color_accent !important;
+	}
+}
+
+// Playlist button
+#unsubscribe-playlist-button,
+sj-paper-button#unsubscribe-playlist-button {
+	.playlist-subscribed,
+	.icon[icon="add-circle"] {
+		color: $color_accent;
+	}
+}
+
+// Links
+a,
+.simple-dialog a,
+.nav-item-container,
+.music-source-empty-message {
+	&.primary {
+		color: $color_accent;
+	}
+}
+
+// Top Toolbar
+core-toolbar#material-app-bar {
+	background-color: $color_accent;
+}
+
+core-header-panel #music-content.material .material-cover {
+	background-color: $color_accent;
+}
+
+// Inputs
+paper-input-decorator {
+	&::shadow .focused-underline {
+		background: $color_accent;
+	}
+
+	&[focused]::shadow .floated-label .label-text {
+		color: $color_accent;
+	}
+}
+
+// Popup Dialog
+paper-action-dialog {
+	paper-input-decorator {
+		&::shadow .focused-underline {
+			background: $color_accent;
+		}
+
+		&[focused]::shadow .floated-label .label-text {
+			color: $color_accent;
+		}
+	}
+
+	sj-paper-button {
+		color: $color_accent;
+	}
+}
+
+// Dragging Songs Icon
+.material-drag .song-drag-label {
+    background: $color_accent;
+}
+
+// Loading Progress
+#current-loading-progress {
+	background: $color_accent;
+}
+
+// Loading Overlay
+.core-overlay-backdrop.core-opened,
+#loading-overlay.material,
+#loading-overlay.material[data-type="full-loading-overlay"],
+#loading-overlay.material[data-type="regular-loading-overlay"] {
+	paper-spinner::shadow .circle {
+		border-color: $color_accent;
+	}
+}
+
+.upload-dialog {
+	.upload-dialog-title {
+		background: $color_accent;
+	}
+}
+
+.upload-dialog-dragover {
+	border-color: $color_accent;
+
+	.upload-dialog-description {
+		color: $color_accent !important;
+	}
+}
+
+
+// Explicit
+.explicit,
+.material-card .explicit,
+.material .song-row .explicit,
+.album-view .material-container-details .info .title .explicit {
+	background: $color_accent;
+}
+
+// Sidebar Navigation
+.nav-item-container,
+#nav_collections .nav-item-container, {
+	&.selected {
+		font-weight: 700;
+		color: $color_accent;
+		border-left: 2px solid $color_accent;
+
+		core-icon {
+			color: $color_accent;
+		}
+	}
+}
+
+.solid-hero core-image#material-hero-image {
+	background-color: $color_accent !important;
+}
+
+.material-detail-view .material-container-details .read-more-button {
+	color: $color_accent;
+}
+
+// Page Play Button (Top Right)
+.material-container-details sj-fab {
+	background: $color_accent;
+}
+
+// Progress/Volume
+#sliderBar::shadow #activeProgress,
+paper-slider::shadow #sliderKnobInner,
+paper-slider::shadow #sliderBar::shadow #activeProgress {
+	background: $color_accent;
+}
+
+// Various Music Buttons
+#player.material .material-player-middle sj-icon-button[data-id="repeat"][value="LIST_REPEAT"],
+#player.material .material-player-middle sj-icon-button[data-id="repeat"][value="SINGLE_REPEAT"],
+#player.material .material-player-middle sj-icon-button[data-id="shuffle"][value="ALL_SHUFFLE"] {
+	color: $color_accent;
+}
+
+#player.material sj-icon-button[data-id="cast"]::shadow core-icon[aria-label="cast-connected"] {
+	color: $color_accent;
+}
+
+#player.material .material-player-middle sj-icon-button[data-id="play-pause"]:not([disabled]) {
+	color: $color_accent;
+}
