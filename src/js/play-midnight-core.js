@@ -343,25 +343,9 @@ var PlayMidnight = (function(_){
 			return;
 		}
 
-		_.$http.get(notificationUrl).then(function(template) {
-			_.log('Show notification for version: %s', VERSION_NUMBER);
-			PM.Modal.show(template, function() {
-				_.browser.save({ lastRun: VERSION_NUMBER }, function() {
-					_userOptions.lastRun = VERSION_NUMBER;
-				});
-			});
-		}).catch(function() {
-			if (_userOptions.lastRun !== null) {
-				_.log('No new notification for Current Version (v%s), Skipping Modal', VERSION_NUMBER);
-
-				_.browser.save({ lastRun: VERSION_NUMBER }, function() {
-					_userOptions.lastRun = VERSION_NUMBER;
-				});
-
-				return;
-			}
-
-			_.log('No notification template exists for version %s, loading default', VERSION_NUMBER);
+		// New User
+		if (_userOptions.lastRun === null) {
+			_.log('New user, loading default', VERSION_NUMBER);
 
 			notificationUrl = _.browser.url('dist/templates/notifications/default.html');
 			_.$http.get(notificationUrl).then(function(template) {
@@ -374,7 +358,28 @@ var PlayMidnight = (function(_){
 			}).catch(function() {
 				_.log('Failed to load Default Notification');
 			});
-		});
+
+			return;
+
+		// Returning User, check for new modal
+		} else {
+			_.$http.get(notificationUrl).then(function(template) {
+				_.log('Show notification for version: %s', VERSION_NUMBER);
+				PM.Modal.show(template, function() {
+					_.browser.save({ lastRun: VERSION_NUMBER }, function() {
+						_userOptions.lastRun = VERSION_NUMBER;
+					});
+				});
+			}).catch(function() {
+				_.log('No new notification for Current Version (v%s), Skipping Modal', VERSION_NUMBER);
+
+				_.browser.save({ lastRun: VERSION_NUMBER }, function() {
+					_userOptions.lastRun = VERSION_NUMBER;
+				});
+
+				return;
+			});
+		}
 	}
 
 
