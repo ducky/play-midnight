@@ -129,7 +129,7 @@
 	});
 
 	/* Default Task */
-	gulp.task('default', ['build']);
+	gulp.task('default', ['styles', 'scripts', 'images', 'html', 'copy']);
 	gulp.task('build', ['clean'], function() {
 		gulp.start('dist');
 	});
