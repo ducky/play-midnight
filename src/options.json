@@ -39,13 +39,6 @@
                 "default": true,
                 "title": "Show Play Midnight Fab Icon",
                 "description": "Enable the Fab icon for quick access to Play Midnight settings"
-            },
-
-            "recent": {
-                "type": "boolean",
-                "default": true,
-                "title": "Enable Recent Activity",
-                "description": "This enables the 'Recent Activity' menu item"
             }
         }
     },
@@ -54,6 +47,13 @@
         "type": "section",
         "title": "Customize",
         "options": {
+            "recent": {
+                "type": "boolean",
+                "default": true,
+                "title": "Enable Recent Activity",
+                "description": "This enables the 'Recent Activity' menu item"
+            },
+
             "queue": {
                 "type": "boolean",
                 "default": true,
