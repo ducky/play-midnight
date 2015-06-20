@@ -8,8 +8,6 @@ body.material,
 }
 
 
-
-
 // Links
 a,
 .simple-dialog a,
@@ -19,12 +17,17 @@ a,
 }
 
 
-
 // Top Toolbar
+core-header-panel#content-container {
+	core-icon,
+	sj-icon-button {
+		color: #fff !important;
+	}
 
-core-header-panel#content-container.transparent {
-	#material-one-middle .material-search {
-		background-color: rgba($background_dark, 0.3);
+	&.transparent {
+		#material-one-middle .material-search {
+			background-color: rgba($background_dark, 0.3);
+		}
 	}
 }
 
