@@ -10,6 +10,27 @@ paper-dialog {
 				visibility: hidden;
 			}
 		}
+
+		.song-indicator {
+			background-color: $background_menu;
+		}
+
+		&.hover td,
+		&.selected-song-row td,
+		&.hover .content,
+		&.selected-song-row .content,
+		&.hover .title-right-items,
+		&.selected-song-row .title-right-items {
+			background-color: $background_menu_hover !important;
+
+			.fade-out:after {
+				background: linear-gradient( to right, rgba($background_menu_hover, 0) 0%, rgba($background_menu_hover, 0.999) 100% );
+			}
+		}
+
+		&.hover .song-indicator {
+			background-color: $background_menu_hover;
+		}
 	}
 
 	.song-row td,
@@ -21,19 +42,6 @@ paper-dialog {
 
 		.fade-out:after {
 			background: linear-gradient( to right, rgba($background_menu, 0) 0%, rgba($background_menu, 0.999) 100% );
-		}
-	}
-
-	.song-row.hover td,
-	.song-row.selected-song-row td,
-	.song-row.hover .content,
-	.song-row.selected-song-row .content,
-	.song-row.hover .title-right-items,
-	.song-row.selected-song-row .title-right-items {
-		background-color: $background_menu_hover !important;
-
-		.fade-out:after {
-			background: linear-gradient( to right, rgba($background_menu_hover, 0) 0%, rgba($background_menu_hover, 0.999) 100% );
 		}
 	}
 

@@ -10,15 +10,37 @@
         	color: $font_primary;
         }
 
+		td a {
+			color: $font_secondary;
+		}
+
 		[data-col="index"] .hover-button[data-id="play"],
 		[data-col="track"] .hover-button[data-id="play"] {
 			filter: invert(100%);
 			background-color: transparent;
 		}
 
-		.song-indicator[data-playback-status="paused"],
-		.song-indicator[data-playback-status="loading"],
-		.song-indicator[data-playback-status="playing"],
+		.song-indicator {
+			background-color: $background_page;
+			background-size: 24px 24px;
+		}
+
+		.song-indicator[data-playback-status="loading"] {
+			background-image: url('{CHROME_DIR}/images/sprites/ani_loading_white.gif');
+		}
+
+		.song-indicator[data-playback-status="playing"] {
+			background-image: url('{CHROME_DIR}/images/sprites/ani_equalizer_white.gif');
+		}
+
+		.song-indicator[data-playback-status="paused"] {
+			background-image: url('{CHROME_DIR}/images/sprites/equalizer_white.png');
+			background-color: $background_page;
+			background-size: 24px 24px;
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+
 		.rating-container.thumbs li {
 			background-color: transparent;
 			filter: invert(100%);
@@ -33,8 +55,9 @@
 		&.hover,
 		&.hover td,
 		&.hover .content,
-		&.hover .title-right-items {
-			background: $background_page_hover;
+		&.hover .title-right-items,
+		&.hover .song-indicator {
+			background-color: $background_page_hover;
 		}
 
 		&.hover,
