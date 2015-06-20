@@ -62,6 +62,8 @@
 
 
 // Upload Music Dialog
+.simple-dialog-bg,
+.zoomable-image-dialog-bg,
 .upload-dialog-bg {
 	background: rgba(lighten($background_dark, 15%), 0.8);
 }
