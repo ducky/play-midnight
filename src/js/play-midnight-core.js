@@ -65,6 +65,13 @@ var PlayMidnight = (function(_){
 			replace: function() {
 				return _userOptions.accent.color;
 			}
+		},
+		{
+			name: 'Chrome URL',
+			regex: /\{CHROME_DIR\}/gi,
+			replace: function() {
+				return _.browser.url('/dist');
+			}
 		}
 	];
 
