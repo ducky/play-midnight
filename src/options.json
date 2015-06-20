@@ -20,6 +20,13 @@
                 "description": "This will temporarily disable/enable Play Midnight if you don't want it on all the time"
             },
 
+            "accentsOnly": {
+                "type": "boolean",
+                "default": true,
+                "title": "Enable Light-Mode Accents",
+                "description": "This enables custom accents when Play Midnight is disabled"
+            },
+
             "favicon": {
                 "type": "boolean",
                 "default": true,
@@ -34,11 +41,11 @@
                 "description": "Enable the Fab icon for quick access to Play Midnight settings"
             },
 
-            "accentsOnly": {
+            "recent": {
                 "type": "boolean",
                 "default": true,
-                "title": "Enable Light-Mode Accents",
-                "description": "This enables custom accents when Play Midnight is disabled"
+                "title": "Enable Recent Activity",
+                "description": "This enables the 'Recent Activity' menu item"
             }
         }
     },

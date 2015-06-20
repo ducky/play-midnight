@@ -58,6 +58,17 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
         }
     };
 
+    _templates.recentActivity = {
+        name: 'fabIcon',
+        url: _.browser.url('dist/templates/menu-recent.html'),
+        target: '#nav_collections',
+        append: 2,
+        enabled: function() {
+            var userOptions = PlayMidnight.getUserOptions();
+            return userOptions.recent;
+        }
+    };
+
 
     // Load Options Templates and Inject
     function createOptions() {
