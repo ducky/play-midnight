@@ -33,7 +33,7 @@ var PlayMidnightUtilities = (function(Browser){
 	// Sample stub $http Utility
 	PMUtils.$http = function(){
 		var core = {
-			ajax : function (method, url, args) {
+			ajax: function (method, url, args) {
 				var promise = new Promise(function (resolve, reject) {
 					var client = new XMLHttpRequest();
 					var uri = url;
@@ -59,7 +59,7 @@ var PlayMidnightUtilities = (function(Browser){
 		};
 
 		return {
-			'get' : function(url) {
+			'get': function(url) {
 				return core.ajax('GET', url);
 			}
 		};
