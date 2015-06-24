@@ -107,3 +107,9 @@
 	background: linear-gradient( to right, rgba($background_dark, 0) 0%, rgba($background_dark, 0.999) 100% );
 	background-image: linear-gradient( to right, rgba($background_dark, 0) 0%, rgba($background_dark, 0.999) 100% );
 }
+
+core-icon[icon="sj:unsubscribe"] svg {
+	path:nth-child(2) {
+		fill: $font_primary;
+	}
+}

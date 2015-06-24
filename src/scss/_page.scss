@@ -53,6 +53,26 @@ core-drawer-panel core-image#material-hero-image {
 	border-top: 1px solid $background_page_hover;
 }
 
+.material-detail-view .top-tracks {
+	background: $background_page;
+}
+
+// Subcategories
+.subcategories-list {
+	background: $background_page;
+	
+	.subcategory {
+		&:not(:last-child) {
+			border-bottom: 1px solid $background_page_border;
+		}
+		
+		&:hover,
+		&:focus {
+			background: $background_page_hover;
+		}
+	}
+}
+
 // Page Play Button (Top Right)
 .material-container-details sj-fab {
 	&::shadow core-icon {
@@ -62,4 +82,25 @@ core-drawer-panel core-image#material-hero-image {
 			}
 		}
 	}
+}
+
+// Banner
+#music-content .material-banner.banner.ws-search-banner,
+#music-content .material-banner.banner.new-user-quiz-card,
+#music-content .material-banner.banner.ws-subscriber-card {
+	background: $background_page;
+	
+	.title {
+		color: $font_primary;
+	}
+}
+
+// More Songs
+.more-songs-container {
+	border-top: 1px solid $background_page_border;
+}
+
+// Playlists Header
+.station-container-content-wrapper .material-container-details {
+	background: $background_page;
 }

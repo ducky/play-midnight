@@ -5,6 +5,15 @@
 	background: $color_accent;
 }
 
+// Menu Selected
+.goog-menu .goog-menuitem.selected .goog-menuitem-content {
+	color: $color_accent;
+	
+	&:hover {
+		color: $color_accent !important;
+	}
+}
+
 // Chevron Icons
 .cluster.material-cluster .lane-button core-icon {
 	color: $color_accent;
@@ -42,6 +51,16 @@ sj-paper-button.material-primary,
 	&:hover {
 		background: $color_accent !important;
 	}
+}
+
+#music-content .material-banner.banner.ws-search-banner sj-paper-button,
+#music-content .material-banner.banner.new-user-quiz-card sj-paper-button,
+#music-content .material-banner.banner.ws-subscriber-card sj-paper-button {
+	color: $color_accent;
+}
+
+.more-songs-container {
+	color: $color_accent;
 }
 
 // Playlist button
@@ -190,4 +209,21 @@ paper-slider::shadow #sliderBar::shadow #activeProgress {
 
 #player.material .material-player-middle sj-icon-button[data-id="play-pause"]:not([disabled]) {
 	color: $color_accent;
+}
+
+// Top Charts Colors
+.top-charts-view .song-row [data-col="index"] .content,
+.material-card .details .left-items .index {
+	color: $color_accent;
+}
+
+// Subscribe Icon
+core-icon[icon="sj:subscribed"] svg {
+	path:nth-child(2) {
+		fill: $color_accent;
+	}
+	
+	path:nth-child(3) {
+		stroke: $color_accent;
+	}
 }
