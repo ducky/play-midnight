@@ -63,6 +63,10 @@ sj-paper-button.material-primary,
 	color: $color_accent;
 }
 
+paper-toast div[data-action="button"] {
+	color: $color_accent;
+}
+
 // Playlist button
 #unsubscribe-playlist-button,
 sj-paper-button#unsubscribe-playlist-button {
