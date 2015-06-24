@@ -1,3 +1,5 @@
+$background_page_zebra: lighten($background_page, 1%);
+
 .song-table {
 	.song-row {
 		background: $background_page;
@@ -49,6 +51,22 @@
 		&.currently-playing {
 			td[data-col="title"] {
 				color: $font_primary;
+			}
+		}
+		
+		&:nth-child(odd) {
+			td,
+			.content,
+			.title-right-items {
+				background: $background_page_zebra;
+			}
+			
+			.song-indicator {
+				background-color: $background_page_zebra;
+			}
+			
+			.fade-out:after {
+				background: linear-gradient( to right, rgba($background_page_zebra, 0) 0%, rgba($background_page_zebra, 0.999) 100% );
 			}
 		}
 
