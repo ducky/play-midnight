@@ -6,14 +6,18 @@ paper-dialog {
 	background: $background_menu;
 
 	.song-row {
-		&.currently-playing {
-			img {
-				visibility: hidden;
-			}
+		td,
+		.content,
+		.title-right-items {
+			background: $background_menu;
 		}
-
+		
 		.song-indicator {
 			background-color: $background_menu;
+		}
+		
+		.fade-out:after {
+			background: linear-gradient( to right, rgba($background_menu, 0) 0%, rgba($background_menu, 0.999) 100% );
 		}
 		
 		&:nth-child(odd) {
@@ -31,31 +35,30 @@ paper-dialog {
 				background: linear-gradient( to right, rgba($background_menu_zebra, 0) 0%, rgba($background_menu_zebra, 0.999) 100% );
 			}
 		}
-
-		&.hover td,
-		&.selected-song-row td,
-		&.hover .content,
-		&.selected-song-row .content,
-		&.hover .title-right-items,
-		&.selected-song-row .title-right-items {
-			background-color: $background_menu_hover !important;
-
+		
+		&.hover,
+        &.selected-song-row {
+			td,
+			.content,
+			.title-right-items {
+				background: $background_menu_hover !important;
+			}
+			
+			.song-indicator {
+	        	background-color: $background_menu_hover !important;
+			}
+			
 			.fade-out:after {
 				background: linear-gradient( to right, rgba($background_menu_hover, 0) 0%, rgba($background_menu_hover, 0.999) 100% );
 			}
-		}
-
-		&.hover .song-indicator {
-			background-color: $background_menu_hover;
-		}
+        }
 	}
 
-	.song-row td,
-	.song-row .content,
-	.song-row .title-right-items,
-	.upload-progress-row td {
-		background-color: $background_menu;
-		color: $font_primary;
+	.upload-progress-row {
+		td {
+			background-color: $background_menu;
+			color: $font_primary;
+		}
 
 		.fade-out:after {
 			background: linear-gradient( to right, rgba($background_menu, 0) 0%, rgba($background_menu, 0.999) 100% );
