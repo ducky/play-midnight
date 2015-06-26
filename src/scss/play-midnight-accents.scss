@@ -1,2 +1,6 @@
 @import 'variables';
 @import 'accents';
+
+.material {
+	@import 'accents';
+}
