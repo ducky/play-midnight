@@ -1,6 +1,10 @@
 $background_page_zebra: lighten($background_page, 1%);
 
 .song-table {
+	&[data-type="srbm"] {
+		border-top: 1px solid $background_page_border;
+	}
+	
 	.song-row {
 		background: $background_page;
 		color: $font_primary;
