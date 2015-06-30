@@ -29,7 +29,7 @@ $background_page_zebra: lighten($background_page, 1%);
         td,
 		.content,
 		.title-right-items {
-            background: $background_page;
+            background-color: $background_page;
         	color: $font_primary;
         }
 
@@ -62,7 +62,7 @@ $background_page_zebra: lighten($background_page, 1%);
 			td,
 			.content,
 			.title-right-items {
-				background: $background_page_zebra;
+				background-color: $background_page_zebra;
 			}
 			
 			.song-indicator {
@@ -79,7 +79,7 @@ $background_page_zebra: lighten($background_page, 1%);
 			td,
 			.content,
 			.title-right-items {
-				background: $background_page_hover !important;
+				background-color: $background_page_hover !important;
 			}
 			
 			.song-indicator {

@@ -9,7 +9,7 @@ paper-dialog {
 		td,
 		.content,
 		.title-right-items {
-			background: $background_menu;
+			background-color: $background_menu;
 		}
 		
 		.song-indicator {
@@ -24,7 +24,7 @@ paper-dialog {
 			td,
 			.content,
 			.title-right-items {
-				background: $background_menu_zebra;
+				background-color: $background_menu_zebra;
 			}
 			
 			.song-indicator {
@@ -41,7 +41,7 @@ paper-dialog {
 			td,
 			.content,
 			.title-right-items {
-				background: $background_menu_hover !important;
+				background-color: $background_menu_hover !important;
 			}
 			
 			.song-indicator {
