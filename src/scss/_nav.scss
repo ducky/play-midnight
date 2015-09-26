@@ -1,4 +1,5 @@
 $background_nav_hover: lighten($background_nav, 3%);
+$background_nav_drag: lighten($background_nav, 5%);
 
 .nav-item-container,
 #nav_collections .nav-item-container, {
@@ -15,6 +16,14 @@ $background_nav_hover: lighten($background_nav, 3%);
 
 		.fade-out:after {
 			background: linear-gradient( to right, rgba($background_nav_hover, 0) 0%, rgba($background_nav_hover, 0.999) 100% );
+		}
+	}
+
+	&.playlist-drag-target {
+		background: $background_nav_drag;
+
+		.fade-out:after {
+			background: linear-gradient( to right, rgba($background_nav_drag, 0) 0%, rgba($background_nav_drag, 0.999) 100% );
 		}
 	}
 
