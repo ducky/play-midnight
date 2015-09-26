@@ -18,6 +18,8 @@ var PlayMidnight = (function(_){
 	var _defaultOptions = {}; // Default Options
 	var _userOptions = {}; // User Loaded Options
 
+	// Body Classlist
+	var _classList = [];
 
 	// Favicon Attributes
 	var _favicon = {
@@ -120,6 +122,29 @@ var PlayMidnight = (function(_){
 				checkNotification();
 			});
 		});
+	}
+
+
+	function buildClassList(options) {
+		var classList;
+
+		for (var key in options) {
+			if (options.hasOwnProperty(key)) {
+				var single = options[key];
+
+				if (_userOptions[key]) {
+					if (typeof single === 'string') {
+						_classList.push(single);
+					} else {
+						_classList.push(single.class);
+						_.callback(single.events);
+					}
+				}
+			}
+		}
+
+		classList = _classList.join(' ');
+		document.body.setAttribute('data-playmidnight', classList);
 	}
 
 
@@ -368,23 +393,8 @@ var PlayMidnight = (function(_){
 	}
 
 
-	// Update Queue
-	function updateQueue() {
-		if (!_userOptions.queue) {
-			return;
-		}
-
-		document.querySelector('#queue-overlay').classList.add('pm-expanded-queue');
-	}
-
-
 	// Update Sidebar
 	function updateSidebar() {
-		if (!_userOptions.sidebar) {
-			return;
-		}
-
-		document.body.classList.add('pm-static-sidebar');
 		document.querySelector('#left-nav-open-button').click();
 	}
 
