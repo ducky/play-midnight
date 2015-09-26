@@ -3,35 +3,104 @@ var PlayMidnightUtilities = (function(Browser){
 	'use strict';
 
 	// Our Friend
-	var PMUtils = {};
+	var PMUtils = {
+		browser: Browser, // Add Browser Save/Get/URL Tools
+		createElement: createElement,
+		empty: empty,
+		equalObjects: equalObjects,
+		garbage: garbage,
+		getParentElement: getParentElement,
+		$http: $http(),
+		insertAfter: insertAfter,
+		isClicked: nodesMatch,
+		log: log,
+		nodesMatch: nodesMatch,
+		remove: remove,
+		replace: replace,
+		setVerbose: setVerbose,
+		toTitleCase: toTitleCase,
+		verbose: verbose,
+		versionCompare: versionCompare
+	};
 
+	// Verbose Mode (console fun stuffs)
 	var _verbose = false;
 
-	// Add Browser Save/Get/URL Tools
-	PMUtils.browser = Browser;
+	// Return Object for Modularity
+	return PMUtils;
 
-	// Check if Verbose
-	PMUtils.verbose = function() {
-		return _verbose;
-	};
+	///////////////////////////////////////////////////////////////////////
 
 
-	// Set Verbose
-	PMUtils.setVerbose = function(verbose) {
-		_verbose = verbose;
-	};
+	//
+	// Public Utilities
+	//
 
 
-	// Log to console if verbose
-	PMUtils.log = function() {
-		if (_verbose) {
-			console.log.apply(console, arguments);
+	// Create Element from html string
+	function createElement(html) {
+		var temp = document.createElement('div');
+
+		temp.innerHTML = html;
+		return temp.childNodes[0];
+	}
+
+
+	// Empty Node
+	function empty(element) {
+		while (element.lastChild) {
+		    element.removeChild(element.lastChild);
 		}
-	};
+	}
+
+
+	// Check (Vaguely) for Object equality
+	function equalObjects(a, b) {
+		if (typeof a !== 'object' || typeof b !== 'object') {
+			return false;
+		}
+
+	    var aProps = Object.getOwnPropertyNames(a);
+	    var bProps = Object.getOwnPropertyNames(b);
+
+	    if (aProps.length !== bProps.length) {
+	        return false;
+	    }
+
+	    for (var i = 0; i < aProps.length; i++) {
+	        var propName = aProps[i];
+
+	        if (a[propName] !== b[propName]) {
+	            return false;
+	        }
+	    }
+
+	    return true;
+	}
+
+
+	// Eat Fake Function Call (CSS3 Transitions with getComputedStyle)
+	function garbage() {
+		return true;
+	}
+
+
+	// Get Parent with class/id
+	function getParentElement(el, search) {
+	    while (el.parentNode) {
+	        if (el.classList.contains(search) || el.id === search) {
+				return el;
+			}
+
+	        el = el.parentNode;
+	    }
+
+		return document.createElement('div'); // returns an Array []
+	}
 
 
 	// Sample stub $http Utility
-	PMUtils.$http = function(){
+	function $http(){
 		var core = {
 			ajax: function (method, url, args) {
 				var promise = new Promise(function (resolve, reject) {
@@ -63,50 +132,25 @@ var PlayMidnightUtilities = (function(Browser){
 				return core.ajax('GET', url);
 			}
 		};
-	}();
+	}
 
 
-	// Check (Vaguely) for Object equality
-	PMUtils.equalObjects = function(a, b) {
-		if (typeof a !== 'object' || typeof b !== 'object') {
-			return false;
+	// Insert Element After Node
+	function insertAfter(newNode, referenceNode) {
+		referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+	}
+
+
+	// Log to console if verbose
+	function log() {
+		if (_verbose) {
+			console.log.apply(console, arguments);
 		}
-
-	    var aProps = Object.getOwnPropertyNames(a);
-	    var bProps = Object.getOwnPropertyNames(b);
-
-	    if (aProps.length !== bProps.length) {
-	        return false;
-	    }
-
-	    for (var i = 0; i < aProps.length; i++) {
-	        var propName = aProps[i];
-
-	        if (a[propName] !== b[propName]) {
-	            return false;
-	        }
-	    }
-
-	    return true;
-	};
-
-
-	// Title Case
-	PMUtils.toTitleCase = function(str) {
-		return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-	};
-
-
-	// Empty Node
-	PMUtils.empty = function(element) {
-		while (element.lastChild) {
-		    element.removeChild(element.lastChild);
-		}
-	};
+	}
 
 
 	// Check if Nodes Match
-	PMUtils.nodesMatch = function(element, target) {
+	function nodesMatch(element, target) {
 		while (element) {
 			if (element === target) {
 				return true;
@@ -115,13 +159,11 @@ var PlayMidnightUtilities = (function(Browser){
 		}
 
 		return false;
-	};
-	// Alias for Nodes Match
-	PMUtils.isClicked = PMUtils.nodesMatch;
+	}
 
 
 	// Remove Element from DOM
-	PMUtils.remove = function(element) {
+	function remove(element) {
 		var ele;
 
 		if (isNodeList(element)) {
@@ -137,43 +179,41 @@ var PlayMidnightUtilities = (function(Browser){
 				element.parentNode.removeChild(element);
 			}
 		}
-	};
+	}
 
 
-	// Insert Element After Node
-	PMUtils.insertAfter = function(newNode, referenceNode) {
-		referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-	};
+	// Replace element in DOM with different element
+	function replace(oldNode, newNode) {
+		oldNode.parentNode.replaceChild(newNode, oldNode);
+	}
 
 
-	// Create Element from html string
-	PMUtils.createElement = function(html) {
-		var temp = document.createElement('div');
-
-		temp.innerHTML = html;
-		return temp.childNodes[0];
-	};
 
 
-	// Get Parent with class/id
-	PMUtils.getParentElement = function(el, search) {
-	    while (el.parentNode) {
-	        if (el.classList.contains(search) || el.id === search) {
-				return el;
-			}
 
-	        el = el.parentNode;
-	    }
+	// Set Verbose
+	function setVerbose(verbose) {
+		_verbose = verbose;
+	}
 
-		return document.createElement('div'); // returns an Array []
-	};
+
+	// Title Case
+	function toTitleCase(str) {
+		return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+	}
+
+
+	// Check if Verbose
+	function verbose() {
+		return _verbose;
+	}
 
 
 	// Return Comparison of version compare
 	// -1: a < b
 	// 0: a === b
 	// 1: a > b
-	PMUtils.versionCompare = function(a, b) {
+	function versionCompare(a, b) {
 		if (a === b) {
 			return 0;
 		}
@@ -202,13 +242,9 @@ var PlayMidnightUtilities = (function(Browser){
 		}
 
 		return 0;
-	};
+	}
 
 
-	// Eat Fake Function Call (CSS3 Transitions with getComputedStyle)
-	PMUtils.garbage = function() {
-		return true;
-	};
 
 
 	//
@@ -225,7 +261,4 @@ var PlayMidnightUtilities = (function(Browser){
 			(nodes.length === 0 || (typeof nodes[0] === "object" && nodes[0].nodeType > 0));
 	}
 
-
-	// Return Object for Modularity
-	return PMUtils;
 })(PlayMidnightBrowser);
