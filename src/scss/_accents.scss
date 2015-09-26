@@ -8,7 +8,7 @@
 // Menu Selected
 .goog-menu .goog-menuitem.selected .goog-menuitem-content {
 	color: $color_accent;
-	
+
 	&:hover {
 		color: $color_accent !important;
 	}
@@ -93,6 +93,13 @@ core-toolbar#material-app-bar {
 
 core-header-panel #music-content.material .material-cover {
 	background-color: $color_accent;
+}
+
+// Logo
+.nav-toolbar .menu-logo {
+	g:nth-of-type(2) {
+		fill: $color_accent;
+	}
 }
 
 // Inputs
@@ -226,7 +233,7 @@ core-icon[icon="sj:subscribed"] svg {
 	path:nth-child(2) {
 		fill: $color_accent;
 	}
-	
+
 	path:nth-child(3) {
 		stroke: $color_accent;
 	}
