@@ -8,7 +8,7 @@
 	left: calc(50vw - 300px);
 	bottom: 110px;
 	width: 600px;
-	height: calc(100vh - 110px - 128px);
+	height: calc(100vh - 110px - 137px);
 	max-height: 750px;
 	margin: 0;
 	border-radius: 3px;
@@ -64,7 +64,7 @@
 		padding: 15px 25px;
 
 		.pm-logo {
-			height: 75px;
+			height: 50px;
 			width: auto;
 		}
 
@@ -77,6 +77,14 @@
 		h6 {
 			background: none;
 			padding: 5px;
+		}
+
+		a {
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
 		}
 	}
 
@@ -214,7 +222,7 @@
 			cursor: pointer;
 			flex: 1;
 			min-width: 150px;
-			height: 115px;
+			height: 85px;
 			transition: all 0.5s;
 			cursor: pointer;
 			overflow: hidden;
@@ -234,10 +242,6 @@
 				text-align: center;
 			}
 
-			.field-color {
-				display: none;
-			}
-
 			&:after {
 				position: absolute;
 				content: 'CURRENT ACCENT';
@@ -247,7 +251,7 @@
 				background: rgba(0,0,0,0.25);
 				color: #fff;
 				text-shadow: 1px 1px 0px $background_dark;
-				padding: 8px 10px;
+				padding: 3px 10px;
 				font-size: 10px;
 				text-align: center;
 				transform: scale3d(1.1, 1.1, 1.1);
@@ -282,7 +286,7 @@
 				width: 16px;
 				height: 16px;
 				opacity: 0;
-				transform: scale3d(0.75, 0.75, 0.75) rotate(-90deg);
+				transform: scale3d(0.75, 0.75, 0.75) rotate(-45deg);
 				transition: all 0.5s;
 
 				&:before,
