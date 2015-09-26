@@ -110,6 +110,7 @@ var PlayMidnight = (function(_){
 				updateFavicon();
 				buildClassList({
 					'enabled': 'enabled',
+					'fab': 'fab-icon',
 					'topbar': 'topbar-dark',
 					'queue': 'expanded-queue',
 					'radio': 'no-radio',
