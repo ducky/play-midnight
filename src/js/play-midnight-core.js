@@ -293,6 +293,11 @@ var PlayMidnight = (function(_){
 	}
 
 
+	// Replace SVGs
+	function replaceSVG() {
+		_.replaceAllSVG();
+	}
+
 
 	// Update Favicon
 	function updateFavicon() {
@@ -428,6 +433,7 @@ var PlayMidnight = (function(_){
 
 			window.addEventListener('load', function() {
 				PM.Options.create();
+				replaceSVG();
 				updateFavicon();
 				updateQueue();
 				updateSidebar();
