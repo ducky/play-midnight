@@ -2,9 +2,6 @@
 var PlayMidnight = (function(_){
 	'use strict';
 
-	// Our Friend
-	var PM = {};
-
 	// Dev Mode: Use CSS File rather than inline <style> (inline allows dynamic accent colors)
 	var _dev = false;
 
@@ -31,21 +28,21 @@ var PlayMidnight = (function(_){
 
 	// Stylesheets
 	var _stylesheets = {
-		main: {
-			id: 'play-midnight-stylesheet',
-			url: _.browser.url('dist/css/play-midnight.css'),
-			html: '',
-			enabled: function() {
-				return _userOptions.enabled;
-			}
-		},
-
 		accents: {
 			id: 'play-midnight-accents',
 			url: _.browser.url('dist/css/play-midnight-accents.css'),
 			html: '',
 			enabled: function() {
 				return (_userOptions.enabled === false && _userOptions.accentsOnly);
+			}
+		},
+
+		main: {
+			id: 'play-midnight-stylesheet',
+			url: _.browser.url('dist/css/play-midnight.css'),
+			html: '',
+			enabled: function() {
+				return _userOptions.enabled;
 			}
 		},
 
@@ -82,8 +79,61 @@ var PlayMidnight = (function(_){
 	];
 
 
+	// Our Friend
+	var PM = {
+		version: VERSION_NUMBER,
+		getUserOptions: getUserOptions,
+		getOptionsGraph: getOptionsGraph,
+		init: init
+	};
 
-	// Load User Options from Chrome Storage
+
+	// Return Object for Modularity
+	return PM;
+
+	/////////////////////////////////////////////////////
+
+
+	function init() {
+		_.setVerbose(_dev);
+
+		loadOptions(function() {
+			config();
+			injectStyle();
+
+			window.addEventListener('load', function() {
+				PM.Options.create();
+				replaceSVG();
+
+				updateFavicon();
+				buildClassList({
+					'enabled': 'enabled',
+					'topbar': 'topbar-dark',
+					'queue': 'expanded-queue',
+					'radio': 'no-radio',
+					'songza': 'no-songza',
+					'sidebar': {
+						class: 'static-sidebar',
+						events: updateSidebar
+					}
+				});
+				checkNotification();
+			});
+		});
+	}
+
+
+	function getUserOptions() {
+		return _userOptions;
+	}
+
+
+	function getOptionsGraph() {
+		return _optionsGraph;
+	}
+
+
+	// Load User Options from Storage
 	function loadOptions(cb) {
 		_.$http.get(_.browser.url('dist/options.json'))
 		.then(function(options) {
@@ -157,7 +207,7 @@ var PlayMidnight = (function(_){
 				return;
 			});
 
-			// Version Older Than Required Reset (For Resetting to add new options)
+		// Version Older Than Required Reset (For Resetting to add new options)
 		} else if (_.versionCompare(options.version, _resetOptions) === -1) {
 			_.log('PLAY MIDNIGHT: Options Update, Forcing Reset');
 
@@ -180,7 +230,7 @@ var PlayMidnight = (function(_){
 				return;
 			});
 
-			// Update Version Number
+		// Update Version Number
 		} else if (_.versionCompare(options.version, VERSION_NUMBER) === -1) {
 			_.log('PLAY MIDNIGHT: Updated to version %s', VERSION_NUMBER);
 
@@ -192,7 +242,7 @@ var PlayMidnight = (function(_){
 				return;
 			});
 
-			// Options All Good
+		// Options All Good
 		} else {
 			_userOptions = options;
 			if (cb && typeof cb === 'function') {
@@ -394,8 +444,6 @@ var PlayMidnight = (function(_){
 	}
 
 
-
-
 	// Configuration
 	function config() {
 		_.setVerbose(_userOptions.verbose || _dev);
@@ -423,41 +471,4 @@ var PlayMidnight = (function(_){
 		}
 	}
 
-	// Yay Initialize!
-	function init() {
-		_.setVerbose(_dev);
-
-		loadOptions(function() {
-			config();
-			injectStyle();
-
-			window.addEventListener('load', function() {
-				PM.Options.create();
-				replaceSVG();
-				updateFavicon();
-				updateQueue();
-				updateSidebar();
-				checkNotification();
-			});
-		});
-	}
-
-
-	function getUserOptions() {
-		return _userOptions;
-	}
-
-	function getOptionsGraph() {
-		return _optionsGraph;
-	}
-
-	// Expose to Outside World
-	PM.version = VERSION_NUMBER;
-	PM.getUserOptions = getUserOptions;
-	PM.getOptionsGraph = getOptionsGraph;
-	PM.init = init;
-
-
-	// Return Object for Modularity
-	return PM;
 })(PlayMidnightUtilities);
