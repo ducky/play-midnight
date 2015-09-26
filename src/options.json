@@ -48,11 +48,11 @@
                     },
                     {
                         "name": "Blue Abyss",
-                        "color": "#3179a1"
+                        "color": "#007AA5"
                     },
                     {
                         "name": "Midnight Oil",
-                        "color": "#4f0f8d"
+                        "color": "#9A12B3"
                     },
                     {
                         "name": "Rusty Spoon",
@@ -60,7 +60,7 @@
                     },
                     {
                         "name": "Spartan Crimson",
-                        "color": "#a61a2b"
+                        "color": "#9d0000"
                     }
                 ],
                 "title": "Accent Colors",
