@@ -242,6 +242,10 @@
 				text-align: center;
 			}
 
+			.field-color {
+				display: none;
+			}
+
 			&:after {
 				position: absolute;
 				content: 'CURRENT ACCENT';
