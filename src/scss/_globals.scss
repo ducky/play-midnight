@@ -1,23 +1,42 @@
-.pm-static-sidebar {
+$background_light: lighten($background_nav, 3%);
+
+[data-playmidnight *= "enabled"][data-playmidnight *= "topbar-dark"] {
+	core-toolbar#material-app-bar,
+	&.material core-toolbar#material-app-bar {
+		background-color: $background_light;
+	}
+}
+
+
+[data-playmidnight *= "static-sidebar"] {
 	#left-nav-open-button,
 	#left-nav-close-button {
 		display: none;
 	}
 }
 
-#queue-overlay {
-	&::shadow #scroller {
-		max-height: auto;
-	}
 
-	&.pm-expanded-queue {
+[data-playmidnight *= "expanded-queue"] {
+	#queue-overlay {
 		width: calc(100vw - 64px);
 		max-width: 1000px;
 		transform-origin: calc(100% - 64px) calc(100% + 26px);
-	}
 
-	core-drawer-panel:not([narrow]) &.pm-expanded-queue {
-		width: calc(100vw - 304px);
+		core-drawer-panel:not([narrow]) & {
+			width: calc(100vw - 304px);
+		}
+	}
+}
+
+[data-playmidnight *= "no-radio"] {
+	.material-card[data-type="wst"] {
+		display: none;
+	}
+}
+
+[data-playmidnight *= "no-songza"] {
+	.situations-container {
+		display: none;
 	}
 }
 
