@@ -414,8 +414,8 @@ var PlayMidnight = (function(_){
 			_.$http.get(notificationUrl).then(function(template) {
 				_.log('Show Default Notification', VERSION_NUMBER);
 				PM.Modal.show(template, function() {
-					_.browser.save({ lastRun: VERSION_NUMBER }, function() {
-						_userOptions.lastRun = VERSION_NUMBER;
+					_.browser.save({ lastRun: '0.0.0' }, function() {
+						_userOptions.lastRun = '0.0.0';
 					});
 				});
 			}).catch(function() {
