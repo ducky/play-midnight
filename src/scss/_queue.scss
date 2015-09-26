@@ -5,37 +5,41 @@ $background_menu_zebra: lighten($background_menu, 1%);
 paper-dialog {
 	background: $background_menu;
 
+	&::shadow #scroller {
+		margin-bottom: 0;
+	}
+
 	.song-row {
 		td,
 		.content,
 		.title-right-items {
 			background-color: $background_menu;
 		}
-		
+
 		.song-indicator {
 			background-color: $background_menu;
 		}
-		
+
 		.fade-out:after {
 			background: linear-gradient( to right, rgba($background_menu, 0) 0%, rgba($background_menu, 0.999) 100% );
 		}
-		
+
 		&:nth-child(odd) {
 			td,
 			.content,
 			.title-right-items {
 				background-color: $background_menu_zebra;
 			}
-			
+
 			.song-indicator {
 				background-color: $background_menu_zebra;
 			}
-			
+
 			.fade-out:after {
 				background: linear-gradient( to right, rgba($background_menu_zebra, 0) 0%, rgba($background_menu_zebra, 0.999) 100% );
 			}
 		}
-		
+
 		&.hover,
         &.selected-song-row {
 			td,
@@ -43,11 +47,11 @@ paper-dialog {
 			.title-right-items {
 				background-color: $background_menu_hover !important;
 			}
-			
+
 			.song-indicator {
 	        	background-color: $background_menu_hover !important;
 			}
-			
+
 			.fade-out:after {
 				background: linear-gradient( to right, rgba($background_menu_hover, 0) 0%, rgba($background_menu_hover, 0.999) 100% );
 			}
