@@ -31,19 +31,17 @@ $background_nav_hover: lighten($background_nav, 3%);
 	border-bottom: 1px solid $border_nav;
 }
 
-#nav,
 core-header-panel#nav-container {
 	background: $background_nav;
+
+	#nav {
+		background: $background_nav;
+		border-top: 1px solid $border_page;
+	}
 }
 
 .nav-toolbar {
 	background: $background_nav_hover;
-}
-
-core-header-panel#nav-container #nav {
-	position: absolute;
-	margin-top: -48px;
-	border-top: 1px solid $border_page;
 }
 
 .my-devices-card .device-list-item:not(:last-child) {

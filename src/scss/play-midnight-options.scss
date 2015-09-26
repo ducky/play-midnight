@@ -384,26 +384,3 @@
 		fill: currentcolor;
 	}
 }
-
-.pm-static-sidebar {
-	#left-nav-open-button,
-	#left-nav-close-button {
-		display: none;
-	}
-}
-
-#queue-overlay {
-	&::shadow #scroller {
-		max-height: auto;
-	}
-
-	&.pm-expanded-queue {
-		width: calc(100vw - 64px);
-		max-width: 1000px;
-		transform-origin: calc(100% - 64px) calc(100% + 26px);
-	}
-
-	core-drawer-panel:not([narrow]) &.pm-expanded-queue {
-		width: calc(100vw - 304px);
-	}
-}

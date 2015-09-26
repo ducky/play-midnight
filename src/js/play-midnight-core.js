@@ -53,6 +53,12 @@ var PlayMidnight = (function(_){
 			id: 'play-midnight-options',
 			url: _.browser.url('dist/css/play-midnight-options.css'),
 			html: ''
+		},
+
+		globals: {
+			id: 'play-midnight-globals',
+			url: _.browser.url('dist/css/play-midnight-globals.css'),
+			html: ''
 		}
 	};
 
