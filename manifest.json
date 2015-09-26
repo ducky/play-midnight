@@ -13,7 +13,8 @@
 	},
 
 	"permissions": [
-		"storage"
+		"storage",
+		"*://play-music.gstatic.com/*"
 	],
 
 	"content_scripts": [
