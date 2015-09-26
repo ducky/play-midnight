@@ -88,12 +88,12 @@
 				"description": "Enable the Fab icon for quick access to Play Midnight settings"
 			},
 
-			"recent": {
-                "type": "boolean",
-                "default": true,
-                "title": "Enable Recent Activity",
-                "description": "This enables the 'Recent Activity' menu item"
-            },
+			"topbar": {
+				"type": "boolean",
+				"default": false,
+                "title": "Enable Dark Top Bar",
+                "description": "Makes the top search bar dark instead of accent color"
+			},
 
             "queue": {
                 "type": "boolean",
@@ -102,19 +102,19 @@
                 "description": "Makes the now playing queue span across your screen further to prevent cutting off song titles"
             },
 
+			"recent": {
+                "type": "boolean",
+                "default": true,
+                "title": "Enable Recent Activity",
+                "description": "This enables the 'Recent Activity' menu item"
+            },
+
             "sidebar": {
                 "type": "boolean",
                 "default": false,
-                "title": "Static Sidebar",
+                "title": "Enable Static Sidebar",
                 "description": "Show sidebar on page load and keep it open permanently"
             },
-
-			"topbar": {
-				"type": "boolean",
-				"default": false,
-                "title": "Dark Top Bar",
-                "description": "Makes the top search bar dark instead of accent color"
-			},
 
 			"radio": {
                 "type": "boolean",
