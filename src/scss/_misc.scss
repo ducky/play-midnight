@@ -84,6 +84,11 @@
 	}
 }
 
+.upload-progress-upload-label,
+.upload-progress-finished-label {
+	color: $font_primary;
+}
+
 .upload-dialog-dragover {
 	.upload-dialog-graphic {
 		filter: grayscale(100%);
