@@ -17,6 +17,7 @@ var PlayMidnightUtilities = (function(Browser){
 		nodesMatch: nodesMatch,
 		remove: remove,
 		replace: replace,
+		replaceAllSVG: replaceAllSVG,
 		setVerbose: setVerbose,
 		toTitleCase: toTitleCase,
 		verbose: verbose,
@@ -188,7 +189,35 @@ var PlayMidnightUtilities = (function(Browser){
 	}
 
 
+	// Replace svg images with their contents
+	function replaceAllSVG() {
+		var svgs = document.querySelectorAll('img[src $= ".svg"]');
 
+		for (var i = 0, len = svgs.length; i < len; i++) {
+			var img = svgs[i];
+			var url = img.src;
+
+			(function(img, url) {
+				var id = img.id;
+				var classList = img.classList;
+
+				$http().get(url)
+					.then(function(contents) {
+						var svg = createElement(contents);
+
+						if (id) {
+							svg.id = id;
+						}
+
+						if (classList.length) {
+							svg.classList.add(classList);
+						}
+
+						PMUtils.replace(img, svg);
+					});
+			}(img, url));
+		}
+	}
 
 
 	// Set Verbose
