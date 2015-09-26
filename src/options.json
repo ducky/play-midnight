@@ -108,6 +108,27 @@
                 "title": "Static Sidebar",
                 "description": "Show sidebar on page load and keep it open permanently"
             },
+
+			"topbar": {
+				"type": "boolean",
+				"default": false,
+                "title": "Dark Top Bar",
+                "description": "Makes the top search bar dark instead of accent color"
+			},
+
+			"radio": {
+                "type": "boolean",
+                "default": false,
+                "title": "Remove Radio Stations (EXPERIMENTAL)",
+                "description": "This hides those pesky suggest radio stations (needs more work, some boxes may be bigger than others)"
+            },
+
+			"songza": {
+                "type": "boolean",
+                "default": false,
+                "title": "Remove Songza",
+                "description": "This hides the Songza (Play music for..) on the 'Listen Now' page"
+            }
 		}
 	},
 
