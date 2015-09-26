@@ -226,9 +226,7 @@ var PlayMidnight = (function(_){
 
 			_.browser.save(_defaultOptions, function() {
 				_userOptions = _defaultOptions;
-				if (cb && typeof cb === 'function') {
-					cb();
-				}
+				_.callback(cb);
 				return;
 			});
 
@@ -249,9 +247,7 @@ var PlayMidnight = (function(_){
 
 			_.browser.save(options, function() {
 				_userOptions = options;
-				if (cb && typeof cb === 'function') {
-					cb();
-				}
+				_.callback(cb);
 				return;
 			});
 
@@ -261,18 +257,14 @@ var PlayMidnight = (function(_){
 
 			_.browser.save({ version: VERSION_NUMBER }, function() {
 				_userOptions.version = VERSION_NUMBER;
-				if (cb && typeof cb === 'function') {
-					cb();
-				}
+				_.callback(cb);
 				return;
 			});
 
 		// Options All Good
 		} else {
 			_userOptions = options;
-			if (cb && typeof cb === 'function') {
-				cb();
-			}
+			_.callback(cb);
 			return;
 		}
 

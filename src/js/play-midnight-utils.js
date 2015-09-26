@@ -5,6 +5,7 @@ var PlayMidnightUtilities = (function(Browser){
 	// Our Friend
 	var PMUtils = {
 		browser: Browser, // Add Browser Save/Get/URL Tools
+		callback: callback,
 		createElement: createElement,
 		empty: empty,
 		equalObjects: equalObjects,
@@ -36,6 +37,14 @@ var PlayMidnightUtilities = (function(Browser){
 	//
 	// Public Utilities
 	//
+
+
+	// Check for and call callback if it exists
+	function callback(cb) {
+		if (cb && typeof cb === 'function') {
+			cb();
+		}
+	}
 
 
 	// Create Element from html string
