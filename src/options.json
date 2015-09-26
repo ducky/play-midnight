@@ -25,49 +25,14 @@
                 "default": true,
                 "title": "Enable Light-Mode Accents",
                 "description": "This enables custom accents when Play Midnight is disabled"
-            },
-
-            "favicon": {
-                "type": "boolean",
-                "default": true,
-                "title": "Show Play Midnight Favicon",
-                "description": "This is the icon that shows on your Google Play tab in the browser"
-            },
-
-            "fab": {
-                "type": "boolean",
-                "default": true,
-                "title": "Show Play Midnight Fab Icon",
-                "description": "Enable the Fab icon for quick access to Play Midnight settings"
             }
         }
     },
 
-    "customize": {
+    "core": {
         "type": "section",
-        "title": "Customize",
+        "title": "Colorize",
         "options": {
-            "recent": {
-                "type": "boolean",
-                "default": true,
-                "title": "Enable Recent Activity",
-                "description": "This enables the 'Recent Activity' menu item"
-            },
-
-            "queue": {
-                "type": "boolean",
-                "default": true,
-                "title": "Enable Larger Queue",
-                "description": "Makes the now playing queue span across your screen further to prevent cutting off song titles"
-            },
-
-            "sidebar": {
-                "type": "boolean",
-                "default": false,
-                "title": "Static Sidebar",
-                "description": "Show sidebar on page load and keep it open permanently"
-            },
-
             "accents": {
                 "type": "array",
                 "single": "accent",
@@ -104,6 +69,47 @@
             }
         }
     },
+
+	"customize": {
+		"type": "section",
+		"title": "Customize",
+		"options": {
+			"favicon": {
+				"type": "boolean",
+				"default": true,
+				"title": "Show Play Midnight Favicon",
+				"description": "This is the icon that shows on your Google Play tab in the browser"
+			},
+
+			"fab": {
+				"type": "boolean",
+				"default": true,
+				"title": "Show Play Midnight Fab Icon",
+				"description": "Enable the Fab icon for quick access to Play Midnight settings"
+			},
+
+			"recent": {
+                "type": "boolean",
+                "default": true,
+                "title": "Enable Recent Activity",
+                "description": "This enables the 'Recent Activity' menu item"
+            },
+
+            "queue": {
+                "type": "boolean",
+                "default": true,
+                "title": "Enable Larger Queue",
+                "description": "Makes the now playing queue span across your screen further to prevent cutting off song titles"
+            },
+
+            "sidebar": {
+                "type": "boolean",
+                "default": false,
+                "title": "Static Sidebar",
+                "description": "Show sidebar on page load and keep it open permanently"
+            },
+		}
+	},
 
     "tidbits": {
         "type": "section",
