@@ -1,3 +1,4 @@
+.info-card,
 .material-card,
 .settings-card {
 	background: $background_card;
@@ -26,6 +27,10 @@
 
 	.details sj-icon-button.menu-anchor {
 		color: $font_primary;
+	}
+
+	sj-paper-button {
+		color: $color_accent;
 	}
 
 	// Feeling Lucky
