@@ -4,6 +4,7 @@ $background_light: lighten($background_nav, 3%);
 	core-toolbar#material-app-bar,
 	&.material core-toolbar#material-app-bar {
 		background-color: $background_light;
+		color: $font_primary;
 	}
 }
 
