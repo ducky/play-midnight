@@ -47,6 +47,7 @@ paper-checkbox::shadow {
 sj-paper-button.material-primary,
 .simple-dialog-buttons button.goog-buttonset-default {
 	background: $color_accent;
+	color: #fff;
 
 	&:hover {
 		background: $color_accent !important;
