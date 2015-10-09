@@ -36,7 +36,7 @@ $background_light: lighten($background_nav, 3%);
 }
 
 [data-playmidnight *= "no-songza"] {
-	.situations-container {
+	.cluster[data-type="situations"] {
 		display: none;
 	}
 }
