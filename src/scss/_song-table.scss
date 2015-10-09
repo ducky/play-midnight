@@ -4,26 +4,26 @@ $background_page_zebra: lighten($background_page, 1%);
 	&[data-type="srbm"] {
 		border-top: 1px solid $background_page_border;
 	}
-	
+
 	.song-row {
 		background: $background_page;
 		color: $font_primary;
-		
+
 		td a {
 			color: $font_secondary;
 		}
-		
+
 		[data-col="index"] .hover-button[data-id="play"],
 		[data-col="track"] .hover-button[data-id="play"] {
 			filter: invert(100%);
 			background-color: transparent;
 		}
-		
+
 		.rating-container.thumbs li {
 			background-color: transparent;
 			filter: invert(100%);
 		}
-		
+
 		&.currently-playing {
 			td[data-col="title"] {
 				color: $font_primary;
@@ -57,27 +57,28 @@ $background_page_zebra: lighten($background_page, 1%);
 			background-repeat: no-repeat;
 			background-position: center center;
 		}
-		
+
 		.fade-out:after {
 			background: linear-gradient( to right, rgba($background_page, 0) 0%, rgba($background_page, 0.999) 100% );
 		}
-		
+
 		&:nth-child(odd) {
 			td,
 			.content,
 			.title-right-items {
 				background-color: $background_page_zebra;
 			}
-			
+
 			.song-indicator {
 				background-color: $background_page_zebra;
 			}
-			
+
 			.fade-out:after {
 				background: linear-gradient( to right, rgba($background_page_zebra, 0) 0%, rgba($background_page_zebra, 0.999) 100% );
 			}
 		}
-		
+
+		&:hover,
 		&.hover,
         &.selected-song-row {
 			td,
@@ -85,16 +86,17 @@ $background_page_zebra: lighten($background_page, 1%);
 			.title-right-items {
 				background-color: $background_page_hover !important;
 			}
-			
+
 			.song-indicator {
 	        	background-color: $background_page_hover !important;
 			}
-			
+
 			.fade-out:after {
 				background: linear-gradient( to right, rgba($background_page_hover, 0) 0%, rgba($background_page_hover, 0.999) 100% );
 			}
         }
 
+		&:hover,
 		&.hover,
 		&.currently-playing {
 			[data-col="index"],
