@@ -388,7 +388,7 @@ var PlayMidnight = (function(_){
 
 	// Update Sidebar
 	function updateSidebar() {
-		document.querySelector('#left-nav-open-button').click();
+		document.querySelector('#drawer-panel').removeAttribute('narrow');
 	}
 
 
