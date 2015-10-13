@@ -73,6 +73,14 @@ paper-dialog {
 
 .goog-menuheader {
 	color: $font_secondary;
+
+	// Loading Icon
+	.spinner {
+		background: transparent url('{CHROME_DIR}/images/sprites/ani_loading_white.gif') no-repeat center center;
+		background-size: 20px 20px;
+		width: auto;
+		min-width: 20px;
+	}
 }
 
 .goog-menuitem,
