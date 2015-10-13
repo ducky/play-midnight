@@ -105,6 +105,16 @@
 }
 
 
+// Share Buttons
+.share-buttons {
+	border-bottom: 1px solid $border_page;
+
+	.share-button .button-label {
+		color: $font_primary;
+	}
+}
+
+
 // Fade Gradient
 .fade-out:after,
 .material .fade-out:after,
