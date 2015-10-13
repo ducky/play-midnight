@@ -225,6 +225,7 @@ paper-slider::shadow #sliderBar::shadow #activeProgress {
 
 // Top Charts Colors
 .top-charts-view .song-row [data-col="index"] .content,
+.top-charts-view .song-row [data-col="index"] .column-content,
 .material-card .details .left-items .index {
 	color: $color_accent;
 }

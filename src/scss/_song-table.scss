@@ -32,6 +32,7 @@ $background_page_zebra: lighten($background_page, 1%);
 
         td,
 		.content,
+		.column-content,
 		.title-right-items {
             background-color: $background_page;
         	color: $font_primary;
@@ -65,6 +66,7 @@ $background_page_zebra: lighten($background_page, 1%);
 		&:nth-child(odd) {
 			td,
 			.content,
+			.column-content,
 			.title-right-items {
 				background-color: $background_page_zebra;
 			}
@@ -83,6 +85,7 @@ $background_page_zebra: lighten($background_page, 1%);
         &.selected-song-row {
 			td,
 			.content,
+			.column-content,
 			.title-right-items {
 				background-color: $background_page_hover !important;
 			}
@@ -101,7 +104,8 @@ $background_page_zebra: lighten($background_page, 1%);
 		&.currently-playing {
 			[data-col="index"],
 			[data-col="track"] {
-				.content {
+				.content,
+				.column-content {
 					font-size: 0;
 				}
 			}

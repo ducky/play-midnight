@@ -12,6 +12,7 @@ paper-dialog {
 	.song-row {
 		td,
 		.content,
+		.column-content,
 		.title-right-items {
 			background-color: $background_menu;
 		}
@@ -27,6 +28,7 @@ paper-dialog {
 		&:nth-child(odd) {
 			td,
 			.content,
+			.column-content,
 			.title-right-items {
 				background-color: $background_menu_zebra;
 			}
@@ -45,6 +47,7 @@ paper-dialog {
         &.selected-song-row {
 			td,
 			.content,
+			.column-content,
 			.title-right-items {
 				background-color: $background_menu_hover !important;
 			}
