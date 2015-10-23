@@ -1,5 +1,6 @@
 $background_light: lighten($background_nav, 3%);
 
+// Options
 [data-playmidnight *= "enabled"][data-playmidnight *= "topbar-dark"] {
 	core-toolbar#material-app-bar,
 	iron-toolbar#material-app-bar,
@@ -9,7 +10,6 @@ $background_light: lighten($background_nav, 3%);
 		color: $font_primary;
 	}
 }
-
 
 [data-playmidnight *= "static-sidebar"] {
 	#left-nav-open-button,
@@ -42,6 +42,81 @@ $background_light: lighten($background_nav, 3%);
 	}
 }
 
+
+// Menu Items
+[data-playmidnight-menus *= "ALL"] {
+	#nav_collections {
+		display: none;
+	}
+}
+
+[data-playmidnight-menus *= "listenNow"] {
+	#nav_collections a[data-type="now"] {
+		display: none;
+	}
+}
+
+[data-playmidnight-menus *= "topCharts"] {
+	#nav_collections a[data-type="wtc"] {
+		display: none;
+	}
+}
+
+[data-playmidnight-menus *= "newReleases"] {
+	#nav_collections a[data-type="wnr"] {
+		display: none;
+	}
+}
+
+[data-playmidnight-menus *= "myLibrary"] {
+	#nav_collections a[data-type="my-library"] {
+		display: none;
+	}
+}
+
+[data-playmidnight-menus *= "browseStations"] {
+	#nav_collections a[data-type="wbs"] {
+		display: none;
+	}
+}
+
+
+// Playlist Items
+[data-playmidnight-playlists *= "ALL"] {
+	.nav-section-divider:nth-child(2),
+	.nav-section-header:nth-child(3),
+	#auto-playlists {
+		display: none;
+	}
+}
+
+[data-playmidnight-playlists *= "thumbsUp"] {
+	#auto-playlists a#auto-playlist-thumbs-up {
+		display: none;
+	}
+}
+
+[data-playmidnight-playlists *= "lastAdded"] {
+	#auto-playlists a#auto-playlist-recent {
+		display: none;
+	}
+}
+
+[data-playmidnight-playlists *= "freePurchased"] {
+	#auto-playlists a#auto-playlist-promo {
+		display: none;
+	}
+}
+
+// Both Empty
+[data-playmidnight-menus *= "ALL"][data-playmidnight-playlists *= "ALL"] {
+	.nav-section-divider:nth-child(5) {
+		display: none;
+	}
+}
+
+
+// Global Styles
 #nav-container #nav {
 	position: absolute;
 	margin-top: -48px;

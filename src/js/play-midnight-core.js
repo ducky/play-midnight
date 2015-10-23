@@ -105,9 +105,10 @@ var PlayMidnight = (function(_){
 
 			window.addEventListener('load', function() {
 				PM.Options.create();
-				replaceSVG();
 
+				replaceSVG();
 				updateFavicon();
+
 				buildClassList({
 					'enabled': 'enabled',
 					'fab': 'fab-icon',
@@ -120,6 +121,23 @@ var PlayMidnight = (function(_){
 						events: updateSidebar
 					}
 				});
+
+				buildGroup("menus", [
+					{ key: "listenNow", url: '#/now' },
+					{ key: "topCharts", url: '#/wtc' },
+					{ key: "recent", url: '#/recent' },
+					{ key: "newReleases", url: '#/wnr' },
+					{ key: "myLibrary", url: '#/wmp' },
+					{ key: "browseStations", url: '#/wbs' }
+				], '#/now');
+
+				buildGroup("playlists", [
+					{ key: "thumbsUp" },
+					{ key: "soundSearch" },
+					{ key: "lastAdded" },
+					{ key: "freePurchased" }
+				]);
+
 				checkNotification();
 				fixGoogleBug();
 			});
@@ -147,6 +165,35 @@ var PlayMidnight = (function(_){
 
 		classList = _classList.join(' ');
 		document.body.setAttribute('data-playmidnight', classList);
+	}
+
+
+	function buildGroup(name, options, def) {
+		var disabled = [];
+		var hashes = [];
+		var list = '';
+		var url;
+
+		for (var i = 0; i < options.length; i++) {
+			var option = options[i];
+
+			if (!_userOptions[option.key]) {
+				disabled.push(option.key);
+				hashes.push(option.url);
+			} else {
+				if (!url) {
+					url = option.url;
+				}
+			}
+		}
+
+		// Redirect if on one of the disabled tabs
+		if (!window.location.hash.length || hashes.indexOf(window.location.hash) > -1) {
+			window.location.href = url || def;
+		}
+
+		list = (disabled.length === options.length) ? 'ALL' : disabled.join(' ');
+		document.body.setAttribute('data-playmidnight-' + name, list);
 	}
 
 

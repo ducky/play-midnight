@@ -102,13 +102,6 @@
                 "description": "Makes the now playing queue span across your screen further to prevent cutting off song titles"
             },
 
-			"recent": {
-                "type": "boolean",
-                "default": true,
-                "title": "Enable Recent Activity",
-                "description": "This enables the 'Recent Activity' menu item"
-            },
-
             "sidebar": {
                 "type": "boolean",
                 "default": false,
@@ -129,6 +122,90 @@
                 "title": "Remove Songza",
                 "description": "This hides the Songza (Play music for..) on the 'Listen Now' page"
             }
+		}
+	},
+
+	"menus": {
+		"type": "section",
+		"title": "Visible Menus",
+		"group": "menus",
+		"options": {
+			"listenNow": {
+				"type": "boolean",
+				"default": true,
+				"title": "Listen Now",
+				"description": "The default central hub for Play Music"
+			},
+
+			"topCharts": {
+				"type": "boolean",
+				"default": true,
+				"title": "Top Charts",
+				"description": "Top songs and albums currently trending in Play Music"
+			},
+
+			"recent": {
+				"type": "boolean",
+				"default": true,
+				"title": "Recent Activity",
+				"description": "Access to your most recently played and added music"
+			},
+
+			"newReleases": {
+				"type": "boolean",
+				"default": true,
+				"title": "New Releases",
+				"description": "Newest albums and singles added to Play Music"
+			},
+
+			"myLibrary": {
+				"type": "boolean",
+				"default": true,
+				"title": "My Library",
+				"description": "The home of your wonderful music collection"
+			},
+
+			"browseStations": {
+				"type": "boolean",
+				"default": true,
+				"title": "Browse Stations",
+				"description": "Radio stations brought directly to you from Google"
+			}
+		}
+	},
+
+	"playlists": {
+		"type": "section",
+		"title": "Visible Auto-Playlists",
+		"group": "playlists",
+		"options": {
+			"thumbsUp": {
+				"type": "boolean",
+				"default": true,
+				"title": "Thumbs Up",
+				"description": "All your favorite songs"
+			},
+
+			"soundSearch": {
+				"type": "boolean",
+				"default": false,
+                "title": "Sound Search",
+                "description": "Sound search auto playlist (generated from Google Now song searches)"
+			},
+
+			"lastAdded": {
+				"type": "boolean",
+				"default": true,
+				"title": "Last Added",
+				"description": "All of your most recently added music"
+			},
+
+			"freePurchased": {
+				"type": "boolean",
+				"default": true,
+				"title": "Free and Purchased",
+				"description": "The music you've paid for or collected over time"
+			}
 		}
 	},
 
