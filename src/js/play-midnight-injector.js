@@ -84,12 +84,16 @@ var PlayMidnightInjector = (function(_, PM){
 
                     target = document.querySelector(templates[key].target);
 
-                    if (templates[key].hasOwnProperty('append')) {
-                        target.insertBefore(templates[key].element, target.childNodes[templates[key].append]);
-                    } else {
-                        target.appendChild(templates[key].element);
-                    }
-                    _.garbage(window.getComputedStyle(templates[key].element).height);
+					if (target) {
+	                    if (templates[key].hasOwnProperty('append')) {
+	                        target.insertBefore(templates[key].element, target.childNodes[templates[key].append]);
+	                    } else {
+	                        target.appendChild(templates[key].element);
+	                    }
+	                    _.garbage(window.getComputedStyle(templates[key].element).height);
+					} else {
+						_.log('Error finding target Element: %s', templates[key].target);
+					}
 
                     // Register Events, If Given
                     if (typeof templates[key].events === 'function') {
