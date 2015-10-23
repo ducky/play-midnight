@@ -18,16 +18,15 @@ $background_light: lighten($background_nav, 3%);
 	}
 }
 
-
 [data-playmidnight *= "expanded-queue"] {
 	#queue-overlay {
 		width: calc(100vw - 64px);
 		max-width: 1000px;
 		transform-origin: calc(100% - 64px) calc(100% + 26px);
+	}
 
-		#drawer-panel:not([narrow]) & {
-			width: calc(100vw - 304px);
-		}
+	&[data-playmidnight *= "static-sidebar"] #queue-overlay {
+		width: calc(100vw - 296px);
 	}
 }
 
