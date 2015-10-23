@@ -41,7 +41,7 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
     _templates.fabIcon = {
         name: 'fabIcon',
         url: _.browser.url('dist/templates/options-fab.html'),
-        target: 'core-header-panel#content-container',
+        target: '#content-container',
         enabled: function() {
             var userOptions = PlayMidnight.getUserOptions();
             return userOptions.fab;
