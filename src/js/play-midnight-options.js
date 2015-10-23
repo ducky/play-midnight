@@ -59,7 +59,7 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
     };
 
     _templates.recentActivity = {
-        name: 'fabIcon',
+        name: 'recentActivity',
         url: _.browser.url('dist/templates/menu-recent.html'),
         target: '#nav_collections',
         append: 2,

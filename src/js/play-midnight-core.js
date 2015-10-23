@@ -121,13 +121,14 @@ var PlayMidnight = (function(_){
 					}
 				});
 				checkNotification();
+				fixGoogleBug();
 			});
 		});
 	}
 
 
 	function buildClassList(options) {
-		var classList;
+		var classList = [];
 
 		for (var key in options) {
 			if (options.hasOwnProperty(key)) {
@@ -146,6 +147,16 @@ var PlayMidnight = (function(_){
 
 		classList = _classList.join(' ');
 		document.body.setAttribute('data-playmidnight', classList);
+	}
+
+
+	// Temp Fix for My Library not working
+	function fixGoogleBug() {
+		var item = document.querySelector('#nav_collections a[data-type="my-library"]');
+
+		if (item) {
+			item.setAttribute('data-type', 'wmp');
+		}
 	}
 
 
@@ -333,7 +344,7 @@ var PlayMidnight = (function(_){
 
 					temp.id = stylesheet.id;
 					temp.innerHTML = stylesheet.html;
-					document.head.appendChild(temp);
+					document.body.appendChild(temp);
 				}
 			}
 		}
