@@ -69,6 +69,17 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
         }
     };
 
+	_templates.soundSearch = {
+        name: 'soundSearch',
+        url: _.browser.url('dist/templates/ap-sound-search.html'),
+        target: '#auto-playlists',
+        append: 1,
+        enabled: function() {
+            var userOptions = PlayMidnight.getUserOptions();
+            return userOptions.soundSearch;
+        }
+    };
+
 
     // Load Options Templates and Inject
     function createOptions() {
