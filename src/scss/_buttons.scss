@@ -15,6 +15,12 @@ sj-paper-button.material-primary,
 	}
 }
 
+// Top Colored Bar icons
+core-header-panel#content-container core-icon,
+core-header-panel#content-container sj-icon-button {
+	color: $font_primary !important;
+}
+
 // Playlist button
 #unsubscribe-playlist-button,
 sj-paper-button#unsubscribe-playlist-button {

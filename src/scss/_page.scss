@@ -13,11 +13,13 @@ $background_page_border: lighten($background_page, 2%);
 
 .section-header,
 .cluster .header,
+.cluster .header .title,
 .settings-cluster .header,
 .recommended-header,
 .cluster.material-cluster .header h2.title,
 .song-table [data-col="index"],
 .song-table [data-col="track"],
+#material-app-bar .header-tab-title,
 .material-detail-view .artist-details .bio-wrapper .bio,
 .material-detail-view .material-container-details .info .description {
 	color: $font_primary;
@@ -68,6 +70,19 @@ $background_page_border: lighten($background_page, 2%);
 
 		&:hover,
 		&:focus {
+			background: $background_page_hover;
+		}
+	}
+
+	li {
+		&:not(:last-child) {
+			.li-content {
+				border-bottom: 1px solid $background_page_border;
+			}
+		}
+
+		a:hover,
+		a:focus {
 			background: $background_page_hover;
 		}
 	}

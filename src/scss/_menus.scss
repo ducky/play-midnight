@@ -12,6 +12,11 @@ paper-dialog {
 	}
 }
 
+// Tabs
+#material-app-bar .material-header-bar sj-tabs.tab-container {
+	color: $font_primary;
+}
+
 .simple-dialog-bg {
 	background: rgba(lighten($background_dark, 15%), 0.8);
 }

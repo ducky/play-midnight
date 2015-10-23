@@ -212,6 +212,7 @@ paper-slider::shadow #sliderBar::shadow #activeProgress {
 }
 
 // Various Music Buttons
+#player.material #material-player-right-wrapper sj-icon-button[data-id="queue"].opened,
 #player.material .material-player-middle sj-icon-button[data-id="repeat"][value="LIST_REPEAT"],
 #player.material .material-player-middle sj-icon-button[data-id="repeat"][value="SINGLE_REPEAT"],
 #player.material .material-player-middle sj-icon-button[data-id="shuffle"][value="ALL_SHUFFLE"] {
