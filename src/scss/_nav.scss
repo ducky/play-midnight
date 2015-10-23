@@ -40,7 +40,7 @@ $background_nav_drag: lighten($background_nav, 5%);
 	border-bottom: 1px solid $border_nav;
 }
 
-core-header-panel#nav-container {
+#nav-container {
 	background: $background_nav;
 
 	#nav {

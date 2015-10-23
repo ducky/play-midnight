@@ -53,8 +53,9 @@ a,
 
 
 // Top Toolbar
-core-header-panel#content-container {
+#content-container {
 	core-icon,
+	iron-icon,
 	sj-icon-button {
 		color: #fff !important;
 	}
@@ -76,9 +77,12 @@ core-header-panel#content-container {
 
 // Icons
 core-icon,
+iron-icon,
 sj-icon-button,
 .header-row core-icon[icon="sort"],
+.header-row iron-icon[icon="sort"],
 .nav-item-container core-icon,
+.nav-item-container iron-icon,
 #player .now-playing-actions sj-icon-button,
 #player.material .now-playing-actions sj-icon-button {
 	color: $font_primary;

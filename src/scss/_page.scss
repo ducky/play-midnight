@@ -1,7 +1,7 @@
 $background_page_hover: lighten($background_page, 3%);
 $background_page_border: lighten($background_page, 2%);
 
-core-drawer-panel core-image#material-hero-image {
+#drawer-panel #material-hero-image {
 	background: $background_dark;
 }
 
@@ -60,12 +60,12 @@ core-drawer-panel core-image#material-hero-image {
 // Subcategories
 .subcategories-list {
 	background: $background_page;
-	
+
 	.subcategory {
 		&:not(:last-child) {
 			border-bottom: 1px solid $background_page_border;
 		}
-		
+
 		&:hover,
 		&:focus {
 			background: $background_page_hover;
@@ -89,7 +89,7 @@ core-drawer-panel core-image#material-hero-image {
 #music-content .material-banner.banner.new-user-quiz-card,
 #music-content .material-banner.banner.ws-subscriber-card {
 	background: $background_page;
-	
+
 	.title {
 		color: $font_primary;
 	}

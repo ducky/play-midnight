@@ -2,7 +2,9 @@ $background_light: lighten($background_nav, 3%);
 
 [data-playmidnight *= "enabled"][data-playmidnight *= "topbar-dark"] {
 	core-toolbar#material-app-bar,
-	&.material core-toolbar#material-app-bar {
+	iron-toolbar#material-app-bar,
+	&.material core-toolbar#material-app-bar,
+	&.material iron-toolbar#material-app-bar {
 		background-color: $background_light;
 		color: $font_primary;
 	}
@@ -23,7 +25,7 @@ $background_light: lighten($background_nav, 3%);
 		max-width: 1000px;
 		transform-origin: calc(100% - 64px) calc(100% + 26px);
 
-		core-drawer-panel:not([narrow]) & {
+		#drawer-panel:not([narrow]) & {
 			width: calc(100vw - 304px);
 		}
 	}
@@ -41,7 +43,7 @@ $background_light: lighten($background_nav, 3%);
 	}
 }
 
-core-header-panel#nav-container #nav {
+#nav-container #nav {
 	position: absolute;
 	margin-top: -48px;
 }

@@ -15,7 +15,8 @@
 }
 
 // Chevron Icons
-.cluster.material-cluster .lane-button core-icon {
+.cluster.material-cluster .lane-button core-icon,
+.cluster.material-cluster .lane-button iron-icon {
 	color: $color_accent;
 }
 
@@ -88,11 +89,11 @@ a,
 }
 
 // Top Toolbar
-core-toolbar#material-app-bar {
+#material-app-bar {
 	background-color: $color_accent;
 }
 
-core-header-panel #music-content.material .material-cover {
+#nav-container #music-content.material .material-cover {
 	background-color: $color_accent;
 }
 
@@ -182,13 +183,15 @@ paper-action-dialog {
 		color: $color_accent;
 		border-left: 2px solid $color_accent;
 
-		core-icon {
+		core-icon,
+		iron-icon {
 			color: $color_accent;
 		}
 	}
 }
 
-.solid-hero core-image#material-hero-image {
+.solid-hero core-image#material-hero-image,
+.solid-hero iron-image#material-hero-image {
 	background-color: $color_accent !important;
 }
 
@@ -215,7 +218,8 @@ paper-slider::shadow #sliderBar::shadow #activeProgress {
 	color: $color_accent;
 }
 
-#player.material sj-icon-button[data-id="cast"]::shadow core-icon[aria-label="cast-connected"] {
+#player.material sj-icon-button[data-id="cast"]::shadow core-icon[aria-label="cast-connected"],
+#player.material sj-icon-button[data-id="cast"]::shadow iron-icon[aria-label="cast-connected"] {
 	color: $color_accent;
 }
 
@@ -231,7 +235,8 @@ paper-slider::shadow #sliderBar::shadow #activeProgress {
 }
 
 // Subscribe Icon
-core-icon[icon="sj:subscribed"] svg {
+core-icon[icon="sj:subscribed"] svg,
+iron-icon[icon="sj:subscribed"] svg {
 	path:nth-child(2) {
 		fill: $color_accent;
 	}
