@@ -445,7 +445,14 @@ var PlayMidnight = (function(_){
 
 	// Update Sidebar
 	function updateSidebar() {
-		document.querySelector('#drawer-panel').removeAttribute('narrow');
+		var drawerPanel = document.querySelector('#drawer-panel');
+		var leftDrawer = drawerPanel.querySelector('.left-drawer');
+
+		// Modify Drawer Panel
+		drawerPanel.removeAttribute('narrow');
+
+		// Modify Left Drawer
+		leftDrawer.classList.remove('narrow-layout');
 	}
 
 

@@ -17,6 +17,14 @@ $background_light: lighten($background_nav, 3%);
 	#left-nav-close-button {
 		display: none;
 	}
+
+	#drawer {
+		transform: translateX(0) !important;
+	}
+
+	#main {
+		left: 240px !important;
+	}
 }
 
 [data-playmidnight *= "expanded-queue"] {
