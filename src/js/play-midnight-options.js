@@ -15,6 +15,12 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
     // Various Templates
     var _templates = {};
 
+	_templates.icons = {
+		name: 'polymerIconset',
+        url: _.browser.url('dist/templates/polymer-icons.html'),
+        target: 'body'
+	};
+
     _templates.optionsPage = {
         name: 'optionsPage',
         url: _.browser.url('dist/templates/options.html'),
@@ -35,6 +41,9 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
 
                 showOptions();
             }, false);
+
+			// Dumb Hack to get SVG to show up
+			ele.querySelector('iron-icon').innerHTML += '';
         }
     };
 
@@ -66,7 +75,11 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
         enabled: function() {
             var userOptions = PlayMidnight.getUserOptions();
             return userOptions.recent;
-        }
+        },
+		events: function(ele) {
+			// Dumb Hack to get SVG to show up
+			ele.querySelector('iron-icon').innerHTML += '';
+		}
     };
 
 	_templates.soundSearch = {
