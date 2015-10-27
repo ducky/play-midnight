@@ -27,7 +27,6 @@ var PlayMidnight = (function(_){
 		url: _.browser.url('dist/images/favicon.ico') + '?v=' + Date.now()
 	};
 
-
 	// Stylesheets
 	var _stylesheets = {
 		accents: {

@@ -127,7 +127,7 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
             var key = ele.key;
 
             if (type === 'boolean') {
-                var checked = ele.querySelector('paper-toggle-button::shadow #toggleContainer').hasAttribute('checked');
+                var checked = ele.querySelector('paper-toggle-button').hasAttribute('checked');
                 options[key] = checked;
             }
 
@@ -248,7 +248,7 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
         details.querySelector('.option-description').appendChild(description);
 
         if (option.createable === true) {
-            var button = _.createElement('<sj-paper-button class="material-primary" role="button"><svg viewBox="0 0 24 24" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" fit="" style="pointer-events: none; display: block;"><g><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></g></svg></sj-paper-button>');
+            var button = _.createElement('<paper-button class="material-primary" role="button"><svg viewBox="0 0 24 24" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" fit="" style="pointer-events: none; display: block;"><g><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></g></svg></paper-button>');
             var form = buildForm(singleKey, option);
 
             button.addEventListener('click', function() {
@@ -356,8 +356,8 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
 
         for (var meta in singleOption) {
             if (singleOption.hasOwnProperty(meta)) {
-                var field = _.createElement('<div class="play-midnight-input"><paper-input-decorator label="" floatinglabel><input type="text" is="core-input" autofocus="" placeholder="" aria-label="" no-focus=""></paper-input-decorator></div>');
-                var input = field.querySelector('paper-input-decorator');
+                var field = _.createElement('<div class="play-midnight-input"><paper-input label="" floatinglabel></paper-input></div>');
+                var input = field.querySelector('paper-input');
                 input.setAttribute('label', _.toTitleCase(meta));
                 input.setAttribute('aria-label', _.toTitleCase(meta));
                 input.querySelector('input').id = meta;
@@ -371,8 +371,8 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
             }
         }
 
-        var button = _.createElement('<div class="form-action"><sj-paper-button class="material-primary" role="button" tabindex="0" no-focus=""></sj-paper-button></div>');
-        button.querySelector('sj-paper-button').innerText = 'Create ' + _.toTitleCase(option.single);
+        var button = _.createElement('<div class="form-action"><paper-button class="material-primary" role="button" tabindex="0" no-focus=""></paper-button></div>');
+        button.querySelector('paper-button').innerText = 'Create ' + _.toTitleCase(option.single);
 
         button.addEventListener('click', function() {
             var fields = form.querySelectorAll('input');
@@ -458,7 +458,7 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
     function buildBoolean(key, option, values) {
         var fragment = document.createDocumentFragment();
 
-        var details = _.createElement('<div class="play-midnight-option"><div class="option-info"><div class="option-name"></div><div class="option-description"></div></div><paper-toggle-button data-id="" checked="" data-original-value="" role="button" aria-pressed="" tabindex="0" touch-action="pan-y" no-focus=""></paper-toggle-button></div>');
+        var details = _.createElement('<div class="play-midnight-option"><div class="option-info"><div class="option-name"></div><div class="option-description"></div></div><paper-toggle-button></paper-toggle-button></div>');
         var title = document.createTextNode(option.title);
         var description = document.createTextNode(option.description);
         details.querySelector('.option-name').appendChild(title);
@@ -467,9 +467,9 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
         details.type = option.type;
 
         var checkbox = details.querySelector('paper-toggle-button');
-        checkbox.setAttribute('data-id', key);
-        checkbox.setAttribute('data-original-value', values[key] || false);
-        checkbox.setAttribute('checked', values[key] || false);
+		if (values[key]) {
+			checkbox.setAttribute('checked', true);
+		}
 
         fragment.appendChild(details);
 
