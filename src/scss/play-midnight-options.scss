@@ -14,7 +14,7 @@
 	border-radius: 3px;
 	z-index: 599;
 	color: $font_primary;
-	transform-origin: 50% 780px;
+	transform-origin: center bottom 0px;
 	transform: scale(0);
 	transition: transform 0.3s;
 	background: $background_menu;
@@ -147,11 +147,11 @@
 				font-weight: 300;
 			}
 
-			paper-toggle-button {
+			paper-button {
 				margin-top: 5px;
 			}
 
-			sj-paper-button {
+			paper-button {
 				display: flex;
 				padding: 0 15px;
 				justify-content: center;
@@ -161,6 +161,21 @@
 				&::shadow .button-content {
 					height: 15px;
 					width: 15px;
+				}
+			}
+		}
+
+		.play-midnight-collection {
+			.details {
+				paper-button {
+					padding: 15px;
+
+					svg {
+						width: 24px;
+						height: 24px;
+						margin: 0 auto;
+						fill: currentcolor;
+					}
 				}
 			}
 		}
@@ -204,8 +219,9 @@
 				max-height: 500px;
 			}
 
-			paper-input-decorator {
+			paper-input {
 				padding-bottom: 0;
+				font-size: 14px;
 			}
 
 			.form-action {
