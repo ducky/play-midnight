@@ -31,6 +31,17 @@ paper-toggle-button::shadow [checked] {
 	}
 }
 
+paper-toggle-button[checked]:not([disabled]) {
+	.toggle-bar.paper-toggle-button,
+	.toggle-button.paper-toggle-button {
+		background-color: $color_accent;
+	}
+
+	.toggle-ink.paper-toggle-button {
+		color: $color_accent;
+	}
+}
+
 // Checkbox
 paper-checkbox::shadow {
 	#checkbox.checked {
@@ -43,16 +54,36 @@ paper-checkbox::shadow {
 	}
 }
 
+paper-checkbox {
+	#ink[checked],
+	#ink[checked].paper-checkbox {
+		color: $color_accent;
+	}
+
+	#checkbox.checked,
+	#checkbox.checked.paper-checkbox {
+		background-color: $color_accent;
+		border-color: $color_accent;
+	}
+}
+
 // Buttons
 .button.primary,
+paper-button.material-primary,
 sj-paper-button.material-primary,
-.simple-dialog-buttons button.goog-buttonset-default {
+paper-button.material-primary:not([raised])[focused],
+.simple-dialog-buttons button.goog-buttonset-default, {
 	background: $color_accent;
 	color: #fff;
 
 	&:hover {
 		background: $color_accent !important;
 	}
+}
+
+paper-action-dialog sj-paper-button,
+paper-dialog .buttons paper-button {
+	color: $color_accent;
 }
 
 #music-content .material-banner.banner.ws-search-banner sj-paper-button,
@@ -65,6 +96,7 @@ sj-paper-button.material-primary,
 	color: $color_accent;
 }
 
+paper-toast [data-action="button"],
 paper-toast div[data-action="button"] {
 	color: $color_accent;
 }
@@ -105,12 +137,23 @@ a,
 }
 
 // Inputs
+paper-input-container,
 paper-input-decorator {
 	&::shadow .focused-underline {
 		background: $color_accent;
 	}
 
 	&[focused]::shadow .floated-label .label-text {
+		color: $color_accent;
+	}
+
+	.focused-line.paper-input-container {
+		background: $color_accent;
+	}
+
+	.add-on-content.is-highlighted.paper-input-container *,
+	.input-content.label-is-highlighted.paper-input-container label,
+	.input-content.label-is-highlighted.paper-input-container .paper-input-label {
 		color: $color_accent;
 	}
 }
@@ -135,6 +178,12 @@ paper-action-dialog {
 // Dragging Songs Icon
 .material-drag .song-drag-label {
     background: $color_accent;
+}
+
+// Slider
+paper-slider #sliderKnobInner.paper-slider,
+paper-progress #primaryProgress.paper-progress {
+	background-color: $color_accent;
 }
 
 // Loading Progress
@@ -200,6 +249,8 @@ paper-action-dialog {
 }
 
 // Page Play Button (Top Right)
+paper-fab,
+.material-container-details paper-fab,
 .material-container-details sj-fab {
 	background: $color_accent;
 }
@@ -212,19 +263,24 @@ paper-slider::shadow #sliderBar::shadow #activeProgress {
 }
 
 // Various Music Buttons
+#player.material .material-player-middle paper-icon-button[data-id="repeat"][value="LIST_REPEAT"] iron-icon,
+#player.material .material-player-middle paper-icon-button[data-id="repeat"][value="SINGLE_REPEAT"] iron-icon,
+#player.material .material-player-middle paper-icon-button[data-id="shuffle"][value="ALL_SHUFFLE"] iron-icon,
+#player.material #material-player-right-wrapper paper-icon-button[data-id="queue"].opened iron-icon,
 #player.material #material-player-right-wrapper sj-icon-button[data-id="queue"].opened,
 #player.material .material-player-middle sj-icon-button[data-id="repeat"][value="LIST_REPEAT"],
 #player.material .material-player-middle sj-icon-button[data-id="repeat"][value="SINGLE_REPEAT"],
 #player.material .material-player-middle sj-icon-button[data-id="shuffle"][value="ALL_SHUFFLE"] {
-	color: $color_accent;
+	color: $color_accent !important;
 }
 
 #player.material sj-icon-button[data-id="cast"]::shadow core-icon[aria-label="cast-connected"],
 #player.material sj-icon-button[data-id="cast"]::shadow iron-icon[aria-label="cast-connected"] {
-	color: $color_accent;
+	color: $color_accent !important;
 }
 
-#player.material .material-player-middle sj-icon-button[data-id="play-pause"]:not([disabled]) {
+#player.material .material-player-middle sj-icon-button[data-id="play-pause"]:not([disabled]),
+#player.material .material-player-middle paper-icon-button[data-id="play-pause"]:not([disabled]) iron-icon {
 	color: $color_accent;
 }
 

@@ -7,6 +7,7 @@
 	background: $background_player;
 }
 
+#player.material:hover #material-player-progress #sliderContainer:not(.disabled) #sliderBar #progressContainer,
 #player.material:hover #material-player-progress::shadow #sliderContainer:not(.disabled) #sliderBar::shadow #progressContainer {
 	background: lighten($background_player, 5%);
 }
@@ -24,6 +25,7 @@ paper-slider::shadow .ring > #sliderKnob > #sliderKnobInner {
 	opacity: 0.75;
 }
 
+#player.material .material-player-middle paper-icon-button[data-id="play-pause"] iron-icon,
 #player.material .material-player-middle sj-icon-button[data-id="play-pause"]::shadow core-icon {
 	g {
 		path:nth-child(2) {

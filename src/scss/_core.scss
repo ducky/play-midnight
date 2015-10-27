@@ -65,7 +65,13 @@ a,
 			background-color: rgba($background_dark, 0.3);
 		}
 	}
+
+	.material-container-details sj-fab iron-icon,
+	.material-container-details paper-fab iron-icon {
+		color: $background_dark !important;
+	}
 }
+
 
 
 // Options Toolbar
