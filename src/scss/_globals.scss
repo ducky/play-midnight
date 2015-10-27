@@ -2,6 +2,7 @@ $background_light: lighten($background_nav, 3%);
 
 // Options
 [data-playmidnight *= "enabled"][data-playmidnight *= "topbar-dark"] {
+	#material-app-bar,
 	core-toolbar#material-app-bar,
 	iron-toolbar#material-app-bar,
 	&.material core-toolbar#material-app-bar,
@@ -45,7 +46,8 @@ $background_light: lighten($background_nav, 3%);
 
 // Menu Items
 [data-playmidnight-menus *= "ALL"] {
-	#nav_collections {
+	#nav_collections,
+	#nav .nav-section-divider:nth-child(2) {
 		display: none;
 	}
 }
@@ -69,6 +71,7 @@ $background_light: lighten($background_nav, 3%);
 }
 
 [data-playmidnight-menus *= "myLibrary"] {
+	#nav_collections a[data-type="wmp"],
 	#nav_collections a[data-type="my-library"] {
 		display: none;
 	}
@@ -83,9 +86,9 @@ $background_light: lighten($background_nav, 3%);
 
 // Playlist Items
 [data-playmidnight-playlists *= "ALL"] {
-	.nav-section-divider:nth-child(2),
-	.nav-section-header:nth-child(3),
-	#auto-playlists {
+	#auto-playlists,
+	#nav .nav-section-divider:nth-child(2),
+	#nav .nav-section-header:nth-child(3) {
 		display: none;
 	}
 }
