@@ -50,6 +50,13 @@
 			.pipe($.uglify())
 			.pipe(gulp.dest('../Dist/Chrome/dist/js'));
 
+		// Background JS
+		gulp.src(['src/js/**/*.js', '!src/js/play-midnight*'])
+			.pipe($.jshint())
+			.pipe($.jshint.reporter('default'))
+			.pipe($.uglify())
+			.pipe(gulp.dest('../Dist/Chrome/dist/js'));
+
 		// Other
 		gulp.src(['src/**/*.html', 'src/**/*.json', 'src/**/*.{png,ico,jpg,gif}'])
 			.pipe(gulp.dest('../Dist/Chrome/dist'));
@@ -60,7 +67,7 @@
 	});
 
 	gulp.task('copy', function() {
-		return gulp.src('src/**/*.json')
+		return gulp.src(['src/**/*.json', 'src/**/*.js', '!src/**/play-midnight*'])
 			.pipe(gulp.dest('dist'));
 	});
 
@@ -115,8 +122,8 @@
 		var html = gulp.src('src/**/*.html');
 
 		return html
-		.pipe(gulp.dest('dist'))
-		.pipe($.notify({ message: 'HTML Task Completed' }));
+			.pipe(gulp.dest('dist'))
+			.pipe($.notify({ message: 'HTML Task Completed' }));
 	});
 
 	/* Watch File Changes */
@@ -125,7 +132,7 @@
 		gulp.watch('src/js/**/play-midnight*.js', ['scripts']);
 		gulp.watch('src/images/**/*', ['images']);
 		gulp.watch('src/**/*.html', ['html']);
-		gulp.watch('src/**/*.json', ['copy']);
+		gulp.watch(['src/**/*.json', 'src/**/*.js', '!src/**/play-midnight*'], ['copy']);
 	});
 
 	/* Default Task */
