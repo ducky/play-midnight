@@ -10,6 +10,16 @@ $background_light: lighten($background_nav, 3%);
 		background-color: $background_light;
 		color: $font_primary;
 	}
+
+	#material-app-bar {
+		paper-tab.iron-selected {
+			color: $color_accent;
+		}
+
+		paper-tabs #selectionBar.paper-tabs {
+			background-color: $color_accent;
+		}	
+	}
 }
 
 [data-playmidnight *= "static-sidebar"] {
@@ -41,6 +51,10 @@ $background_light: lighten($background_nav, 3%);
 
 [data-playmidnight *= "no-radio"] {
 	.material-card[data-type="wst"] {
+		display: none;
+	}
+
+	paper-tab[data-type="wms"] {
 		display: none;
 	}
 }

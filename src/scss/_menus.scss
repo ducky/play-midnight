@@ -13,7 +13,8 @@ paper-dialog {
 }
 
 // Tabs
-#material-app-bar .material-header-bar sj-tabs.tab-container {
+#material-app-bar .material-header-bar sj-tabs.tab-container,
+#material-app-bar .material-header-bar paper-tabs.tab-container {
 	color: $font_primary;
 }
 
