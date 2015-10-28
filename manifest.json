@@ -17,6 +17,10 @@
 		"*://play-music.gstatic.com/*"
 	],
 
+	"background": {
+		"scripts": ["dist/js/background.js"]
+	},
+
 	"content_scripts": [
 		{
 			"matches": ["*://play.google.com/music/listen*"],
