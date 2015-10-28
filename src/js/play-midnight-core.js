@@ -198,11 +198,19 @@ var PlayMidnight = (function(_){
 
 	// Temp Fix for My Library not working
 	function fixGoogleBug() {
+		var validPaths = ['wmp', 'wms', 'artists', 'albums', 'all', 'genres'];
 		var item = document.querySelector('#nav_collections a[data-type="my-library"]');
 
-		if (item) {
-			item.setAttribute('data-type', 'wmp');
-		}
+		window.addEventListener("hashchange", function() {
+			var hash = location.hash.replace(/#\//, '');
+			var isValid = (validPaths.indexOf(hash) > -1);
+
+			if (isValid) {
+				item.classList.add('selected');
+			} else {
+				item.classList.remove('selected');
+			}
+		});
 	}
 
 
