@@ -18,7 +18,7 @@ $background_light: lighten($background_nav, 3%);
 
 		paper-tabs #selectionBar.paper-tabs {
 			background-color: $color_accent;
-		}	
+		}
 	}
 }
 
@@ -62,6 +62,31 @@ $background_light: lighten($background_nav, 3%);
 [data-playmidnight *= "no-songza"] {
 	.cluster[data-type="situations"] {
 		display: none;
+	}
+}
+
+
+[data-playmidnight *= "no-header-image"] {
+	#material-hero-image {
+		display: none;
+	}
+
+	.material-detail-view .has-hero-image {
+		margin-top: 128px;
+	}
+
+	&[data-playmidnight *= "enabled"] {
+		paper-header-panel#content-container #material-app-bar,
+		paper-header-panel#content-container.transparent #material-app-bar {
+			background-color: $color_accent;
+		}
+	}
+
+	&[data-playmidnight *= "topbar-dark"] {
+		paper-header-panel#content-container #material-app-bar,
+		paper-header-panel#content-container.transparent #material-app-bar {
+			background-color: $background_light;
+		}
 	}
 }
 

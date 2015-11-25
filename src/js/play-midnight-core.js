@@ -113,6 +113,7 @@ var PlayMidnight = (function(_){
 					'fab': 'fab-icon',
 					'topbar': 'topbar-dark',
 					'queue': 'expanded-queue',
+					'artistImage': 'no-header-image',
 					'radio': 'no-radio',
 					'songza': 'no-songza',
 					'sidebar': {
