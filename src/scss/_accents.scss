@@ -192,13 +192,12 @@ paper-progress #primaryProgress.paper-progress {
 }
 
 // Loading Overlay
-.core-overlay-backdrop.core-opened,
-#loading-overlay.material,
-#loading-overlay.material[data-type="full-loading-overlay"],
-#loading-overlay.material[data-type="regular-loading-overlay"] {
-	paper-spinner::shadow .circle {
-		border-color: $color_accent;
-	}
+#loading-overlay.material paper-spinner .circle {
+	border-color: $color_accent;
+}
+
+paper-spinner .spinner-layer {
+	border-color: $color_accent !important;
 }
 
 .upload-dialog {

@@ -10,10 +10,12 @@ $background_page: lighten($background_dark, 3%);
 $background_card: $background_page;
 $background_player: lighten($background_dark, 5%);
 $background_menu: lighten($background_dark, 5%);
+$background_search: lighten($background_dark, 8%);
 
 $border_nav: darken($background_nav, 5%);
 $border_page: darken($background_page, 5%);
 $border_menu: darken($background_menu, 5%);
+$border_search: darken($background_search, 3%);
 
 // Font Colors
 $font_primary: #dcdcdc;

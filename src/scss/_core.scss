@@ -1,3 +1,5 @@
+$background_hover: lighten($background_search, 3%);
+
 body,
 body.material,
 #music-content {
@@ -60,14 +62,46 @@ a,
 		color: #fff !important;
 	}
 
-	&.transparent {
-		#material-one-middle .material-search {
-			background-color: rgba($background_dark, 0.3);
+	sj-search-box {
+		background-color: rgba($background_dark, 0.5);
+		color: $font_primary;
+
+		&[opened] {
+			background-color: $background_search;
+
+			&:not([num-suggestions="0"]) #input.sj-search-box {
+				border-bottom-color: $border_search;
+			}
+		}
+
+		#input.sj-search-box {
+			color: $font_primary;
+		}
+
+		core-icon,
+		iron-icon,
+		sj-icon-button {
+			color: $font_primary !important;
 		}
 	}
 
-	.material-container-details sj-fab iron-icon,
-	.material-container-details paper-fab iron-icon {
+	sj-search-suggestion {
+		&:hover,
+		&.query-selected {
+			background: $background_hover;
+		}
+
+		.sj-search-suggestion {
+			color: $font_secondary;
+		}
+
+		.sub-match.sj-search-suggestion {
+			color: $font_primary;
+		}
+	}
+
+	sj-fab iron-icon,
+	paper-fab iron-icon {
 		color: $background_dark !important;
 	}
 }
