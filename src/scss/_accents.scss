@@ -301,3 +301,8 @@ iron-icon[icon="sj:subscribed"] svg {
 		stroke: $color_accent;
 	}
 }
+
+// Queue Reorder Target Line
+.dragging-target-line {
+	border-top-color: $color_accent;
+}
