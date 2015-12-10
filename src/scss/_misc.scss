@@ -1,3 +1,9 @@
+// Scollables
+paper-dialog-scrollable.is-scrolled:not(:first-child)::before,
+paper-dialog-scrollable.can-scroll:not([style-scope]):not(.style-scope):not(.scrolled-to-bottom)::after {
+	background: $border_page;
+}
+
 // Visualizer Card
 .visualizercard {
 	background: $background_page;
