@@ -1,3 +1,5 @@
+$border_page_light: lighten($background_page, 8%);
+
 // Scollables
 paper-dialog-scrollable.is-scrolled:not(:first-child)::before,
 paper-dialog-scrollable.can-scroll:not([style-scope]):not(.style-scope):not(.scrolled-to-bottom)::after {
@@ -37,9 +39,25 @@ paper-dialog-scrollable.can-scroll:not([style-scope]):not(.style-scope):not(.scr
 .shortcuts-table {
 	color: $font_primary;
 
-	td,
-	th {
+	th,
+	td {
 		border-bottom: 1px solid $border_page;
+		color: $font_primary;
+	}
+}
+
+.shortcuts-dialog {
+	tr {
+		border-bottom: 1px solid $border_page_light;
+
+		&:first-child {
+			border-top: 1px solid $border_page_light;
+		}
+	}
+
+	td,
+	caption {
+		color: $font_primary;
 	}
 }
 
