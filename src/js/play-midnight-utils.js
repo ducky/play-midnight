@@ -208,7 +208,7 @@ var PlayMidnightUtilities = (function(Browser){
 
 			(function(img, url) {
 				var id = img.id;
-				var classList = img.classList;
+				var classList = img.classList.toString().split(' ');
 
 				$http().get(url)
 					.then(function(contents) {
@@ -218,8 +218,9 @@ var PlayMidnightUtilities = (function(Browser){
 							svg.id = id;
 						}
 
-						if (classList.length) {
-							svg.classList.add(classList);
+						for (var j = 0; j < classList.length; j++) {
+							var singleClass = classList[j];
+							svg.classList.add(singleClass);
 						}
 
 						PMUtils.replace(img, svg);
