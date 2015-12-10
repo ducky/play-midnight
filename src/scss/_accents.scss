@@ -181,13 +181,15 @@ paper-action-dialog {
 }
 
 // Slider
-paper-slider #sliderKnobInner.paper-slider,
-paper-progress #primaryProgress.paper-progress {
-	background-color: $color_accent;
-
+paper-slider {
 	paper-ripple.paper-slider {
 		color: $color_accent;
 	}
+}
+
+paper-slider #sliderKnobInner.paper-slider,
+paper-progress #primaryProgress.paper-progress {
+	background-color: $color_accent;
 }
 
 // Loading Progress
