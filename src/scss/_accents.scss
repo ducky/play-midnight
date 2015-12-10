@@ -184,6 +184,10 @@ paper-action-dialog {
 paper-slider #sliderKnobInner.paper-slider,
 paper-progress #primaryProgress.paper-progress {
 	background-color: $color_accent;
+
+	paper-ripple.paper-slider {
+		color: $color_accent;
+	}
 }
 
 // Loading Progress
@@ -262,14 +266,9 @@ paper-slider::shadow #sliderBar::shadow #activeProgress {
 }
 
 // Various Music Buttons
-#player.material .material-player-middle paper-icon-button[data-id="repeat"][value="LIST_REPEAT"] iron-icon,
-#player.material .material-player-middle paper-icon-button[data-id="repeat"][value="SINGLE_REPEAT"] iron-icon,
-#player.material .material-player-middle paper-icon-button[data-id="shuffle"][value="ALL_SHUFFLE"] iron-icon,
-#player.material #material-player-right-wrapper paper-icon-button[data-id="queue"].opened iron-icon,
-#player.material #material-player-right-wrapper sj-icon-button[data-id="queue"].opened,
-#player.material .material-player-middle sj-icon-button[data-id="repeat"][value="LIST_REPEAT"],
-#player.material .material-player-middle sj-icon-button[data-id="repeat"][value="SINGLE_REPEAT"],
-#player.material .material-player-middle sj-icon-button[data-id="shuffle"][value="ALL_SHUFFLE"] {
+#player.material .material-player-middle paper-icon-button[data-id="repeat"].active iron-icon,
+#player.material .material-player-middle paper-icon-button[data-id="shuffle"].active iron-icon,
+#player.material #material-player-right-wrapper paper-icon-button[data-id="queue"].opened iron-icon {
 	color: $color_accent !important;
 }
 
