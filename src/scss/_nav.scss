@@ -2,46 +2,51 @@ $background_nav_hover: lighten($background_nav, 3%);
 $background_nav_drag: lighten($background_nav, 5%);
 
 .nav-item-container,
-#nav_collections .nav-item-container, {
-	.owner-name {
-		color: $font_secondary
-	}
+#nav_collections .nav-item-container,
+.playlists-container .nav-item-container {
+    .owner-name {
+        color: $font_secondary;
+    }
 
-	&:focus,
-	&:hover,
-	&.selected,
-	&.selected:focus,
-	&.selected:hover {
-		background: $background_nav_hover;
+    paper-icon-button iron-icon {
+        color: $font_primary;
+    }
 
-		.fade-out:after {
-			background: linear-gradient( to right, rgba($background_nav_hover, 0) 0%, rgba($background_nav_hover, 0.999) 100% );
-		}
-	}
+    &:focus,
+    &:hover,
+    &.selected,
+    &.selected:focus,
+    &.selected:hover {
+        background: $background_nav_hover;
 
-	&.playlist-drag-target {
-		background: $background_nav_drag;
+        .fade-out:after {
+            background: linear-gradient( to right, rgba($background_nav_hover, 0) 0%, rgba($background_nav_hover, 0.999) 100% );
+        }
+    }
 
-		.fade-out:after {
-			background: linear-gradient( to right, rgba($background_nav_drag, 0) 0%, rgba($background_nav_drag, 0.999) 100% );
-		}
-	}
+    &.playlist-drag-target {
+        background: $background_nav_drag;
 
-	.fade-out:after {
-		background: linear-gradient( to right, rgba($background_nav, 0) 0%, rgba($background_nav, 0.999) 100% );
-	}
+        .fade-out:after {
+            background: linear-gradient( to right, rgba($background_nav_drag, 0) 0%, rgba($background_nav_drag, 0.999) 100% );
+        }
+    }
+
+    .fade-out:after {
+        background: linear-gradient( to right, rgba($background_nav, 0) 0%, rgba($background_nav, 0.999) 100% );
+    }
 }
 
 .nav-section-header {
-	color: $font_secondary;
+    color: $font_secondary;
 }
 
 .nav-section-divider {
-	border-bottom: 1px solid $border_nav;
+    border-bottom: 1px solid $border_nav;
 }
 
 #nav-container {
-	background: $background_nav;
+    background: $background_nav;
 
 	#nav {
 		background: $background_nav;
@@ -50,9 +55,9 @@ $background_nav_drag: lighten($background_nav, 5%);
 }
 
 .nav-toolbar {
-	background: $background_nav_hover;
+    background: $background_nav_hover;
 }
 
 .my-devices-card .device-list-item:not(:last-child) {
-	border-bottom: 1px solid $border_page;
+    border-bottom: 1px solid $border_page;
 }

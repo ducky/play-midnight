@@ -1,11 +1,9 @@
 // Defined Color Variables
 @import 'variables';
 @import 'accents';
-
 // Random Gradients/Helpers
 @import 'buttons';
 @import 'misc';
-
 // Play Midnight Styles
 @import 'core';
 @import 'nav';
@@ -16,15 +14,12 @@
 @import 'song-table';
 @import 'queue';
 @import 'forms';
-
 // Gross, but Google uses material class in places but not others, so a safety fallback
 .material {
-	@import 'accents';
-
+    @import 'accents';
     // Random Gradients/Helpers
     @import 'buttons';
     @import 'misc';
-
     // Play Midnight Styles
     @import 'core';
     @import 'nav';

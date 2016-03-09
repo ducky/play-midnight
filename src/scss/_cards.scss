@@ -1,45 +1,43 @@
 .info-card,
 .material-card,
 .settings-card {
-	background: $background_card;
-	background-color: $background_card;
-	color: $font_primary;
+    background      : $background_card;
+    background-color: $background_card;
+    color           : $font_primary;
 
-	.title {
-		color: $font_primary;
-	}
+    .title {
+        color: $font_primary;
+    }
 
-	.sub-title {
-		color: $font_secondary;
-	}
+    .sub-title {
+        color: $font_secondary;
+    }
 
-	&[data-is-listen-now="true"] .reason .reason-text {
-		color: $font_secondary;
-	}
+    &[data-is-listen-now="true"] .reason .reason-text {
+        color: $font_primary;
+    }
 
-	&.entity-card {
-		background: transparent;
+    &.entity-card {
+        background: transparent;
 
-		.image-wrapper {
-			background: lighten($background_card, 5%);
-		}
-	}
+        .image-wrapper {
+            background: lighten($background_card, 5%);
+        }
+    }
 
-	.details sj-icon-button.menu-anchor {
-		color: $font_primary;
-	}
+    .details sj-icon-button.menu-anchor {
+        color: $font_primary;
+    }
+    // Feeling Lucky
+    &[data-size="small"][data-type="imfl"] .title {
+        color: $font_primary;
+    }
 
-	// Feeling Lucky
-	&[data-size="small"][data-type="imfl"] .title {
-		color: $font_primary;
-	}
-
-	&[data-size="small"][data-type="imfl"] .sub-title {
-		color: $font_secondary;
-	}
-
-	// Gradient Fade
-	.fade-out:after {
-		background: linear-gradient( to right, rgba($background_card, 0) 0%, rgba($background_card, 0.999) 100% );
-	}
+    &[data-size="small"][data-type="imfl"] .sub-title {
+        color: $font_secondary;
+    }
+    // Gradient Fade
+    .fade-out:after {
+        background: linear-gradient( to right, rgba($background_card, 0) 0%, rgba($background_card, 0.999) 100% );
+    }
 }
