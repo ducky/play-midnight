@@ -48,10 +48,14 @@ $background_nav_drag: lighten($background_nav, 5%);
 #nav-container {
     background: $background_nav;
 
-	#nav {
-		background: $background_nav;
-		border-top: 1px solid $border_page;
-	}
+    .nav-toolbar {
+        background: $background_nav;
+    }
+
+    #nav {
+        background: $background_nav;
+        border-top: 1px solid $border_page;
+    }
 }
 
 .nav-toolbar {
