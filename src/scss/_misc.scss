@@ -153,3 +153,15 @@ iron-icon[icon="sj:unsubscribe"] svg {
 		fill: $font_primary;
 	}
 }
+
+// Default album art & radio station background
+img[src$="default_album.svg"],
+img[src$="default_playlist.svg"],
+img[src$="default_album_med.png"],
+img[src$="default_album_art_song_row.png"],
+.card[data-zoomable-image-url$="default_album.svg"] svg,
+.material-card[data-type="album"] svg.image,
+.material-card[data-type="wst"] .quilted-radio-fallback,
+.material-card[data-type="wst"] .quilted-radio-fallback > * {
+	filter: invert(100%);
+}
