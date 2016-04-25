@@ -128,6 +128,7 @@ var PlayMidnight = (function(_){
 					{ key: "recent", url: '#/recent' },
 					{ key: "newReleases", url: '#/wnr' },
 					{ key: "myLibrary", url: '#/wmp' },
+					{ key: "podcasts", url: '#/podcasts' },
 					{ key: "browseStations", url: '#/wbs' }
 				], '#/now');
 
