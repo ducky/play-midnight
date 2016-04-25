@@ -179,6 +179,13 @@
 				"description": "The home of your wonderful music collection"
 			},
 
+			"podcasts": {
+				"type": "boolean",
+				"default": true,
+				"title": "Podcasts",
+				"description": "Podcasts brought directly to you from Google"
+			},
+
 			"browseStations": {
 				"type": "boolean",
 				"default": true,
