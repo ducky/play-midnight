@@ -61,6 +61,10 @@
                     {
                         "name": "Spartan Crimson",
                         "color": "#9d0000"
+                    },
+                    {
+                        "name": "Prince purple",
+                        "color": "#673ab7"
                     }
                 ],
                 "title": "Accent Colors",
