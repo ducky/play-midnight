@@ -1,13 +1,19 @@
 paper-dialog {
     &::shadow {
-        h1,
-        .content {
+        h2,
+        .content,
+        .description,
+        .dialog-header .episode-title,
+        .dialog-header a[data-id="series-navigate"] {
             color: $font_primary;
         }
     }
 
-    h1,
-    .content {
+    h2,
+    .content,
+    .description,
+    .dialog-header .episode-title,
+    .dialog-header a[data-id="series-navigate"] {
         color: $font_primary;
     }
 }

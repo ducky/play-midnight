@@ -6,8 +6,8 @@
 }
 
 // Menu Selected
-.goog-menu .goog-menuitem.selected .goog-menuitem-content {
-	color: $color_accent;
+.goog-menu .goog-menuitem.selected .goog-menuitem-content:not([style-scope]):not(.style-scope) {
+	color: $color_accent !important;
 
 	&:hover {
 		color: $color_accent !important;
@@ -82,7 +82,7 @@ paper-button.material-primary:not([raised])[focused],
 }
 
 paper-action-dialog sj-paper-button,
-paper-dialog .buttons paper-button {
+paper-dialog .buttons paper-button:not([style-scope]):not(.style-scope):not([disabled]) {
 	color: $color_accent;
 }
 
@@ -92,7 +92,7 @@ paper-dialog .buttons paper-button {
 	color: $color_accent;
 }
 
-.more-songs-container {
+.more-songs-container.primary > paper-button {
 	color: $color_accent;
 }
 
@@ -187,7 +187,11 @@ paper-slider {
 	}
 }
 
-paper-slider #sliderKnobInner.paper-slider,
+paper-slider #sliderKnob.paper-slider.style-scope > #sliderKnobInner.paper-slider.style-scope {
+	background-color: $color_accent;
+	border: 2px solid $color_accent;
+}
+
 paper-progress #primaryProgress.paper-progress {
 	background-color: $color_accent;
 }
@@ -198,7 +202,7 @@ paper-progress #primaryProgress.paper-progress {
 }
 
 // Loading Overlay
-#loading-overlay.material paper-spinner .circle {
+#loading-overlay.material paper-spinner-lite .circle {
 	border-color: $color_accent;
 }
 
@@ -225,13 +229,14 @@ paper-spinner .spinner-layer {
 .explicit,
 .material-card .explicit,
 .material .song-row .explicit,
-.album-view .material-container-details .info .title .explicit {
+.album-view .material-container-details .info .title .explicit,
+.podcast-series-view .material-container-details .info .title .explicit {
 	background: $color_accent;
 }
 
 // Sidebar Navigation
-.nav-item-container,
-#nav_collections .nav-item-container, {
+a.nav-item-container.tooltip:not([style-scope]):not(.style-scope),
+#nav .nav-section > a.nav-item-container {
 	&.selected {
 		font-weight: 700;
 		color: $color_accent;
@@ -286,7 +291,7 @@ paper-slider::shadow #sliderBar::shadow #activeProgress {
 
 // Top Charts Colors
 .top-charts-view .song-row [data-col="index"] .content,
-.top-charts-view .song-row [data-col="index"] .column-content,
+.top-charts-view .song-row [data-col="index"] .column-content:not([style-scope]):not(.style-scope),
 .material-card .details .left-items .index {
 	color: $color_accent;
 }

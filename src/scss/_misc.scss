@@ -124,7 +124,8 @@ paper-dialog-scrollable.can-scroll:not([style-scope]):not(.style-scope):not(.scr
 .explicit,
 .material-card .explicit,
 .material .song-row .explicit,
-.album-view .material-container-details .info .title .explicit {
+.album-view .material-container-details .info .title .explicit,
+.podcast-series-view .material-container-details .info .title .explicit {
 	color: $background_card;
 }
 
