@@ -41,3 +41,8 @@
         background: linear-gradient( to right, rgba($background_card, 0) 0%, rgba($background_card, 0.999) 100% );
     }
 }
+
+// Songza cards
+.material-card[data-type="situations"][data-is-podlist-situation="true"] iron-icon.podcast-badge {
+    background-color: $background_card;
+}
