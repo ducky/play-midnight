@@ -1,4 +1,6 @@
 ## Play Midnight - Chrome Extension
+[![Install now.](https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://chrome.google.com/webstore/detail/play-midnight-for-google/ljmjmhjkcgfmfdhgplikncgndbdeckci)
+
 ### A Nighttime Theme for Google Play Music
 
 Play Midnight is a different take on the standard theme that is used on Google Play Music. As much as I love the original look of Play, the brightness can hurt the eyes after a while. After noticing there wasn't a dark alternative Play Midnight came to be.
