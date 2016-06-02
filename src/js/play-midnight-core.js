@@ -105,7 +105,6 @@ var PlayMidnight = (function(_){
 			window.addEventListener('load', function() {
 				PM.Options.create();
 
-				replaceSVG();
 				updateFavicon();
 
 				buildClassList({
@@ -202,6 +201,8 @@ var PlayMidnight = (function(_){
 	function fixGoogleBug() {
 		var validPaths = ['wmp', 'wms', 'artists', 'albums', 'all', 'genres'];
 		var item = document.querySelector('#nav_collections a[data-type="my-library"]');
+
+		if (!item) { return; }
 
 		window.addEventListener("hashchange", function() {
 			var hash = location.hash.replace(/#\//, '');
@@ -428,12 +429,6 @@ var PlayMidnight = (function(_){
 	}
 
 
-	// Replace SVGs
-	function replaceSVG() {
-		_.replaceAllSVG();
-	}
-
-
 	// Update Favicon
 	function updateFavicon() {
 		if (!_userOptions.favicon && !_userOptions.faviconAccent) {
@@ -485,10 +480,14 @@ var PlayMidnight = (function(_){
 		var leftDrawer = drawerPanel.querySelector('.left-drawer');
 
 		// Modify Drawer Panel
-		drawerPanel.removeAttribute('narrow');
+		if (drawerPanel) {
+			drawerPanel.removeAttribute('narrow');
+		}
 
 		// Modify Left Drawer
-		leftDrawer.classList.remove('narrow-layout');
+		if (leftDrawer) {
+			leftDrawer.classList.remove('narrow-layout');
+		}
 	}
 
 

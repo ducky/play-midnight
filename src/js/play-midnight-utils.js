@@ -202,6 +202,10 @@ var PlayMidnightUtilities = (function(Browser){
 	function replaceAllSVG() {
 		var svgs = document.querySelectorAll('img[src $= ".svg"]');
 
+		if (!svgs || !svgs.length) {
+			return;
+		}
+
 		for (var i = 0, len = svgs.length; i < len; i++) {
 			var img = svgs[i];
 			var url = img.src;
