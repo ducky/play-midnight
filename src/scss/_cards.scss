@@ -17,6 +17,10 @@
         color: $font_primary;
     }
 
+    &[data-type="situations"][data-is-podlist-situation="true"] .podcast-badge {
+        background: $background_card;
+    }
+
     &.entity-card {
         background: transparent;
 
@@ -36,6 +40,7 @@
     &[data-size="small"][data-type="imfl"] .sub-title {
         color: $font_secondary;
     }
+
     // Gradient Fade
     .fade-out:after {
         background: linear-gradient( to right, rgba($background_card, 0) 0%, rgba($background_card, 0.999) 100% );

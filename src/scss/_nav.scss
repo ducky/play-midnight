@@ -50,6 +50,16 @@ $background_nav_drag: lighten($background_nav, 5%);
 
     .nav-toolbar {
         background: $background_nav;
+
+        .toolbar-tools {
+            padding: 0 10px;
+        }
+
+        .menu-logo {
+            path:nth-of-type(1) {
+                fill: $font_primary;
+            }
+        }
     }
 
     #nav {

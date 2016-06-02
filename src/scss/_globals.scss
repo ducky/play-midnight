@@ -27,6 +27,10 @@ $background_light: lighten($background_nav, 3%);
         display: none;
     }
 
+    #nav-container .nav-toolbar .menu-logo {
+        max-width: 100%;
+    }
+
     #drawer {
         transform: translateX(0) !important;
     }
