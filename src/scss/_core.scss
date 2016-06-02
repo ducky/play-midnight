@@ -1,50 +1,48 @@
 $background_hover: lighten($background_search, 3%);
 
 body,
-body.material,
-#music-content {
-    background-color      : $background_dark;
-    color                 : $font_primary;
+body.material {
+    background-color: $background_dark;
+    color: $font_primary;
     -webkit-font-smoothing: antialiased;
 }
-// Scrollbar
- ::-webkit-scrollbar,
-::shadow ::-webkit-scrollbar {
-    width     : 9px;
-    background: rgba(0, 0, 0, 0);
+
+#music-content {
+	color: $font_primary;
 }
 
- ::-webkit-scrollbar-track,
+// Scrollbar
+::-webkit-scrollbar,
+::shadow ::-webkit-scrollbar {
+    width: 9px;
+    background: rgba(0, 0, 0, 0);
+}
+::-webkit-scrollbar-track,
 ::shadow ::-webkit-scrollbar-track {
     background-color: rgba(255,255,255,0.05);
-
     &:hover {
         background-color: rgba(255,255,255,0.1);
     }
-
     &:active {
         background-color: rgba(255,255,255,0.07);
     }
 }
-
- ::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb,
 ::shadow ::-webkit-scrollbar-thumb {
     background-color: rgba(255,255,255,0.1);
-    border-radius   : 0;
-
+    border-radius: 0;
     &:hover {
         background-color: rgba(255,255,255,0.15);
     }
-
     &:active {
         background-color: rgba(255,255,255,0.125);
     }
 }
 // Links
-a,
-.simple-dialog a,
+.music-source-empty-message,
 .nav-item-container,
-.music-source-empty-message {
+.simple-dialog a,
+a {
     color: $font_primary;
 }
 // Top Toolbar
@@ -54,47 +52,38 @@ a,
     sj-icon-button {
         color: $font_primary !important;
     }
-
     sj-search-box {
         background-color: rgba($background_dark, 0.5);
-        color           : $font_primary;
-
+        color: $font_primary;
         &[opened] {
             background-color: $background_search;
-
             &:not([num-suggestions="0"]) #input.sj-search-box {
                 border-bottom-color: $border_search;
             }
         }
-
         #input.sj-search-box {
             color: $font_primary;
         }
-
         core-icon,
         iron-icon,
         sj-icon-button {
             color: $font_primary !important;
         }
     }
-
     sj-search-suggestion {
-        &:hover,
-        &.query-selected {
+        &.query-selected,
+        &:hover {
             background: $background_hover;
         }
-
         .sj-search-suggestion {
             color: $font_secondary;
         }
-
         .sub-match.sj-search-suggestion {
             color: $font_primary;
         }
     }
-
-    sj-fab iron-icon,
-    paper-fab iron-icon {
+    paper-fab iron-icon,
+    sj-fab iron-icon {
         color: $background_dark !important;
     }
 }
@@ -104,18 +93,17 @@ a,
     background: $background_menu;
 }
 // Icons
-core-icon,
-iron-icon,
-sj-icon-button,
+#player .now-playing-actions sj-icon-button,
+#player.material .now-playing-actions sj-icon-button,
 .header-row core-icon[icon="sort"],
 .header-row iron-icon[icon="sort"],
 .nav-item-container core-icon,
 .nav-item-container iron-icon,
-#player .now-playing-actions sj-icon-button,
-#player.material .now-playing-actions sj-icon-button {
+core-icon,
+iron-icon,
+sj-icon-button {
     color: $font_primary;
 }
-
 div.icon {
     filter:invert(100%);
 }

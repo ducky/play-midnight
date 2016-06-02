@@ -47,6 +47,19 @@
     }
 }
 
+// Info Card
+#music-content .info-card {
+	background-color: $background_card;
+
+	.title {
+		color: $font_primary;
+	}
+
+	.sub-title {
+		color: $font_secondary;
+	}
+}
+
 // Songza cards
 .material-card[data-type="situations"][data-is-podlist-situation="true"] iron-icon.podcast-badge {
     background-color: $background_card;

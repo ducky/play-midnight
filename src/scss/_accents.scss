@@ -81,6 +81,15 @@ paper-button.material-primary:not([raised])[focused],
 	}
 }
 
+.top-charts-view .song-row [data-col="index"] .column-content:not([style-scope]):not(.style-scope),
+.info-card:not([style-scope]):not(.style-scope):not(.szsb-card):not(.add-your-music) paper-button,
+paper-toast paper-button[data-action="button"]:not([style-scope]):not(.style-scope),
+.ups.light iron-icon:not([style-scope]):not(.style-scope),
+.upload-dialog-dragover .upload-dialog-description:not([style-scope]):not(.style-scope),
+paper-dialog .buttons paper-button:not([style-scope]):not(.style-scope):not([disabled]) {
+	color: $color_accent;
+}
+
 paper-action-dialog sj-paper-button,
 paper-dialog .buttons paper-button:not([style-scope]):not(.style-scope):not([disabled]) {
 	color: $color_accent;
