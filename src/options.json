@@ -1,241 +1,241 @@
 {
-    "version": {
-        "type": "string",
-        "default": "{VERSION_NUMBER}"
-    },
+  "version": {
+    "type": "string",
+    "default": "{VERSION_NUMBER}"
+  },
 
-    "lastRun": {
-        "type": "string",
-        "default": null
-    },
+  "lastRun": {
+    "type": "string",
+    "default": null
+  },
 
-    "general": {
-        "type": "section",
-        "title": "General",
-        "options": {
-            "enabled": {
-                "type": "boolean",
-                "default": true,
-                "title": "Enable Play Midnight",
-                "description": "This will temporarily disable/enable Play Midnight if you don't want it on all the time"
-            },
+  "general": {
+    "type": "section",
+    "title": "General",
+    "options": {
+      "enabled": {
+        "type": "boolean",
+        "default": true,
+        "title": "Enable Play Midnight",
+        "description": "This will temporarily disable/enable Play Midnight if you don't want it on all the time"
+      },
 
-            "accentsOnly": {
-                "type": "boolean",
-                "default": true,
-                "title": "Enable Light-Mode Accents",
-                "description": "This enables custom accents when Play Midnight is disabled"
-            }
-        }
-    },
+      "accentsOnly": {
+        "type": "boolean",
+        "default": true,
+        "title": "Enable Light-Mode Accents",
+        "description": "This enables custom accents when Play Midnight is disabled"
+      }
+    }
+  },
 
-    "core": {
-        "type": "section",
-        "title": "Colorize",
-        "options": {
-            "accents": {
-                "type": "array",
-                "single": "accent",
-                "createable": true,
-                "default": {
-                    "name": "Play Music (Default)",
-                    "color": "#fb8521"
-                },
-                "collection": [
-                    {
-                        "name": "Play Music (Default)",
-                        "color": "#fb8521"
+  "core": {
+    "type": "section",
+    "title": "Colorize",
+    "options": {
+      "accents": {
+        "type": "array",
+        "single": "accent",
+        "createable": true,
+        "default": {
+          "name": "Play Music (Default)",
+          "color": "#fb8521"
+        },
+        "collection": [
+          {
+            "name": "Play Music (Default)",
+            "color": "#fb8521"
                     },
-                    {
-                        "name": "Blue Abyss",
-                        "color": "#007AA5"
+          {
+            "name": "Blue Abyss",
+            "color": "#007AA5"
                     },
-                    {
-                        "name": "Midnight Oil",
-                        "color": "#8400a3"
+          {
+            "name": "Midnight Oil",
+            "color": "#8400a3"
                     },
-                    {
-                        "name": "Rusty Spoon",
-                        "color": "#4c9014"
+          {
+            "name": "Rusty Spoon",
+            "color": "#4c9014"
                     },
-                    {
-                        "name": "Spartan Crimson",
-                        "color": "#9d0000"
+          {
+            "name": "Spartan Crimson",
+            "color": "#9d0000"
                     },
-                    {
-                        "name": "Prince purple",
-                        "color": "#673ab7"
+          {
+            "name": "Prince purple",
+            "color": "#673ab7"
                     }
                 ],
-                "title": "Accent Colors",
-                "description": "Customize the accent color to your heart\"s content",
-                "note": "Currently accepts colors in hex/rgb format (#XXX, #XXXXXX, rgb(X,X,X))"
-            }
-        }
-    },
-
-	"customize": {
-		"type": "section",
-		"title": "Customize",
-		"options": {
-			"fab": {
-				"type": "boolean",
-				"default": true,
-				"title": "Show Play Midnight Fab Icon",
-				"description": "Enable the Fab icon for quick access to Play Midnight settings"
-			},
-
-			"topbar": {
-				"type": "boolean",
-				"default": false,
-                "title": "Enable Dark Top Bar",
-                "description": "Makes the top search bar dark instead of accent color"
-			},
-
-            "queue": {
-                "type": "boolean",
-                "default": true,
-                "title": "Enable Larger Queue",
-                "description": "Makes the now playing queue span across your screen further to prevent cutting off song titles"
-            },
-
-			"artistImage": {
-				"type": "boolean",
-                "default": false,
-                "title": "Remove Artist Header Image",
-                "description": "This hides the background image on artist pages"
-			},
-
-			"radio": {
-                "type": "boolean",
-                "default": false,
-                "title": "Remove Radio Stations (EXPERIMENTAL)",
-                "description": "This hides those pesky suggest radio stations (needs more work, some boxes may be bigger than others)"
-            },
-
-			"songza": {
-                "type": "boolean",
-                "default": false,
-                "title": "Remove Songza",
-                "description": "This hides the Songza (Play music for..) on the 'Listen Now' page"
-            }
-		}
-	},
-
-	"menus": {
-		"type": "section",
-		"title": "Visible Menus",
-		"group": "menus",
-		"options": {
-			"listenNow": {
-				"type": "boolean",
-				"default": true,
-				"title": "Listen Now",
-				"description": "The default central hub for Play Music"
-			},
-
-			"topCharts": {
-				"type": "boolean",
-				"default": true,
-				"title": "Top Charts",
-				"description": "Top songs and albums currently trending in Play Music"
-			},
-
-			"recent": {
-				"type": "boolean",
-				"default": true,
-				"title": "Recent Activity",
-				"description": "Access to your most recently played and added music"
-			},
-
-			"newReleases": {
-				"type": "boolean",
-				"default": true,
-				"title": "New Releases",
-				"description": "Newest albums and singles added to Play Music"
-			},
-
-			"myLibrary": {
-				"type": "boolean",
-				"default": true,
-				"title": "My Library",
-				"description": "The home of your wonderful music collection"
-			},
-
-			"podcasts": {
-				"type": "boolean",
-				"default": true,
-				"title": "Podcasts",
-				"description": "Podcasts brought directly to you from Google"
-			},
-
-			"browseStations": {
-				"type": "boolean",
-				"default": true,
-				"title": "Browse Stations",
-				"description": "Radio stations brought directly to you from Google"
-			}
-		}
-	},
-
-	"playlists": {
-		"type": "section",
-		"title": "Visible Auto-Playlists",
-		"group": "playlists",
-		"options": {
-			"thumbsUp": {
-				"type": "boolean",
-				"default": true,
-				"title": "Thumbs Up",
-				"description": "All your favorite songs"
-			},
-
-			"lastAdded": {
-				"type": "boolean",
-				"default": true,
-				"title": "Last Added",
-				"description": "All of your most recently added music"
-			},
-
-			"freePurchased": {
-				"type": "boolean",
-				"default": true,
-				"title": "Free and Purchased",
-				"description": "The music you've paid for or collected over time"
-			}
-		}
-	},
-
-    "tidbits": {
-        "type": "section",
-        "title": "Tidbits",
-        "options": {
-            "notify": {
-                "type": "boolean",
-                "default": true,
-                "title": "Update Notifications",
-                "description": "Show Play Midnight update notifications when new features are introduced"
-            },
-
-            "verbose": {
-                "type": "boolean",
-                "default": false,
-                "title": "Play Midnight VERBOSE Mode",
-                "description": "Enables verbose mode, logging all the fun developer notes to the console to see what Play Midnight is up to"
-            }
-        }
-    },
-
-    "message": {
-        "type": "section",
-        "title": "Message From The Developer",
-        "options": {
-            "thanks": {
-                "type": "string",
-                "visible": true,
-                "saved": false,
-                "description": "<p>Why hello! Just wanted to take another minute to thank all of you for checking out Play Midnight. This project has been something that has grown with me over time and I can't begin to express how much I've enjoyed hearing from all of you. There have been and will be bugs, and I appreciate that you guys have been kind enough not to tear me apart while I fix them, haha. I've poured as much of myself into this as I can and I hope that you enjoy it as much as I do.</p> <p>Again, if you notice any issues, or have any suggestions don't hesitate to shoot that over to me. The best place to reach me is through the subreddit at <a href=\"http://reddit.com/r/PlayMidnight\">/r/PlayMidnight</a> or through <a href=\"mailto:iam@christieman.com\">email</a>. If you'd like to shoot me a donation or buy me some coffee, you can do so via <a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KHH9ZJH42FF4J\">PayPal</a> or <a href=\"https://www.coinbase.com/christieman\">Bitcoin</a>. Once again, thanks again for all the feedback and I hope you enjoy Play Midnight, peace!</p>"
-            }
-        }
+        "title": "Accent Colors",
+        "description": "Customize the accent color to your heart\"s content",
+        "note": "Currently accepts colors in hex/rgb format (#XXX, #XXXXXX, rgb(X,X,X))"
+      }
     }
+  },
+
+  "customize": {
+    "type": "section",
+    "title": "Customize",
+    "options": {
+      "fab": {
+        "type": "boolean",
+        "default": true,
+        "title": "Show Play Midnight Fab Icon",
+        "description": "Enable the FAB (bottom right) icon for quick access to Play Midnight settings"
+      },
+
+      "topbar": {
+        "type": "boolean",
+        "default": false,
+        "title": "Enable Dark Top Bar",
+        "description": "Makes the top search bar dark instead of accent color"
+      },
+
+      "queue": {
+        "type": "boolean",
+        "default": true,
+        "title": "Enable Larger Queue",
+        "description": "Makes the now playing queue span across your screen further to prevent cutting off song titles"
+      },
+
+      "artistImage": {
+        "type": "boolean",
+        "default": false,
+        "title": "Remove Artist Header Image",
+        "description": "This hides the background image on artist pages"
+      },
+
+      "radio": {
+        "type": "boolean",
+        "default": false,
+        "title": "Remove Radio Stations (EXPERIMENTAL)",
+        "description": "This hides those pesky suggest radio stations (needs more work, some boxes may be bigger than others)"
+      },
+
+      "songza": {
+        "type": "boolean",
+        "default": false,
+        "title": "Remove Songza",
+        "description": "This hides the Songza (Play music for..) on the 'Listen Now' page"
+      }
+    }
+  },
+
+  "menus": {
+    "type": "section",
+    "title": "Visible Menus",
+    "group": "menus",
+    "options": {
+      "listenNow": {
+        "type": "boolean",
+        "default": true,
+        "title": "Listen Now",
+        "description": "The default central hub for Play Music"
+      },
+
+      "topCharts": {
+        "type": "boolean",
+        "default": true,
+        "title": "Top Charts",
+        "description": "Top songs and albums currently trending in Play Music"
+      },
+
+      "recent": {
+        "type": "boolean",
+        "default": true,
+        "title": "Recent Activity",
+        "description": "Access to your most recently played and added music"
+      },
+
+      "newReleases": {
+        "type": "boolean",
+        "default": true,
+        "title": "New Releases",
+        "description": "Newest albums and singles added to Play Music"
+      },
+
+      "myLibrary": {
+        "type": "boolean",
+        "default": true,
+        "title": "My Library",
+        "description": "The home of your wonderful music collection"
+      },
+
+      "podcasts": {
+        "type": "boolean",
+        "default": true,
+        "title": "Podcasts",
+        "description": "Podcasts brought directly to you from Google"
+      },
+
+      "browseStations": {
+        "type": "boolean",
+        "default": true,
+        "title": "Browse Stations",
+        "description": "Radio stations brought directly to you from Google"
+      }
+    }
+  },
+
+  "playlists": {
+    "type": "section",
+    "title": "Visible Auto-Playlists",
+    "group": "playlists",
+    "options": {
+      "thumbsUp": {
+        "type": "boolean",
+        "default": true,
+        "title": "Thumbs Up",
+        "description": "All your favorite songs"
+      },
+
+      "lastAdded": {
+        "type": "boolean",
+        "default": true,
+        "title": "Last Added",
+        "description": "All of your most recently added music"
+      },
+
+      "freePurchased": {
+        "type": "boolean",
+        "default": true,
+        "title": "Free and Purchased",
+        "description": "The music you've paid for or collected over time"
+      }
+    }
+  },
+
+  "tidbits": {
+    "type": "section",
+    "title": "Tidbits",
+    "options": {
+      "notify": {
+        "type": "boolean",
+        "default": true,
+        "title": "Update Notifications",
+        "description": "Show Play Midnight update notifications when new features are introduced"
+      },
+
+      "verbose": {
+        "type": "boolean",
+        "default": false,
+        "title": "Play Midnight VERBOSE Mode",
+        "description": "Enables verbose mode, logging all the fun developer notes to the console to see what Play Midnight is up to"
+      }
+    }
+  },
+
+  "message": {
+    "type": "section",
+    "title": "Message From The Developer",
+    "options": {
+      "thanks": {
+        "type": "string",
+        "visible": true,
+        "saved": false,
+        "description": "<p>Why hello! Just wanted to take another minute to thank all of you for checking out Play Midnight. This project has been something that has grown with me over time and I can't begin to express how much I've enjoyed hearing from all of you. There have been and will be bugs, and I appreciate that you guys have been kind enough not to tear me apart while I fix them, haha. I've poured as much of myself into this as I can and I hope that you enjoy it as much as I do.</p> <p>Again, if you notice any issues, or have any suggestions don't hesitate to shoot that over to me. The best place to reach me is through the subreddit at <a href=\"http://reddit.com/r/PlayMidnight\">/r/PlayMidnight</a> or through <a href=\"mailto:iam@christieman.com\">email</a>. If you'd like to shoot me a donation or buy me some coffee, you can do so via <a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KHH9ZJH42FF4J\">PayPal</a> or <a href=\"https://www.coinbase.com/christieman\">Bitcoin</a>. Once again, thanks again for all the feedback and I hope you enjoy Play Midnight, peace!</p>"
+      }
+    }
+  }
 }
