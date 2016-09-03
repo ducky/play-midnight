@@ -1,6 +1,6 @@
 /*global PlayMidnight, chrome */
-(function(PlayMidnight){
-	'use strict';
+(function (PlayMidnight) {
+  'use strict';
 
-	PlayMidnight.init();
+  PlayMidnight.init();
 })(PlayMidnight);
