@@ -82,18 +82,7 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
 		}
     };
 
-	_templates.soundSearch = {
-        name: 'soundSearch',
-        url: _.browser.url('dist/templates/ap-sound-search.html'),
-        target: '#auto-playlists',
-        append: 1,
-        enabled: function() {
-            var userOptions = PlayMidnight.getUserOptions();
-            return userOptions.soundSearch;
         }
-    };
-
-
     // Load Options Templates and Inject
     function createOptions() {
         _.inject(_templates, function() {
@@ -112,6 +101,19 @@ var PlayMidnightOptions = (function(_, PlayMidnight){
             document.body.classList.add('play-midnight-active');
         });
     }
+  _templates.soundSearch = {
+    name: 'soundSearch',
+    url: _.browser.url('dist/templates/ap-sound-search.html'),
+    target: '.sj-right-drawer .autoplaylist-section',
+    append: 1,
+    enabled: function () {
+      // Needs to be fixed with new sidebar
+      var userOptions = PlayMidnight.getUserOptions();
+      return false; //userOptions.soundSearch;
+    }
+  };
+
+
 
 
     // Save Options
