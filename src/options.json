@@ -78,20 +78,6 @@
 		"type": "section",
 		"title": "Customize",
 		"options": {
-			"favicon": {
-				"type": "boolean",
-				"default": true,
-				"title": "Show Play Midnight Favicon",
-				"description": "This is the icon that shows on your Google Play tab in the browser"
-			},
-
-			"faviconAccent": {
-				"type": "boolean",
-				"default": true,
-				"title": "Show Accent Favicon",
-				"description": "Makes the favicon match your selected accent color instead of dark"
-			},
-
 			"fab": {
 				"type": "boolean",
 				"default": true,
@@ -111,13 +97,6 @@
                 "default": true,
                 "title": "Enable Larger Queue",
                 "description": "Makes the now playing queue span across your screen further to prevent cutting off song titles"
-            },
-
-            "sidebar": {
-                "type": "boolean",
-                "default": false,
-                "title": "Enable Static Sidebar",
-                "description": "Show sidebar on page load and keep it open permanently"
             },
 
 			"artistImage": {
@@ -209,13 +188,6 @@
 				"default": true,
 				"title": "Thumbs Up",
 				"description": "All your favorite songs"
-			},
-
-			"soundSearch": {
-				"type": "boolean",
-				"default": false,
-                "title": "Sound Search",
-                "description": "Sound search auto playlist (generated from Google Now song searches)"
 			},
 
 			"lastAdded": {
