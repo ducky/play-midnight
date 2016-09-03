@@ -1,163 +1,162 @@
 $background_light: lighten($background_nav, 3%);
 // Options
 [data-playmidnight *= "enabled"][data-playmidnight *= "topbar-dark"] {
-    #material-app-bar,
-    core-toolbar#material-app-bar,
-    iron-toolbar#material-app-bar,
-    &.material core-toolbar#material-app-bar,
-    &.material iron-toolbar#material-app-bar {
-        background-color: $background_light;
-        color           : $font_primary;
+   &.material core-toolbar#material-app-bar,
+  #material-app-bar,
+  &.material iron-toolbar#material-app-bar,
+  core-toolbar#material-app-bar,
+  iron-toolbar#material-app-bar {
+    background-color: $background_light;
+    color: $font_primary;
+  }
+
+  #material-app-bar {
+    paper-tab.iron-selected {
+      color: $color_accent;
     }
 
-    #material-app-bar {
-        paper-tab.iron-selected {
-            color: $color_accent;
-        }
-
-        paper-tabs #selectionBar.paper-tabs {
-            background-color: $color_accent;
-        }
+    paper-tabs #selectionBar.paper-tabs {
+      background-color: $color_accent;
     }
+  }
 }
 
-[data-playmidnight *= "static-sidebar"] {
-    #left-nav-open-button,
-    #left-nav-close-button {
-        display: none;
-    }
-
-    #nav-container .nav-toolbar .menu-logo {
-        max-width: 100%;
-    }
-
-    #drawer {
-        transform: translateX(0) !important;
-    }
-
-    #main {
-        left: 240px !important;
-    }
-}
+// [data-playmidnight *= "static-sidebar"] {
+//   #left-nav-close-button,
+//   #left-nav-open-button {
+//     display: none;
+//   }
+//
+//   #nav-container .nav-toolbar .menu-logo {
+//     max-width: 100%;
+//   }
+//
+//   #drawer {
+//     transform: translateX(0) !important;
+//   }
+//
+//   #main {
+//     left: 240px !important;
+//   }
+// }
 
 [data-playmidnight *= "expanded-queue"] {
-    #queue-overlay {
-        width           : calc(100vw - 64px);
-        max-width       : 1000px;
-        transform-origin: calc(100% - 64px) calc(100% + 26px);
-    }
+  #queue-overlay {
+    width: calc(100vw - 64px);
+    max-width: 1000px;
+    transform-origin: calc(100% - 64px) calc(100% + 26px);
+  }
 
-    &[data-playmidnight *= "static-sidebar"] #queue-overlay {
-        width: calc(100vw - 296px);
-    }
+  &[data-playmidnight *= "static-sidebar"] #queue-overlay {
+    width: calc(100vw - 296px);
+  }
 }
 
 [data-playmidnight *= "no-radio"] {
-    .material-card[data-type="wst"] {
-        display: none;
-    }
+  .material-card[data-type="wst"] {
+    display: none;
+  }
 
-    paper-tab[data-type="wms"] {
-        display: none;
-    }
+  paper-tab[data-type="wms"] {
+    display: none;
+  }
 }
 
 [data-playmidnight *= "no-songza"] {
-    .cluster[data-type="situations"] {
-        display: none;
-    }
+  .cluster[data-type="situations"] {
+    display: none;
+  }
 }
 
 [data-playmidnight *= "no-header-image"] {
-    #material-hero-image {
-        display: none;
-    }
+  #material-hero-image {
+    display: none;
+  }
 
-    .material-detail-view .has-hero-image {
-        margin-top: 128px;
-    }
+  .material-detail-view .has-hero-image {
+    margin-top: 128px;
+  }
 
-    &[data-playmidnight *= "enabled"] {
-        paper-header-panel#content-container #material-app-bar,
-        paper-header-panel#content-container.transparent #material-app-bar {
-            background-color: $color_accent;
-        }
+  &[data-playmidnight *= "enabled"] {
+    paper-header-panel#content-container #material-app-bar,
+    paper-header-panel#content-container.transparent #material-app-bar {
+      background-color: $color_accent;
     }
+  }
 
-    &[data-playmidnight *= "topbar-dark"] {
-        paper-header-panel#content-container #material-app-bar,
-        paper-header-panel#content-container.transparent #material-app-bar {
-            background-color: $background_light;
-        }
+  &[data-playmidnight *= "topbar-dark"] {
+    paper-header-panel#content-container #material-app-bar,
+    paper-header-panel#content-container.transparent #material-app-bar {
+      background-color: $background_light;
     }
+  }
 }
 // Menu Items
 [data-playmidnight-menus *= "ALL"] {
-    #nav_collections,
-    #nav .nav-section-divider:nth-child(2) {
-        display: none;
-    }
+  #nav .nav-section-divider:nth-child(2),
+  #nav_collections {
+    display: none;
+  }
 }
 
 [data-playmidnight-menus *= "listenNow"] {
-    #nav_collections a[data-type="now"] {
-        display: none;
-    }
+  #nav_collections a[data-type="now"] {
+    display: none;
+  }
 }
 
 [data-playmidnight-menus *= "topCharts"] {
-    #nav_collections a[data-type="wtc"] {
-        display: none;
-    }
+  #nav_collections a[data-type="wtc"] {
+    display: none;
+  }
 }
 
 [data-playmidnight-menus *= "newReleases"] {
-    #nav_collections a[data-type="wnr"] {
-        display: none;
-    }
+  #nav_collections a[data-type="wnr"] {
+    display: none;
+  }
 }
 
 [data-playmidnight-menus *= "myLibrary"] {
-    #nav_collections a[data-type="wmp"],
-    #nav_collections a[data-type="my-library"] {
-        display: none;
-    }
+  #nav_collections a[data-type="my-library"],
+  #nav_collections a[data-type="wmp"] {
+    display: none;
+  }
 }
 
 [data-playmidnight-menus *= "browseStations"] {
-    #nav_collections a[data-type="wbs"] {
-        display: none;
-    }
+  #nav_collections a[data-type="wbs"] {
+    display: none;
+  }
+}
+
+[data-playmidnight-menus *= "podcasts"] {
+  #nav_collections a[data-type="tps"] {
+    display: none;
+  }
 }
 // Playlist Items
 [data-playmidnight-playlists *= "ALL"] {
-    #auto-playlists,
-    #nav .nav-section-divider:nth-child(2),
-    #nav .nav-section-header:nth-child(3) {
-        display: none;
-    }
+  .sj-right-drawer #auto-playlists-header,
+  .sj-right-drawer .autoplaylist-section {
+    display: none;
+  }
 }
 
 [data-playmidnight-playlists *= "thumbsUp"] {
-    #auto-playlists a#auto-playlist-thumbs-up {
-        display: none;
-    }
+  .sj-right-drawer .autoplaylist-section [data-id = "auto-playlist-thumbs-up"] {
+    display: none;
+  }
 }
 
 [data-playmidnight-playlists *= "lastAdded"] {
-    #auto-playlists a#auto-playlist-recent {
-        display: none;
-    }
+  .sj-right-drawer .autoplaylist-section [data-id = "auto-playlist-recent"] {
+    display: none;
+  }
 }
 
 [data-playmidnight-playlists *= "freePurchased"] {
-    #auto-playlists a#auto-playlist-promo {
-        display: none;
-    }
-}
-// Both Empty
-[data-playmidnight-menus *= "ALL"][data-playmidnight-playlists *= "ALL"] {
-    .nav-section-divider:nth-child(5) {
-        display: none;
-    }
+  .sj-right-drawer .autoplaylist-section [data-id = "auto-playlist-promo"] {
+    display: none;
+  }
 }

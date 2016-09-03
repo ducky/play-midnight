@@ -121,3 +121,7 @@ $background_page_border: lighten($background_page, 2%);
 .station-container-content-wrapper .material-container-details {
     background: $background_page;
 }
+
+gpm-action-buttons {
+  border-top: 1px solid $background_page_border;
+}

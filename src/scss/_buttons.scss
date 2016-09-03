@@ -2,15 +2,15 @@ $background_disabled: lighten($background_page, 3%);
 
 // Radio Button
 paper-button .toggle-bar.paper-toggle-button {
-	background-color: $background_dark;
+  background-color: $background_dark;
 }
 paper-button .paper-toggle-button.paper-toggle-button {
-	background-color: $font_primary;
+  background-color: $font_primary;
 }
 
 // Checkbox
 paper-checkbox #checkboxLabel.paper-checkbox {
-	color: $font_primary;
+  color: $font_primary;
 }
 
 // Buttons
@@ -18,29 +18,29 @@ paper-checkbox #checkboxLabel.paper-checkbox {
 paper-button.material-primary,
 sj-paper-button.material-primary,
 .simple-dialog-buttons button.goog-buttonset-default {
-	opacity: 0.9;
+  opacity: 0.9;
 
-	[disabled] {
-		background: $background_disabled;
-		color: $font_secondary;
-	}
+  [disabled] {
+    background: $background_disabled;
+    color: $font_secondary;
+  }
 
-	&:hover {
-		opacity: 1;
-	}
+  &:hover {
+    opacity: 1;
+  }
 }
 
 // Top Colored Bar icons
 core-header-panel#content-container core-icon,
 core-header-panel#content-container sj-icon-button {
-	color: $font_primary !important;
+  color: $font_primary !important;
 }
 
 // Playlist button
 #unsubscribe-playlist-button,
 paper-button#unsubscribe-playlist-button
 sj-paper-button#unsubscribe-playlist-button {
-	.playlist-unsubscribe {
-		color: $font_primary;
-	}
+  .playlist-unsubscribe {
+    color: $font_primary;
+  }
 }

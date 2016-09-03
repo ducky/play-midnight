@@ -68,6 +68,45 @@ $background_nav_drag: lighten($background_nav, 5%);
     }
 }
 
+
+// Playlist
+sj-right-drawer #drawer.sj-right-drawer {
+  background: $background_nav;
+}
+
+#playlist-drawer {
+  .autoplaylist-section,
+  #recent-playlists-container {
+    border-bottom-color: $border_page;
+  }
+
+  .playlist-drawer-item {
+    .playlist-wrapper {
+      &:hover,
+      &:active,
+      &:focus {
+        background: $background_nav_hover;
+      }
+    }
+  }
+}
+
+#playlist-drawer .playlist-drawer-item .playlist-wrapper:hover,
+#playlist-drawer .playlist-drawer-item .playlist-wrapper:focus,
+#playlist-drawer .playlist-drawer-item sj-play-button:hover~.playlist-wrapper,
+#playlist-drawer .playlist-drawer-item iron-icon:hover~.playlist-wrapper,
+#playlist-drawer .playlist-drawer-item.playlist-drop-target:not(.subscribed) .playlist-wrapper {
+  background: $background_nav_hover;
+}
+
+#playlist-drawer paper-header-panel paper-toolbar:not([style-scope]):not(.style-scope) {
+  background: $background_nav;
+}
+
+#playlist-drawer paper-header-panel[at-top] paper-toolbar:not([style-scope]):not(.style-scope) {
+  border-bottom-color: $border_page;
+}
+
 .nav-toolbar {
     background: $background_nav_hover;
 }

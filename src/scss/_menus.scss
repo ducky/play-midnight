@@ -1,6 +1,8 @@
-paper-dialog {
+paper-dialog,
+.paper-dialog-0 {
     &::shadow {
         h2,
+        p,
         .content,
         .description,
         .dialog-header .episode-title,
@@ -10,6 +12,7 @@ paper-dialog {
     }
 
     h2,
+    p,
     .content,
     .description,
     .dialog-header .episode-title,

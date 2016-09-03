@@ -1,5 +1,10 @@
 $background_hover: lighten($background_search, 3%);
 
+html:not([style-scope]):not(.style-scope) {
+  --light-theme-text-color: $font_primary;
+  --light-theme-secondary-color: $font_secondary;
+}
+
 body,
 body.material {
     background-color: $background_dark;
@@ -8,13 +13,13 @@ body.material {
 }
 
 #music-content {
-	color: $font_primary;
+  color: $font_primary;
 }
 
 // Scrollbar
 ::-webkit-scrollbar,
 ::shadow ::-webkit-scrollbar {
-    width: 9px;
+    width: 11px;
     background: rgba(0, 0, 0, 0);
 }
 ::-webkit-scrollbar-track,
@@ -83,6 +88,7 @@ a {
         }
     }
     paper-fab iron-icon,
+    .paper-fab-0 iron-icon,
     sj-fab iron-icon {
         color: $background_dark !important;
     }

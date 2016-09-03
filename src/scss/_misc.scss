@@ -3,74 +3,74 @@ $border_page_light: lighten($background_page, 8%);
 // Scollables
 paper-dialog-scrollable.is-scrolled:not(:first-child)::before,
 paper-dialog-scrollable.can-scroll:not([style-scope]):not(.style-scope):not(.scrolled-to-bottom)::after {
-	background: $border_page;
+  background: $border_page;
 }
 
 // Visualizer Card
 .visualizercard {
-	background: $background_page;
-	color: $font_primary;
+  background: $background_page;
+  color: $font_primary;
 
-	.label {
-		color: $font_primary;
-	}
+  .label {
+    color: $font_primary;
+  }
 }
 
 
 // Google Labs
 .labs-card {
-	.lab-list-item {
-		.lab-name {
-			font-weight: 700;
-		}
+  .lab-list-item {
+    .lab-name {
+      font-weight: 700;
+    }
 
-		.lab-description {
-			color: $font_primary;
-		}
+    .lab-description {
+      color: $font_primary;
+    }
 
-		&:not(:last-child) {
-			border-bottom: 1px solid $border_page;
-		}
-	}
+    &:not(:last-child) {
+      border-bottom: 1px solid $border_page;
+    }
+  }
 }
 
 
 // Shortcuts Table
 .shortcuts-table {
-	color: $font_primary;
+  color: $font_primary;
 
-	th,
-	td {
-		border-bottom: 1px solid $border_page;
-		color: $font_primary;
-	}
+  th,
+  td {
+    border-bottom: 1px solid $border_page;
+    color: $font_primary;
+  }
 }
 
 .shortcuts-dialog {
-	tr {
-		border-bottom: 1px solid $border_page_light;
+  tr {
+    border-bottom: 1px solid $border_page_light;
 
-		&:first-child {
-			border-top: 1px solid $border_page_light;
-		}
-	}
+    &:first-child {
+      border-top: 1px solid $border_page_light;
+    }
+  }
 
-	td,
-	caption {
-		color: $font_primary;
-	}
+  td,
+  caption {
+    color: $font_primary;
+  }
 }
 
 
 // Suggested Query
 .suggested-query {
-	color: $font_primary;
+  color: $font_primary;
 }
 
 // Album Art
 .albumImage {
-	border: 1px solid $border_page;
-	background: $background_page;
+  border: 1px solid $border_page;
+  background: $background_page;
 }
 
 
@@ -80,8 +80,8 @@ paper-dialog-scrollable.can-scroll:not([style-scope]):not(.style-scope):not(.scr
 #loading-overlay.material,
 #loading-overlay.material[data-type="full-loading-overlay"],
 #loading-overlay.material[data-type="regular-loading-overlay"] {
-	background: rgba(lighten($background_dark, 15%), 0.8);
-	opacity: 1;
+  background: rgba(lighten($background_dark, 15%), 0.8);
+  opacity: 1;
 }
 
 
@@ -89,34 +89,34 @@ paper-dialog-scrollable.can-scroll:not([style-scope]):not(.style-scope):not(.scr
 .simple-dialog-bg,
 .zoomable-image-dialog-bg,
 .upload-dialog-bg {
-	background: rgba(lighten($background_dark, 15%), 0.8);
+  background: rgba(lighten($background_dark, 15%), 0.8);
 }
 
 .upload-dialog {
-	background: $background_page;
+  background: $background_page;
 
-	.upload-dialog-title-close {
-		cursor: pointer;
-	}
+  .upload-dialog-title-close {
+    cursor: pointer;
+  }
 
-	.upload-dialog-title {
-		color: $font_primary;
-	}
+  .upload-dialog-title {
+    color: $font_primary;
+  }
 
-	.upload-dialog-content {
-		color: $font_primary;
-	}
+  .upload-dialog-content {
+    color: $font_primary;
+  }
 }
 
 .upload-progress-upload-label,
 .upload-progress-finished-label {
-	color: $font_primary;
+  color: $font_primary;
 }
 
 .upload-dialog-dragover {
-	.upload-dialog-graphic {
-		filter: grayscale(100%);
-	}
+  .upload-dialog-graphic {
+    filter: grayscale(100%);
+  }
 }
 
 
@@ -126,17 +126,17 @@ paper-dialog-scrollable.can-scroll:not([style-scope]):not(.style-scope):not(.scr
 .material .song-row .explicit,
 .album-view .material-container-details .info .title .explicit,
 .podcast-series-view .material-container-details .info .title .explicit {
-	color: $background_card;
+  color: $background_card;
 }
 
 
 // Share Buttons
 .share-buttons {
-	border-bottom: 1px solid $border_page;
+  border-bottom: 1px solid $border_page;
 
-	.share-button .button-label {
-		color: $font_primary;
-	}
+  .share-button .button-label {
+    color: $font_primary;
+  }
 }
 
 
@@ -144,15 +144,15 @@ paper-dialog-scrollable.can-scroll:not([style-scope]):not(.style-scope):not(.scr
 .fade-out:after,
 .material .fade-out:after,
 .material .fade-out.gray:after {
-	background: linear-gradient( to right, rgba($background_dark, 0) 0%, rgba($background_dark, 0.999) 100% );
-	background-image: linear-gradient( to right, rgba($background_dark, 0) 0%, rgba($background_dark, 0.999) 100% );
+  background: linear-gradient( to right, rgba($background_dark, 0) 0%, rgba($background_dark, 0.999) 100% );
+  background-image: linear-gradient( to right, rgba($background_dark, 0) 0%, rgba($background_dark, 0.999) 100% );
 }
 
 core-icon[icon="sj:unsubscribe"] svg,
 iron-icon[icon="sj:unsubscribe"] svg {
-	path:nth-child(2) {
-		fill: $font_primary;
-	}
+  path:nth-child(2) {
+    fill: $font_primary;
+  }
 }
 
 // Default album art & radio station background
@@ -164,5 +164,5 @@ img[src$="default_album_art_song_row.png"],
 .material-card[data-type="album"] svg.image,
 .material-card[data-type="wst"] .quilted-radio-fallback,
 .material-card[data-type="wst"] .quilted-radio-fallback > * {
-	filter: invert(100%);
+  filter: invert(100%);
 }

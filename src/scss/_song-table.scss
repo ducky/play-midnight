@@ -1,144 +1,144 @@
 $background_page_zebra: lighten($background_page, 1%);
 
 .song-table {
-	&[data-type="srbm"] {
-		border-top: 1px solid $background_page_border;
-	}
+  &[data-type="srbm"] {
+    border-top: 1px solid $background_page_border;
+  }
 
-	.song-row {
-		background: $background_page;
-		color: $font_primary;
+  .song-row {
+    background: $background_page;
+    color: $font_primary;
 
-		td a {
-			color: $font_secondary;
-		}
+    td a {
+      color: $font_secondary;
+    }
 
-		[data-col="index"] .hover-button[data-id="play"],
-		[data-col="track"] .hover-button[data-id="play"] {
-			filter: invert(100%);
-			background-color: transparent;
-		}
+    [data-col="index"] .hover-button[data-id="play"],
+    [data-col="track"] .hover-button[data-id="play"] {
+      filter: invert(100%);
+      background-color: transparent;
+    }
 
-		.rating-container.thumbs li {
-			background-color: transparent;
-			filter: invert(100%);
-		}
+    .rating-container.thumbs li {
+      background-color: transparent;
+      filter: invert(100%);
+    }
 
-		&.currently-playing {
-			td[data-col="title"] {
-				color: $font_primary;
-			}
-		}
+    &.currently-playing {
+      td[data-col="title"] {
+        color: $font_primary;
+      }
+    }
 
-        td,
-		.content,
-		.column-content,
-		.title-right-items {
-            background-color: $background_page;
-        	color: $font_primary;
+    .column-content,
+    .content,
+    .title-right-items,
+    td {
+      background-color: $background_page;
+      color: $font_primary;
+    }
+
+    .song-indicator {
+      background-color: $background_page;
+      background-size: 24px 24px;
+    }
+
+    .song-indicator[data-playback-status="loading"] {
+      background-image: url('{CHROME_DIR}/images/sprites/ani_loading_white.gif');
+    }
+
+    .song-indicator[data-playback-status="playing"] {
+      background-image: url('{CHROME_DIR}/images/sprites/ani_equalizer_white.gif');
+    }
+
+    .song-indicator[data-playback-status="paused"] {
+      background-image: url('{CHROME_DIR}/images/sprites/equalizer_white.png');
+      background-color: $background_page;
+      background-size: 24px 24px;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    .fade-out:after {
+      background: linear-gradient( to right, rgba($background_page, 0) 0%, rgba($background_page, 0.999) 100% );
+    }
+
+    &:nth-child(odd) {
+      .column-content,
+      .content,
+      .title-right-items,
+      td {
+        background-color: $background_page_zebra;
+      }
+
+      .song-indicator {
+        background-color: $background_page_zebra;
+      }
+
+      .fade-out:after {
+        background: linear-gradient( to right, rgba($background_page_zebra, 0) 0%, rgba($background_page_zebra, 0.999) 100% );
+      }
+    }
+
+    &.hover,
+    &.selected-song-row,
+    &:hover {
+      .column-content,
+      .content,
+      .title-right-items,
+      td {
+        background-color: $background_page_hover !important;
+      }
+
+      .song-indicator {
+        background-color: $background_page_hover !important;
+      }
+
+      .fade-out:after {
+        background: linear-gradient( to right, rgba($background_page_hover, 0) 0%, rgba($background_page_hover, 0.999) 100% );
+      }
+    }
+
+    &.currently-playing,
+    &.hover,
+    &:hover {
+      [data-col="index"],
+      [data-col="track"] {
+        .column-content,
+        .content {
+          font-size: 0;
         }
+      }
+    }
+  }
 
-		.song-indicator {
-			background-color: $background_page;
-			background-size: 24px 24px;
-		}
-
-		.song-indicator[data-playback-status="loading"] {
-			background-image: url('{CHROME_DIR}/images/sprites/ani_loading_white.gif');
-		}
-
-		.song-indicator[data-playback-status="playing"] {
-			background-image: url('{CHROME_DIR}/images/sprites/ani_equalizer_white.gif');
-		}
-
-		.song-indicator[data-playback-status="paused"] {
-			background-image: url('{CHROME_DIR}/images/sprites/equalizer_white.png');
-			background-color: $background_page;
-			background-size: 24px 24px;
-			background-repeat: no-repeat;
-			background-position: center center;
-		}
-
-		.fade-out:after {
-			background: linear-gradient( to right, rgba($background_page, 0) 0%, rgba($background_page, 0.999) 100% );
-		}
-
-		&:nth-child(odd) {
-			td,
-			.content,
-			.column-content,
-			.title-right-items {
-				background-color: $background_page_zebra;
-			}
-
-			.song-indicator {
-				background-color: $background_page_zebra;
-			}
-
-			.fade-out:after {
-				background: linear-gradient( to right, rgba($background_page_zebra, 0) 0%, rgba($background_page_zebra, 0.999) 100% );
-			}
-		}
-
-		&:hover,
-		&.hover,
-        &.selected-song-row {
-			td,
-			.content,
-			.column-content,
-			.title-right-items {
-				background-color: $background_page_hover !important;
-			}
-
-			.song-indicator {
-	        	background-color: $background_page_hover !important;
-			}
-
-			.fade-out:after {
-				background: linear-gradient( to right, rgba($background_page_hover, 0) 0%, rgba($background_page_hover, 0.999) 100% );
-			}
-        }
-
-		&:hover,
-		&.hover,
-		&.currently-playing {
-			[data-col="index"],
-			[data-col="track"] {
-				.content,
-				.column-content {
-					font-size: 0;
-				}
-			}
-		}
-	}
-
-	th,
-	[data-col="title"],
-	&.mini [data-col="song-details"] .song-title {
-		color: $font_primary;
-	}
+  &.mini [data-col="song-details"] .song-title,
+  [data-col="title"],
+  th {
+    color: $font_primary;
+  }
 }
 
 .upload-progress-row td {
-	background: $background_page;
-	color: $font_primary;
-	border-top: 1px solid $background_page_border;
+  background: $background_page;
+  color: $font_primary;
+  border-top: 1px solid $background_page_border;
 }
 
 .upload-progress-bar-thumb {
-	background: lighten($background_page, 8%);
-	color: $font_primary;
+  background: lighten($background_page, 8%);
+  color: $font_primary;
 }
 
-.upload-progress-upload-icon-bar,
-.upload-progress-upload-icon-arrow {
-	filter: grayscale(100%);
+.upload-progress-upload-icon-arrow,
+.upload-progress-upload-icon-bar {
+  filter: grayscale(100%);
 }
 
 .cluster-text-protection {
-	background: $background_dark;
+  background: $background_dark;
 
-	&:before {
-		background: $background_dark;
-	}
+  &:before {
+    background: $background_dark;
+  }
 }
