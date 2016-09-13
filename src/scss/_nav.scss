@@ -45,28 +45,29 @@ $background_nav_drag: lighten($background_nav, 5%);
   border-bottom: 1px solid $border_nav;
 }
 
-#nav-container {
-  background: $background_nav;
-
-  .nav-toolbar {
+.new-playlist-drawer {
+  #nav-container {
     background: $background_nav;
 
-    .toolbar-tools {
-      padding: 0 10px;
-    }
+    .nav-toolbar {
+      background: $background_nav;
 
-    .menu-logo {
-      path:nth-of-type(1) {
-        fill: $font_primary;
+      .toolbar-tools {
+        padding: 0 10px;
+      }
+
+      .menu-logo {
+        background-image: url('{CHROME_DIR}/images/play_music_logo_dark.png');
       }
     }
-  }
 
-  #nav {
-    background: $background_nav;
-    border-top: 1px solid $border_page;
+    #nav {
+      background: $background_nav;
+      border-top: 1px solid $border_page;
+    }
   }
 }
+
 
 // Playlist
 sj-right-drawer #drawer.sj-right-drawer {
