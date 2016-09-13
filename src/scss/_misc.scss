@@ -80,6 +80,10 @@ paper-dialog-scrollable.is-scrolled:not(:first-child)::before {
   opacity: 1;
 }
 
+.iron-overlay-backdrop-0 {
+  background-color: rgba(lighten($background_dark, 15%), 0.8);
+}
+
 // Upload Music Dialog
 .simple-dialog-bg,
 .upload-dialog-bg,
