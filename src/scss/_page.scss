@@ -2,124 +2,124 @@ $background_page_hover: lighten($background_page, 3%);
 $background_page_border: lighten($background_page, 2%);
 
 #drawer-panel #material-hero-image {
-    background: $background_dark;
+  background: $background_dark;
 }
 
 .material-detail-view .material-container-details .read-more-button {
-    &:hover {
-        background: $background_page_hover;
-    }
+  &:hover {
+    background: $background_page_hover;
+  }
 }
 
-.section-header,
-.cluster .header,
-.cluster .header .title,
-.cluster .header .cluster-title,
-.settings-cluster .header,
-.recommended-header,
-.cluster.material-cluster .header h2.title,
-.song-table [data-col="index"],
-.song-table [data-col="track"],
 #material-app-bar .header-tab-title,
+.cluster .header,
+.cluster .header .cluster-title,
+.cluster .header .title,
+.cluster.material-cluster .header h2.title,
 .material-detail-view .artist-details .bio-wrapper .bio,
-.material-detail-view .material-container-details .info .description {
-    color: $font_primary;
+.material-detail-view .material-container-details .info .description,
+.recommended-header,
+.section-header,
+.settings-cluster .header,
+.song-table [data-col="index"],
+.song-table [data-col="track"] {
+  color: $font_primary;
 }
 
-.cluster.material-cluster .header span.subtitle,
-.cluster .header .subtitle {
-    color: $font_secondary;
+.cluster .header .subtitle,
+.cluster.material-cluster .header span.subtitle {
+  color: $font_secondary;
 }
 
-.situations-filter,
-.songlist-container,
 .material-album-container,
+.material-detail-view .artist-details,
 .material-playlist-container,
-.material-detail-view .artist-details {
-    background: $background_page;
+.situations-filter,
+.songlist-container {
+  background: $background_page;
 }
 
 .playlist-view .editable:hover,
-.situations-content.material .situations-filter sj-item:hover,
-.situations-content.material .situations-filter sj-item:focus {
-    background: $background_page_hover;
+.situations-content.material .situations-filter sj-item:focus,
+.situations-content.material .situations-filter sj-item:hover {
+  background: $background_page_hover;
 }
 
 .situations-content.material .situations-filter sj-item:not(:last-child) .material-filter {
-    border-bottom: 1px solid $background_page_border;
+  border-bottom: 1px solid $background_page_border;
 }
 
 .material-detail-view .material-container-details .info .container-stats-container .container-stats span {
-    color: $font_secondary;
+  color: $font_secondary;
 }
 
 .material-detail-view .material-container-details .actions {
-    border-top: 1px solid $background_page_hover;
+  border-top: 1px solid $background_page_hover;
 }
 
 .material-detail-view .top-tracks {
-    background: $background_page;
+  background: $background_page;
 }
 // Subcategories
 
 .subcategories-list {
-    background: $background_page;
+  background: $background_page;
 
-    .subcategory {
-        &:not(:last-child) {
-            border-bottom: 1px solid $background_page_border;
-        }
-
-        &:hover,
-        &:focus {
-            background: $background_page_hover;
-        }
+  .subcategory {
+    &:not(:last-child) {
+      border-bottom: 1px solid $background_page_border;
     }
 
-    li {
-        &:not(:last-child) {
-            .li-content {
-                border-bottom: 1px solid $background_page_border;
-            }
-        }
-
-        a:hover,
-        a:focus {
-            background: $background_page_hover;
-        }
+    &:focus,
+    &:hover {
+      background: $background_page_hover;
     }
+  }
+
+  li {
+    &:not(:last-child) {
+      .li-content {
+        border-bottom: 1px solid $background_page_border;
+      }
+    }
+
+    a:focus,
+    a:hover {
+      background: $background_page_hover;
+    }
+  }
 }
 // Page Play Button (Top Right)
 
 .material-container-details sj-fab {
-    &::shadow core-icon {
-        g {
-            path:nth-child(1) {
-                fill: $background_player;
-            }
-        }
+  &::shadow core-icon {
+    g {
+      path:nth-child(1) {
+        fill: $background_player;
+      }
     }
+  }
 }
 // Banner
 
-#music-content .material-banner.banner.ws-search-banner,
 #music-content .material-banner.banner.new-user-quiz-card,
+#music-content .material-banner.banner.ws-search-banner,
 #music-content .material-banner.banner.ws-subscriber-card {
-    background: $background_page;
+  background: $background_page;
 
-    .title {
-        color: $font_primary;
-    }
+  .title {
+    color: $font_primary;
+  }
 }
 // More Songs
 
 .more-songs-container {
-    border-top: 1px solid $background_page_border;
+  border-top: 1px solid $background_page_border;
 }
 // Playlists Header
 
 .station-container-content-wrapper .material-container-details {
-    background: $background_page;
+  background: $background_page;
 }
 
 gpm-action-buttons {

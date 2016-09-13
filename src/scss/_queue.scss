@@ -7,86 +7,86 @@ $background_menu_zebra: lighten($background_menu, 1%);
 
 #queue-overlay,
 paper-dialog {
-    background: $background_menu;
+  background: $background_menu;
 
-    &::shadow #scroller {
-        margin-bottom: 0;
+  &::shadow #scroller {
+    margin-bottom: 0;
+  }
+
+  .song-row {
+    .column-content,
+    .content,
+    .title-right-items,
+    td {
+      background-color: $background_menu !important;
     }
 
-    .song-row {
-        td,
-        .content,
-        .column-content,
-        .title-right-items {
-            background-color: $background_menu !important;
-        }
-
-        .song-indicator {
-            background-color: $background_menu;
-        }
-
-        .fade-out:after {
-            background: linear-gradient( to right, rgba($background_menu, 0) 0%, rgba($background_menu, 0.999) 100% );
-        }
-
-        &:nth-child(odd) {
-            td,
-            .content,
-            .column-content,
-            .title-right-items {
-                background-color: $background_menu_zebra !important;
-            }
-
-            .song-indicator {
-                background-color: $background_menu_zebra;
-            }
-
-            .fade-out:after {
-                background: linear-gradient( to right, rgba($background_menu_zebra, 0) 0%, rgba($background_menu_zebra, 0.999) 100% );
-            }
-        }
-
-        &:hover,
-        &.hover,
-        &.selected-song-row {
-            td,
-            .content,
-            .column-content,
-            .title-right-items {
-                background-color: $background_menu_hover !important;
-            }
-
-            .song-indicator {
-                background-color: $background_menu_hover !important;
-            }
-
-            .fade-out:after {
-                background: linear-gradient( to right, rgba($background_menu_hover, 0) 0%, rgba($background_menu_hover, 0.999) 100% );
-            }
-        }
+    .song-indicator {
+      background-color: $background_menu;
     }
 
-    .upload-progress-row {
-        td {
-            background-color: $background_menu;
-            color           : $font_primary;
-        }
-
-        .fade-out:after {
-            background: linear-gradient( to right, rgba($background_menu, 0) 0%, rgba($background_menu, 0.999) 100% );
-        }
+    .fade-out:after {
+      background: linear-gradient( to right, rgba($background_menu, 0) 0%, rgba($background_menu, 0.999) 100% );
     }
 
-    &:after {
-        border-color: transparent transparent $background_menu $background_menu;
+    &:nth-child(odd) {
+      .column-content,
+      .content,
+      .title-right-items,
+      td {
+        background-color: $background_menu_zebra !important;
+      }
+
+      .song-indicator {
+        background-color: $background_menu_zebra;
+      }
+
+      .fade-out:after {
+        background: linear-gradient( to right, rgba($background_menu_zebra, 0) 0%, rgba($background_menu_zebra, 0.999) 100% );
+      }
     }
 
-    #mini-queue-details .imfl-image {
-        filter:grayscale(100%);
+    &.hover,
+    &.selected-song-row,
+    &:hover {
+      .column-content,
+      .content,
+      .title-right-items,
+      td {
+        background-color: $background_menu_hover !important;
+      }
+
+      .song-indicator {
+        background-color: $background_menu_hover !important;
+      }
+
+      .fade-out:after {
+        background: linear-gradient( to right, rgba($background_menu_hover, 0) 0%, rgba($background_menu_hover, 0.999) 100% );
+      }
     }
+  }
+
+  .upload-progress-row {
+    td {
+      background-color: $background_menu;
+      color: $font_primary;
+    }
+
+    .fade-out:after {
+      background: linear-gradient( to right, rgba($background_menu, 0) 0%, rgba($background_menu, 0.999) 100% );
+    }
+  }
+
+  &:after {
+    border-color: transparent transparent $background_menu $background_menu;
+  }
+
+  #mini-queue-details .imfl-image {
+    filter:grayscale(100%);
+  }
 }
 
 .material-empty .empty-message,
 .material-empty .empty-submessage {
-    color: $font_secondary;
+  color: $font_secondary;
 }

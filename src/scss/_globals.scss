@@ -1,8 +1,8 @@
 $background_light: lighten($background_nav, 3%);
 // Options
 [data-playmidnight *= "enabled"][data-playmidnight *= "topbar-dark"] {
-   &.material core-toolbar#material-app-bar,
   #material-app-bar,
+  &.material core-toolbar#material-app-bar,
   &.material iron-toolbar#material-app-bar,
   core-toolbar#material-app-bar,
   iron-toolbar#material-app-bar {

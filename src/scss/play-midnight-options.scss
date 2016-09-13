@@ -14,7 +14,7 @@
   border-radius: 3px;
   z-index: 599;
   color: $font_primary;
-  transform-origin: center bottom 0px;
+  transform-origin: center bottom 0;
   transform: scale(0);
   transition: transform 0.3s;
   background: $background_menu;
@@ -25,7 +25,7 @@
   }
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     width: 0;
     height: 0;
@@ -36,10 +36,15 @@
     transform: rotate(-45deg);
     border: 8px solid black;
     border-color: transparent transparent $background_page $background_page;
-    box-shadow: -12px 12px 15px 0px rgba(0,0,0,.24);
+    box-shadow: -12px 12px 15px 0 rgba(0,0,0,.24);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     background: lighten($background_dark, 3%);
     margin: 0;
     padding: 15px 25px;
@@ -92,7 +97,7 @@
     position: relative;
     flex: 2;
     overflow: hidden;
-    box-shadow: 0 5px 25px 0px rgba(0,0,0,0.12);
+    box-shadow: 0 5px 25px 0 rgba(0,0,0,0.12);
 
     .options-container {
       position: absolute;
@@ -122,8 +127,8 @@
       }
     }
 
-    .play-midnight-option,
     .play-midnight-collection .details,
+    .play-midnight-option,
     .play-midnight-text-area {
       display: flex;
       padding: 15px 20px;
@@ -199,8 +204,7 @@
       perspective: 1000;
 
       .collection-item {
-
-      }
+        }
     }
 
     form.add-new {
@@ -251,7 +255,7 @@
         visibility: hidden;
         opacity: 0;
         transform: scale3d(0.7, 0.7, 0.7);
-        text-shadow: 1px 1px 0px $background_dark;
+        text-shadow: 1px 1px 0 $background_dark;
         transition: all 0.5s;
         color: #fff;
         padding: 8px 10px;
@@ -270,7 +274,7 @@
         right: 0;
         background: rgba(0,0,0,0.25);
         color: #fff;
-        text-shadow: 1px 1px 0px $background_dark;
+        text-shadow: 1px 1px 0 $background_dark;
         padding: 3px 10px;
         font-size: 10px;
         text-align: center;
@@ -309,8 +313,8 @@
         transform: scale3d(0.75, 0.75, 0.75) rotate(-45deg);
         transition: all 0.5s;
 
-        &:before,
-        &:after {
+        &:after,
+        &:before {
           position: absolute;
           display: block;
           content: '';
@@ -336,15 +340,15 @@
           transform: scale3d(1.2, 1.2, 1.2);
           opacity: 1;
 
-          &:before,
-          &:after {
+          &:after,
+          &:before {
             background: #a61a2b;
           }
         }
       }
 
-      &:focus,
-      &:active {
+      &:active,
+      &:focus {
         opacity: 0.9;
       }
     }
@@ -394,8 +398,8 @@
     transform: scale3d(1.1,1.1,1.1);
   }
 
-  &:focus,
-  &:active {
+  &:active,
+  &:focus {
     opacity: 0.8;
     transform: scale3d(0.95,0.95,0.95);
   }

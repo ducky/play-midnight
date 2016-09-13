@@ -7,9 +7,9 @@ html:not([style-scope]):not(.style-scope) {
 
 body,
 body.material {
-    background-color: $background_dark;
-    color: $font_primary;
-    -webkit-font-smoothing: antialiased;
+  background-color: $background_dark;
+  color: $font_primary;
+  -webkit-font-smoothing: antialiased;
 }
 
 #music-content {
@@ -19,84 +19,99 @@ body.material {
 // Scrollbar
 ::-webkit-scrollbar,
 ::shadow ::-webkit-scrollbar {
-    width: 11px;
-    background: rgba(0, 0, 0, 0);
+  width: 11px;
+  background: rgba(0, 0, 0, 0);
 }
+
 ::-webkit-scrollbar-track,
 ::shadow ::-webkit-scrollbar-track {
-    background-color: rgba(255,255,255,0.05);
-    &:hover {
-        background-color: rgba(255,255,255,0.1);
-    }
-    &:active {
-        background-color: rgba(255,255,255,0.07);
-    }
+  background-color: rgba(255,255,255,0.05);
+
+  &:hover {
+    background-color: rgba(255,255,255,0.1);
+  }
+
+  &:active {
+    background-color: rgba(255,255,255,0.07);
+  }
 }
+
 ::-webkit-scrollbar-thumb,
 ::shadow ::-webkit-scrollbar-thumb {
-    background-color: rgba(255,255,255,0.1);
-    border-radius: 0;
-    &:hover {
-        background-color: rgba(255,255,255,0.15);
-    }
-    &:active {
-        background-color: rgba(255,255,255,0.125);
-    }
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 0;
+
+  &:hover {
+    background-color: rgba(255,255,255,0.15);
+  }
+
+  &:active {
+    background-color: rgba(255,255,255,0.125);
+  }
 }
 // Links
 .music-source-empty-message,
 .nav-item-container,
 .simple-dialog a,
 a {
-    color: $font_primary;
+  color: $font_primary;
 }
 // Top Toolbar
 #content-container {
+  core-icon,
+  iron-icon,
+  sj-icon-button {
+    color: $font_primary !important;
+  }
+
+  sj-search-box {
+    background-color: rgba($background_dark, 0.5);
+    color: $font_primary;
+
+    &[opened] {
+      background-color: $background_search;
+
+      &:not([num-suggestions="0"]) #input.sj-search-box {
+        border-bottom-color: $border_search;
+      }
+    }
+
+    #input.sj-search-box {
+      color: $font_primary;
+    }
+
     core-icon,
     iron-icon,
     sj-icon-button {
-        color: $font_primary !important;
+      color: $font_primary !important;
     }
-    sj-search-box {
-        background-color: rgba($background_dark, 0.5);
-        color: $font_primary;
-        &[opened] {
-            background-color: $background_search;
-            &:not([num-suggestions="0"]) #input.sj-search-box {
-                border-bottom-color: $border_search;
-            }
-        }
-        #input.sj-search-box {
-            color: $font_primary;
-        }
-        core-icon,
-        iron-icon,
-        sj-icon-button {
-            color: $font_primary !important;
-        }
+  }
+
+  sj-search-suggestion {
+    &.query-selected,
+    &:hover {
+      background: $background_hover;
     }
-    sj-search-suggestion {
-        &.query-selected,
-        &:hover {
-            background: $background_hover;
-        }
-        .sj-search-suggestion {
-            color: $font_secondary;
-        }
-        .sub-match.sj-search-suggestion {
-            color: $font_primary;
-        }
+
+    .sj-search-suggestion {
+      color: $font_secondary;
     }
-    paper-fab iron-icon,
-    .paper-fab-0 iron-icon,
-    sj-fab iron-icon {
-        color: $background_dark !important;
+
+    .sub-match.sj-search-suggestion {
+      color: $font_primary;
     }
+  }
+
+  .paper-fab-0 iron-icon,
+  paper-fab iron-icon,
+  sj-fab iron-icon {
+    color: $background_dark !important;
+  }
 }
 // Options Toolbar
 #sliding_action_bar_container,
 #sliding_action_bar_container.material {
-    background: $background_menu;
+  background: $background_menu;
 }
 // Icons
 #player .now-playing-actions sj-icon-button,
@@ -108,8 +123,9 @@ a {
 core-icon,
 iron-icon,
 sj-icon-button {
-    color: $font_primary;
+  color: $font_primary;
 }
+
 div.icon {
-    filter:invert(100%);
+  filter:invert(100%);
 }

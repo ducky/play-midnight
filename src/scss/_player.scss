@@ -1,41 +1,41 @@
 #player {
-    background: $background_player;
-    color     : $font_primary;
+  background: $background_player;
+  color: $font_primary;
 }
 
 #player.material .player-rating-container {
-    background: $background_player;
+  background: $background_player;
 }
 
 #player.material:hover #material-player-progress #sliderContainer:not(.disabled) #sliderBar #progressContainer,
 #player.material:hover #material-player-progress::shadow #sliderContainer:not(.disabled) #sliderBar::shadow #progressContainer {
-    background: lighten($background_player, 5%);
+  background: lighten($background_player, 5%);
 }
 
 #material-player-left-wrapper #playerSongInfo #player-artist,
-#material-player-left-wrapper #playerSongInfo .player-dash,
-#material-player-left-wrapper #playerSongInfo .player-album {
-    color: $font_secondary;
+#material-player-left-wrapper #playerSongInfo .player-album,
+#material-player-left-wrapper #playerSongInfo .player-dash {
+  color: $font_secondary;
 }
 
 paper-slider::shadow #sliderBar::shadow #progressContainer {
-    background: $background_light;
+  background: $background_light;
 }
 
 paper-slider::shadow .ring > #sliderKnob > #sliderKnobInner {
-    background: $background_player;
-    border    : 2px solid $background_light;
+  background: $background_player;
+  border: 2px solid $background_light;
 }
 
 #player.material .material-player-middle sj-icon-button[data-id="play-pause"][disabled] {
-    opacity: 0.75;
+  opacity: 0.75;
 }
 
 #player.material .material-player-middle paper-icon-button[data-id="play-pause"] iron-icon,
 #player.material .material-player-middle sj-icon-button[data-id="play-pause"]::shadow core-icon {
-    g {
-        path:nth-child(2) {
-            fill: $background_player;
-        }
+  g {
+    path:nth-child(2) {
+      fill: $background_player;
     }
+  }
 }
