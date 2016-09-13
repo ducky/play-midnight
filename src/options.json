@@ -78,6 +78,20 @@
     "type": "section",
     "title": "Customize",
     "options": {
+      "favicon": {
+        "type": "boolean",
+        "default": true,
+        "title": "Show Play Midnight Favicon",
+        "description": "This is the icon that shows on your Google Play tab in the browser"
+      },
+
+      "faviconAccent": {
+        "type": "boolean",
+        "default": true,
+        "title": "Show Accent Favicon",
+        "description": "Makes the favicon match your selected accent color instead of dark"
+      },
+
       "fab": {
         "type": "boolean",
         "default": true,

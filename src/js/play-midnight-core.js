@@ -24,7 +24,7 @@ var PlayMidnight = (function (_) {
   // Favicon Attributes
   var _favicon = {
     // Load Newest Icon with Timestamp to prevent Caching
-    url: _.browser.url('dist/images/favicon.ico') + '?v=' + Date.now()
+    url: _.browser.url('dist/images/favicon.png') + '?v=' + Date.now()
   };
 
   // Stylesheets
@@ -477,12 +477,12 @@ var PlayMidnight = (function (_) {
 
     if (_userOptions.faviconAccent) {
       if (!cached) {
-        chrome.extension.sendRequest(data, function (response) {
+        chrome.runtime.sendMessage(data, function (response) {
           localStorage.setItem('PM_ICON', JSON.stringify({
-            url: response,
+            url: response.url,
             color: _userOptions.accent.color
           }));
-          createIcon(response);
+          createIcon(response.url);
         });
       } else {
         createIcon(stored.url);
@@ -493,13 +493,13 @@ var PlayMidnight = (function (_) {
 
     function createIcon(url) {
       // Remove Old Favicon
-      var current = document.querySelectorAll('link[rel="SHORTCUT ICON"], link[rel="shortcut icon"], link[href $= ".ico"]');
+      var current = document.querySelectorAll('link[rel="SHORTCUT ICON"], link[rel="shortcut icon"], link[rel="icon"], link[href $= ".ico"]');
       _.remove(current);
 
       // Create Link Element
       var icon = document.createElement('link');
-      icon.rel = 'shortcut icon';
-      icon.type = 'image/x-icon';
+      icon.rel = 'icon';
+      icon.type = 'image/png';
       icon.href = url;
 
       document.head.appendChild(icon);

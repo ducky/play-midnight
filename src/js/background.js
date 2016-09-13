@@ -6,8 +6,8 @@
     var context;
     var img = document.createElement('img');
     var canvas = document.createElement("canvas");
-    var width = 48;
-    var height = 48;
+    var width = 96;
+    var height = 96;
 
     canvas.width = width;
     canvas.height = height;
@@ -31,8 +31,10 @@
 
       console.log(icon);
 
-      cb(icon);
+      cb({ url: icon });
     }
+
+    return true;
   }
-  chrome.extension.onRequest.addListener(getIcon);
+  chrome.runtime.onMessage.addListener(getIcon);
 }());
