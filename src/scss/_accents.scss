@@ -160,11 +160,8 @@ a {
   width: 170px;
   height: 60px;
   padding-left: 170px;
-  background-image: url('{CHROME_DIR}/images/play_music_logo_light.png');
-  background-repeat: no-repeat;
-  background-position: center center;
+  background: $color_accent url('{CHROME_DIR}/images/play_music_logo_light.png') no-repeat center center;
   background-size: 170px auto;
-  background-color: $color_accent;
 }
 
 // Inputs
