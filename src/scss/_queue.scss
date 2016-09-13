@@ -18,7 +18,7 @@ paper-dialog {
         .content,
         .column-content,
         .title-right-items {
-            background-color: $background_menu;
+            background-color: $background_menu !important;
         }
 
         .song-indicator {
@@ -34,7 +34,7 @@ paper-dialog {
             .content,
             .column-content,
             .title-right-items {
-                background-color: $background_menu_zebra;
+                background-color: $background_menu_zebra !important;
             }
 
             .song-indicator {

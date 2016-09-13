@@ -25,9 +25,6 @@ $background_page_zebra: lighten($background_page, 1%);
     }
 
     &.currently-playing {
-      td {
-        background: $background_page !important;
-      }
       td[data-col="title"] {
         color: $font_primary;
       }
@@ -37,7 +34,7 @@ $background_page_zebra: lighten($background_page, 1%);
     .content,
     .title-right-items,
     td {
-      background-color: $background_page;
+      background-color: $background_page !important;
       color: $font_primary;
     }
 
@@ -71,7 +68,7 @@ $background_page_zebra: lighten($background_page, 1%);
       .content,
       .title-right-items,
       td {
-        background-color: $background_page_zebra;
+        background-color: $background_page_zebra !important;
       }
 
       .song-indicator {
