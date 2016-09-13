@@ -45,28 +45,23 @@
           {
             "name": "Play Music (Default)",
             "color": "#fb8521"
-                    },
-          {
+          }, {
             "name": "Blue Abyss",
             "color": "#007AA5"
-                    },
-          {
+          }, {
             "name": "Midnight Oil",
             "color": "#8400a3"
-                    },
-          {
+          }, {
             "name": "Rusty Spoon",
             "color": "#4c9014"
-                    },
-          {
+          }, {
             "name": "Spartan Crimson",
             "color": "#9d0000"
-                    },
-          {
+          }, {
             "name": "Prince purple",
             "color": "#673ab7"
-                    }
-                ],
+          }
+        ],
         "title": "Accent Colors",
         "description": "Customize the accent color to your heart\"s content",
         "note": "Currently accepts colors in hex/rgb format (#XXX, #XXXXXX, rgb(X,X,X))"
