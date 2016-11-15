@@ -1,4 +1,5 @@
 $background_hover: lighten($background_search, 3%);
+$background_light: lighten($background_nav, 3%);
 
 html:not([style-scope]):not(.style-scope) {
   --light-theme-text-color: $font_primary;
@@ -25,28 +26,28 @@ body.material {
 
 ::-webkit-scrollbar-track,
 ::shadow ::-webkit-scrollbar-track {
-  background-color: rgba(255,255,255,0.05);
+  background-color: rgba($background_page,0.6);
 
   &:hover {
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba($background_page,0.7);
   }
 
   &:active {
-    background-color: rgba(255,255,255,0.07);
+    background-color: rgba($background_page,0.65);
   }
 }
 
 ::-webkit-scrollbar-thumb,
 ::shadow ::-webkit-scrollbar-thumb {
-  background-color: rgba(255,255,255,0.1);
   border-radius: 0;
+  opacity: 0.7;
 
   &:hover {
-    background-color: rgba(255,255,255,0.15);
+    opacity: 0.8;
   }
 
   &:active {
-    background-color: rgba(255,255,255,0.125);
+    opacity: 0.75;
   }
 }
 // Links
@@ -56,8 +57,45 @@ body.material {
 a {
   color: $font_primary;
 }
+
+// Logo
+body.qp #material-app-bar #material-one-left {
+  // TODO - Update logo in future
+  .music-logo-link {
+    display: none;
+    width: 170px;
+    height: 60px;
+    margin-top: -6px;
+  }
+
+  .music-logo {
+    width: 170px;
+    height: 60px;
+    background: $color_accent url('{CHROME_DIR}/images/play_music_logo_dark.png') no-repeat center center;
+    background-size: 170px auto;
+  }
+}
+
+#sliding-action-bar-container {
+  background-color: $background_light !important;
+  color: $font_primary !important;
+
+  paper-icon-button {
+    color: $font_primary;
+
+    &[disabled] {
+      color: $font_primary;
+      opacity: 0.4;
+    }
+  }
+}
+
 // Top Toolbar
-#content-container {
+paper-header-panel#content-container {
+  &:not([style-scope]):not(.style-scope):not(.transparent)[at-top] paper-toolbar#material-app-bar {
+    border-bottom: 1px solid $border_search;
+  }
+
   core-icon,
   iron-icon,
   sj-icon-button {
@@ -108,6 +146,38 @@ a {
     color: $background_dark !important;
   }
 }
+
+sj-home {
+  &[selected="0"],
+  &[selected="1"] {
+    #backgroundContainer {
+      opacity: 0;
+    }
+    // #backgroundColor.sj-home {
+    //   background-color: $background_page !important;
+    // }
+    //
+    // #gradient.sj-home {
+    //   display: none;
+    // }
+  }
+
+  #backgroundContainer {
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
+
+  #gradient.sj-home:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to top, rgba($background_page, 0.999), rgba($background_page, 0.15) 75%), linear-gradient(to right, rgba($background_page, 0.999), rgba($background_page, 0.15) 50%) !important;
+  }
+}
+
 // Options Toolbar
 #sliding_action_bar_container,
 #sliding_action_bar_container.material {

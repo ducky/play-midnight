@@ -111,6 +111,20 @@ $background_page_border: lighten($background_page, 2%);
     color: $font_primary;
   }
 }
+
+// Homepage Scrolling Module
+sj-scrolling-module {
+  h2 {
+    color: rgba(#fff, 0.9) !important;
+    text-shadow: 1px 1px 3px $background_page;
+  }
+
+  .module-subtitle {
+    color: rgba(#fff, 0.7);
+    text-shadow: 1px 1px 3px $background_page;
+  }
+}
+
 // More Songs
 
 .more-songs-container {

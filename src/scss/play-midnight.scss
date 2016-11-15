@@ -1,34 +1,42 @@
-// Defined Color Variables
 @import 'variables';
-@import 'accents';
-// Random Gradients/Helpers
-@import 'buttons';
-@import 'misc';
-// Play Midnight Styles
 @import 'core';
-@import 'nav';
-@import 'loading';
-@import 'cards';
-@import 'player';
-@import 'page';
-@import 'song-table';
-@import 'queue';
-@import 'forms';
-// Gross, but Google uses material class in places but not others, so a safety fallback
-.material {
+
+body,
+body.qp {
   @import 'accents';
   // Random Gradients/Helpers
   @import 'buttons';
   @import 'misc';
   // Play Midnight Styles
-  @import 'core';
   @import 'nav';
+  @import 'card-grid';
   @import 'menus';
   @import 'loading';
   @import 'cards';
   @import 'player';
   @import 'page';
+  @import 'page-indicator';
   @import 'song-table';
   @import 'queue';
   @import 'forms';
+
+  // Gross, but Google uses material class in places but not others, so a safety fallback
+  .material {
+    @import 'accents';
+    // Random Gradients/Helpers
+    @import 'buttons';
+    @import 'misc';
+    // Play Midnight Styles
+    @import 'nav';
+    @import 'card-grid';
+    @import 'menus';
+    @import 'loading';
+    @import 'cards';
+    @import 'player';
+    @import 'page';
+    @import 'page-indicator';
+    @import 'song-table';
+    @import 'queue';
+    @import 'forms';
+  }
 }

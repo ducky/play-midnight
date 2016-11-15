@@ -1,0 +1,101 @@
+gpm-card-grid,
+gpm-now-card-grid {
+  sj-play-button {
+    #buttonContent.sj-play-button {
+      background: lighten($background_card, 10%);
+    }
+
+    #icon.sj-play-button {
+      fill: $font_primary;
+    }
+  }
+}
+
+gpm-now-card-grid {
+  gpm-colored-now-card {
+    #textProtection {
+      background: linear-gradient(to top, rgba($background_page, 0.999), rgba($background_page, 0.15)) !important;
+    }
+
+    .card-header {
+      color: rgba(#fff, 0.9);
+      text-shadow: 1px 1px 3px $background_card;
+    }
+
+    .card-reason {
+      color: rgba(#fff, 0.7);
+      text-shadow: 1px 1px 3px $background_card;
+    }
+
+    #textSeparator {
+      background: rgba(#fff, 0.7) !important;
+      box-shadow: 1px 1px 3px $background_card;
+    }
+
+    .card-title {
+      color: rgba(#fff, 0.9);
+      text-shadow: 1px 1px 3px $background_card;
+    }
+
+    .card-description {
+      color: rgba(#fff, 0.6);
+      text-shadow: 1px 1px 3px $background_card;
+      padding-bottom: 3px;
+    }
+    // Ignore Black Backgrounds
+    // &:not(.gpm-colored-now-card-2) {
+    //   #backgroundImage {
+    //     &:after {
+    //       position: absolute;
+    //       top: 0;
+    //       bottom: 0;
+    //       right: 0;
+    //       left: 0;
+    //       content: '';
+    //     }
+    //   }
+    // }
+  }
+}
+
+gpm-card-grid {
+  #gridTitle {
+    color: $font_primary;
+  }
+
+  sj-card {
+    &[card-aspect-ratio="wide"] {
+      background-color: $background_card;
+
+      .card-title {
+        color: $font_primary;
+      }
+
+      .card-subtitle {
+        color: $font_secondary;
+      }
+
+      .card-description {
+        color: $font_secondary;
+      }
+    }
+
+    &:not([card-aspect-ratio="wide"]) {
+      .card-title {
+        color: rgba(#fff, 0.9);
+        text-shadow: 1px 1px 3px $background_card;
+      }
+
+      .card-subtitle {
+        color: rgba(#fff, 0.7);
+        text-shadow: 1px 1px 3px $background_card;
+      }
+
+      .card-description {
+        color: rgba(#fff, 0.6);
+        text-shadow: 1px 1px 3px $background_card;
+        padding-bottom: 3px;
+      }
+    }
+  }
+}

@@ -3,6 +3,23 @@ html:not([style-scope]):not(.style-scope) {
   --primary-color: $color_accent;
 }
 
+::-webkit-scrollbar-thumb,
+::shadow ::-webkit-scrollbar-thumb {
+  background-color: $color_accent;
+}
+
+.primary:not([style-scope]):not(.style-scope) {
+  color: $color_accent !important;
+}
+
+// Logo
+#material-app-bar #material-one-left {
+  // TODO - Update logo in future
+  .music-logo-link {
+    display: none !important;
+  }
+}
+
 // Uploading Music
 .material-transfer-radial-download-overlay,
 .material-transfer-radial-processing-overlay,
@@ -315,6 +332,24 @@ paper-slider::shadow #sliderKnobInner {
 #player.material .material-player-middle paper-icon-button[data-id="play-pause"]:not([disabled]) iron-icon,
 #player.material .material-player-middle sj-icon-button[data-id="play-pause"]:not([disabled]) {
   color: $color_accent;
+}
+
+// Homepage Scrolling Module
+sj-scrolling-module {
+  .module-title-underline {
+    background: $color_accent !important;
+  }
+}
+
+// Page Indicator
+#content-container {
+  sj-page-indicator {
+    .sj-page-tab.sj-page-indicator.iron-selected {
+      iron-icon {
+        color: $color_accent !important;
+      }
+    }
+  }
 }
 
 // Top Charts Colors
