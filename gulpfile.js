@@ -63,7 +63,7 @@
 
 		return gulp.src(['manifest.json', '*.png'])
 			.pipe(gulp.dest('../Dist/Chrome'))
-			.pipe($.notify({ message: 'Build Task Completed' }));
+			.pipe($.notify({ onLast: true, message: 'Build Task Completed' }));
 	});
 
 	gulp.task('copy', function() {
@@ -80,7 +80,7 @@
 			.pipe($.autoprefixer({ browsers: ['last 2 version'] }))
 			.pipe($.if(argv.prod, $.minifycss()))
 			.pipe(gulp.dest('dist/css'))
-			.pipe($.notify({ message: 'Styles Task Completed' }));
+			.pipe($.notify({ onLast: true, message: 'Styles Task Completed' }));
 	});
 
 	/* Main Script / Libraries */
@@ -105,7 +105,7 @@
 			.pipe($.concat('play-midnight.js'))
 			.pipe($.if(argv.prod, $.uglify()))
 			.pipe(gulp.dest('dist/js'))
-			.pipe($.notify({ message: 'Main Scripts Task Completed' }));
+			.pipe($.notify({ onLast: true, message: 'Main Scripts Task Completed' }));
 	});
 
 	/* Images Script */
@@ -114,7 +114,7 @@
 
 		return images
 		.pipe(gulp.dest('dist/images'))
-		.pipe($.notify({ message: 'Images Task Completed' }));
+		.pipe($.notify({ onLast: true, message: 'Images Task Completed' }));
 	});
 
 	/* HTML Script */
@@ -123,7 +123,7 @@
 
 		return html
 			.pipe(gulp.dest('dist'))
-			.pipe($.notify({ message: 'HTML Task Completed' }));
+			.pipe($.notify({ onLast: true, message: 'HTML Task Completed' }));
 	});
 
 	/* Watch File Changes */
