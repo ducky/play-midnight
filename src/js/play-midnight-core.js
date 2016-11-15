@@ -69,15 +69,14 @@ var PlayMidnight = (function (_) {
       replace: function () {
         return _userOptions.accent.color;
       }
-		},
-    {
+    }, {
       name: 'Chrome URL',
       regex: /\{CHROME_DIR\}/gi,
       replace: function () {
         return _.browser.url('/dist');
       }
-		}
-	];
+    }
+  ];
 
 
   // Our Friend
@@ -113,8 +112,8 @@ var PlayMidnight = (function (_) {
           'topbar': 'topbar-dark',
           'queue': 'expanded-queue',
           'artistImage': 'no-header-image',
-          'radio': 'no-radio',
-          'songza': 'no-songza',
+          // 'radio': 'no-radio',
+          // 'songza': 'no-songza',
           'sidebar': {
             class: 'static-sidebar',
             events: updateSidebar
@@ -150,7 +149,7 @@ var PlayMidnight = (function (_) {
             key: "browseStations",
             url: '#/wbs'
           }
-				], '#/now');
+        ], '#/now');
 
         buildGroup("playlists", [
           {
@@ -165,7 +164,7 @@ var PlayMidnight = (function (_) {
           {
             key: "freePurchased"
           }
-				]);
+        ]);
 
         checkNotification();
         fixGoogleBug();
