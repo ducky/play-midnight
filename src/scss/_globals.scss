@@ -1,13 +1,38 @@
 $background_light: lighten($background_nav, 3%);
-// Options
-[data-playmidnight *= "enabled"][data-playmidnight *= "topbar-dark"] {
-  #material-app-bar,
-  &.material core-toolbar#material-app-bar,
-  &.material iron-toolbar#material-app-bar,
-  core-toolbar#material-app-bar,
-  iron-toolbar#material-app-bar {
-    background-color: $background_light;
-    color: $font_primary;
+
+// Global Globals
+gpm-card-grid {
+  &.mini {
+    sj-card {
+      width: 150px;
+
+      .details {
+        margin-bottom: 25px;
+      }
+    }
+  }
+}
+
+[data-playmidnight *= "accents-only"],
+[data-playmidnight *= "enabled"] {
+  ::-webkit-scrollbar,
+  ::shadow ::-webkit-scrollbar {
+    width: 11px;
+    background: rgba(0, 0, 0, 0);
+  }
+
+  ::-webkit-scrollbar-thumb,
+  ::shadow ::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.75;
+    }
   }
 
   #material-app-bar {
@@ -17,6 +42,58 @@ $background_light: lighten($background_nav, 3%);
 
     paper-tabs #selectionBar.paper-tabs {
       background-color: $color_accent;
+    }
+  }
+}
+
+[data-playmidnight *= "accents-only"]:not([data-playmidnight *= "enabled"]) {
+  // Scrollbar
+  ::-webkit-scrollbar-track,
+  ::shadow ::-webkit-scrollbar-track {
+    background-color: rgba(#dcdcdc, 0.6);
+
+    &:hover {
+      background-color: rgba(#dcdcdc, 0.7);
+    }
+
+    &:active {
+      background-color: rgba(#dcdcdc, 0.65);
+    }
+  }
+}
+
+// Options
+[data-playmidnight *= "enabled"] {
+  #material-app-bar,
+  &.material core-toolbar#material-app-bar,
+  &.material iron-toolbar#material-app-bar,
+  core-toolbar#material-app-bar,
+  iron-toolbar#material-app-bar {
+    background-color: $color_accent;
+  }
+
+  #material-app-bar {
+    paper-tab.iron-selected {
+      color: $font_primary !important;
+    }
+
+    paper-tabs #selectionBar.paper-tabs {
+      background-color: $font_primary !important;
+    }
+  }
+}
+
+[data-playmidnight *= "enabled"][data-playmidnight *= "topbar-dark"] {
+  #material-app-bar,
+  &.material core-toolbar#material-app-bar,
+  &.material iron-toolbar#material-app-bar,
+  core-toolbar#material-app-bar,
+  iron-toolbar#material-app-bar {
+    background-color: $background_light;
+    color: $font_primary;
+  }
+}
+
 [data-playmidnight *= "static-sidebar"] {
   #left-nav-close-button,
   #material-one-left #left-nav-open-button {

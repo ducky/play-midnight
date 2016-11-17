@@ -21,6 +21,10 @@
     background: $background_card;
   }
 
+  &[data-type="artist"] .details .fade-out:after {
+    background: linear-gradient(to right, rgba($background_dark, 0) 0%, rgba($background_dark, 0.999) 100%);
+  }
+
   &.entity-card {
     background: transparent;
 

@@ -1,9 +1,23 @@
 $border_page_light: lighten($background_page, 8%);
 
 // Scollables
-paper-dialog-scrollable.can-scroll:not([style-scope]):not(.style-scope):not(.scrolled-to-bottom)::after,
-paper-dialog-scrollable.is-scrolled:not(:first-child)::before {
-  background: $border_page;
+paper-dialog-scrollable {
+  button.suggestion {
+    color: $font_secondary;
+  }
+
+  .download-dialog {
+    color: $font_primary !important;
+
+    .limit-text {
+      color: $font_secondary !important;
+    }
+  }
+
+  &.is-scrolled:not(:first-child)::before,
+  &.can-scroll:not([style-scope]):not(.style-scope):not(.scrolled-to-bottom)::after {
+    background: $border_page;
+  }
 }
 
 // Visualizer Card
@@ -161,4 +175,33 @@ img[src$="default_album_art_song_row.png"],
 img[src$="default_album_med.png"],
 img[src$="default_playlist.svg"] {
   filter: invert(100%);
+}
+
+// Improve Recommendations
+paper-header-panel #music-content .g-content {
+  padding: 30px 72px;
+}
+
+.nuq-view {
+  & > h2 {
+    color: $font_primary;
+    margin-bottom: 25px;
+  }
+
+  .quiz-item-list {
+    padding: 0 25px;
+  }
+
+  button.quiz-block {
+    cursor: pointer;
+    margin-bottom: 15px;
+
+    .name {
+      color: $font_primary;
+    }
+  }
+}
+
+.button-bar {
+  background: $background_menu;
 }

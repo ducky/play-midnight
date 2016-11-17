@@ -109,14 +109,14 @@ paper-dialog {
 .goog-menu {
   .goog-menuitem {
     .goog-menuitem-content {
-      color: $font_primary;
+      color: $font_primary !important;
     }
 
     &:hover {
       background: lighten($background_menu, 3%);
 
       .goog-menuitem-content {
-        color: lighten($font_primary, 3%);
+        color: lighten($font_primary, 3%) !important;
       }
     }
   }

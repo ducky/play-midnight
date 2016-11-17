@@ -3,6 +3,7 @@ html:not([style-scope]):not(.style-scope) {
   --primary-color: $color_accent;
 }
 
+// Scrollbar
 ::-webkit-scrollbar-thumb,
 ::shadow ::-webkit-scrollbar-thumb {
   background-color: $color_accent;
@@ -132,6 +133,20 @@ paper-toast div[data-action="button"] {
   color: $color_accent;
 }
 
+sj-callout {
+  background: $color_accent !important;
+}
+
+paper-icon-button.sj-callout-target:not([style-scope]):not(.style-scope) {
+  background-color: $color_accent !important;
+}
+
+gpm-bottom-sheet {
+  paper-button span {
+    color: $color_accent;
+  }
+}
+
 // Playlist button
 #unsubscribe-playlist-button,
 sj-paper-button#unsubscribe-playlist-button {
@@ -162,10 +177,6 @@ a {
 }
 
 // Top Toolbar
-#material-app-bar {
-  background-color: $color_accent;
-}
-
 #nav-container #music-content.material .material-cover {
   background-color: $color_accent;
 }
@@ -197,6 +208,8 @@ paper-input-decorator {
   }
 
   .add-on-content.is-highlighted.paper-input-container *,
+  .input-content.label-is-floating.paper-input-container label,
+  .input-content.label-is-floating.paper-input-container  .paper-input-label,
   .input-content.label-is-highlighted.paper-input-container .paper-input-label,
   .input-content.label-is-highlighted.paper-input-container label {
     color: $color_accent;
@@ -251,6 +264,10 @@ paper-progress #primaryProgress.paper-progress {
   border-color: $color_accent;
 }
 
+.primary-background:not([style-scope]):not(.style-scope) {
+  background-color: $color_accent !important;
+}
+
 paper-spinner .spinner-layer {
   border-color: $color_accent !important;
 }
@@ -262,10 +279,21 @@ paper-spinner .spinner-layer {
 }
 
 .upload-dialog-dragover {
-  border-color: $color_accent;
+  border-color: $color_accent !important;
+
+  &:not([style-scope]):not(.style-scope) {
+    border-color: $color_accent !important;
+  }
 
   .upload-dialog-description {
     color: $color_accent !important;
+  }
+}
+
+.progress-bar-vertical,
+.progress-bar-horizontal {
+  .progress-bar-thumb {
+    background-color: $color_accent !important;
   }
 }
 

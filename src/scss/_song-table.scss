@@ -142,3 +142,16 @@ $background_page_zebra: lighten($background_page, 1%);
     background: $background_dark;
   }
 }
+
+// Download Styles
+.song-transfer-table-container {
+  .song-transfer-table-row {
+    border-bottom: 1px solid $background_page_border;
+  }
+}
+
+.progress-bar-vertical,
+.progress-bar-horizontal {
+  background: lighten($background_page, 8%);
+  border: 1px solid $background_page_border;
+}
