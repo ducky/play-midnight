@@ -4,6 +4,7 @@
 body,
 body.qp {
   @import 'accents';
+  @import 'alerts';
   // Random Gradients/Helpers
   @import 'buttons';
   @import 'misc';
@@ -23,6 +24,7 @@ body.qp {
   // Gross, but Google uses material class in places but not others, so a safety fallback
   .material {
     @import 'accents';
+    @import 'alerts';
     // Random Gradients/Helpers
     @import 'buttons';
     @import 'misc';

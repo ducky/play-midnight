@@ -1,0 +1,17 @@
+sj-callout {
+  // Saved
+}
+
+gpm-bottom-sheet {
+  background: $background_menu !important;
+
+  h2,
+  h2 span {
+    color: $font_primary !important;
+  }
+
+  p,
+  p span {
+    color: $font_secondary !important;
+  }
+}
