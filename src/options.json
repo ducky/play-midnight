@@ -109,10 +109,10 @@
       },
 
       "sidebar": {
-          "type": "boolean",
-          "default": false,
-          "title": "Enable Static Sidebar (EXPERIMENTAL)",
-          "description": "Show sidebar on page load and keep it open permanently"
+        "type": "boolean",
+        "default": false,
+        "title": "Enable Static Sidebar (EXPERIMENTAL)",
+        "description": "Show sidebar on page load and keep it open permanently"
       },
 
       "artistImage": {
