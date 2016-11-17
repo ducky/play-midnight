@@ -85,7 +85,6 @@ var PlayMidnight = (function (_) {
     }
   ];
 
-
   // Our Friend
   var PM = {
     version: VERSION_NUMBER,
@@ -115,16 +114,14 @@ var PlayMidnight = (function (_) {
 
         buildClassList({
           'enabled': 'enabled',
+          'accentsOnly': 'accents-only',
           'fab': 'fab-icon',
           'topbar': 'topbar-dark',
           'queue': 'expanded-queue',
           'artistImage': 'no-header-image',
           // 'radio': 'no-radio',
           // 'songza': 'no-songza',
-          'sidebar': {
-            class: 'static-sidebar',
-            events: updateSidebar
-          }
+          'sidebar': 'static-sidebar'
         });
 
         buildGroup("menus", [
@@ -138,7 +135,7 @@ var PlayMidnight = (function (_) {
           },
           {
             key: "recent",
-            url: '#/recent'
+            url: '#/recents'
           },
           {
             key: "newReleases",
@@ -554,23 +551,6 @@ var PlayMidnight = (function (_) {
       icon.href = url;
 
       document.head.appendChild(icon);
-    }
-  }
-
-
-  // Update Sidebar
-  function updateSidebar() {
-    var drawerPanel = document.querySelector('#drawer-panel');
-    var leftDrawer = drawerPanel.querySelector('.left-drawer');
-
-    // Modify Drawer Panel
-    if (drawerPanel) {
-      drawerPanel.removeAttribute('narrow');
-    }
-
-    // Modify Left Drawer
-    if (leftDrawer) {
-      leftDrawer.classList.remove('narrow-layout');
     }
   }
 
