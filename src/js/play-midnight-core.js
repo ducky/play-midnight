@@ -27,6 +27,13 @@ var PlayMidnight = (function (_) {
     url: _.browser.url('dist/images/favicon.png') + '?v=' + Date.now()
   };
 
+  // Observables
+  var mainObserver = new MutationObserver(domUpdated);
+  var loggerCache = {
+    recentActivity: [],
+    panes: false
+  };
+
   // Stylesheets
   var _stylesheets = {
     accents: {
@@ -168,8 +175,15 @@ var PlayMidnight = (function (_) {
 
         checkNotification();
         fixGoogleBug();
+
+        mainObserver.observe(document.querySelector('body'), { childList: true, subtree: true });
       });
     });
+  }
+
+  function domUpdated() {
+    updatePaneBGs();
+    updateRecentActivity();
   }
 
 
@@ -310,6 +324,44 @@ var PlayMidnight = (function (_) {
     return _parsed;
   }
 
+  // Update backgrounds of first to homepage panes to be black
+  function updatePaneBGs() {
+    if (!_userOptions.enabled) { return; }
+
+    var backgroundColor = 'rgba(20,21,23,1)';
+    var panes = document.querySelectorAll('#gpm-home-module-0, #gpm-home-module-1');
+
+    for (var i = 0, len = panes.length; i < len; i++) {
+      if (!loggerCache.panes) {
+        loggerCache.panes = true;
+        _.log('PLAY MIDNIGHT: Updating Homepage Single Pane Backgrounds (White -> Black)');
+      }
+
+      var pane = panes[i];
+      pane.setAttribute('background-color', backgroundColor);
+    }
+  }
+
+  // Update recent activity album sizes
+  function updateRecentActivity() {
+    var urlRegex = /(=s90)/;
+    var gridItems = document.querySelectorAll('gpm-card-grid.mini sj-card');
+
+    for (var i = 0, len = gridItems.length; i < len; i++) {
+      var item = gridItems[i];
+      var name = item.getAttribute('play-label').replace('Play ', '');
+      var img = item.querySelector('img.image');
+
+      if (urlRegex.test(img.src)) {
+        if (loggerCache.recentActivity.indexOf(name) < 0) {
+          loggerCache.recentActivity.push(name);
+          _.log('PLAY MIDNIGHT: Updating Recent Activity Album Art For ' + name + ' (90x90 -> 150x150)');
+        }
+
+        img.setAttribute('src', img.src.replace('=s90', '=s150'));
+      }
+    }
+  }
 
   // Check if Play Midnight has Updated, Reset options if needed
   function checkUpdated(options, cb) {
