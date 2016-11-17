@@ -90,8 +90,16 @@ paper-header-panel#content-container {
     background-color: rgba($background_dark, 0.5);
     color: $font_primary;
 
+    &::-webkit-input-placeholder {
+      color: $font_primary;
+    }
+
     &[opened] {
       background-color: $background_search;
+
+      &::-webkit-input-placeholder {
+        color: $font_secondary;
+      }
 
       &:not([num-suggestions="0"]) #input.sj-search-box {
         border-bottom-color: $border_search;
@@ -100,6 +108,18 @@ paper-header-panel#content-container {
 
     #input.sj-search-box {
       color: $font_primary;
+
+      &::-webkit-input-placeholder {
+        color: $font_primary;
+      }
+    }
+
+    &[opened] {
+      background-color: $background_search;
+
+      #input.sj-search-box::-webkit-input-placeholder {
+        color: $font_secondary;
+      }
     }
 
     core-icon,
