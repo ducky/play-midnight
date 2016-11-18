@@ -335,7 +335,9 @@ var PlayMidnight = (function (_) {
       }
 
       var pane = panes[i];
-      pane.setAttribute('background-color', backgroundColor);
+      if (pane.getAttribute('background-color') !== backgroundColor) {
+        pane.setAttribute('background-color', backgroundColor);
+      }
     }
   }
 

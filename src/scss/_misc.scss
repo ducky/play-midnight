@@ -1,5 +1,10 @@
 $border_page_light: lighten($background_page, 8%);
 
+#loading-logo {
+  background: url('{CHROME_DIR}/images/play-logo-dark.png');
+  background-size: 256px 256px;
+}
+
 // Scollables
 paper-dialog-scrollable {
   button.suggestion {
