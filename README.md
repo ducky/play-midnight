@@ -15,8 +15,12 @@ Play Midnight is a different take on the standard theme that is used on Google P
 Play Midnight is currently using a `gulp` setup, so getting started is relatively easy. You'll have to follow these few steps and you should be up and running:
 
 1. Clone Repository
-2. `cd` into the directory and run `npm install`
-3. To build your changes, run `gulp` and it should process everything.
+2. Install Dependencies
+  1. Optionally install yarn if you don't have it yet `npm install -g yarn`
+  2.  `cd` into the directory and run `yarn` (or `npm install` if you don't want to use yarn)
+3. Build Changes
+  1. To build your changes, run `npm run build` and it should process everything.
+  2. To watch all files for changes (easier), run `npm run watch`
 4. In Chrome, go to `chrome://extensions` and toggle the `Developer Mode` option (top right) to "On"
 5. Click `Load Unpacked Extension` and load up your main Play Midnight folder (the one containing `manifest.json`)
 6. Make changes at your leisure!

@@ -3,6 +3,10 @@
   "version": "2.4.2",
   "description": "Play Midnight Gulp Dependencies",
   "author": "Chris Tieman",
+  "scripts": {
+    "build": "gulp",
+    "watch": "gulp watch"
+  },
   "devDependencies": {
     "del": "^1.2.0",
     "gulp": "^3.8.10",
