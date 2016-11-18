@@ -7,7 +7,7 @@ $background_menu_zebra: lighten($background_menu, 1%);
 
 #queue-overlay,
 paper-dialog {
-  background: $background_menu;
+  background: $background_menu !important;
 
   &::shadow #scroller {
     margin-bottom: 0;

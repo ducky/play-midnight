@@ -7,7 +7,7 @@ paper-dialog {
     .dialog-header a[data-id="series-navigate"],
     h2,
     p {
-      color: $font_primary;
+      color: $font_primary !important;
     }
   }
 
@@ -17,7 +17,7 @@ paper-dialog {
   .dialog-header a[data-id="series-navigate"],
   h2,
   p {
-    color: $font_primary;
+    color: $font_primary !important;
   }
 }
 // Tabs
@@ -73,18 +73,18 @@ paper-dialog {
 .now-playing-menu .goog-menuitem,
 .now-playing-menu .goog-submenu,
 .now-playing-menu .goog-submenu .goog-submenu-arrow {
-  background-color: $background_menu;
-  color: $font_primary;
+  background-color: $background_menu !important;
+  color: $font_primary !important;
 }
 
 .goog-menuitem {
   &:hover {
-    background: lighten($background_menu, 3%);
+    background: lighten($background_menu, 3%) !important;
   }
 }
 
 .goog-menuheader {
-  color: $font_secondary;
+  color: $font_secondary !important;
   // Loading Icon
   .spinner {
     background: transparent url('{CHROME_DIR}/images/sprites/ani_loading_white.gif') no-repeat center center;
@@ -98,7 +98,7 @@ paper-dialog {
 .goog-menuitem,
 .goog-menuitem-content,
 .now-playing-menu .goog-menuitem .goog-menuitem-content {
-  color: $font_primary;
+  color: $font_primary !important;
 }
 
 .goog-menuitem-highlight .goog-menuitem-content,
@@ -113,7 +113,7 @@ paper-dialog {
     }
 
     &:hover {
-      background: lighten($background_menu, 3%);
+      background: lighten($background_menu, 3%) !important;
 
       .goog-menuitem-content {
         color: lighten($font_primary, 3%) !important;
@@ -123,7 +123,7 @@ paper-dialog {
 
   .goog-submenu {
     iron-icon {
-      color: $font_primary;
+      color: $font_primary !important;
     }
   }
 
@@ -134,9 +134,9 @@ paper-dialog {
 
 .goog-menuitem-content .goog-submenu-arrow,
 .now-playing-menu .goog-submenu .goog-submenu-arrow {
-  color: $font_primary;
+  color: $font_primary !important;
 }
 
 .goog-menuseparator {
-  border-top: 1px solid darken($background_menu, 5%);
+  border-top: 1px solid darken($background_menu, 5%) !important;
 }

@@ -3,7 +3,7 @@ $border_page_light: lighten($background_page, 8%);
 // Scollables
 paper-dialog-scrollable {
   button.suggestion {
-    color: $font_secondary;
+    color: $font_secondary !important;
   }
 
   .download-dialog {
@@ -16,7 +16,7 @@ paper-dialog-scrollable {
 
   &.is-scrolled:not(:first-child)::before,
   &.can-scroll:not([style-scope]):not(.style-scope):not(.scrolled-to-bottom)::after {
-    background: $border_page;
+    background: $border_page !important;
   }
 }
 
