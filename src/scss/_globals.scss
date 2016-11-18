@@ -1,6 +1,11 @@
 $background_light: lighten($background_nav, 3%);
 
 // Global Globals
+#loading-logo {
+  background: url('{CHROME_DIR}/images/play-logo-dark.png');
+  background-size: 256px 256px;
+}
+
 gpm-card-grid {
   &.mini {
     sj-card {

@@ -173,7 +173,7 @@ var PlayMidnight = (function (_) {
         checkNotification();
         fixGoogleBug();
 
-        mainObserver.observe(document.querySelector('body'), { childList: true, subtree: true });
+        mainObserver.observe(document.querySelector('body'), { attributes: true, characterData: true, childList: true, subtree: true });
       });
     });
   }
@@ -182,7 +182,6 @@ var PlayMidnight = (function (_) {
     updatePaneBGs();
     updateRecentActivity();
   }
-
 
   function buildClassList(options) {
     var classList = [];

@@ -1,9 +1,9 @@
 $border_page_light: lighten($background_page, 8%);
 
-#loading-logo {
-  background: url('{CHROME_DIR}/images/play-logo-dark.png');
-  background-size: 256px 256px;
-}
+// TODO - Need a better way to do this since can't tell difference between album art and particles
+// .screensaver {
+//   filter: contrast(100%) invert(75%) grayscale(50%) brightness(30%);
+// }
 
 // Scollables
 paper-dialog-scrollable {
@@ -184,7 +184,7 @@ img[src$="default_playlist.svg"] {
 
 // Improve Recommendations
 paper-header-panel #music-content .g-content {
-  padding: 30px 72px;
+  padding: 30px 0;
 }
 
 .nuq-view {
