@@ -112,7 +112,7 @@ $background_page_zebra: lighten($background_page, 1%);
     }
   }
 
-  &.mini [data-col="song-details"] .song-title,
+  &.mini [data-col="song-details"] .song-details-wrapper .song-title,
   [data-col="title"],
   th {
     color: $font_primary;
