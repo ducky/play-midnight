@@ -171,7 +171,6 @@ var PlayMidnight = (function (_) {
         ]);
 
         checkNotification();
-        fixGoogleBug();
 
         mainObserver.observe(document.querySelector('body'), { attributes: true, characterData: true, childList: true, subtree: true });
       });
@@ -232,28 +231,6 @@ var PlayMidnight = (function (_) {
 
     list = (disabled.length === options.length) ? 'ALL' : disabled.join(' ');
     document.body.setAttribute('data-playmidnight-' + name, list);
-  }
-
-
-  // Temp Fix for My Library not working
-  function fixGoogleBug() {
-    var validPaths = ['wmp', 'wms', 'artists', 'albums', 'all', 'genres'];
-    var item = document.querySelector('#nav_collections a[data-type="my-library"]');
-
-    if (!item) {
-      return;
-    }
-
-    window.addEventListener("hashchange", function () {
-      var hash = location.hash.replace(/#\//, '');
-      var isValid = (validPaths.indexOf(hash) > -1);
-
-      if (isValid) {
-        item.classList.add('selected');
-      } else {
-        item.classList.remove('selected');
-      }
-    });
   }
 
 
