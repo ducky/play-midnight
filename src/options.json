@@ -111,7 +111,7 @@
       "sidebar": {
         "type": "boolean",
         "default": false,
-        "title": "Enable Static Sidebar (EXPERIMENTAL)",
+        "title": "Enable Static Sidebar",
         "description": "Show sidebar on page load and keep it open permanently"
       },
 
