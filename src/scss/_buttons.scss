@@ -17,13 +17,15 @@ paper-checkbox #checkboxLabel.paper-checkbox {
 // Buttons
 .button.primary,
 .simple-dialog-buttons button.goog-buttonset-default,
+paper-button,
 paper-button.material-primary,
 sj-paper-button.material-primary {
   opacity: 0.9;
 
-  [disabled] {
+  &[disabled] {
     background: $background_disabled;
     color: $font_secondary;
+    cursor: not-allowed;
   }
 
   &:hover {
