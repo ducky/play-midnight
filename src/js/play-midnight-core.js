@@ -121,7 +121,8 @@ var PlayMidnight = (function (_) {
           'artistImage': 'no-header-image',
           // 'radio': 'no-radio',
           // 'songza': 'no-songza',
-          'sidebar': 'static-sidebar'
+          'sidebar': 'static-sidebar',
+          'staticPlaylists': 'static-playlists'
         });
 
         buildGroup("menus", [

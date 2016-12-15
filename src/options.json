@@ -115,6 +115,13 @@
         "description": "Show sidebar on page load and keep it open permanently"
       },
 
+      "staticPlaylists": {
+        "type": "boolean",
+        "default": false,
+        "title": "Enable Static Playlists",
+        "description": "Show playlists sidebar on page load and keep it open permanently"
+      },
+
       "artistImage": {
         "type": "boolean",
         "default": false,

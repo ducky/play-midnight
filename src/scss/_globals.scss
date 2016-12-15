@@ -134,6 +134,47 @@ gpm-card-grid {
   }
 }
 
+[data-playmidnight *= "static-playlists"] {
+  #playlist-drawer-button {
+    display: none;
+  }
+
+  #playlist-drawer {
+    height: calc(100% - 90px);
+
+    #drawer {
+      z-index: 1 !important;
+      bottom: 90px !important;
+      height: auto !important;
+      visibility: visible !important;
+      transform: translateX(0) !important;
+    }
+
+    #scrim {
+      display: none;
+    }
+  }
+
+  #pageIndicatorContainer.sj-home {
+    right: 324px !important;
+  }
+
+  #main paper-header-panel#content-container {
+    width: calc(100% - 300px);
+    margin-right: 300px;
+  }
+
+  .play-midnight-fab {
+    right: 324px;
+  }
+}
+
+[data-playmidnight *= "static-sidebar"][data-playmidnight *= "static-playlists"] {
+  #main paper-header-panel#content-container {
+    width: calc(100% - 580px);
+  }
+}
+
 [data-playmidnight *= "expanded-queue"] {
   #queue-overlay {
     width: calc(100vw - 64px);
