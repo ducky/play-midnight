@@ -132,6 +132,10 @@ gpm-card-grid {
     width: calc(100% - 280px);
     margin-left: 280px;
   }
+
+  sj-home #backgroundContainer.sj-home {
+    left: 280px !important;
+  }
 }
 
 [data-playmidnight *= "static-playlists"] {
@@ -166,6 +170,38 @@ gpm-card-grid {
 
   .play-midnight-fab {
     right: 324px;
+  }
+
+  sj-home #backgroundContainer.sj-home {
+    right: 300px !important;
+  }
+
+  @media (min-width: 1850px) {
+    paper-header-panel #music-content .recent-view,
+    sj-scrolling-module .content-wrapper.sj-scrolling-module {
+        width: calc(1404px - 300px);
+    }
+  }
+
+  @media (max-width: 1849px) and (min-width: 1400px) {
+    paper-header-panel #music-content .recent-view,
+    sj-scrolling-module .content-wrapper.sj-scrolling-module {
+        width: calc(1002px - 300px);
+    }
+  }
+
+  @media (max-width: 1399px) and (min-width: 1250px) {
+    paper-header-panel #music-content .recent-view,
+    sj-scrolling-module .content-wrapper.sj-scrolling-module {
+        width: calc(884px - 300px);
+    }
+  }
+
+  @media (max-width: 1249px) and (min-width: 950px) {
+    paper-header-panel #music-content .recent-view,
+    sj-scrolling-module .content-wrapper.sj-scrolling-module {
+        width: calc(704px - 300px);
+    }
   }
 }
 
