@@ -217,6 +217,7 @@ paper-input-decorator {
 }
 
 // Popup Dialog
+paper-dialog,
 paper-action-dialog {
   paper-input-decorator {
     &::shadow .focused-underline {
@@ -229,6 +230,10 @@ paper-action-dialog {
   }
 
   sj-paper-button {
+    color: $color_accent;
+  }
+
+  .buttons {
     color: $color_accent;
   }
 }
@@ -360,6 +365,10 @@ paper-slider::shadow #sliderKnobInner {
 #player.material .material-player-middle paper-icon-button[data-id="play-pause"]:not([disabled]) iron-icon,
 #player.material .material-player-middle sj-icon-button[data-id="play-pause"]:not([disabled]) {
   color: $color_accent;
+}
+
+sj-play-button #pulse.sj-play-button {
+  background: $color_accent !important;
 }
 
 // Homepage Scrolling Module

@@ -46,3 +46,8 @@ paper-button#unsubscribe-playlist-button sj-paper-button#unsubscribe-playlist-bu
     color: $font_primary;
   }
 }
+
+// Play Button
+sj-play-button #pulse.sj-play-button {
+  opacity: 0.3;
+}
