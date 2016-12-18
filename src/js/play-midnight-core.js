@@ -325,10 +325,13 @@ var PlayMidnight = (function (_) {
 
     for (var i = 0, len = gridItems.length; i < len; i++) {
       var item = gridItems[i];
-      var name = item.getAttribute('play-label').replace('Play ', '');
+
+      if (!item) { continue; }
+
+      var name = (item.getAttribute('play-label') || '').replace('Play ', '');
       var img = item.querySelector('img.image');
 
-      if (urlRegex.test(img.src)) {
+      if (img && urlRegex.test(img.src)) {
         if (loggerCache.recentActivity.indexOf(name) < 0) {
           loggerCache.recentActivity.push(name);
           _.log('PLAY MIDNIGHT: Updating Recent Activity Album Art For ' + name + ' (90x90 -> 150x150)');
