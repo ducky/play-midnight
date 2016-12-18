@@ -108,6 +108,13 @@
         "description": "Makes the now playing queue span across your screen further to prevent cutting off song titles"
       },
 
+      "largeTable": {
+        "type": "boolean",
+        "default": false,
+        "title": "Enable Larger Song Table",
+        "description": "Makes the heights of the song rows larger like the were originally before the December 15th change"
+      },
+
       "sidebar": {
         "type": "boolean",
         "default": false,
