@@ -172,6 +172,14 @@ gpm-card-grid {
     right: 324px;
   }
 
+  #queue-overlay {
+    right: 324px;
+
+    &:after {
+      display: none;
+    }
+  }
+
   sj-home #backgroundContainer.sj-home {
     right: 300px !important;
   }
@@ -220,6 +228,14 @@ gpm-card-grid {
 
   &[data-playmidnight *= "static-sidebar"] #queue-overlay {
     width: calc(100vw - 64px - 280px);
+  }
+
+  &[data-playmidnight *= "static-playlists"] #queue-overlay {
+    width: calc(100vw - 64px - 300px);
+  }
+
+  &[data-playmidnight *= "static-sidebar"][data-playmidnight *= "static-playlists"] #queue-overlay {
+    width: calc(100vw - 64px - 280px - 300px);
   }
 }
 

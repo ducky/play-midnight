@@ -27,7 +27,7 @@ paper-dialog {
     }
 
     .song-indicator {
-      background-color: $background_menu;
+      background-color: $background_menu !important;
     }
 
     .fade-out:after {
@@ -43,7 +43,7 @@ paper-dialog {
       }
 
       .song-indicator {
-        background-color: $background_menu_zebra;
+        background-color: $background_menu_zebra !important;
       }
 
       .fade-out:after {

@@ -37,9 +37,15 @@ $background_page_zebra: lighten($background_page, 1%);
       }
     }
 
+    .song-details-wrapper .song-artist-album,
+    .song-details-wrapper .song-artist-album a {
+      color: $font_secondary;
+    }
+
+
     .song-indicator {
-      background-color: $background_page;
-      background-size: 24px 24px;
+      background-color: $background_page !important;
+      background-size: 24px 24px !important;
     }
 
     .song-indicator[data-playback-status="loading"] {
@@ -51,11 +57,9 @@ $background_page_zebra: lighten($background_page, 1%);
     }
 
     .song-indicator[data-playback-status="paused"] {
-      background-image: url('{CHROME_DIR}/images/sprites/equalizer_white.png');
-      background-color: $background_page;
-      background-size: 24px 24px;
-      background-repeat: no-repeat;
-      background-position: center center;
+      background-image: url('{CHROME_DIR}/images/sprites/equalizer_white.png') !important;
+      background-repeat: no-repeat !important;
+      background-position: center center !important;
     }
 
     .fade-out:after {
@@ -71,7 +75,7 @@ $background_page_zebra: lighten($background_page, 1%);
       }
 
       .song-indicator {
-        background-color: $background_page_zebra;
+        background-color: $background_page_zebra !important;
       }
 
       .fade-out:after {
