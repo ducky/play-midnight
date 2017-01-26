@@ -205,6 +205,13 @@
         "title": "Thumbs Up",
         "description": "All your favorite songs"
       },
+	  
+	  "soundSearch": {
+        "type": "boolean",
+        "default": true,
+        "title": "Sound search",
+        "description": "The music you've find over time"
+      },
 
       "lastAdded": {
         "type": "boolean",
