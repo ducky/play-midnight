@@ -24,7 +24,9 @@ paper-action-dialog {
   }
 }
 
-paper-input-container {
+paper-input-container,
+.paper-input-container,
+.paper-input-container-1 {
   .input-content.paper-input-container .paper-input-input,
   .input-content.paper-input-container input,
   .input-content.paper-input-container iron-autogrow-textarea,
