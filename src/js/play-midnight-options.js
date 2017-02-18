@@ -89,7 +89,7 @@ var PlayMidnightOptions = (function (_, PlayMidnight) {
     append: 1,
     enabled: function () {
       var userOptions = PlayMidnight.getUserOptions();
-	  return userOptions.soundSearch;
+      return userOptions.soundSearch;
     }
   };
 
