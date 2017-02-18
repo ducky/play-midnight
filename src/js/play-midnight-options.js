@@ -88,9 +88,8 @@ var PlayMidnightOptions = (function (_, PlayMidnight) {
     target: '.sj-right-drawer .autoplaylist-section',
     append: 1,
     enabled: function () {
-      // Needs to be fixed with new sidebar
       var userOptions = PlayMidnight.getUserOptions();
-      return false; //userOptions.soundSearch;
+	  return userOptions.soundSearch;
     }
   };
 
