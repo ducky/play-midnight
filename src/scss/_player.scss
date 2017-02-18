@@ -27,12 +27,14 @@ paper-slider::shadow .ring > #sliderKnob > #sliderKnobInner {
   border: 2px solid $background_light;
 }
 
-#player.material .material-player-middle sj-icon-button[data-id="play-pause"][disabled] {
-  opacity: 0.75;
+#player.material .material-player-middle paper-icon-button[data-id='play-pause'][disabled],
+#player.material .material-player-middle sj-icon-button[data-id='play-pause'][disabled] {
+  opacity: 0.35 !important;
+  cursor: not-allowed !important;
 }
 
-#player.material .material-player-middle paper-icon-button[data-id="play-pause"] iron-icon,
-#player.material .material-player-middle sj-icon-button[data-id="play-pause"]::shadow core-icon {
+#player.material .material-player-middle paper-icon-button[data-id='play-pause'] iron-icon,
+#player.material .material-player-middle sj-icon-button[data-id='play-pause']::shadow core-icon {
   g {
     path:nth-child(2) {
       fill: $background_player;
