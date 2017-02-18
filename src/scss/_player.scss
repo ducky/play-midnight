@@ -41,3 +41,7 @@ paper-slider::shadow .ring > #sliderKnob > #sliderKnobInner {
     }
   }
 }
+
+#player paper-icon-button[data-id='show-miniplayer'] {
+  z-index: 1;
+}
