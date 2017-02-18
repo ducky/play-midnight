@@ -265,7 +265,8 @@ paper-progress #primaryProgress.paper-progress {
 }
 
 // Loading Overlay
-#loading-overlay.material paper-spinner-lite .circle {
+#loading-overlay paper-spinner-lite .circle,
+#loading-overlay paper-spinner-lite .spinner-layer.paper-spinner-lite {
   border-color: $color_accent;
 }
 

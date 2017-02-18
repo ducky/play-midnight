@@ -90,9 +90,9 @@ paper-dialog-scrollable {
 }
 
 // Loading Overlay
-#loading-overlay.material,
-#loading-overlay.material[data-type="full-loading-overlay"],
-#loading-overlay.material[data-type="regular-loading-overlay"],
+#loading-overlay,
+#loading-overlay[data-type='full-loading-overlay'],
+#loading-overlay[data-type='regular-loading-overlay'],
 .core-overlay-backdrop.core-opened,
 .zoomable-image-dialog-bg {
   background: rgba(lighten($background_dark, 15%), 0.8);
@@ -163,22 +163,22 @@ paper-dialog-scrollable {
   background-image: linear-gradient( to right, rgba($background_dark, 0) 0%, rgba($background_dark, 0.999) 100% );
 }
 
-core-icon[icon="sj:unsubscribe"] svg,
-iron-icon[icon="sj:unsubscribe"] svg {
+core-icon[icon='sj:unsubscribe'] svg,
+iron-icon[icon='sj:unsubscribe'] svg {
   path:nth-child(2) {
     fill: $font_primary;
   }
 }
 
 // Default album art & radio station background
-.card[data-zoomable-image-url$="default_album.svg"] svg,
-.material-card[data-type="album"] svg.image,
-.material-card[data-type="wst"] .quilted-radio-fallback,
-.material-card[data-type="wst"] .quilted-radio-fallback > *,
-img[src$="default_album.svg"],
-img[src$="default_album_art_song_row.png"],
-img[src$="default_album_med.png"],
-img[src$="default_playlist.svg"] {
+.card[data-zoomable-image-url$='default_album.svg'] svg,
+.material-card[data-type='album'] svg.image,
+.material-card[data-type='wst'] .quilted-radio-fallback,
+.material-card[data-type='wst'] .quilted-radio-fallback > *,
+img[src$='default_album.svg'],
+img[src$='default_album_art_song_row.png'],
+img[src$='default_album_med.png'],
+img[src$='default_playlist.svg'] {
   filter: invert(100%);
 }
 
