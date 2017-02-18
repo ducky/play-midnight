@@ -330,7 +330,7 @@ var PlayMidnight = (function (_) {
       if (!item) { continue; }
 
       var name = (item.getAttribute('play-label') || '').replace('Play ', '');
-      var img = item.querySelector('img.image');
+      var img = item.querySelector('img');
 
       if (img && urlRegex.test(img.src)) {
         if (loggerCache.recentActivity.indexOf(name) < 0) {
