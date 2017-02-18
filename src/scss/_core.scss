@@ -35,7 +35,7 @@ body.material {
 .nav-item-container,
 .simple-dialog a,
 a {
-  color: $font_primary;
+  color: $font_primary !important;
 }
 
 // Logo
@@ -166,6 +166,16 @@ sj-home {
     height: 100vh;
     background: linear-gradient(to top, rgba($background_page, 0.999), rgba($background_page, 0.15) 75%), linear-gradient(to right, rgba($background_page, 0.999), rgba($background_page, 0.15) 50%) !important;
   }
+
+	@for $index from 0 through 20 {
+		&[selected="#{$index}"] .home-palette-id-1 {
+			color: $font_primary !important;
+		}
+
+		&[selected="#{$index}"] .home-palette-id-2 {
+			color: $font_secondary !important;
+		}
+	}
 }
 
 // Options Toolbar

@@ -2,27 +2,30 @@
 .material-card,
 .settings-card {
   background: $background_card;
-  background-color: $background_card;
   color: $font_primary;
 
   .title {
-    color: $font_primary;
+    color: $font_primary !important;
   }
 
   .sub-title {
-    color: $font_secondary;
+    color: $font_secondary !important;
   }
 
-  &[data-is-listen-now="true"] .reason .reason-text {
+  &[data-is-listen-now='true'] .reason .reason-text {
     color: $font_primary;
   }
 
-  &[data-type="situations"][data-is-podlist-situation="true"] .podcast-badge {
+  &[data-type='situations'][data-is-podlist-situation='true'] .podcast-badge {
     background: $background_card;
   }
 
-  &[data-type="artist"] .details .fade-out:after {
+  &[data-type='artist'] .details .fade-out:after {
     background: linear-gradient(to right, rgba($background_dark, 0) 0%, rgba($background_dark, 0.999) 100%);
+  }
+
+  .details {
+    background: $background_card;
   }
 
   &.entity-card {
@@ -31,23 +34,27 @@
     .image-wrapper {
       background: lighten($background_card, 5%);
     }
+
+    .details {
+      background: transparent;
+    }
   }
 
   .details sj-icon-button.menu-anchor {
     color: $font_primary;
   }
   // Feeling Lucky
-  &[data-size="small"][data-type="imfl"] .title {
+  &[data-size='small'][data-type='imfl'] .title {
     color: $font_primary;
   }
 
-  &[data-size="small"][data-type="imfl"] .sub-title {
+  &[data-size='small'][data-type='imfl'] .sub-title {
     color: $font_secondary;
   }
 
   // Gradient Fade
   .fade-out:after {
-    background: linear-gradient( to right, rgba($background_card, 0) 0%, rgba($background_card, 0.999) 100% );
+    background: linear-gradient(to right, rgba($background_card, 0) 0%, rgba($background_card, 0.999) 100%);
   }
 }
 
@@ -65,6 +72,6 @@
 }
 
 // Songza cards
-.material-card[data-type="situations"][data-is-podlist-situation="true"] iron-icon.podcast-badge {
+.material-card[data-type='situations'][data-is-podlist-situation='true'] iron-icon.podcast-badge {
   background-color: $background_card;
 }
