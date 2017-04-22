@@ -142,8 +142,22 @@ paper-icon-button.sj-callout-target:not([style-scope]):not(.style-scope) {
 }
 
 gpm-bottom-sheet {
-  paper-button span {
-    color: $color_accent;
+  #buttonRow {
+    paper-button {
+      background-color: $color_accent !important;
+
+      span {
+        color: $font_primary !important;
+      }
+
+      &:first-child {
+        background-color: transparent !important;
+
+        span {
+          color: $color_accent !important;
+        }
+      }
+    }
   }
 }
 
