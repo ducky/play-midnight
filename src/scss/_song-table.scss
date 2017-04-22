@@ -1,6 +1,11 @@
 $background_page_zebra: lighten($background_page, 1%);
 
 .song-table {
+  &,
+  .detail-view & {
+    padding: 5px 0 0 0;
+  }
+
   &[data-type="srbm"] {
     border-top: 1px solid $background_page_border;
   }
@@ -63,7 +68,7 @@ $background_page_zebra: lighten($background_page, 1%);
     }
 
     .fade-out:after {
-      background: linear-gradient( to right, rgba($background_page, 0) 0%, rgba($background_page, 0.999) 100% );
+      background: linear-gradient(to right, rgba($background_page, 0) 0%, rgba($background_page, 0.999) 100%);
     }
 
     &:nth-child(odd) {
@@ -79,7 +84,7 @@ $background_page_zebra: lighten($background_page, 1%);
       }
 
       .fade-out:after {
-        background: linear-gradient( to right, rgba($background_page_zebra, 0) 0%, rgba($background_page_zebra, 0.999) 100% );
+        background: linear-gradient(to right, rgba($background_page_zebra, 0) 0%, rgba($background_page_zebra, 0.999) 100%);
       }
     }
 
@@ -98,7 +103,7 @@ $background_page_zebra: lighten($background_page, 1%);
       }
 
       .fade-out:after {
-        background: linear-gradient( to right, rgba($background_page_hover, 0) 0%, rgba($background_page_hover, 0.999) 100% );
+        background: linear-gradient(to right, rgba($background_page_hover, 0) 0%, rgba($background_page_hover, 0.999) 100%);
       }
     }
 
