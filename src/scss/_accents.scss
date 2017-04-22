@@ -268,9 +268,15 @@ paper-slider {
   }
 }
 
-paper-slider #sliderKnob.paper-slider.style-scope > #sliderKnobInner.paper-slider.style-scope {
+paper-slider #sliderKnob.paper-slider.style-scope > #sliderKnobInner.paper-slider.style-scope,
+paper-slider .slider-knob-inner.paper-slider {
   background-color: $color_accent;
   border: 2px solid $color_accent;
+}
+
+paper-slider .ring.paper-slider > .slider-knob.paper-slider > .slider-knob-inner.paper-slider {
+  background-color: $color_accent;
+  border-color: transparent;
 }
 
 paper-progress #primaryProgress.paper-progress {
