@@ -151,6 +151,27 @@ paper-header-panel#content-container {
   }
 }
 
+.sj-search-box sj-entity-suggestion.sj-search-box:last-of-type {
+  border-bottom: none;
+  box-shadow: 0px 3px 3px 0px darken($background_hover, 5%);
+}
+
+.sj-search-box[opened]:not([num-suggestions="0"]) #suggestionList.sj-search-box {
+  padding: 8px 0 0;
+}
+
+sj-entity-suggestion #title.sj-entity-suggestion {
+  color: $font-primary !important;
+}
+
+sj-entity-suggestion #subtitle.sj-entity-suggestion {
+  color: $font-secondary !important;
+}
+
+sj-entity-suggestion:hover, sj-entity-suggestion.query-selected {
+  background-color: $background_hover !important;
+}
+
 sj-home {
   #backgroundImageContainer.sj-home {
     height: 40vw;
