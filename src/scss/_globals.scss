@@ -444,6 +444,18 @@ gpm-card-grid {
     display: none;
   }
 }
+
+[data-playmidnight-menus *= "shop"] {
+  #nav_collections a[data-type="shop"] {
+    display: none;
+  }
+}
+
+[data-playmidnight-menus *= "subscribe"] {
+  #nav_collections [data-type="sub"] {
+    display: none;
+  }
+}
 // Playlist Items
 [data-playmidnight-playlists *= "ALL"] {
   .sj-right-drawer #auto-playlists-header,

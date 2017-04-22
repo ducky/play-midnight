@@ -154,6 +154,14 @@ var PlayMidnight = (function (_) {
           {
             key: "browseStations",
             url: '#/wbs'
+          },
+          {
+            key: "shop",
+            url: '#/shop'
+          },
+          {
+            key: "subscribe",
+            url: '#/sub'
           }
         ], '#/now');
 

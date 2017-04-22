@@ -190,6 +190,20 @@
         "default": true,
         "title": "Browse Stations",
         "description": "Radio stations brought directly to you from Google"
+      },
+
+      "shop": {
+        "type": "boolean",
+        "default": true,
+        "title": "Shop (Free Users Only)",
+        "description": "Shop menu for purchasing music if you're not an 'All Access' subscriber"
+      },
+
+      "subscribe": {
+        "type": "boolean",
+        "default": true,
+        "title": "Subscribe Now (Free Users Only)",
+        "description": "Subscribe button for converting you to an 'All Access' subscriber"
       }
     }
   },
