@@ -1,9 +1,27 @@
 $background_light: lighten($background_nav, 3%);
 
 // Global Globals
-#loading-logo {
-  background: url('{CHROME_DIR}/images/play-logo-dark.png');
-  background-size: 256px 256px;
+#splash-screen {
+  #loading-progress-content {
+    position: relative;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      content: '';
+      width: 256px;
+      height: 256px;
+      background: url('{CHROME_DIR}/images/play-logo-dark.png');
+      background-size: 256px 256px;
+    }
+
+    svg {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
 }
 
 gpm-card-grid {
