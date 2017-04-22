@@ -126,11 +126,28 @@ sj-scrolling-module {
 }
 
 // More Songs
-
 .more-songs-container {
   border-top: 1px solid $background_page_border;
 }
-// Playlists Header
+
+// Playlist/Artist/Albums Header
+.gpm-detail-page-header div.gpm-detail-page-header > [slot="title"] {
+  color: rgba($font-primary, 0.87); // Maybe Important?
+}
+
+gpm-detail-page-header div.gpm-detail-page-header > [slot="subtitle"],
+gpm-detail-page-header div.gpm-detail-page-header > [slot="description"],
+gpm-detail-page-header div.gpm-detail-page-header > [slot="metadata"] {
+  color: rgba($font-primary, 0.54); // Maybe Important?
+}
+
+gpm-detail-page-header[description-overflows] #descriptionWrapper.gpm-detail-page-header:hover {
+  background: lighten($background-dark, 3%); // Maybe Important
+}
+
+.gpm-detail-page-header div.gpm-detail-page-header > [slot="buttons"] {
+  color: rgba($font-primary, 0.87); // Maybe Important
+}
 
 .station-container-content-wrapper .material-container-details {
   background: $background_page;
