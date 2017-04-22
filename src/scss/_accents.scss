@@ -161,6 +161,10 @@ gpm-bottom-sheet {
   }
 }
 
+sj-play-button #buttonContent.sj-play-button {
+  background-color: $color_accent;
+}
+
 // Playlist button
 #unsubscribe-playlist-button,
 sj-paper-button#unsubscribe-playlist-button {
