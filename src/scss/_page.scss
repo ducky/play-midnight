@@ -35,7 +35,11 @@ $background_page_border: lighten($background_page, 2%);
 .material-detail-view .artist-details,
 .material-playlist-container,
 .situations-filter,
-.songlist-container {
+.songlist-container, 
+.song-table,
+.top-tracks-info,
+.more-songs-container,
+.gpm-vertical-list-0 #items.gpm-vertical-list {
   background: $background_page;
 }
 
