@@ -27,10 +27,10 @@ $background_light: lighten($background_nav, 3%);
 gpm-card-grid {
   &.mini {
     sj-card {
-      width: 150px;
+      width: 140px !important;
 
       .details {
-        margin-bottom: 25px;
+        margin-bottom: 20px !important;
       }
     }
   }
