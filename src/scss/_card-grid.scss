@@ -10,7 +10,7 @@ gpm-now-card-grid {
     }
   }
 
-  #gridTitle {
+  [slot='title'], #gridTitle {
     color: $font_primary;
   }
 
@@ -77,6 +77,7 @@ gpm-now-card-grid {
     }
 
     [slot='title'],
+    [slot='header'],
     .card-header {
       color: rgba(#fff, 0.9) !important;
       text-shadow: 1px 1px 3px $background_card !important;
@@ -106,19 +107,5 @@ gpm-now-card-grid {
       text-shadow: 1px 1px 3px $background_card !important;
       padding-bottom: 3px !important;
     }
-
-    // Ignore Black Backgrounds
-    // &:not(.gpm-colored-now-card-2) {
-    //   #backgroundImage {
-    //     &:after {
-    //       position: absolute;
-    //       top: 0;
-    //       bottom: 0;
-    //       right: 0;
-    //       left: 0;
-    //       content: '';
-    //     }
-    //   }
-    // }
   }
 }
