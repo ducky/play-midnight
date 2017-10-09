@@ -50,11 +50,11 @@ var PlayMidnightOptions = (function (_, PlayMidnight) {
   _templates.fabIcon = {
     name: 'fabIcon',
     url: _.browser.url('dist/templates/options-fab.html'),
-    target: '#content-container',
-    enabled: function () {
-      var userOptions = PlayMidnight.getUserOptions();
-      return userOptions.fab;
-    },
+    target: 'body',
+    // enabled: function () {
+    //   var userOptions = PlayMidnight.getUserOptions();
+    //   return userOptions.fab;
+    // },
     events: function (ele) {
       ele.addEventListener('click', function (e) {
         // Prevent Click Bubbling to Document
