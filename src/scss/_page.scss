@@ -35,11 +35,10 @@ $background_page_border: lighten($background_page, 2%);
 .material-detail-view .artist-details,
 .material-playlist-container,
 .situations-filter,
-.songlist-container, 
+.songlist-container,
 .song-table,
 .top-tracks-info,
-.more-songs-container,
-.gpm-vertical-list-0 #items.gpm-vertical-list {
+.more-songs-container {
   background: $background_page;
 }
 
@@ -47,6 +46,17 @@ $background_page_border: lighten($background_page, 2%);
 .situations-content.material .situations-filter sj-item:focus,
 .situations-content.material .situations-filter sj-item:hover {
   background: $background_page_hover;
+}
+
+gpm-vertical-list {
+  #items.gpm-vertical-list {
+    background: $background_page;
+
+    & > *:hover,
+    & > *[focused] {
+      background-color: $background_page_hover !important;
+    }
+  }
 }
 
 .situations-content.material .situations-filter sj-item:not(:last-child) .material-filter {
