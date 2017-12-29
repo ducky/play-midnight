@@ -13,9 +13,10 @@ export const load = async data => {
     if (chrome.storage) {
       return chrome.storage.sync.get(data, resolve);
     } else {
-      const storage = localStorage.getItem(LOCAL_STORAGE_KEY) || data;
-      console.log('Fetching from Local Storage!', storage);
-      resolve(storage);
+      const storageContents = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const storageData = storageContents ? JSON.parse(storageContents) : data;
+      console.log('Fetching from Local Storage!', storageData);
+      resolve(storageData);
     }
   });
 };
@@ -25,7 +26,7 @@ export const save = async data => {
     if (chrome.storage) {
       return chrome.storage.sync.set(data, resolve);
     } else {
-      localStorage.setItem(LOCAL_STORAGE_KEY, data);
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
       console.log('Saving to Local Storage!', data);
       resolve(data);
     }
