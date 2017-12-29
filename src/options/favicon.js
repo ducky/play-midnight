@@ -14,7 +14,7 @@ const option = {
 
 const styles = css`
   body {
-    direction: rtl;
+    padding: 50px;
   }
 `;
 
