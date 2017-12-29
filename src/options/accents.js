@@ -15,6 +15,7 @@ const option = {
 const styles = css`
   body {
     background: #141517;
+    color: #dcdcdc;
   }
 `;
 

@@ -4,6 +4,12 @@ import { css } from 'styled-components';
 import getInjectedElement from '../utils/getInjectedElement';
 import getCssString from '../utils/getCssString';
 
+const styles = css`
+  body {
+    color: #f00;
+  }
+`;
+
 const option = {
   key: 'enabled',
   type: 'boolean',
@@ -11,12 +17,6 @@ const option = {
   description: `This will temporarily disable/enable Play Midnight if you don't want it on all the time`,
   defaultValue: true
 };
-
-const styles = css`
-  body {
-    color: #f00;
-  }
-`;
 
 class Enabled extends PureComponent {
   componentDidMount() {
