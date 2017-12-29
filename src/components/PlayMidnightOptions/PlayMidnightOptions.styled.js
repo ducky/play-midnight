@@ -116,6 +116,10 @@ const StyledOptions = styled.div`
     }
   }
 
+  .PlayMidnightOptions__option {
+    padding: 15px;
+  }
+
   .PlayMidnightOptions__options-save {
     visibility: hidden;
     opacity: 0;

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
 import OPTIONS, { DEFAULT_OPTIONS } from '../options';
-import { load } from '../utils/api';
+import { load, save } from '../utils/api';
 
 import PlayMidnightFAB from './PlayMidnightFAB';
 import PlayMidnightOptions from './PlayMidnightOptions';
@@ -17,20 +17,33 @@ class PlayMidnight extends PureComponent {
     options: {}
   };
 
+  getOptionValue = key => {
+    return this.state.options[key];
+  };
+
   updateOptionsShown = value => {
     this.setState(state => ({
       optionsShown: value !== undefined ? value : !state.optionsShown
     }));
   };
 
-  updateOption = key => e => {
-    const value = e.target.checked;
+  updateOption = e => {
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
     this.setState(state => ({
       options: {
         ...state.options,
-        [key]: value
+        [name]: value
       }
     }));
+  };
+
+  saveOptions = async () => {
+    const { options: toSave } = this.state;
+    const options = await save(toSave);
+    this.setState({ options });
   };
 
   async componentDidMount() {
@@ -39,22 +52,29 @@ class PlayMidnight extends PureComponent {
   }
 
   render() {
-    const { options, optionsShown } = this.state;
-    const OptionComponents = OPTIONS.filter(option => {
-      return options[option.key];
-    });
+    const { options: optionsValues, optionsShown } = this.state;
+
+    const options = OPTIONS.map(option => ({
+      ...option,
+      value: optionsValues[option.key]
+    }));
+
+    const renderOptions = options =>
+      options.map(
+        ({ key, value, Component }) => value && <Component key={key} />
+      );
 
     return (
       <Wrapper>
         <PlayMidnightFAB onClick={this.updateOptionsShown} />
         <PlayMidnightOptions
           visible={optionsShown}
-          options={OPTIONS}
-          optionValues={options}
+          options={options}
           onClose={() => this.updateOptionsShown(false)}
+          onSave={this.saveOptions}
           onOptionChange={this.updateOption}
         />
-        {OptionComponents.map(({ key, Component }) => <Component key={key} />)}
+        {renderOptions(options)}
       </Wrapper>
     );
   }
