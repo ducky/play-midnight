@@ -10,9 +10,10 @@ const VERSION_NUMBER = '3.0.0';
 const PlayMidnightOptions = ({
   visible,
   options,
-  optionValues,
+  getOptionValue,
   onOptionChange,
-  onClose
+  onClose,
+  onSave
 }) => {
   const handleBackgroundClick = e => {
     if (e.target === e.currentTarget) onClose();
@@ -47,14 +48,15 @@ const PlayMidnightOptions = ({
         <section className="PlayMidnightOptions__options">
           <div className="PlayMidnightOptions__options-container">
             {options.map(option => (
-              <div key={option.key} className="Options__option">
-                <h3>{option.title}</h3>
-                <h4>{option.description}</h4>
+              <div key={option.key} className="PlayMidnightOptions__option">
+                <h3 style={{ margin: 0, padding: 0 }}>{option.title}</h3>
+                <h4 style={{ margin: 0, padding: 0 }}>{option.description}</h4>
                 <div>
                   <input
+                    name={option.key}
                     type="checkbox"
-                    checked={optionValues[option.key]}
-                    onChange={onOptionChange(option.key)}
+                    checked={option.value}
+                    onChange={onOptionChange}
                   />
                 </div>
               </div>
@@ -66,14 +68,7 @@ const PlayMidnightOptions = ({
         </section>
 
         <footer className="PlayMidnightOptions__footer">
-          <paper-button
-            className="material-primary"
-            role="button"
-            tabindex="0"
-            no-focus=""
-          >
-            Save Options
-          </paper-button>
+          <button onClick={onSave}>Save Options</button>
         </footer>
       </StyledOptions>
     </Backdrop>
