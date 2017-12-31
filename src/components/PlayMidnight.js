@@ -1,83 +1,56 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import OPTIONS, { DEFAULT_OPTIONS } from '../options';
-import { load, save } from '../utils/api';
+import { actions, selectors } from 'modules/options';
+import Components from 'options/Components';
 
-import PlayMidnightFAB from './PlayMidnightFAB';
 import PlayMidnightOptions from './PlayMidnightOptions';
 
 const Wrapper = styled.div`
   font-family: 'Roboto', Helvetica, sans-serif;
+
+  * {
+    box-sizing: border-box;
+  }
 `;
 
 class PlayMidnight extends PureComponent {
-  state = {
-    optionsShown: false,
-    options: {}
-  };
-
-  getOptionValue = key => {
-    return this.state.options[key];
-  };
-
-  updateOptionsShown = value => {
-    this.setState(state => ({
-      optionsShown: value !== undefined ? value : !state.optionsShown
-    }));
-  };
-
-  updateOption = e => {
-    const target = e.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState(state => ({
-      options: {
-        ...state.options,
-        [name]: value
-      }
-    }));
-  };
-
-  saveOptions = async () => {
-    const { options: toSave } = this.state;
-    const options = await save(toSave);
-    this.setState({ options });
-  };
-
-  async componentDidMount() {
-    const options = await load(DEFAULT_OPTIONS);
-    this.setState({ options });
+  componentDidMount() {
+    this.props.fetchOptions();
   }
 
   render() {
-    const { options: optionsValues, optionsShown } = this.state;
+    const { options } = this.props;
 
-    const options = OPTIONS.map(option => ({
-      ...option,
-      value: optionsValues[option.key]
-    }));
-
-    const renderOptions = options =>
-      options.map(
-        ({ key, value, Component }) => value && <Component key={key} />
-      );
+    const renderOptions = options => {
+      return options
+        .filter(option => {
+          return Components[option.id] !== undefined;
+        })
+        .map(option => {
+          const Component = Components[option.id];
+          return (
+            (option.static || option.value) && (
+              <Component key={option.id} {...option} />
+            )
+          );
+        });
+    };
 
     return (
       <Wrapper>
-        <PlayMidnightFAB onClick={this.updateOptionsShown} />
-        <PlayMidnightOptions
-          visible={optionsShown}
-          options={options}
-          onClose={() => this.updateOptionsShown(false)}
-          onSave={this.saveOptions}
-          onOptionChange={this.updateOption}
-        />
+        <PlayMidnightOptions />
         {renderOptions(options)}
       </Wrapper>
     );
   }
 }
 
-export default PlayMidnight;
+const mapStateToProps = state => ({
+  options: selectors.options(state)
+});
+
+export default connect(mapStateToProps, {
+  fetchOptions: actions.fetchOptions
+})(PlayMidnight);
