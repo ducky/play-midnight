@@ -15,8 +15,9 @@ export const load = async data => {
     } else {
       const storageContents = localStorage.getItem(LOCAL_STORAGE_KEY);
       const storageData = storageContents ? JSON.parse(storageContents) : data;
-      console.log('Fetching from Local Storage!', storageData);
-      resolve(storageData);
+      const merged = { ...data, ...storageData };
+      console.log('Fetching from Local Storage!', merged);
+      resolve(merged);
     }
   });
 };
