@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { actions } from 'modules/options';
+import checkEnv from 'utils/checkEnv';
 
 const StyledFAB = styled.div`
   position: fixed;
@@ -18,9 +19,9 @@ const StyledFAB = styled.div`
   transition: all 0.3s;
   visibility: visible;
   opacity: 0.9;
-
   background: #ed6237;
   border-radius: 50%;
+  ${() => (checkEnv('development') ? 'bottom: 24px' : null)};
 
   &:hover {
     opacity: 1;
