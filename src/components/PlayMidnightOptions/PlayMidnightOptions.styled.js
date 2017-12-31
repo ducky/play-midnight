@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import checkEnv from 'utils/checkEnv';
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -14,7 +15,7 @@ const StyledOptions = styled.div`
   display: flex;
   flex-flow: column;
   left: calc(50vw - 300px);
-  bottom: 110px;
+  bottom: 118px;
   width: 600px;
   height: calc(100vh - 110px - 137px);
   max-height: 750px;
@@ -26,6 +27,7 @@ const StyledOptions = styled.div`
   transition: transform 0.3s;
   background: #242527;
   box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
+  ${() => (checkEnv('development') ? 'bottom: 32px' : null)};
 
   &:after {
     content: '';

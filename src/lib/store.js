@@ -3,8 +3,9 @@ import { createLogger } from 'redux-logger';
 import { createStore, applyMiddleware, compose } from 'redux';
 
 import { rootReducer, rootSaga } from 'modules/root';
+import checkEnv from 'utils/checkEnv';
 
-const DEV = process.env.NODE_ENV === 'development';
+const DEV = checkEnv('development');
 
 /*
 * Middleware & enhancers
