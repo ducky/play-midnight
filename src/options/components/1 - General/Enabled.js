@@ -1,8 +1,9 @@
 import { PureComponent } from 'react';
 import { css } from 'styled-components';
 
-import getInjectedElement from 'utils/getInjectedElement';
-import getCssString from 'utils/getCssString';
+import withStyles from 'hoc/withStyles';
+
+const OPTION_ID = 'enabled';
 
 const styles = css`
   body {
@@ -11,23 +12,9 @@ const styles = css`
 `;
 
 class Enabled extends PureComponent {
-  static id = 'enabled';
-
-  componentDidMount() {
-    const { id } = this.props;
-    const style = getInjectedElement('style', `play-midnight-${id}`);
-    style.innerText = getCssString(styles);
-  }
-
-  componentWillUnmount() {
-    const { id } = this.props;
-    const style = getInjectedElement('style', `play-midnight-${id}`);
-    style.remove();
-  }
-
   render() {
     return null;
   }
 }
 
-export default Enabled;
+export default withStyles(OPTION_ID, styles)(Enabled);
