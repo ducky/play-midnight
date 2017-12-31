@@ -11,10 +11,11 @@ const styles = css`
   }
 `;
 
+@withStyles(OPTION_ID, styles)
 class Favicon extends PureComponent {
   render() {
     return null;
   }
 }
 
-export default withStyles(OPTION_ID, styles)(Favicon);
+export default Favicon;

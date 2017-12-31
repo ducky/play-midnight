@@ -11,10 +11,11 @@ const styles = css`
   }
 `;
 
+@withStyles(OPTION_ID, styles)
 class Enabled extends PureComponent {
   render() {
     return null;
   }
 }
 
-export default withStyles(OPTION_ID, styles)(Enabled);
+export default Enabled;
