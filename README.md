@@ -1,4 +1,5 @@
 ## Play Midnight - Chrome Extension
+
 [![Install now.](https://img.shields.io/badge/chrome%20web%20store-download-blue.svg)](https://chrome.google.com/webstore/detail/play-midnight-for-google/ljmjmhjkcgfmfdhgplikncgndbdeckci)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/d/ljmjmhjkcgfmfdhgplikncgndbdeckci.svg)](https://chrome.google.com/webstore/detail/play-midnight-for-google/ljmjmhjkcgfmfdhgplikncgndbdeckci)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/ljmjmhjkcgfmfdhgplikncgndbdeckci.svg)](https://chrome.google.com/webstore/detail/play-midnight-for-google/ljmjmhjkcgfmfdhgplikncgndbdeckci)
@@ -16,16 +17,13 @@ Play Midnight is currently using a `gulp` setup, so getting started is relativel
 
 1. Clone Repository
 2. Install Dependencies
-  1. Optionally install yarn if you don't have it yet `npm install -g yarn`
-  2.  `cd` into the directory and run `yarn` (or `npm install` if you don't want to use yarn)
-3. Build Changes
-  1. To build your changes, run `npm run build` and it should process everything.
-  2. To watch all files for changes (easier), run `npm run watch`
-4. In Chrome, go to `chrome://extensions` and toggle the `Developer Mode` option (top right) to "On"
-5. Click `Load Unpacked Extension` and load up your main Play Midnight folder (the one containing `manifest.json`)
-6. Make changes at your leisure!
-
-**Note:** If you're on Windows and are having any issues with `node-sass` you may need to install python (I've been using `v2.7.12`) and alternatively MSBUILD which comes with Visual Studio Express.
+3. Optionally install yarn if you don't have it yet `brew install yarn` if you have homebrew, or `npm install -g yarn`
+4. `cd` into the directory and run `yarn` (or `npm install` if you don't want to use yarn)
+5. Build Changes
+6. To build your changes, run `yarn start` (or `npm run start`) and it should process everything.
+7. In Chrome, go to `chrome://extensions` and toggle the `Developer Mode` option (top right) to "On"
+8. Click `Load Unpacked Extension` and load up your main Play Midnight folder (the one containing `manifest.json`)
+9. Make changes at your leisure!
 
 ### About
 
