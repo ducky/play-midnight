@@ -11,10 +11,11 @@ const styles = css`
   }
 `;
 
+@withStyles(OPTION_ID, styles)
 class Core extends PureComponent {
   render() {
     return null;
   }
 }
 
-export default withStyles(OPTION_ID, styles)(Core);
+export default Core;

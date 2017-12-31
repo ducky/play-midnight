@@ -11,10 +11,11 @@ const styles = css`
   }
 `;
 
+@withStyles(OPTION_ID, styles)
 class AccentsOnly extends PureComponent {
   render() {
     return null;
   }
 }
 
-export default withStyles(OPTION_ID, styles)(AccentsOnly);
+export default AccentsOnly;
