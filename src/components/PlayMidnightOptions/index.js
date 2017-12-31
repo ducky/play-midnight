@@ -1,1 +1,1 @@
-export { default } from './PlayMidnightOptions';
+export { default } from './PlayMidnightOptions.container';
