@@ -5,6 +5,17 @@ import { actions, selectors } from 'modules/options';
 
 import PlayMidnightOptions from './PlayMidnightOptions';
 
+const mapStateToProps = state => ({
+  options: selectors.options(state),
+  sections: selectors.sortedOptions(state),
+  menuVisible: state.options.menuVisible
+});
+
+@connect(mapStateToProps, {
+  saveOptions: actions.saveOptions,
+  toggleMenu: actions.toggleMenu,
+  updateOption: actions.updateOption
+})
 class PlayMidnightOptionsContainer extends PureComponent {
   updateOption = ({ target }) => {
     const { updateOption } = this.props;
@@ -40,14 +51,4 @@ class PlayMidnightOptionsContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
-  options: selectors.options(state),
-  sections: selectors.sortedOptions(state),
-  menuVisible: state.options.menuVisible
-});
-
-export default connect(mapStateToProps, {
-  saveOptions: actions.saveOptions,
-  toggleMenu: actions.toggleMenu,
-  updateOption: actions.updateOption
-})(PlayMidnightOptionsContainer);
+export default PlayMidnightOptionsContainer;

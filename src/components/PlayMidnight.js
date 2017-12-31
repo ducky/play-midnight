@@ -15,6 +15,13 @@ const Wrapper = styled.div`
   }
 `;
 
+const mapStateToProps = state => ({
+  options: selectors.options(state)
+});
+
+@connect(mapStateToProps, {
+  fetchOptions: actions.fetchOptions
+})
 class PlayMidnight extends PureComponent {
   componentDidMount() {
     this.props.fetchOptions();
@@ -47,10 +54,4 @@ class PlayMidnight extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
-  options: selectors.options(state)
-});
-
-export default connect(mapStateToProps, {
-  fetchOptions: actions.fetchOptions
-})(PlayMidnight);
+export default PlayMidnight;
