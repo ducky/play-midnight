@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import { actions } from 'modules/options';
+import { actions, selectors } from 'modules/options';
 import checkEnv from 'utils/checkEnv';
 
 const StyledFAB = styled.div`
@@ -20,7 +20,8 @@ const StyledFAB = styled.div`
   transition: all 0.3s;
   visibility: visible;
   opacity: 0.9;
-  background: #ed6237;
+  background: ${props =>
+    props.accent ? `${props.accent.value}` : 'transparent'};
   border-radius: 50%;
   ${() => (checkEnv('development') ? 'bottom: 24px' : null)};
 
@@ -85,7 +86,7 @@ class FAB extends PureComponent {
   }
 
   render() {
-    const { toggleMenu } = this.props;
+    const { accent, toggleMenu } = this.props;
     const { active } = this.state;
 
     return (
@@ -95,7 +96,7 @@ class FAB extends PureComponent {
         transitionLeaveTimeout={300}
       >
         {active ? (
-          <StyledFAB onClick={() => toggleMenu()}>
+          <StyledFAB accent={accent} onClick={() => toggleMenu()}>
             <div className="FAB__icon">
               <svg
                 viewBox="0 0 24 24"
@@ -117,6 +118,10 @@ class FAB extends PureComponent {
   }
 }
 
-export default connect(null, {
+const mapStateToProps = state => ({
+  accent: selectors.accentColor(state)
+});
+
+export default connect(mapStateToProps, {
   toggleMenu: actions.toggleMenu
 })(FAB);
