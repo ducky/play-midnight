@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
+import { removeItem } from 'utils/array';
+
 import Button from 'components/Button';
 import StyledOption from './Option.styled';
 
@@ -30,14 +32,19 @@ const CollectionItem = styled.label`
     transform: scale3d(0.7, 0.7, 0.7);
     text-shadow: 1px 1px 0 #141517;
     transition: all 0.5s;
-    font-size: 13px;
     color: #fff;
     padding: 8px 10px;
     text-align: center;
   }
 
   .CollectionItem__field {
+    font-size: 12px;
     margin: 0 0 3px;
+
+    &.CollectionItem__field--title {
+      font-weight: 700;
+      font-size: 14px;
+    }
 
     &:last-child {
       margin: 0;
@@ -134,13 +141,20 @@ class Option extends PureComponent {
     showForm: false
   };
 
-  updateOption = ({ target }) => {
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+  removeItem = (evt, id) => {
+    const { plural, value, values, onChangeValues } = this.props;
+    evt.stopPropagation();
 
-    this.setState(() => ({
-      [name]: value
-    }));
+    // if (value === id) {
+    //   onChange({
+    //     // TODO - Fix remove of active item
+    //   });
+    // }
+
+    onChangeValues({
+      id: plural,
+      value: removeItem(values, { id })
+    });
   };
 
   saveForm = () => {
@@ -163,6 +177,15 @@ class Option extends PureComponent {
   toggleForm = toggleState => {
     this.setState(state => ({
       showForm: toggleState !== undefined ? toggleState : !state.showForm
+    }));
+  };
+
+  updateOption = ({ target }) => {
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState(() => ({
+      [name]: value
     }));
   };
 
@@ -223,12 +246,17 @@ class Option extends PureComponent {
                 type="radio"
               />
               <div className="CollectionItem__fields">
-                <div className="CollectionItem__field">{name}</div>
+                <div className="CollectionItem__field CollectionItem__field--title">
+                  {name}
+                </div>
                 <div className="CollectionItem__field">
                   {colorValue.toUpperCase()}
                 </div>
               </div>
-              <div className="CollectionItem__remove" />
+              <div
+                className="CollectionItem__remove"
+                onClick={e => this.removeItem(e, colorId)}
+              />
             </CollectionItem>
           ))}
         </div>
