@@ -25,6 +25,10 @@
     "scripts": ["build/background.js"]
   },
 
+  "externally_connectable": {
+    "matches": ["*://play.google.com/music/listen*"]
+  },
+
   "content_scripts": [
     {
       "matches": ["*://play.google.com/music/listen*"],
