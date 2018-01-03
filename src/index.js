@@ -7,6 +7,6 @@ import 'theme/global';
 import Root from 'components/Root';
 import getInjectedElement from 'utils/getInjectedElement';
 
-const entry = getInjectedElement('div', 'play-midnight');
+const entry = getInjectedElement('div', { id: 'play-midnight' });
 
 ReactDOM.render(<Root />, entry);

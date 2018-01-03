@@ -41,8 +41,8 @@ const OPTIONS = [
       { id: 'blue-abyss', name: 'Blue Abyss', value: '#007AA5' },
       { id: 'midnight-oil', name: 'Midnight Oil', value: '#8400a3' },
       { id: 'prince-purple', name: 'Prince Purple', value: '#673ab7' },
-      { id: 'rusty-spoon', name: 'Rusty Spoon', value: '#4c9014' },
-      { id: 'spartan-crimson', name: 'Spartan Crimson', value: '#9d0000' }
+      { id: 'redrum', name: 'Redrum', value: '#981046' },
+      { id: 'rusty-spoon', name: 'Rusty Spoon', value: '#4c9014' }
     ]
   },
 
