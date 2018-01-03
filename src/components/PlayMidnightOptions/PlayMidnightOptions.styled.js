@@ -11,23 +11,21 @@ export const Backdrop = styled.div`
 `;
 
 const StyledOptions = styled.div`
-  position: fixed;
   display: flex;
   flex-flow: column;
+  position: fixed;
   left: calc(50vw - 300px);
-  bottom: 118px;
+  bottom: ${() => (checkEnv('development') ? '32px' : '118px')};
   width: 600px;
   height: calc(100vh - 110px - 137px);
   max-height: 750px;
-  margin: 0;
-  border-radius: 3px;
   z-index: 110;
+  border-radius: 3px;
   color: #dcdcdc;
-  transform-origin: center bottom 0;
-  transition: transform 0.3s;
   background: #242527;
   box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
-  ${() => (checkEnv('development') ? 'bottom: 32px' : null)};
+  transform-origin: center bottom 0;
+  transition: transform 0.3s;
 
   &:after {
     content: '';

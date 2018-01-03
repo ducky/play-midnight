@@ -6,6 +6,7 @@ import { actions, selectors } from 'modules/options';
 import PlayMidnightOptions from './PlayMidnightOptions';
 
 const mapStateToProps = state => ({
+  accentColor: selectors.accentColor(state),
   options: selectors.options(state),
   sections: selectors.sortedOptions(state),
   menuVisible: state.options.menuVisible
@@ -31,6 +32,7 @@ class PlayMidnightOptionsContainer extends PureComponent {
 
   render() {
     const {
+      accentColor,
       options,
       sections,
       menuVisible,
@@ -40,6 +42,7 @@ class PlayMidnightOptionsContainer extends PureComponent {
 
     return (
       <PlayMidnightOptions
+        accent={accentColor}
         visible={menuVisible}
         sections={sections}
         onClose={() => toggleMenu(false)}
