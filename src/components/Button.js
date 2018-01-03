@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+
+import { selectors } from 'modules/options';
 
 const StyledButton = styled.button`
   display: inline-flex;
@@ -11,21 +14,28 @@ const StyledButton = styled.button`
   font-weight: 500;
   padding: 10px 15px;
   cursor: pointer;
-  background: #981046;
   opacity: 0.9;
   border: none;
   outline: none;
   box-shadow: none;
   color: #fff;
-  transform: opacity 500ms;
+  transition: background 500ms, opacity 500ms;
+
+  ${props => props.accent && `background: ${props.accent.value}`};
 
   &:hover {
     opacity: 1;
   }
 `;
 
-const Checkbox = ({ children, ...rest }) => (
-  <StyledButton {...rest}>{children}</StyledButton>
+const Button = ({ accentColor, children, ...rest }) => (
+  <StyledButton accent={accentColor} {...rest}>
+    {children}
+  </StyledButton>
 );
 
-export default Checkbox;
+const mapStateToProps = state => ({
+  accentColor: selectors.accentColor(state)
+});
+
+export default connect(mapStateToProps)(Button);

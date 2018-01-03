@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import noop from 'lodash/noop';
+
+import { selectors } from 'modules/options';
 
 const StyledCheckbox = styled.div`
   display: inline-flex;
@@ -37,15 +40,16 @@ const StyledCheckbox = styled.div`
   }
 
   input:checked + .Checkbox__container .Checkbox__track {
-    background: #981046;
-    border-color: #981046;
+    ${props => props.accent && `background: ${props.accent.value}`};
+    ${props => props.accent && `border-color: ${props.accent.value}`};
+    /* TODO - Darken Border */
     opacity: 0.5;
   }
 
   input:checked + .Checkbox__container .Checkbox__knob {
-    background: #981046;
+    ${props => props.accent && `background: ${props.accent.value}`};
+    ${props => props.accent && `border-color: ${props.accent.value}`};
     transform: translateX(100%);
-    border-color: #981046;
   }
 
   input {
@@ -53,8 +57,16 @@ const StyledCheckbox = styled.div`
   }
 `;
 
-const Checkbox = ({ checked, disabled, defaultChecked, onChange, ...rest }) => (
-  <StyledCheckbox>
+const Checkbox = ({
+  accentColor,
+  checked,
+  disabled,
+  defaultChecked,
+  onChange,
+  dispatch,
+  ...rest
+}) => (
+  <StyledCheckbox accent={accentColor}>
     <label>
       <input
         type="checkbox"
@@ -71,4 +83,8 @@ const Checkbox = ({ checked, disabled, defaultChecked, onChange, ...rest }) => (
   </StyledCheckbox>
 );
 
-export default Checkbox;
+const mapStateToProps = state => ({
+  accentColor: selectors.accentColor(state)
+});
+
+export default connect(mapStateToProps)(Checkbox);
