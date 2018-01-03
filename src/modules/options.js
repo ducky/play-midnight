@@ -2,8 +2,10 @@ import { createActions, handleActions } from 'redux-actions';
 import { all, put, call, takeEvery } from 'redux-saga/effects';
 import { createSelector } from 'reselect';
 import filter from 'lodash/filter';
+import find from 'lodash/find';
 
 import { load, save } from 'lib/api';
+import { DEFAULT_ACCENT } from 'theme/style';
 import { updateItem } from 'utils/array';
 
 import OPTIONS, { SECTIONS } from 'options';
@@ -18,6 +20,13 @@ const defaultState = {
 export const selectors = {
   options: state => state.options.data
 };
+
+selectors.accentColor = createSelector([selectors.options], options => {
+  const accentOption = find(options, { id: 'accent' });
+  return accentOption
+    ? find(accentOption.values, { id: accentOption.value })
+    : { value: DEFAULT_ACCENT };
+});
 
 selectors.sortedOptions = createSelector([selectors.options], options =>
   SECTIONS.map(section => {
