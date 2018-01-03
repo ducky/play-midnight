@@ -18,6 +18,7 @@ const OPTION_TYPES = {
 };
 
 const PlayMidnightOptions = ({
+  accent,
   visible,
   sections,
   onOptionChange,
@@ -37,7 +38,7 @@ const PlayMidnightOptions = ({
     >
       {visible ? (
         <Backdrop onClick={handleBackgroundClick}>
-          <StyledOptions>
+          <StyledOptions accent={accent}>
             <header className="PlayMidnightOptions__header">
               <div className="image-header">
                 <img
