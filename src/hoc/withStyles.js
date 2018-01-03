@@ -3,24 +3,28 @@ import React, { PureComponent } from 'react';
 import getInjectedElement from 'utils/getInjectedElement';
 import getCssString from 'utils/getCssString';
 
-const withStyles = (id, styles) => Component => {
+const withStyles = id => Component => {
   class StyleComponent extends PureComponent {
     static id = id;
 
-    componentDidMount() {
-      const { id } = this.props;
-      const style = getInjectedElement('style', `play-midnight-${id}`);
+    updateStyles = styles => {
+      const style = getInjectedElement('style', { id: `play-midnight-${id}` });
       style.innerText = getCssString(styles);
-    }
+    };
 
-    componentWillUnmount() {
-      const { id } = this.props;
-      const style = getInjectedElement('style', `play-midnight-${id}`);
+    removeStyles = () => {
+      const style = getInjectedElement('style', { id: `play-midnight-${id}` });
       style.remove();
-    }
+    };
 
     render() {
-      return <Component {...this.props} />;
+      return (
+        <Component
+          updateStyles={this.updateStyles}
+          removeStyles={this.removeStyles}
+          {...this.props}
+        />
+      );
     }
   }
 
