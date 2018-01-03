@@ -1,5 +1,5 @@
-export default (type, id, where = 'body') => {
-  let element = document.querySelector(`${type}#${id}`);
+export default (type, attributes = { id: '' }, where = 'body') => {
+  let element = document.querySelector(`${type}#${attributes.id}`);
 
   if (element) {
     return element;
@@ -7,7 +7,12 @@ export default (type, id, where = 'body') => {
 
   const container = document.querySelector(where);
   element = document.createElement(type);
-  element.id = id;
+
+  Object.keys(attributes).forEach(key => {
+    const attribute = attributes[key];
+    element[key] = attribute;
+  });
+
   container.appendChild(element);
   return element;
 };
