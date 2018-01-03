@@ -31,8 +31,10 @@
     "typeface-roboto": "^0.0.45"
   },
   "scripts": {
-    "start": "parcel src/index.html",
-    "build": "parcel build src/index.js --out-dir build"
+    "start":
+      "parcel build src/background.js --out-dir dist && parcel src/index.html",
+    "build":
+      "parcel build src/index.js --out-dir build && parcel build src/background.js --no-minify --out-dir build"
   },
   "babel": {
     "plugins": [
