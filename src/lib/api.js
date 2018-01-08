@@ -26,7 +26,6 @@ export const load = async data => {
 export const loadBackground = async data => {
   return new Promise(resolve => {
     if (IS_EXTENSION) {
-      console.log(chrome.runtime);
       return chrome.runtime.sendMessage(data, resolve);
     } else {
       console.log('Load Background Fallback!', data);
