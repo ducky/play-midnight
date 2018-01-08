@@ -21,8 +21,9 @@ const PlayMidnightOptions = ({
   accent,
   visible,
   sections,
-  onOptionChange,
   onArrayChange,
+  onOptionChange,
+  onTargetedChange,
   onClose,
   onSave
 }) => {
@@ -79,6 +80,7 @@ const PlayMidnightOptions = ({
                             key={option.id}
                             onChange={onOptionChange}
                             onChangeValues={onArrayChange}
+                            onTargetedChange={onTargetedChange}
                             {...option}
                           />
                         );
