@@ -166,6 +166,10 @@ const StyledOption = styled.div`
     font-weight: 300;
   }
 
+  .Option__color-slider {
+    padding: 25px;
+  }
+
   .Option__collection {
       display: flex;
       justify-content: center;
