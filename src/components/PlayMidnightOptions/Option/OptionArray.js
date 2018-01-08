@@ -12,19 +12,32 @@ class Option extends PureComponent {
     showForm: false
   };
 
-  removeItem = (evt, id) => {
-    const { plural, value, values, onChangeValues } = this.props;
-    evt.stopPropagation();
+  removeItem = id => {
+    const {
+      id: optionId,
+      defaultValues,
+      plural,
+      value,
+      values,
+      onChange,
+      onChangeValues
+    } = this.props;
 
-    // if (value === id) {
-    //   onChange({
-    //     // TODO - Fix remove of active item
-    //   });
-    // }
+    // Remove Item or Reset Default if Empty
+    const updatedValues =
+      values.length > 1 ? removeItem(values, { id }) : [...defaultValues];
+
+    // Deleting Current Accent, reset to first in array
+    if (value === id) {
+      onChange({
+        id: optionId,
+        value: updatedValues[0].id
+      });
+    }
 
     onChangeValues({
       id: plural,
-      value: removeItem(values, { id })
+      value: updatedValues
     });
   };
 
