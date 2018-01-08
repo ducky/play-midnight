@@ -7,13 +7,17 @@ const withStyles = id => Component => {
   class StyleComponent extends PureComponent {
     static id = id;
 
-    updateStyles = styles => {
-      const style = getInjectedElement('style', { id: `play-midnight-${id}` });
+    updateStyles = async styles => {
+      const style = await getInjectedElement('style', {
+        id: `play-midnight-${id}`
+      });
       style.innerText = getCssString(styles);
     };
 
-    removeStyles = () => {
-      const style = getInjectedElement('style', { id: `play-midnight-${id}` });
+    removeStyles = async () => {
+      const style = await getInjectedElement('style', {
+        id: `play-midnight-${id}`
+      });
       style.remove();
     };
 
