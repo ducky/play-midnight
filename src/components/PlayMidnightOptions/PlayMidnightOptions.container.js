@@ -18,11 +18,14 @@ const mapStateToProps = state => ({
   updateOption: actions.updateOption
 })
 class PlayMidnightOptionsContainer extends PureComponent {
-  updateOption = ({ target }) => {
-    const { updateOption } = this.props;
+  updateTargetedOption = ({ target }) => {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const id = target.name;
-    updateOption({ id, value });
+    this.props.updateOption({ id, value });
+  };
+
+  updateOption = ({ id, value }) => {
+    this.props.updateOption({ id, value });
   };
 
   updateArray = ({ id, value }) => {
@@ -49,6 +52,7 @@ class PlayMidnightOptionsContainer extends PureComponent {
         onSave={() => saveOptions(options)}
         onArrayChange={this.updateArray}
         onOptionChange={this.updateOption}
+        onTargetedChange={this.updateTargetedOption}
       />
     );
   }
