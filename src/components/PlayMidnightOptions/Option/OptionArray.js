@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { SliderPicker } from 'react-color';
 
 import { removeItem } from 'utils/array';
 import { validateId, validateTitle } from 'utils/validation';
@@ -44,7 +45,13 @@ class Option extends PureComponent {
   };
 
   saveForm = () => {
-    const { plural, values, onChangeValues } = this.props;
+    const {
+      id: optionId,
+      plural,
+      values,
+      onChange,
+      onChangeValues
+    } = this.props;
     const { color, name: rawName } = this.state;
 
     const name = validateTitle(rawName);
@@ -55,12 +62,31 @@ class Option extends PureComponent {
       value: [...values, { id, name, value: color }]
     });
 
-    this.toggleForm(false);
+    onChange({
+      id: optionId,
+      value: id
+    });
+
+    this.resetForm();
+  };
+
+  resetForm = () => {
+    this.setState(state => ({
+      color: '',
+      name: '',
+      showForm: false
+    }));
   };
 
   toggleForm = toggleState => {
     this.setState(state => ({
       showForm: toggleState !== undefined ? toggleState : !state.showForm
+    }));
+  };
+
+  updateColor = color => {
+    this.setState(() => ({
+      color: color.hex
     }));
   };
 
@@ -111,13 +137,9 @@ class Option extends PureComponent {
               onChange={this.updateOption}
               value={name}
             />
-            <input
-              type="text"
-              name="color"
-              placeholder="Color"
-              onChange={this.updateOption}
-              value={color}
-            />
+            <div className="Option__color-slider">
+              <SliderPicker color={color} onChange={this.updateColor} />
+            </div>
             <Button onClick={this.saveForm}>Save</Button>
             <Button onClick={() => this.toggleForm(false)}>Cancel</Button>
           </div>
