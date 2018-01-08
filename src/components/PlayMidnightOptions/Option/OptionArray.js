@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
 
 import { removeItem } from 'utils/array';
+import { validateId, validateTitle } from 'utils/validation';
 
 import Button from 'components/Button';
 import StyledOption, { CollectionItem } from './Option.styled';
 
+// TODO - Update to be dynamic and allow for createable - false
 class Option extends PureComponent {
   state = {
     color: '',
@@ -45,17 +47,15 @@ class Option extends PureComponent {
     const { plural, values, onChangeValues } = this.props;
     const { color, name: rawName } = this.state;
 
-    const name = rawName.replace(/[^a-zA-Z0-9',"()\s]/g, '');
-    const id = name
-      .replace(/[^a-zA-Z0-9\s]/g, '')
-      .replace(/\s/g, '-')
-      .toLowerCase();
+    const name = validateTitle(rawName);
+    const id = validateId(name);
 
     onChangeValues({
       id: plural,
       value: [...values, { id, name, value: color }]
     });
-    this.toggleForm();
+
+    this.toggleForm(false);
   };
 
   toggleForm = toggleState => {
@@ -74,8 +74,15 @@ class Option extends PureComponent {
   };
 
   render() {
-    const { id, title, description, value, values, onChange } = this.props;
     const { name, color, showForm } = this.state;
+    const {
+      id,
+      title,
+      description,
+      value,
+      values,
+      onTargetedChange
+    } = this.props;
 
     return (
       <StyledOption>
@@ -100,12 +107,14 @@ class Option extends PureComponent {
               type="text"
               name="name"
               maxLength="24"
+              placeholder="Name"
               onChange={this.updateOption}
               value={name}
             />
             <input
               type="text"
               name="color"
+              placeholder="Color"
               onChange={this.updateOption}
               value={color}
             />
@@ -126,7 +135,7 @@ class Option extends PureComponent {
                 name={id}
                 value={colorId}
                 defaultChecked={value === colorId}
-                onClick={onChange}
+                onClick={onTargetedChange}
                 type="radio"
               />
               <div className="CollectionItem__fields">
@@ -139,7 +148,7 @@ class Option extends PureComponent {
               </div>
               <div
                 className="CollectionItem__remove"
-                onClick={e => this.removeItem(e, colorId)}
+                onClick={() => this.removeItem(colorId)}
               />
             </CollectionItem>
           ))}

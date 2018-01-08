@@ -3,7 +3,7 @@ import React from 'react';
 import Checkbox from 'components/Checkbox';
 import StyledOption from './Option.styled';
 
-const Option = ({ id, title, description, value, onChange }) => (
+const Option = ({ id, title, description, value, onTargetedChange }) => (
   <StyledOption>
     <div className="Option__header">
       <div className="Option__content">
@@ -15,7 +15,7 @@ const Option = ({ id, title, description, value, onChange }) => (
           name={id}
           type="checkbox"
           checked={value}
-          onChange={onChange}
+          onChange={onTargetedChange}
         />
       </div>
     </div>
