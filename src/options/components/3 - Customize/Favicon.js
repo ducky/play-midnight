@@ -14,57 +14,6 @@ import getInjectedElement from 'utils/getInjectedElement';
 const OPTION_ID = 'favicon';
 const ICON_STORAGE = 'PM_ICON';
 
-// // Update Favicon
-// function updateFavicon() {
-//   if (!_userOptions.favicon && !_userOptions.faviconAccent) {
-//     return;
-//   }
-
-//   var stored = localStorage.getItem('PM_ICON')
-//     ? JSON.parse(localStorage.getItem('PM_ICON'))
-//     : undefined;
-//   var cached = stored && stored.color === _userOptions.accent.color;
-//   var data = {
-//     url: _favicon.url,
-//     color: _userOptions.accent.color
-//   };
-
-//   if (_userOptions.faviconAccent) {
-//     if (!cached) {
-//       chrome.runtime.sendMessage(data, function(response) {
-//         localStorage.setItem(
-//           'PM_ICON',
-//           JSON.stringify({
-//             url: response.url,
-//             color: _userOptions.accent.color
-//           })
-//         );
-//         createIcon(response.url);
-//       });
-//     } else {
-//       createIcon(stored.url);
-//     }
-//   } else {
-//     createIcon(data.url);
-//   }
-
-//   function createIcon(url) {
-//     // Remove Old Favicon
-//     var current = document.querySelectorAll(
-//       'link[rel="SHORTCUT ICON"], link[rel="shortcut icon"], link[rel="icon"], link[href $= ".ico"]'
-//     );
-//     _.remove(current);
-
-//     // Create Link Element
-//     var icon = document.createElement('link');
-//     icon.rel = 'icon';
-//     icon.type = 'image/png';
-//     icon.href = url;
-
-//     document.head.appendChild(icon);
-//   }
-// }
-
 const mapStateToProps = state => ({
   accent: selectors.accentColor(state),
   options: selectors.options(state)
@@ -75,7 +24,6 @@ class Favicon extends Component {
   static id = OPTION_ID;
 
   updateFavicon = async (accent, useAccent) => {
-    console.log('update!', accent, useAccent);
     const stored = localStorage.getItem(ICON_STORAGE)
       ? JSON.parse(localStorage.getItem(ICON_STORAGE))
       : undefined;
@@ -86,7 +34,7 @@ class Favicon extends Component {
       accent: accent.value
     };
 
-    const createIcon = href => {
+    const createIcon = async href => {
       // Remove Old Favicon
       const existing = document.querySelectorAll(
         'link[rel="SHORTCUT ICON"], link[rel="shortcut icon"], link[rel="icon"], link[href $= ".ico"]'
@@ -94,7 +42,7 @@ class Favicon extends Component {
       removeAllElements(existing);
 
       // Create Link Element
-      getInjectedElement(
+      await getInjectedElement(
         'link',
         { id: 'play-midnight-favicon', rel: 'icon', type: 'image/png', href },
         'head'
@@ -132,8 +80,10 @@ class Favicon extends Component {
     return !isEqual(prevAccent, accent) || !isEqual(prevFavicon, favicon);
   }
 
-  componentWillUnmount() {
-    const icon = getInjectedElement('link', { id: 'play-midnight-favicon' });
+  async componentWillUnmount() {
+    const icon = await getInjectedElement('link', {
+      id: 'play-midnight-favicon'
+    });
     icon.remove();
   }
 
