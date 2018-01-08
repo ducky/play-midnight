@@ -28,11 +28,11 @@ const StyledFAB = styled.div`
   padding: 8px;
   box-sizing: border-box;
   cursor: pointer;
-  transition: opacity 0.3s;
   visibility: visible;
   opacity: 0.9;
   color: ${props => (props.accent ? `${props.accent.value}` : '#dcdcdc')};
   border-radius: 50%;
+  transition: opacity 300ms, transform 300ms;
 
   &:hover {
     opacity: 1;
