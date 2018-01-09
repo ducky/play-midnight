@@ -5,7 +5,7 @@ import filter from 'lodash/filter';
 import find from 'lodash/find';
 
 import { load, save } from 'lib/api';
-import { DEFAULT_ACCENT } from 'theme/style';
+import { DEFAULT_ACCENT } from 'style/theme';
 import { updateItem } from 'utils/array';
 
 import OPTIONS, { SECTIONS } from 'options';
