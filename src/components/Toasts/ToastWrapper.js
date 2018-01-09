@@ -6,25 +6,23 @@ import isNaN from 'lodash/isNaN';
 import noop from 'lodash/noop';
 
 import { actions } from 'modules/toast';
+import { colors } from 'style/theme';
 
 const DEFAULT_TIMEOUT = 3500;
-
-/*${colors.white};*/
-/* ${props =>
-    props.type === 'info' && `border-top: 10px solid ${colors.grayHoki}`};
-  ${props =>
-    props.type === 'success' && `border-top: 10px solid ${colors.greenSushi}`};
-  ${props =>
-    props.type === 'alert' && `border-top: 10px solid ${colors.redPersian}`}; */
 
 const Toast = styled.div`
   width: 300px;
   border-radius: 5px;
-  background: #fff;
+  background: ${colors.background_menu};
+  color: ${colors.font_primary};
   padding: 20px;
   margin: 0 0 15px;
   transform-origin: top right;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+  ${props => props.type === 'info' && `border-top: 10px solid ${colors.blue}`};
+  ${props => props.type === 'success' && `border-top: 10px solid ${colors.green}`};
+  ${props => props.type === 'alert' && `border-top: 10px solid ${colors.red}`};
 
   &:last-child {
     margin: 0;
@@ -82,17 +80,13 @@ const Toast = styled.div`
 
 class ToastWrapper extends PureComponent {
   static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.element,
-      PropTypes.string
-    ]).isRequired,
+    children: PropTypes.oneOfType([PropTypes.array, PropTypes.element, PropTypes.string]).isRequired,
     title: PropTypes.string,
     type: PropTypes.string,
 
     // Methods
     close: PropTypes.func.isRequired,
-    onClose: PropTypes.func.isRequired
+    onClose: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -101,7 +95,7 @@ class ToastWrapper extends PureComponent {
 
     // Methods
     close: noop,
-    onClose: noop
+    onClose: noop,
   };
 
   startTimer = () => {
@@ -109,9 +103,7 @@ class ToastWrapper extends PureComponent {
 
     if (timeout !== false) {
       const parseTimeout = parseInt(timeout, 10);
-      const computedTimeout = !isNaN(parseTimeout)
-        ? parseTimeout
-        : DEFAULT_TIMEOUT;
+      const computedTimeout = !isNaN(parseTimeout) ? parseTimeout : DEFAULT_TIMEOUT;
       this.timer = setTimeout(this.withClose(onClose), computedTimeout);
     }
   };
@@ -141,17 +133,10 @@ class ToastWrapper extends PureComponent {
     const { children, title, type, onClose } = this.props;
 
     return (
-      <Toast
-        type={type}
-        onMouseEnter={this.stopTimer}
-        onMouseLeave={this.startTimer}
-      >
+      <Toast type={type} onMouseEnter={this.stopTimer} onMouseLeave={this.startTimer}>
         <div className="Toast__header">
           <div className="Toast__header-title">{title}</div>
-          <div
-            className="Toast__header-action"
-            onClick={this.withClose(onClose)}
-          >
+          <div className="Toast__header-action" onClick={this.withClose(onClose)}>
             <i className="fa fa-times" />
           </div>
         </div>

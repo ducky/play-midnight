@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-// import { colors } from 'theme/theme';
+import { colors } from 'style/theme';
 
 export const ModalBackdrop = styled.div`
   position: fixed;
@@ -32,18 +32,11 @@ export const ModalBackdrop = styled.div`
   }
 `;
 
-/*${colors.white};*/
-/* ${props =>
-    props.type === 'info' && `border-top: 10px solid ${colors.grayHoki}`};
-  ${props =>
-    props.type === 'success' && `border-top: 10px solid ${colors.greenSushi}`};
-  ${props =>
-    props.type === 'alert' && `border-top: 10px solid ${colors.redPersian}`}; */
-
 const Modal = styled.div`
-  background: #fff;
+  background: ${colors.background_menu};
+  color: ${colors.font_primary};
   border-radius: 5px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
   padding: 36px;
   max-width: 1024px;
   margin: 0 auto;
