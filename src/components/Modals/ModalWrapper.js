@@ -7,10 +7,7 @@ import { actions } from 'modules/modal';
 
 import Button from 'components/Button';
 import { propTypes, defaultProps } from './ModalWrapper.statics';
-import StyledModal, {
-  ModalActions,
-  ModalBackdrop
-} from './ModalWrapper.styled';
+import StyledModal, { ModalActions, ModalBackdrop } from './ModalWrapper.styled';
 
 class ModalWrapper extends PureComponent {
   static defaultProps = defaultProps;
@@ -31,16 +28,8 @@ class ModalWrapper extends PureComponent {
   };
 
   getCloseEvent = () => {
-    const {
-      cancelButton,
-      onClose,
-      onCancel,
-      useCloseAction,
-      useCancelAction
-    } = this.props;
-    return cancelButton
-      ? this.withClose(onCancel, useCloseAction)
-      : this.withClose(onClose, useCancelAction);
+    const { cancelButton, onClose, onCancel, useCloseAction, useCancelAction } = this.props;
+    return cancelButton ? this.withClose(onCancel, useCloseAction) : this.withClose(onClose, useCancelAction);
   };
 
   handleBackgroundClick = e => {
@@ -60,7 +49,8 @@ class ModalWrapper extends PureComponent {
   getButtonType = (type = '') => ({
     alert: type === 'alert',
     info: type === 'info',
-    success: type === 'success'
+    success: type === 'success',
+    noAccent: !['alert', 'info', 'success'].includes(type),
   });
 
   componentDidMount() {
@@ -76,6 +66,7 @@ class ModalWrapper extends PureComponent {
       id,
       buttons,
       children,
+      collapse,
       cancelText,
       closeText,
       cancelButton,
@@ -88,7 +79,7 @@ class ModalWrapper extends PureComponent {
       width,
       valid,
       onCancel,
-      onClose
+      onClose,
     } = this.props;
 
     const modalButtons = [];
@@ -99,7 +90,7 @@ class ModalWrapper extends PureComponent {
         useReduxAction: useCloseAction,
         text: closeText,
         type: cancelButton ? type || 'info' : null,
-        disabled: !valid
+        disabled: !valid,
       });
     }
 
@@ -107,26 +98,20 @@ class ModalWrapper extends PureComponent {
       modalButtons.push({
         action: onCancel,
         useReduxAction: useCancelAction,
-        text: cancelText
+        text: cancelText,
       });
     }
 
     const modalActions = [...buttons, ...modalButtons];
 
     return (
-      <ModalBackdrop
-        key={id}
-        onClick={!locked ? this.handleBackgroundClick : noop}
-      >
-        <StyledModal
-          style={{ width: width ? `${width}px` : '100%' }}
-          type={type}
-        >
+      <ModalBackdrop key={id} onClick={!locked ? this.handleBackgroundClick : noop}>
+        <StyledModal style={{ width: width ? `${width}px` : '100%' }} type={type} collapse={collapse}>
           {title && <div className="Modal__header">{title}</div>}
           <div className="Modal__content">{children}</div>
-          <ModalActions length={modalActions.length}>
-            {modalActions.map(
-              ({ action, type, text, useReduxAction, ...props }, i) => (
+          {modalActions.length > 0 && (
+            <ModalActions length={modalActions.length}>
+              {modalActions.map(({ action, type, text, useReduxAction, ...props }, i) => (
                 <Button
                   className="Modal__action"
                   key={i}
@@ -136,9 +121,9 @@ class ModalWrapper extends PureComponent {
                 >
                   {text}
                 </Button>
-              )
-            )}
-          </ModalActions>
+              ))}
+            </ModalActions>
+          )}
         </StyledModal>
       </ModalBackdrop>
     );
@@ -146,5 +131,5 @@ class ModalWrapper extends PureComponent {
 }
 
 export default connect(null, {
-  close: actions.closeModal
+  close: actions.closeModal,
 })(ModalWrapper);

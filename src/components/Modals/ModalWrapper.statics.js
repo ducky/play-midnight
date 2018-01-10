@@ -6,14 +6,11 @@ export const propTypes = {
     PropTypes.shape({
       action: PropTypes.func.isRequired,
       text: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired
+      type: PropTypes.string.isRequired,
     })
   ),
-  children: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.element,
-    PropTypes.string
-  ]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.element, PropTypes.string]).isRequired,
+  collapse: PropTypes.bool,
   cancelText: PropTypes.string,
   closeText: PropTypes.string,
   cancelButton: PropTypes.bool,
@@ -29,13 +26,14 @@ export const propTypes = {
   close: PropTypes.func.isRequired,
   showModal: PropTypes.func.isRequired,
   onCancel: PropTypes.func,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
 };
 
 export const defaultProps = {
   buttons: [],
   cancelText: 'Cancel',
   closeText: 'OK',
+  collapse: false,
   cancelButton: true,
   closeButton: true,
   locked: false,
@@ -50,5 +48,5 @@ export const defaultProps = {
   close: noop,
   showModal: noop,
   onCancel: noop,
-  onClose: noop
+  onClose: noop,
 };
