@@ -25,7 +25,7 @@ const injectElement = (element, where, prepend = false) => {
   return undefined;
 };
 
-export default async (type, attributes, where = 'body') => {
+export const injectElementAsync = async (type, attributes, where = 'body') => {
   const { prepend, ...attrs } = attributes;
 
   return new Promise(resolve => {
@@ -49,4 +49,19 @@ export default async (type, attributes, where = 'body') => {
 
     observer.observe(document.body, { childList: true });
   });
+};
+
+export default (type, attributes, where = 'body') => {
+  const { prepend, ...attrs } = attributes;
+
+  // Already Exists
+  const element = document.querySelector(`${type}#${attrs.id}`);
+  if (element) return element;
+
+  // New Element
+  const create = createElement(type, attrs);
+  const injected = injectElement(create, where, prepend);
+  if (!injected) throw new Error(`Error Injecting ${attrs.id} into ${where}`);
+
+  return create;
 };
