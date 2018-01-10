@@ -44,17 +44,22 @@ const Modal = styled.div`
 
   .Modal__header {
     font-size: 20px;
-    font-weight: 700;
-    margin: 0 0 45px;
+    font-weight: 500;
+    margin: 0 0 25px;
   }
 
   .Modal__content {
-    font-size: 15px;
-    line-height: 1.5;
-    margin: 0 0 45px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 0 0 25px;
 
     p {
-      margin: 0 0 25px;
+      margin: 0 0 15px;
+
+      &:last-child {
+        margin: 0;
+      }
     }
 
     &:last-child {
