@@ -5,48 +5,38 @@ import isEqual from 'lodash/isEqual';
 
 import { getUrl, loadBackground } from 'lib/api';
 import { selectors } from 'modules/options';
-import isOptionActive from 'options/isOptionActive';
 import removeAllElements from 'utils/removeAllElements';
+import withOptions from 'hoc/withOptions';
 
 import FaviconImage from 'assets/images/favicon.png';
-import getInjectedElement from 'utils/getInjectedElement';
+import injectElement from 'utils/injectElement';
 
 const OPTION_ID = 'favicon';
 const ICON_STORAGE = 'PM_ICON';
 
 const mapStateToProps = state => ({
   accent: selectors.accentColor(state),
-  options: selectors.options(state)
+  options: selectors.options(state),
 });
 
+@withOptions
 @connect(mapStateToProps)
 class Favicon extends Component {
-  static id = OPTION_ID;
-
   updateFavicon = async (accent, useAccent) => {
-    const stored = localStorage.getItem(ICON_STORAGE)
-      ? JSON.parse(localStorage.getItem(ICON_STORAGE))
-      : undefined;
+    const stored = localStorage.getItem(ICON_STORAGE) ? JSON.parse(localStorage.getItem(ICON_STORAGE)) : undefined;
 
     const cached = stored && stored.accent === accent.value;
     const data = {
       url: getUrl(FaviconImage),
-      accent: accent.value
+      accent: accent.value,
     };
 
-    const createIcon = async href => {
+    const createIcon = href => {
       // Remove Old Favicon
-      const existing = document.querySelectorAll(
-        'link[rel="SHORTCUT ICON"], link[rel="shortcut icon"], link[rel="icon"], link[href $= ".ico"]'
-      );
-      removeAllElements(existing);
+      removeAllElements('link[rel="SHORTCUT ICON"], link[rel="shortcut icon"], link[rel="icon"], link[href $= ".ico"]');
 
       // Create Link Element
-      await getInjectedElement(
-        'link',
-        { id: 'play-midnight-favicon', rel: 'icon', type: 'image/png', href },
-        'head'
-      );
+      injectElement('link', { id: `play-midnight-${OPTION_ID}`, rel: 'icon', type: 'image/png', href }, 'head');
     };
 
     if (!useAccent) {
@@ -60,7 +50,7 @@ class Favicon extends Component {
           ICON_STORAGE,
           JSON.stringify({
             url,
-            accent
+            accent,
           })
         );
         createIcon(url);
@@ -70,28 +60,17 @@ class Favicon extends Component {
 
   shouldComponentUpdate({ accent: prevAccent, options: prevOptions }) {
     const { accent, options } = this.props;
-    const prevFavicon = filter(prevOptions, o =>
-      ['favicon', 'faviconAccent'].includes(o.id)
-    );
-    const favicon = filter(options, o =>
-      ['favicon', 'faviconAccent'].includes(o.id)
-    );
+    const prevFavicon = filter(prevOptions, o => ['favicon', 'faviconAccent'].includes(o.id));
+    const favicon = filter(options, o => ['favicon', 'faviconAccent'].includes(o.id));
 
     return !isEqual(prevAccent, accent) || !isEqual(prevFavicon, favicon);
   }
 
-  async componentWillUnmount() {
-    const icon = await getInjectedElement('link', {
-      id: 'play-midnight-favicon'
-    });
-    icon.remove();
-  }
-
   render() {
-    const { accent, options } = this.props;
-    const accented = isOptionActive(options, 'faviconAccent');
+    const { accent, isActive } = this.props;
+    const accented = isActive('faviconAccent');
 
-    this.updateFavicon(accent, accented);
+    if (isActive('favicon')) this.updateFavicon(accent, accented);
 
     return null;
   }
