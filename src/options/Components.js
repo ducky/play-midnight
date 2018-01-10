@@ -1,25 +1,15 @@
-import Core from './components/0 - Core/Core';
-import FAB from './components/0 - Core/FAB';
-import AccentsOnly from './components/1 - General/AccentsOnly';
-import Enabled from './components/1 - General/Enabled';
-import Favicon from './components/3 - Customize/Favicon';
+import Core from './components/A - Core/Core';
+import FAB from './components/A - Core/FAB';
+import AccentsOnly from './components/B - General/AccentsOnly';
+import Enabled from './components/B - General/Enabled';
+import Favicon from './components/C - Customize/Favicon';
+import Menus from './components/D - Menus/Menus';
+import Playlists from './components/E - Playlists/Playlists';
 
-const CORE = {
-  [Core.id]: Core,
-  [FAB.id]: FAB
-};
+const CORE = [Core, FAB];
+const GENERAL = [AccentsOnly, Enabled];
+const CUSTOMIZE = [Favicon];
+const MENUS = [Menus];
+const PLAYLISTS = [Playlists];
 
-const GENERAL = {
-  [AccentsOnly.id]: AccentsOnly,
-  [Enabled.id]: Enabled
-};
-
-const CUSTOMIZE = {
-  [Favicon.id]: Favicon
-};
-
-export default {
-  ...CORE,
-  ...GENERAL,
-  ...CUSTOMIZE
-};
+export default [...CORE, ...GENERAL, ...CUSTOMIZE, ...MENUS, ...PLAYLISTS];
