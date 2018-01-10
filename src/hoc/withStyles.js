@@ -1,34 +1,36 @@
 import React, { PureComponent } from 'react';
 
-import getInjectedElement from 'utils/getInjectedElement';
+import injectElement from 'utils/injectElement';
 import getCssString from 'utils/getCssString';
 
-const withStyles = id => Component => {
+const withStyles = Component => {
   class StyleComponent extends PureComponent {
-    static id = id;
-
-    updateStyles = async styles => {
-      const style = await getInjectedElement('style', {
-        id: `play-midnight-${id}`
+    updateStyles = (id, styles) => {
+      const style = injectElement('style', {
+        id: `play-midnight-${id}`,
       });
-      style.innerText = getCssString(styles);
+
+      if (style) {
+        const newStyles = getCssString(styles);
+
+        // Ensure we don't update dom for no reason
+        if (style.innerText !== newStyles) {
+          style.innerText = newStyles;
+        }
+      }
     };
 
-    removeStyles = async () => {
-      const style = await getInjectedElement('style', {
-        id: `play-midnight-${id}`
+    removeStyles = id => {
+      const style = injectElement('style', {
+        id: `play-midnight-${id}`,
       });
-      style.remove();
+      if (style) {
+        style.remove();
+      }
     };
 
     render() {
-      return (
-        <Component
-          updateStyles={this.updateStyles}
-          removeStyles={this.removeStyles}
-          {...this.props}
-        />
-      );
+      return <Component updateStyles={this.updateStyles} removeStyles={this.removeStyles} {...this.props} />;
     }
   }
 
