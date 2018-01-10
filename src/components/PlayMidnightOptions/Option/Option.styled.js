@@ -88,7 +88,7 @@ export const CollectionItem = styled.label`
   .CollectionItem__remove {
     position: absolute;
     top: 4px;    
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.25);
     width: 24px;
     height: 24px;
     cursor: pointer;
