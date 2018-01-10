@@ -1,76 +1,29 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import styled, { css } from 'styled-components';
 
+import withOptions from 'hoc/withOptions';
 import withPortal from 'hoc/withPortal';
 import withStyles from 'hoc/withStyles';
 
 import { actions, selectors } from 'modules/options';
+import getStyles, { StyledFAB } from './FAB.styles';
 
 const OPTION_ID = 'fab';
 
-const styles = css`
-  #player #material-player-right-wrapper paper-icon-button[data-id='queue'] {
-    margin: 8px;
-  }
-
-  #queue-overlay:after {
-    right: 72px;
-  }
-`;
-
-const StyledFAB = styled.div`
-  width: 40px;
-  height: 40px;
-  z-index: 108;
-  margin: 4px;
-  margin-right: 32px;
-  padding: 8px;
-  box-sizing: border-box;
-  cursor: pointer;
-  visibility: visible;
-  opacity: 0.9;
-  color: ${props => (props.accent ? `${props.accent.value}` : '#dcdcdc')};
-  border-radius: 50%;
-  transition: opacity 300ms, transform 300ms;
-
-  &:hover {
-    opacity: 1;
-    transform: scale3d(1.1, 1.1, 1.1);
-  }
-
-  &:active,
-  &:focus {
-    opacity: 0.8;
-    transform: scale3d(0.95, 0.95, 0.95);
-  }
-
-  .FAB__icon {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    fill: currentcolor;
-  }
-`;
-
 const mapStateToProps = state => ({
-  accent: selectors.accentColor(state)
+  accent: selectors.accentColor(state),
 });
 
+@withOptions
+@withStyles
 @withPortal(OPTION_ID, '#material-player-right-wrapper')
-@withStyles(OPTION_ID)
 @connect(mapStateToProps, { toggleMenu: actions.toggleMenu })
 class FAB extends PureComponent {
-  componentDidMount() {
-    this.props.updateStyles(styles);
-  }
-
-  componentWillUnmount() {
-    this.props.removeStyles();
-  }
-
   render() {
-    const { accent, toggleMenu } = this.props;
+    const { accent, toggleMenu, updateStyles } = this.props;
+    const styles = getStyles();
+
+    updateStyles(OPTION_ID, styles);
 
     return (
       <StyledFAB accent={accent} onClick={() => toggleMenu()}>
