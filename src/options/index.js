@@ -2,11 +2,11 @@ const OPTIONS = [
   // Static - User-Hidden Core Functionality
   {
     id: 'core',
-    static: true
+    static: true,
   },
   {
     id: 'fab',
-    static: true
+    static: true,
   },
 
   // Section - General
@@ -16,7 +16,7 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: true,
     title: 'Enable Play Midnight',
-    description: `This will temporarily disable/enable Play Midnight if you don't want it on all the time`
+    description: `This will temporarily disable/enable Play Midnight if you don't want it on all the time`,
   },
   {
     id: 'accentsOnly',
@@ -24,7 +24,7 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: false,
     title: 'Enable Light-Mode Accents',
-    description: 'This enables custom accents when Play Midnight is disabled'
+    description: 'This enables custom accents when Play Midnight is disabled',
   },
 
   // Section - Colorize
@@ -42,8 +42,8 @@ const OPTIONS = [
       { id: 'midnight-oil', name: 'Midnight Oil', value: '#8400a3' },
       { id: 'prince-purple', name: 'Prince Purple', value: '#673ab7' },
       { id: 'redrum', name: 'Redrum', value: '#981046' },
-      { id: 'rusty-spoon', name: 'Rusty Spoon', value: '#4c9014' }
-    ]
+      { id: 'rusty-spoon', name: 'Rusty Spoon', value: '#4c9014' },
+    ],
   },
 
   // Section - Customize
@@ -53,7 +53,7 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: true,
     title: 'Show Play Midnight Favicon',
-    description: `This is the icon that shows on your Google Play tab in the browser`
+    description: `This is the icon that shows on your Google Play tab in the browser`,
   },
   {
     id: 'faviconAccent',
@@ -61,7 +61,7 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: true,
     title: 'Show Accent Favicon',
-    description: `Makes the favicon match your selected accent color instead of dark`
+    description: `Makes the favicon match your selected accent color instead of dark`,
   },
   {
     id: 'darkBar',
@@ -69,7 +69,7 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: false,
     title: 'Enable Dark Top Bar',
-    description: `Makes the top search bar dark instead of accent color`
+    description: `Makes the top search bar dark instead of accent color`,
   },
   {
     id: 'queue',
@@ -77,7 +77,7 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: true,
     title: 'Enable Larger Queue',
-    description: `Makes the now playing queue span across your screen further to prevent cutting off song titles`
+    description: `Makes the now playing queue span across your screen further to prevent cutting off song titles`,
   },
   {
     id: 'sidebar',
@@ -85,7 +85,7 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: false,
     title: 'Enable Static Sidebar',
-    description: `Show sidebar on page load and keep it open permanently`
+    description: `Show sidebar on page load and keep it open permanently`,
   },
   {
     id: 'staticPlaylists',
@@ -93,7 +93,7 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: false,
     title: 'Enable Static Playlists',
-    description: `Show playlists sidebar on page load and keep it open permanently`
+    description: `Show playlists sidebar on page load and keep it open permanently`,
   },
   {
     id: 'artistImage',
@@ -101,25 +101,17 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: false,
     title: 'Remove Artist Header Image',
-    description: `This hides the background image on artist pages`
+    description: `This hides the background image on artist pages`,
   },
 
   // Section - Visible Menus
   {
-    id: 'listenNow',
+    id: 'myLibrary',
     section: 'visibleMenus',
     type: 'boolean',
     defaultValue: true,
-    title: 'Listen Now',
-    description: `The default central hub for Play Music`
-  },
-  {
-    id: 'topCharts',
-    section: 'visibleMenus',
-    type: 'boolean',
-    defaultValue: true,
-    title: 'Top Charts',
-    description: `Top songs and albums currently trending in Play Music`
+    title: 'My Library',
+    description: `The home of your wonderful music collection`,
   },
   {
     id: 'recent',
@@ -127,7 +119,15 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: true,
     title: 'Recent Activity',
-    description: `Access to your most recently played and added music`
+    description: `Access to your most recently played and added music`,
+  },
+  {
+    id: 'topCharts',
+    section: 'visibleMenus',
+    type: 'boolean',
+    defaultValue: true,
+    title: 'Top Charts',
+    description: `Top songs and albums currently trending in Play Music`,
   },
   {
     id: 'newReleases',
@@ -135,15 +135,15 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: true,
     title: 'New Releases',
-    description: `Newest albums and singles added to Play Music`
+    description: `Newest albums and singles added to Play Music`,
   },
   {
-    id: 'myLibrary',
+    id: 'browseStations',
     section: 'visibleMenus',
     type: 'boolean',
     defaultValue: true,
-    title: 'My Library',
-    description: `The home of your wonderful music collection`
+    title: 'Browse Stations',
+    description: `Radio stations brought directly to you from Google`,
   },
   {
     id: 'podcasts',
@@ -151,7 +151,7 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: true,
     title: 'Podcasts',
-    description: `Podcasts brought directly to you from Google`
+    description: `Podcasts brought directly to you from Google`,
   },
   {
     id: 'shop',
@@ -159,7 +159,7 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: true,
     title: 'Shop (Free Users Only)',
-    description: `Shop menu for purchasing music if you're not an 'All Access' subscriber`
+    description: `Shop menu for purchasing music if you're not an 'All Access' subscriber`,
   },
   {
     id: 'subscribe',
@@ -167,7 +167,7 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: true,
     title: 'Subscribe Now (Free Users Only)',
-    description: `Subscribe button for converting you to an 'All Access' subscriber`
+    description: `Subscribe button for converting you to an 'All Access' subscriber`,
   },
 
   // Section - Visible Playlists
@@ -177,7 +177,7 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: true,
     title: `Thumbs Up`,
-    description: `All your favorite songs`
+    description: `All your favorite songs`,
   },
   {
     id: 'soundSearch',
@@ -185,7 +185,7 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: false,
     title: `Sound search`,
-    description: `The music you've found over time via Google Sound Search`
+    description: `The music you've found over time via Google Sound Search`,
   },
   {
     id: 'lastAdded',
@@ -193,7 +193,7 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: true,
     title: `Last Added`,
-    description: `All of your most recently added music`
+    description: `All of your most recently added music`,
   },
   {
     id: 'freePurchased',
@@ -201,7 +201,7 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: true,
     title: `Free and Purchased`,
-    description: `The music you've paid for or collected over time`
+    description: `The music you've paid for or collected over time`,
   },
 
   // Section - Default
@@ -209,8 +209,8 @@ const OPTIONS = [
     id: 'devNote',
     type: 'string',
     title: 'Thanks!',
-    description: `Here's a big old thanks for all you do!`
-  }
+    description: `Here's a big old thanks for all you do!`,
+  },
 ];
 
 export const SECTIONS = [
@@ -220,7 +220,7 @@ export const SECTIONS = [
   { id: 'visibleMenus', title: 'Visible Menus' },
   { id: 'visiblePlaylists', title: 'Visible Auto-Playlists' },
   { id: 'tidbits', title: 'Tidbits' },
-  { id: 'default' }
+  { id: 'default' },
 ];
 
 export default OPTIONS;
