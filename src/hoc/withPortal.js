@@ -1,15 +1,13 @@
 import React, { PureComponent } from 'react';
 import { createPortal } from 'react-dom';
 
-import getInjectedElement from 'utils/getInjectedElement';
+import { injectElementAsync } from 'utils/injectElement';
 
 // There has to be a better way to do this... 😭
 const withPortal = (id, where) => Component => {
-  class StyleComponent extends PureComponent {
-    static id = id;
-
+  class PortalComponent extends PureComponent {
     state = {
-      render: false
+      render: false,
     };
 
     constructor(props) {
@@ -21,9 +19,11 @@ const withPortal = (id, where) => Component => {
       if (this.el) {
         this.setState({ render: true });
       } else {
-        this.el = await getInjectedElement(
+        this.el = await injectElementAsync(
           'div',
-          { id: `play-midnight-${id}` },
+          {
+            id: `play-midnight-${id}`,
+          },
           where
         );
         this.setState({ render: true });
@@ -32,11 +32,11 @@ const withPortal = (id, where) => Component => {
 
     render() {
       const { render } = this.state;
-      return render ? createPortal(<Component />, this.el) : null;
+      return render ? createPortal(<Component {...this.props} />, this.el) : null;
     }
   }
 
-  return StyleComponent;
+  return PortalComponent;
 };
 
 export default withPortal;
