@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import checkEnv from 'utils/checkEnv';
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -15,7 +14,7 @@ const StyledOptions = styled.div`
   flex-flow: column;
   position: fixed;
   left: calc(50vw - 300px);
-  bottom: ${() => (checkEnv('development') ? '32px' : '118px')};
+  bottom: 118px;
   width: 600px;
   height: calc(100vh - 110px - 137px);
   max-height: 750px;
@@ -23,7 +22,7 @@ const StyledOptions = styled.div`
   border-radius: 3px;
   color: #dcdcdc;
   background: #242527;
-  box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19);
   transform-origin: center bottom 0;
   transition: transform 0.3s;
 
@@ -123,8 +122,7 @@ const StyledOptions = styled.div`
     position: relative;
     flex: 1 1 auto;
     overflow: hidden;
-    box-shadow: inset 0 5px 25px 0 rgba(0, 0, 0, 0.12),
-      inset 0 -5px 25px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: inset 0 5px 25px 0 rgba(0, 0, 0, 0.12), inset 0 -5px 25px 0 rgba(0, 0, 0, 0.12);
 
     .PlayMidnightOptions__options-container {
       position: absolute;
