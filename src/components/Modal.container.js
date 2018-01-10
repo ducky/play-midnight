@@ -3,11 +3,13 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 
 import AlertModal from 'components/Modals/AlertModal';
+import ColorPickerModal from 'components/Modals/ColorPickerModal';
 import ConfirmModal from 'components/Modals/ConfirmModal';
 
 const types = {
   alert: <AlertModal />,
-  confirm: <ConfirmModal />
+  confirm: <ConfirmModal />,
+  colorPicker: <ColorPickerModal />,
 };
 
 const ModalConductor = ({ modals = [] }) => {
@@ -15,11 +17,7 @@ const ModalConductor = ({ modals = [] }) => {
 
   return (
     <Fragment>
-      <ReactCSSTransitionGroup
-        transitionName="modal"
-        transitionEnterTimeout={300}
-        transitionLeaveTimeout={200}
-      >
+      <ReactCSSTransitionGroup transitionName="modal" transitionEnterTimeout={300} transitionLeaveTimeout={200}>
         {modals.map(modal => {
           const Modal = getModalComponent(modal.type);
 
@@ -27,7 +25,7 @@ const ModalConductor = ({ modals = [] }) => {
             ? React.cloneElement(Modal, {
                 key: modal.id,
                 id: modal.id,
-                ...modal.options
+                ...modal.options,
               })
             : null;
         })}
