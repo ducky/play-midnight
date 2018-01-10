@@ -3,6 +3,7 @@ import { PhotoshopPicker } from 'react-color';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import { DEFAULT_ACCENT } from 'style/theme';
 import { actions } from 'modules/modal';
 
 import ModalWrapper from './ModalWrapper';
@@ -16,7 +17,7 @@ const FancyInput = styled.input`
   color: #ececec;
   text-shadow: 0px 3px #141517;
   border: none;
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 700;
   margin: 0 0 25px;
 `;
@@ -35,7 +36,7 @@ class ColorPickerModal extends PureComponent {
     const details = props.details || {};
     this.state = {
       id: undefined,
-      color: '',
+      color: DEFAULT_ACCENT,
       name: '',
       ...details,
     };
@@ -71,13 +72,15 @@ class ColorPickerModal extends PureComponent {
       <ModalWrapper {...this.props} closeButton={false} cancelButton={false} width={513}>
         <FancyInput
           name="name"
-          placeholder="Click Here to Name"
+          placeholder="Click Here to Name Your Masterpiece"
+          maxLength="24"
           onChange={this.onTitleChange}
           value={name}
           type="text"
         />
         <PickerWrapper>
           <PhotoshopPicker
+            header="Beautiful Color Decider"
             color={color}
             onChange={this.onColorChange}
             onAccept={() => this.closeModal(true)}
@@ -86,7 +89,7 @@ class ColorPickerModal extends PureComponent {
         </PickerWrapper>
         <p>
           <small style={{ display: 'block', textAlign: 'center' }}>
-            Play around until you find the perfect color. You'll thank me later.
+            Play around until you find the perfect color. Your eyes will thank you.
           </small>
         </p>
       </ModalWrapper>
