@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+import { getUrl } from 'lib/api';
+
+import iconPencil from 'assets/images/icon-pencil.svg';
+import iconTrash from 'assets/images/icon-trash.svg';
+
 export const CollectionItem = styled.label`
   position: relative;
   display: flex;
@@ -72,59 +77,67 @@ export const CollectionItem = styled.label`
       opacity: 1;
     }
 
+    .CollectionItem__edit,
     .CollectionItem__remove {
       opacity: 0.8;
-      transform: scale3d(1, 1, 1) rotate(0deg);
+      transform: scale3d(1, 1, 1);
     }
   }
 
+  .CollectionItem__edit,
   .CollectionItem__remove {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 16px;
-    height: 16px;
+    top: 4px;    
+    background-color: rgba(0,0,0,0.3);
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    background-position: center center;
+    background-repeat: no-repeat;
     opacity: 0;
-    transform: scale3d(0.75, 0.75, 0.75) rotate(-45deg);
+    transform: scale3d(0.75, 0.75, 0.75);
     transition: all 0.5s;
 
-    &:after,
-    &:before {
-      position: absolute;
-      display: block;
-      content: '';
-      background: #fff;
-      box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.3);
-      transform: rotate(45deg);
-      transition: all 0.5s;
-    }
-
-    &:before {
-      top: 7px;
-      width: 16px;
-      height: 2px;
-    }
-
-    &:after {
-      left: 7px;
-      width: 2px;
-      height: 16px;
-    }
-
     &:hover {
-      transform: scale3d(1.2, 1.2, 1.2);
-      opacity: 1;
-
-      &:after,
-      &:before {
-        background: #a61a2b;
-      }
+      transform: scale3d(1.15, 1.15, 1.15);
     }
+  }
+
+  .CollectionItem__edit {
+    left: 4px;
+    background-image: url('${getUrl(iconPencil)}');
+    background-size: 14px 14px;
+  }
+
+  .CollectionItem__remove {
+    right: 4px;
+    background-image: url('${getUrl(iconTrash)}');
+    background-size: 14px 14px;
   }
 
   &:active,
   &:focus {
     opacity: 0.9;
+  }
+`;
+
+export const PrettyColor = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  border-radius: 5px;
+  background: ${props => props.color};
+  box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19);
+  margin: 45px 0 8px;
+
+  strong {
+    font-weight: 900;
+  }
+
+  &:before {
+    content: '😎';
+    font-size: 36px;
   }
 `;
 
