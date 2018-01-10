@@ -13,19 +13,30 @@ import OPTIONS, { SECTIONS } from 'options';
 // state
 const defaultState = {
   data: [],
-  menuVisible: false
+  menuVisible: false,
 };
 
 // selectors
 export const selectors = {
-  options: state => state.options.data
+  options: state => state.options.data,
 };
 
 selectors.accentColor = createSelector([selectors.options], options => {
   const accentOption = find(options, { id: 'accent' });
-  return accentOption
-    ? find(accentOption.values, { id: accentOption.value })
-    : { value: DEFAULT_ACCENT };
+  return accentOption ? find(accentOption.values, { id: accentOption.value }) : { value: DEFAULT_ACCENT };
+});
+
+selectors.enabled = createSelector([selectors.options], options => {
+  const enabledOption = find(options, { id: 'enabled' });
+  return enabledOption ? enabledOption.value : false;
+});
+
+selectors.visibleMenus = createSelector([selectors.options], options => {
+  return filter(options, { section: 'visibleMenus' });
+});
+
+selectors.visiblePlaylists = createSelector([selectors.options], options => {
+  return filter(options, { section: 'visiblePlaylists' });
 });
 
 selectors.sortedOptions = createSelector([selectors.options], options =>
@@ -37,7 +48,7 @@ selectors.sortedOptions = createSelector([selectors.options], options =>
 
     return {
       ...section,
-      options: sectionOptions || []
+      options: sectionOptions || [],
     };
   })
 );
@@ -52,36 +63,37 @@ export const actions = createActions(
   'UPDATE_OPTION'
 );
 
-const toJson = (options = []) =>
+const toObject = (options = []) =>
   options.reduce((obj, option) => {
     if (option.static) return obj;
     if (option.type === 'string') return obj;
 
     const updated = {
       ...obj,
-      [option.id]:
-        option.value !== undefined ? option.value : option.defaultValue
+      [option.id]: option.value !== undefined ? option.value : option.defaultValue,
     };
 
     return !option.plural
       ? updated
       : {
           ...updated,
-          [option.plural]:
-            option.values !== undefined ? option.values : option.defaultValues
+          [option.plural]: option.values !== undefined ? option.values : option.defaultValues,
         };
   }, {});
+
+const mapToValues = (options = [], values = {}) =>
+  options.map(option => ({
+    ...option,
+    value: values[option.id],
+    values: values[option.plural],
+  }));
 
 // sagas
 export function* fetchOptionsSaga() {
   try {
-    const DEFAULT_OPTIONS = toJson(OPTIONS);
+    const DEFAULT_OPTIONS = toObject(OPTIONS);
     const optionsValues = yield call(load, DEFAULT_OPTIONS);
-    const options = OPTIONS.map(option => ({
-      ...option,
-      value: optionsValues[option.id],
-      values: optionsValues[option.plural]
-    }));
+    const options = mapToValues(OPTIONS, optionsValues);
     yield put(actions.fetchOptionsResponse(options));
   } catch (e) {
     console.error(e);
@@ -90,7 +102,7 @@ export function* fetchOptionsSaga() {
 
 export function* saveOptionsSaga({ payload: optionsSave }) {
   try {
-    yield call(save, toJson(optionsSave));
+    yield call(save, toObject(optionsSave));
     yield put(actions.toggleMenu(false));
     yield put(actions.saveOptionsResponse(optionsSave));
   } catch (e) {
@@ -99,10 +111,7 @@ export function* saveOptionsSaga({ payload: optionsSave }) {
 }
 
 export function* optionsSaga() {
-  yield all([
-    takeEvery(actions.fetchOptions, fetchOptionsSaga),
-    takeEvery(actions.saveOptions, saveOptionsSaga)
-  ]);
+  yield all([takeEvery(actions.fetchOptions, fetchOptionsSaga), takeEvery(actions.saveOptions, saveOptionsSaga)]);
 }
 
 // reducer
@@ -118,7 +127,7 @@ export default handleActions(
       if (isArray) {
         return {
           ...state,
-          data: updateItem(state.data, { plural: id, values: value }, 'plural')
+          data: updateItem(state.data, { plural: id, values: value }, 'plural'),
         };
       }
 
@@ -127,10 +136,9 @@ export default handleActions(
     [actions.toggleMenu](state, { payload: toggleState }) {
       return {
         ...state,
-        menuVisible:
-          toggleState !== undefined ? toggleState : !state.menuVisible
+        menuVisible: toggleState !== undefined ? toggleState : !state.menuVisible,
       };
-    }
+    },
   },
   defaultState
 );
