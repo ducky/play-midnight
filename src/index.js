@@ -2,17 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import 'typeface-roboto';
-import 'theme/global';
+import 'style/global';
 
 import Root from 'components/Root';
-import getInjectedElement from 'utils/getInjectedElement';
+import injectElement from 'utils/injectElement';
 
-const init = async () => {
-  const entry = await getInjectedElement('div', {
-    id: 'play-midnight'
-  });
+const entry = injectElement('div', {
+  id: 'play-midnight',
+});
 
-  ReactDOM.render(<Root />, entry);
-};
-
-init();
+ReactDOM.render(<Root />, entry);
