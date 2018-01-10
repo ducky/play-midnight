@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import color from 'tinycolor2';
 
 import { selectors } from 'modules/options';
 
@@ -19,19 +20,19 @@ const StyledButton = styled.button`
   outline: none;
   box-shadow: none;
   background: #ccc;
-  color: #fff;
+  color: #333;
   transition: background 500ms, opacity 500ms;
 
-  ${props => !props.noAccent && props.accent && `background: ${props.accent.value}`};
-  ${props => props.noAccent && `color: #333`};
+  ${props => props.accent && `background: ${props.accent.value}`};
+  ${props => props.accent && `color: ${color(props.accent.value).getBrightness() > 165 ? '#141517' : '#fff'}`};
 
   &:hover {
     opacity: 1;
   }
 `;
 
-const Button = ({ accentColor, children, ...rest }) => (
-  <StyledButton accent={accentColor} {...rest}>
+const Button = ({ accentColor, noAccent, children, ...rest }) => (
+  <StyledButton accent={!noAccent && accentColor} {...rest}>
     {children}
   </StyledButton>
 );
