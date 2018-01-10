@@ -11,15 +11,27 @@
       font-family: 'Roboto', Helvetica, sans-serif;
     }
 
-    body>p {
-      font-weight: 700;
+    #player {
+      display: flex;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 90px;
+      align-items: center;
+      justify-content: flex-end;
+      background-color: #fff;
+      z-index: 2;
+      box-shadow: 0 0 8px rgba(0, 0, 0, .4);
     }
   </style>
 </head>
 
 <body>
   <p>Hello, how are you? I hope you're having fun. :)</p>
-  <div id="material-player-right-wrapper"></div>
+  <div id="player">
+    <div id="material-player-right-wrapper"></div>
+  </div>
   <script src="./index.js"></script>
 </body>
 
