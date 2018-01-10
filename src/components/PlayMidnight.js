@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { actions, selectors } from 'modules/options';
+import { actions } from 'modules/options';
 import { actions as modalActions } from 'modules/modal';
 import { actions as toastActions } from 'modules/toast';
 import Components from 'options/Components';
@@ -18,14 +18,10 @@ const Wrapper = styled.div`
   }
 `;
 
-const mapStateToProps = state => ({
-  options: selectors.options(state)
-});
-
-@connect(mapStateToProps, {
+@connect(null, {
   fetchOptions: actions.fetchOptions,
   showModal: modalActions.showModal,
-  createToast: toastActions.createToast
+  createToast: toastActions.createToast,
 })
 class PlayMidnight extends PureComponent {
   componentDidMount() {
@@ -33,21 +29,10 @@ class PlayMidnight extends PureComponent {
   }
 
   render() {
-    const { options, createToast, showModal } = this.props;
+    const { createToast, showModal } = this.props;
 
     const renderOptions = options => {
-      return options
-        .filter(option => {
-          return Components[option.id] !== undefined;
-        })
-        .map(option => {
-          const Component = Components[option.id];
-          return (
-            (option.static || option.value) && (
-              <Component key={option.id} {...option} />
-            )
-          );
-        });
+      return Components.map((Component, i) => <Component key={i} />);
     };
 
     return (
@@ -61,15 +46,15 @@ class PlayMidnight extends PureComponent {
               onClose: () =>
                 createToast('success', {
                   title: 'Buns Success!',
-                  message: 'You rocked it!'
-                })
+                  message: 'You rocked it!',
+                }),
             });
           }}
         >
           Modal
         </Button>
         <PlayMidnightOptions />
-        {renderOptions(options)}
+        {renderOptions()}
       </Wrapper>
     );
   }
