@@ -7,6 +7,7 @@
 /coverage
 
 # production
+/deploy
 /build
 /dist
 
