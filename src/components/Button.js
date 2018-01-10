@@ -18,10 +18,12 @@ const StyledButton = styled.button`
   border: none;
   outline: none;
   box-shadow: none;
+  background: #ccc;
   color: #fff;
   transition: background 500ms, opacity 500ms;
 
-  ${props => props.accent && `background: ${props.accent.value}`};
+  ${props => !props.noAccent && props.accent && `background: ${props.accent.value}`};
+  ${props => props.noAccent && `color: #333`};
 
   &:hover {
     opacity: 1;
@@ -35,7 +37,7 @@ const Button = ({ accentColor, children, ...rest }) => (
 );
 
 const mapStateToProps = state => ({
-  accentColor: selectors.accentColor(state)
+  accentColor: selectors.accentColor(state),
 });
 
 export default connect(mapStateToProps)(Button);
