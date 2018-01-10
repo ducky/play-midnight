@@ -1,93 +1,96 @@
-import React, { PureComponent } from 'react';
-import { SliderPicker } from 'react-color';
+import React, { Fragment, PureComponent } from 'react';
+import { connect } from 'react-redux';
 
-import { removeItem } from 'utils/array';
+import { actions } from 'modules/modal';
+import { replaceItem, removeItem } from 'utils/array';
 import { validateId, validateTitle } from 'utils/validation';
 
 import Button from 'components/Button';
-import StyledOption, { CollectionItem } from './Option.styled';
+import StyledOption, { CollectionItem, PrettyColor } from './Option.styled';
 
 // TODO - Update to be dynamic and allow for createable - false
+@connect(null, { showModal: actions.showModal })
 class Option extends PureComponent {
   state = {
     color: '',
     name: '',
-    showForm: false
+    showForm: false,
   };
 
-  removeItem = id => {
-    const {
-      id: optionId,
-      defaultValues,
-      plural,
-      value,
-      values,
-      onChange,
-      onChangeValues
-    } = this.props;
+  removeItem = (e, { id, name, color }) => {
+    const { id: optionId, defaultValues, plural, value, values, onChange, onChangeValues, showModal } = this.props;
 
-    // Remove Item or Reset Default if Empty
-    const updatedValues =
-      values.length > 1 ? removeItem(values, { id }) : [...defaultValues];
+    e.preventDefault();
 
-    // Deleting Current Accent, reset to first in array
-    if (value === id) {
-      onChange({
-        id: optionId,
-        value: updatedValues[0].id
+    const remove = () => {
+      // Remove Item or Reset Default if Empty
+      const updatedValues = values.length > 1 ? removeItem(values, { id }) : [...defaultValues];
+
+      // Deleting Current Accent, reset to first in array
+      if (value === id) {
+        onChange({
+          id: optionId,
+          value: updatedValues[0].id,
+        });
+      }
+
+      onChangeValues({
+        id: plural,
+        value: updatedValues,
       });
-    }
+    };
 
-    onChangeValues({
-      id: plural,
-      value: updatedValues
+    showModal('confirm', {
+      type: 'alert',
+      title: `Delete ${name}`,
+      closeText: `Delete, It's Pure Garbage`,
+      cancelText: `Cancel, Buyer's Remorse`,
+      onClose: remove,
+      message: (
+        <Fragment>
+          <p>
+            Whoa there, bruv! You sure you wanna delete the lovely <strong>{name}</strong> color?
+          </p>
+          <p>
+            This action{' '}
+            <strong>
+              <em>cannot</em>
+            </strong>{' '}
+            be undone, so just be sure about this.
+          </p>
+          <PrettyColor color={color} />
+          <p>
+            <small style={{ display: 'block', textAlign: 'center' }}>Take a second look. Beautiful, innit?</small>
+          </p>
+        </Fragment>
+      ),
     });
   };
 
-  saveForm = () => {
-    const {
-      id: optionId,
-      plural,
-      values,
-      onChange,
-      onChangeValues
-    } = this.props;
-    const { color, name: rawName } = this.state;
+  saveColor = ({ id: existingId, name: rawName, color }) => {
+    const { id: optionId, plural, values, onChange, onChangeValues } = this.props;
 
     const name = validateTitle(rawName);
-    const id = validateId(name);
+    const id = existingId ? existingId : validateId(name);
 
     onChangeValues({
       id: plural,
-      value: [...values, { id, name, value: color }]
+      value: replaceItem(values, { id, name, value: color }),
     });
 
     onChange({
       id: optionId,
-      value: id
+      value: id,
     });
-
-    this.resetForm();
   };
 
-  resetForm = () => {
-    this.setState(state => ({
-      color: '',
-      name: '',
-      showForm: false
-    }));
-  };
-
-  toggleForm = toggleState => {
-    this.setState(state => ({
-      showForm: toggleState !== undefined ? toggleState : !state.showForm
-    }));
-  };
-
-  updateColor = color => {
-    this.setState(() => ({
-      color: color.hex
-    }));
+  editColor = (e, details) => {
+    e.preventDefault();
+    const { showModal } = this.props;
+    showModal('colorPicker', {
+      details,
+      onClose: this.saveColor,
+    });
   };
 
   updateOption = ({ target }) => {
@@ -95,20 +98,12 @@ class Option extends PureComponent {
     const name = target.name;
 
     this.setState(() => ({
-      [name]: value
+      [name]: value,
     }));
   };
 
   render() {
-    const { name, color, showForm } = this.state;
-    const {
-      id,
-      title,
-      description,
-      value,
-      values,
-      onTargetedChange
-    } = this.props;
+    const { id, title, description, value, values, onTargetedChange } = this.props;
 
     return (
       <StyledOption>
@@ -118,32 +113,11 @@ class Option extends PureComponent {
             <div className="Option__description">{description}</div>
           </div>
           <div className="Option__action">
-            <Button
-              className="Option__action-button"
-              onClick={() => this.toggleForm()}
-            >
+            <Button className="Option__action-button" onClick={this.editColor}>
               +
             </Button>
           </div>
         </div>
-
-        {showForm && (
-          <div className="Option__form">
-            <input
-              type="text"
-              name="name"
-              maxLength="24"
-              placeholder="Name"
-              onChange={this.updateOption}
-              value={name}
-            />
-            <div className="Option__color-slider">
-              <SliderPicker color={color} onChange={this.updateColor} />
-            </div>
-            <Button onClick={this.saveForm}>Save</Button>
-            <Button onClick={() => this.toggleForm(false)}>Cancel</Button>
-          </div>
-        )}
 
         <div className="Option__body Option__collection">
           {values.map(({ id: colorId, name, value: colorValue }) => (
@@ -161,16 +135,16 @@ class Option extends PureComponent {
                 type="radio"
               />
               <div className="CollectionItem__fields">
-                <div className="CollectionItem__field CollectionItem__field--title">
-                  {name}
-                </div>
-                <div className="CollectionItem__field">
-                  {colorValue.toUpperCase()}
-                </div>
+                <div className="CollectionItem__field CollectionItem__field--title">{name}</div>
+                <div className="CollectionItem__field">{colorValue.toUpperCase()}</div>
               </div>
               <div
+                className="CollectionItem__edit"
+                onClick={e => this.editColor(e, { id: colorId, name, color: colorValue })}
+              />
+              <div
                 className="CollectionItem__remove"
-                onClick={() => this.removeItem(colorId)}
+                onClick={e => this.removeItem(e, { id: colorId, name, color: colorValue })}
               />
             </CollectionItem>
           ))}
