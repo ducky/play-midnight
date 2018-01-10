@@ -8,7 +8,7 @@ export const ModalBackdrop = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 8;
+  z-index: 209;
   padding: 100px;
   overflow: auto;
   background: rgba(0, 0, 0, 0.7);
@@ -37,22 +37,28 @@ const Modal = styled.div`
   color: ${colors.font_primary};
   border-radius: 5px;
   box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
-  padding: 36px;
+  padding: ${props => (props.collapse ? '0' : '36px')};
   max-width: 1024px;
   margin: 0 auto;
   transform-origin: top center;
 
   .Modal__header {
-    font-size: 18px;
-    margin: 0 0 25px;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 45px;
   }
 
   .Modal__content {
     font-size: 15px;
-    margin: 0 0 36px;
+    line-height: 1.5;
+    margin: 0 0 45px;
 
-    ul {
-      line-height: 1.5;
+    p {
+      margin: 0 0 25px;
+    }
+
+    &:last-child {
+      margin: 0;
     }
   }
 
