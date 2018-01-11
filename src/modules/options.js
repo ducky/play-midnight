@@ -9,6 +9,7 @@ import { DEFAULT_ACCENT } from 'style/theme';
 import { updateItem } from 'utils/array';
 
 import OPTIONS, { SECTIONS } from 'options';
+import { actions as toastActions } from 'modules/toast';
 
 // state
 const defaultState = {
@@ -105,6 +106,12 @@ export function* saveOptionsSaga({ payload: optionsSave }) {
     yield call(save, toObject(optionsSave));
     yield put(actions.toggleMenu(false));
     yield put(actions.saveOptionsResponse(optionsSave));
+    yield put(
+      toastActions.createToast('success', {
+        title: 'Options Saved!',
+        message: 'Your changes are all safe on the Google cloud now.',
+      })
+    );
   } catch (e) {
     console.error(e);
   }
