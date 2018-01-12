@@ -70,7 +70,7 @@ class Favicon extends Component {
     const { accent, isActive } = this.props;
     const accented = isActive('faviconAccent');
 
-    if (isActive('favicon')) this.updateFavicon(accent, accented);
+    if (isActive(OPTION_ID)) this.updateFavicon(accent, accented);
 
     return null;
   }
