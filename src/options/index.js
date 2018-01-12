@@ -1,14 +1,4 @@
 const OPTIONS = [
-  // Static - User-Hidden Core Functionality
-  {
-    id: 'core',
-    static: true,
-  },
-  {
-    id: 'fab',
-    static: true,
-  },
-
   // Section - General
   {
     id: 'enabled',
@@ -58,6 +48,7 @@ const OPTIONS = [
   {
     id: 'faviconAccent',
     section: 'customize',
+    reliesOn: 'favicon',
     type: 'boolean',
     defaultValue: true,
     title: 'Show Accent Favicon',
@@ -71,30 +62,22 @@ const OPTIONS = [
     title: 'Enable Larger Queue',
     description: `Makes the now playing queue span across your screen further to prevent cutting off song titles`,
   },
-  {
-    id: 'sidebar',
-    section: 'customize',
-    type: 'boolean',
-    defaultValue: false,
-    title: 'Enable Static Sidebar',
-    description: `Show sidebar on page load and keep it open permanently`,
-  },
-  {
-    id: 'staticPlaylists',
-    section: 'customize',
-    type: 'boolean',
-    defaultValue: false,
-    title: 'Enable Static Playlists',
-    description: `Show playlists sidebar on page load and keep it open permanently`,
-  },
-  {
-    id: 'artistImage',
-    section: 'customize',
-    type: 'boolean',
-    defaultValue: false,
-    title: 'Remove Artist Header Image',
-    description: `This hides the background image on artist pages`,
-  },
+  // {
+  //   id: 'staticSidebar',
+  //   section: 'customize',
+  //   type: 'boolean',
+  //   defaultValue: false,
+  //   title: 'Enable Static Sidebar',
+  //   description: `Show main sidebar on page load and keep it open permanently`,
+  // },
+  // {
+  //   id: 'staticPlaylists',
+  //   section: 'customize',
+  //   type: 'boolean',
+  //   defaultValue: false,
+  //   title: 'Enable Static Playlists',
+  //   description: `Show playlists sidebar on page load and keep it open permanently`,
+  // },
 
   // Section - Visible Menus
   {
