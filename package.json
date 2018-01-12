@@ -29,28 +29,33 @@
     "redux-saga": "^0.16.0",
     "reselect": "^3.0.1",
     "styled-components": "^2.4.0",
+    "stylis": "^3.4.8",
     "tinycolor2": "^1.4.1",
     "typeface-roboto": "^0.0.45",
     "uuid": "^3.1.0"
   },
   "scripts": {
     "start": "parcel build src/background.js --out-dir dist && parcel src/index.html",
-    "build":
-      "parcel build src/index.js --no-minify --out-dir build && parcel build src/background.js --no-minify --out-dir build",
-    "deploy":
-      "rm -rf deploy && mkdir deploy && cp manifest.json deploy/manifest.json && cp icon* deploy && parcel build src/index.js --no-cache --out-dir deploy/build && parcel build src/background.js --no-cache --out-dir deploy/build"
+    "build": "parcel build src/index.js --no-minify --out-dir build && parcel build src/background.js --no-minify --out-dir build",
+    "deploy": "rm -rf deploy && mkdir deploy && cp manifest.json deploy/manifest.json && cp icon* deploy && parcel build src/index.js --no-cache --out-dir deploy/build && parcel build src/background.js --no-cache --out-dir deploy/build"
   },
   "babel": {
     "plugins": [
       [
         "module-resolver",
         {
-          "root": ["./src"]
+          "root": [
+            "./src"
+          ]
         }
       ],
-      ["transform-decorators-legacy"]
+      [
+        "transform-decorators-legacy"
+      ]
     ],
-    "presets": ["react-app"]
+    "presets": [
+      "react-app"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app",
@@ -58,8 +63,14 @@
       "chrome": true
     },
     "rules": {
-      "comma-dangle": ["warn", "always-multiline"],
-      "max-len": ["error", 120]
+      "comma-dangle": [
+        "warn",
+        "always-multiline"
+      ],
+      "max-len": [
+        "error",
+        120
+      ]
     }
   },
   "devDependencies": {
