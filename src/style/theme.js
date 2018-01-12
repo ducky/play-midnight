@@ -12,7 +12,7 @@ export const lighten = (c, amount) => {
     .toHexString();
 };
 
-export const DEFAULT_ACCENT = '#ed6237';
+export const DEFAULT_ACCENT = '#ec4e28';
 
 export const colors = {
   background_dark: '#141517',
