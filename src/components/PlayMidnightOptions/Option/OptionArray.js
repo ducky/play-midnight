@@ -6,7 +6,7 @@ import { replaceItem, removeItem } from 'utils/array';
 import { validateId, validateTitle } from 'utils/validation';
 
 import Button from 'components/Button';
-import StyledOption, { CollectionItem, PrettyColor } from './Option.styled';
+import StyledOption, { CollectionItem } from './Option.styled';
 
 // TODO - Update to be dynamic and allow for createable - false
 @connect(null, { showModal: actions.showModal })
@@ -40,30 +40,12 @@ class Option extends PureComponent {
       });
     };
 
-    showModal('confirm', {
+    showModal('colorDelete', {
       type: 'alert',
-      title: `Delete ${name}`,
       closeText: `Delete, It's Pure Garbage`,
       cancelText: `Cancel, Buyer's Remorse`,
+      details: { name, color },
       onClose: remove,
-      message: (
-        <Fragment>
-          <p>
-            Whoa there, bruv! You sure you wanna delete the lovely <strong>{name}</strong> color?
-          </p>
-          <p>
-            This action{' '}
-            <strong>
-              <em>cannot</em>
-            </strong>{' '}
-            be undone, so just be sure about this.
-          </p>
-          <PrettyColor color={color} />
-          <p>
-            <small style={{ display: 'block', textAlign: 'center' }}>Take a second look. Beautiful, innit?</small>
-          </p>
-        </Fragment>
-      ),
     });
   };
 
