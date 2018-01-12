@@ -1,4 +1,18 @@
+import AppInfo from '../../package.json';
+
 const OPTIONS = [
+  // Static - Reference Info
+  {
+    id: 'lastRun',
+    static: true,
+    value: null,
+  },
+  {
+    id: 'version',
+    static: true,
+    value: AppInfo.version,
+  },
+
   // Section - General
   {
     id: 'enabled',
