@@ -64,14 +64,6 @@ const OPTIONS = [
     description: `Makes the favicon match your selected accent color instead of dark`,
   },
   {
-    id: 'darkBar',
-    section: 'customize',
-    type: 'boolean',
-    defaultValue: false,
-    title: 'Enable Dark Top Bar',
-    description: `Makes the top search bar dark instead of accent color`,
-  },
-  {
     id: 'queue',
     section: 'customize',
     type: 'boolean',
