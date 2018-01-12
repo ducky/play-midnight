@@ -14,7 +14,7 @@ const VERSION_NUMBER = '3.0.0';
 const OPTION_TYPES = {
   array: OptionArray,
   boolean: OptionCheckbox,
-  string: OptionString
+  string: OptionString,
 };
 
 const PlayMidnightOptions = ({
@@ -25,18 +25,14 @@ const PlayMidnightOptions = ({
   onOptionChange,
   onTargetedChange,
   onClose,
-  onSave
+  onSave,
 }) => {
   const handleBackgroundClick = e => {
     if (e.target === e.currentTarget) onClose();
   };
 
   return (
-    <ReactCSSTransitionGroup
-      transitionName="animate"
-      transitionEnterTimeout={300}
-      transitionLeaveTimeout={300}
-    >
+    <ReactCSSTransitionGroup transitionName="animate" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
       {visible ? (
         <Backdrop onClick={handleBackgroundClick}>
           <StyledOptions accent={accent}>
@@ -53,11 +49,7 @@ const PlayMidnightOptions = ({
               </div>
               <div className="PlayMidnightOptions__header-version">
                 v{VERSION_NUMBER} by{' '}
-                <a
-                  href="https://christieman.com/"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
+                <a href="https://christieman.com/" rel="noopener noreferrer" target="_blank">
                   Chris Tieman
                 </a>
               </div>
@@ -67,17 +59,15 @@ const PlayMidnightOptions = ({
               <div className="PlayMidnightOptions__options-container">
                 {sections.map(({ id, title, options }) => (
                   <div key={id} className="PlayMidnightOptions__section">
-                    {title && (
-                      <div className="PlayMidnightOptions__section-title">
-                        {title}
-                      </div>
-                    )}
+                    {title && <div className="PlayMidnightOptions__section-title">{title}</div>}
                     <div className="PlayMidnightOptions__section-options">
-                      {options.filter(option => !option.static).map(option => {
+                      {options.map(option => {
                         const Option = OPTION_TYPES[option.type];
                         return (
                           <Option
                             key={option.id}
+                            options={options}
+                            reliesOn={option.reliesOn}
                             onChange={onOptionChange}
                             onChangeValues={onArrayChange}
                             onTargetedChange={onTargetedChange}
@@ -88,9 +78,6 @@ const PlayMidnightOptions = ({
                     </div>
                   </div>
                 ))}
-              </div>
-              <div className="PlayMidnightOptions__options-save">
-                Your options saved successfully! Reloading...
               </div>
             </section>
 
