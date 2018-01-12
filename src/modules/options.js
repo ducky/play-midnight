@@ -109,11 +109,19 @@ export function* saveOptionsSaga({ payload: optionsSave }) {
     yield put(
       toastActions.createToast('success', {
         title: 'Options Saved!',
-        message: 'Your changes are all safe on the Google cloud now.',
+        message: `They're resting safely in the Google Cloud now.`,
       })
     );
   } catch (e) {
     console.error(e);
+    yield put(
+      toastActions.createToast('alert', {
+        title: 'Options Failure!',
+        message:
+          'There seems to be an issue saving your options. Please try again or refresh the page. Please contact me if this persists!',
+        timeout: false,
+      })
+    );
   }
 }
 
