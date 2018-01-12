@@ -41,7 +41,7 @@ const OPTIONS = [
     description: `Customize the accent color to your heart's content`,
     defaultValue: 'default',
     defaultValues: [
-      { id: 'default', name: 'Play Music (Default)', value: '#fb8521' },
+      { id: 'default', name: 'Play Music (Default)', value: '#ec4e28' },
       { id: 'blue-abyss', name: 'Blue Abyss', value: '#007AA5' },
       { id: 'midnight-oil', name: 'Midnight Oil', value: '#8400a3' },
       { id: 'prince-purple', name: 'Prince Purple', value: '#673ab7' },
