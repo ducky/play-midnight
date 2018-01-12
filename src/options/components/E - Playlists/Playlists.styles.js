@@ -1,6 +1,8 @@
 import { css } from 'styled-components';
 
-const getStyles = () => ({
+import createStylesheet from 'utils/createStylesheet';
+
+const styles = () => ({
   thumbsUp: css`
     .sj-right-drawer .autoplaylist-section [data-id = 'auto-playlist-thumbs-up'] {
       display: none;
@@ -18,4 +20,4 @@ const getStyles = () => ({
   `,
 });
 
-export default getStyles;
+export default createStylesheet(styles);
