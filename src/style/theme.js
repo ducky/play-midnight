@@ -1,12 +1,12 @@
 import color from 'tinycolor2';
 
-const darken = (c, amount) => {
+export const darken = (c, amount) => {
   return color(c)
     .darken(amount)
     .toHexString();
 };
 
-const lighten = (c, amount) => {
+export const lighten = (c, amount) => {
   return color(c)
     .lighten(amount)
     .toHexString();
