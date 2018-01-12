@@ -52,25 +52,26 @@ const StyledCheckbox = styled.div`
     transform: translateX(100%);
   }
 
+  input:disabled + .Checkbox__container .Checkbox__track {
+    cursor: not-allowed;
+  }
+
+  input:disabled + .Checkbox__container .Checkbox__knob {
+    cursor: not-allowed;
+  }
+
   input {
     display: none;
   }
 `;
 
-const Checkbox = ({
-  accentColor,
-  checked,
-  disabled,
-  defaultChecked,
-  onChange,
-  dispatch,
-  ...rest
-}) => (
+const Checkbox = ({ accentColor, checked, disabled, defaultChecked, onChange, dispatch, ...rest }) => (
   <StyledCheckbox accent={accentColor}>
     <label>
       <input
         type="checkbox"
         checked={checked}
+        disabled={disabled}
         defaultChecked={defaultChecked}
         onChange={disabled ? noop : onChange}
         {...rest}
@@ -84,7 +85,7 @@ const Checkbox = ({
 );
 
 const mapStateToProps = state => ({
-  accentColor: selectors.accentColor(state)
+  accentColor: selectors.accentColor(state),
 });
 
 export default connect(mapStateToProps)(Checkbox);
