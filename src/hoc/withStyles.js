@@ -1,36 +1,23 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import noop from 'lodash/noop';
 
-import injectElement from 'utils/injectElement';
-import getCssString from 'utils/getCssString';
+import { selectors } from 'modules/options';
 
-const withStyles = Component => {
+const mapStateToProps = state => ({
+  accentColor: selectors.accentColor(state),
+});
+
+const withStyles = (styleGenerator = noop) => Component => {
+  @connect(mapStateToProps)
   class StyleComponent extends PureComponent {
-    updateStyles = (id, styles) => {
-      const style = injectElement('style', {
-        id: `play-midnight-${id}`,
-      });
-
-      if (style) {
-        const newStyles = getCssString(styles);
-
-        // Ensure we don't update dom for no reason
-        if (style.innerText !== newStyles) {
-          style.innerText = newStyles;
-        }
-      }
-    };
-
-    removeStyles = id => {
-      const style = injectElement('style', {
-        id: `play-midnight-${id}`,
-      });
-      if (style) {
-        style.remove();
-      }
+    generateStylesheet = () => {
+      const { accentColor } = this.props;
+      return styleGenerator(accentColor.value);
     };
 
     render() {
-      return <Component updateStyles={this.updateStyles} removeStyles={this.removeStyles} {...this.props} />;
+      return <Component Stylesheet={this.generateStylesheet()} {...this.props} />;
     }
   }
 
