@@ -82,7 +82,7 @@ class ToastWrapper extends PureComponent {
     children: PropTypes.oneOfType([PropTypes.array, PropTypes.element, PropTypes.string]).isRequired,
     title: PropTypes.string,
     type: PropTypes.string,
-    timeout: PropTypes.number,
+    timeout: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
 
     // Methods
     close: PropTypes.func.isRequired,
@@ -135,7 +135,7 @@ class ToastWrapper extends PureComponent {
 
     return (
       <Toast type={type} onClick={this.withClose(onClose)} onMouseEnter={this.stopTimer} onMouseLeave={this.startTimer}>
-        <div className="Toast__header">{title}</div>
+        <div className="Toast__header">Play Midnight - {title}</div>
         <div className="Toast__content">{children}</div>
       </Toast>
     );
