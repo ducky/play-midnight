@@ -8,15 +8,47 @@
   <title>Play Midnight Sandbox</title>
   <style>
     body {
+      display: flex;
+      flex-flow: column nowrap;
+      margin: 0;
+      padding: 0;
       font-family: 'Roboto', Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+
+    #material-app-bar {
+      box-sizing: border-box;
+      height: 64px;
+      padding: 8px 16px;
+      background: #fff;
+      color: #212121;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .jumbo-sized {
+      font-size: 48px;
+    }
+
+    #main {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      justify-content: center;
+      padding: 45px;
+      box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
+      flex: 1 1 auto;
+      overflow: auto;
+      text-align: center;
+      font-weight: 700;
+      font-size: 24px;
+    }
+
+    #main>p {
+      margin: 0;
     }
 
     #player {
       display: flex;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
       height: 90px;
       align-items: center;
       justify-content: flex-end;
@@ -28,7 +60,11 @@
 </head>
 
 <body>
-  <p>Hello, how are you? I hope you're having fun. :)</p>
+  <div id="material-app-bar"></div>
+  <div id="main">
+    <p class="jumbo-sized">😉</p>
+    <p>Hello, Beautiful</p>
+  </div>
   <div id="player">
     <div id="material-player-right-wrapper"></div>
   </div>
