@@ -8,21 +8,35 @@ import noop from 'lodash/noop';
 import { actions } from 'modules/toast';
 import { colors } from 'style/theme';
 
-const DEFAULT_TIMEOUT = 3500;
+const DEFAULT_TIMEOUT = 4000;
 
 const Toast = styled.div`
+  position: relative;
   width: 300px;
   border-radius: 5px;
   background: ${colors.background_menu};
   color: ${colors.font_primary};
-  padding: 20px;
+  padding: 20px 20px 35px;
   margin: 0 0 15px;
-  transform-origin: top right;
+  cursor: pointer;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
   ${props => props.type === 'info' && `border-top: 10px solid ${colors.blue}`};
   ${props => props.type === 'success' && `border-top: 10px solid ${colors.green}`};
   ${props => props.type === 'alert' && `border-top: 10px solid ${colors.red}`};
+
+  &:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: 'click to close';
+    text-align: center;
+    padding: 8px;
+    font-size: 10px;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.3);
+  }
 
   &:last-child {
     margin: 0;
@@ -51,30 +65,15 @@ const Toast = styled.div`
   }
 
   .Toast__header {
-    display: flex;
-    align-items: center;
     font-size: 16px;
-    margin: 0 0 20px;
-  }
-
-  .Toast__header-title {
-    flex: 1 1 auto;
-    margin-right: 15px;
-  }
-
-  .Toast__header-action {
-    cursor: pointer;
-    font-size: 14px;
-    transition: opacity 0.3s;
-
-    &:hover {
-      opacity: 0.8;
-    }
+    font-weight: 500;
+    margin: 0 0 15px;
   }
 
   .Toast__content {
     font-size: 14px;
-    line-height: 1.2;
+    font-weight: 400;
+    line-height: 1.5;
   }
 `;
 
@@ -83,6 +82,7 @@ class ToastWrapper extends PureComponent {
     children: PropTypes.oneOfType([PropTypes.array, PropTypes.element, PropTypes.string]).isRequired,
     title: PropTypes.string,
     type: PropTypes.string,
+    timeout: PropTypes.number,
 
     // Methods
     close: PropTypes.func.isRequired,
@@ -92,6 +92,7 @@ class ToastWrapper extends PureComponent {
   static defaultProps = {
     title: '',
     type: 'info',
+    timeout: DEFAULT_TIMEOUT,
 
     // Methods
     close: noop,
@@ -133,13 +134,8 @@ class ToastWrapper extends PureComponent {
     const { children, title, type, onClose } = this.props;
 
     return (
-      <Toast type={type} onMouseEnter={this.stopTimer} onMouseLeave={this.startTimer}>
-        <div className="Toast__header">
-          <div className="Toast__header-title">{title}</div>
-          <div className="Toast__header-action" onClick={this.withClose(onClose)}>
-            <i className="fa fa-times" />
-          </div>
-        </div>
+      <Toast type={type} onClick={this.withClose(onClose)} onMouseEnter={this.stopTimer} onMouseLeave={this.startTimer}>
+        <div className="Toast__header">{title}</div>
         <div className="Toast__content">{children}</div>
       </Toast>
     );
