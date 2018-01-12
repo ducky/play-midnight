@@ -1,12 +1,12 @@
 import { Component } from 'react';
-import { connect } from 'react-redux';
 import filter from 'lodash/filter';
 import isEqual from 'lodash/isEqual';
 
-import { getUrl, loadBackground } from 'lib/api';
-import { selectors } from 'modules/options';
-import removeAllElements from 'utils/removeAllElements';
 import withOptions from 'hoc/withOptions';
+import withStyles from 'hoc/withStyles';
+
+import { getUrl, loadBackground } from 'lib/api';
+import removeAllElements from 'utils/removeAllElements';
 
 import FaviconImage from 'assets/images/favicon.png';
 import injectElement from 'utils/injectElement';
@@ -14,13 +14,8 @@ import injectElement from 'utils/injectElement';
 const OPTION_ID = 'favicon';
 const ICON_STORAGE = 'PM_ICON';
 
-const mapStateToProps = state => ({
-  accent: selectors.accentColor(state),
-  options: selectors.options(state),
-});
-
 @withOptions
-@connect(mapStateToProps)
+@withStyles()
 class Favicon extends Component {
   updateFavicon = async (accent, useAccent) => {
     const stored = localStorage.getItem(ICON_STORAGE) ? JSON.parse(localStorage.getItem(ICON_STORAGE)) : undefined;
@@ -59,18 +54,18 @@ class Favicon extends Component {
   };
 
   shouldComponentUpdate({ accent: prevAccent, options: prevOptions }) {
-    const { accent, options } = this.props;
+    const { accentColor, options } = this.props;
     const prevFavicon = filter(prevOptions, o => ['favicon', 'faviconAccent'].includes(o.id));
     const favicon = filter(options, o => ['favicon', 'faviconAccent'].includes(o.id));
 
-    return !isEqual(prevAccent, accent) || !isEqual(prevFavicon, favicon);
+    return !isEqual(prevAccent, accentColor) || !isEqual(prevFavicon, favicon);
   }
 
   render() {
-    const { accent, isActive } = this.props;
+    const { accentColor, isActive } = this.props;
     const accented = isActive('faviconAccent');
 
-    if (isActive(OPTION_ID)) this.updateFavicon(accent, accented);
+    if (isActive(OPTION_ID)) this.updateFavicon(accentColor, accented);
 
     return null;
   }
