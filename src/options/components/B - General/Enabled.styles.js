@@ -30,7 +30,7 @@ const styles = accentColor => css`
 
   #material-app-bar {
     background: ${colors.background_nav};
-    border-bottom-color: ${colors.border_nav};
+    border-bottom-color: ${colors.border_nav} !important;
     transition: background 300ms;
   }
 
@@ -42,7 +42,7 @@ const styles = accentColor => css`
   /* Background Panes - Fading */
   sj-home {
     #backgroundContainer #backgroundColor {
-      background-color: ${colors.background_page};
+      background-color: ${colors.background_dark};
     }
 
     #backgroundContainer #backgroundImageContainer {
@@ -53,7 +53,7 @@ const styles = accentColor => css`
   sj-home[selected='0'],
   sj-home[selected='1'] {
     #backgroundContainer #backgroundColor {
-      background-color: ${colors.background_page} !important;
+      background-color: ${colors.background_dark} !important;
       transition: background-color 300ms;
     }
 
