@@ -134,27 +134,6 @@ const StyledOptions = styled.div`
     }
   }
 
-  .PlayMidnightOptions__options-save {
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: $color_accent;
-    padding: 10px 15px;
-    color: #fff;
-    text-align: center;
-    transform: translateY(100%);
-    transition: all 0.5s;
-
-    &.visible {
-      transform: translateY(0);
-      visibility: visible;
-      opacity: 1;
-    }
-  }
-
   .PlayMidnightOptions__footer {
     flex: 0 0 auto;
     background: #1b1c1f;

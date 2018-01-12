@@ -121,26 +121,6 @@ export const CollectionItem = styled.label`
   }
 `;
 
-export const PrettyColor = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
-  border-radius: 5px;
-  background: ${props => props.color};
-  box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19);
-  margin: 45px 0 8px;
-
-  strong {
-    font-weight: 900;
-  }
-
-  &:before {
-    content: '😎';
-    font-size: 36px;
-  }
-`;
-
 const StyledOption = styled.div`
   border-bottom: 1px solid #141517;
 
