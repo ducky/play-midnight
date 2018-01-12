@@ -1,19 +1,19 @@
-import { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 
-import getStyles from './Menus.styles';
 import withOptions from 'hoc/withOptions';
 import withStyles from 'hoc/withStyles';
 
 import { selectors } from 'modules/options';
+import styles from './Menus.styles';
 
 const mapStateToProps = state => ({
   visibleMenus: selectors.visibleMenus(state),
 });
 
 @withOptions
-@withStyles
+@withStyles(styles)
 @connect(mapStateToProps)
 class Menus extends Component {
   shouldComponentUpdate({ visibleMenus: nextMenus }) {
@@ -22,20 +22,16 @@ class Menus extends Component {
   }
 
   render() {
-    const { isActive, updateStyles, removeStyles } = this.props;
-    const styles = getStyles();
+    const { isActive, Stylesheet: StylesheetList } = this.props;
 
-    Object.keys(styles).forEach(id => {
-      const style = styles[id];
-
-      if (!isActive(id)) {
-        updateStyles(id, style);
-      } else {
-        removeStyles(id);
-      }
-    });
-
-    return null;
+    return (
+      <Fragment>
+        {Object.keys(StylesheetList).map(id => {
+          const Stylesheet = StylesheetList[id];
+          return !isActive(id) ? <Stylesheet key={id} /> : null;
+        })}
+      </Fragment>
+    );
   }
 }
 
