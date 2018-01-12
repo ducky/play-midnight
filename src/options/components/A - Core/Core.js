@@ -1,29 +1,47 @@
-import { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import React, { PureComponent } from 'react';
 
 import withOptions from 'hoc/withOptions';
 import withStyles from 'hoc/withStyles';
 
-import { selectors } from 'modules/options';
-import getStyles from './Core.styles';
+import styles from './Core.styles';
 
 const OPTION_ID = 'core';
 
-const mapStateToProps = state => ({
-  accentColor: selectors.accentColor(state),
-});
-
 @withOptions
-@withStyles
-@connect(mapStateToProps)
+@withStyles(styles)
 class Core extends PureComponent {
+  updateRecentActivity = () => {
+    const urlRegex = /(=s90)/;
+    const gridItems = document.querySelectorAll('sj-scrolling-module[module-token="CLIENT_SIDE_RECENTS"] sj-card');
+
+    for (let i = 0, len = gridItems.length; i < len; i++) {
+      const item = gridItems[i];
+
+      if (!item) continue;
+
+      const img = item.querySelector('img');
+
+      if (img && urlRegex.test(img.src)) {
+        img.setAttribute('src', img.src.replace('=s90', '=s150'));
+      }
+    }
+  };
+
+  componentWillUnmount() {
+    this.bodyObserver.disconnect();
+  }
+
+  componentDidMount() {
+    this.bodyObserver = new MutationObserver(() => {
+      this.updateRecentActivity();
+    });
+
+    this.bodyObserver.observe(document.body, { childList: true });
+  }
+
   render() {
-    const { accentColor, updateStyles } = this.props;
-    const styles = getStyles(accentColor.value);
-
-    updateStyles(OPTION_ID, styles);
-
-    return null;
+    const { Stylesheet } = this.props;
+    return <Stylesheet />;
   }
 }
 
