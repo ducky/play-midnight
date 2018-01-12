@@ -1,33 +1,18 @@
-import { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import React, { PureComponent } from 'react';
 
 import withOptions from 'hoc/withOptions';
 import withStyles from 'hoc/withStyles';
 
-import { selectors } from 'modules/options';
-import getStyles from './AccentsOnly.styles';
+import styles from './AccentsOnly.styles';
 
 const OPTION_ID = 'accentsOnly';
 
-const mapStateToProps = state => ({
-  accentColor: selectors.accentColor(state),
-});
-
 @withOptions
-@withStyles
-@connect(mapStateToProps)
+@withStyles(styles)
 class AccentsOnly extends PureComponent {
   render() {
-    const { accentColor, isActive } = this.props;
-    const styles = getStyles(accentColor.value);
-
-    if (isActive(OPTION_ID)) {
-      this.props.updateStyles(OPTION_ID, styles);
-    } else {
-      this.props.removeStyles(OPTION_ID);
-    }
-
-    return null;
+    const { isActive, Stylesheet } = this.props;
+    return isActive(OPTION_ID) ? <Stylesheet /> : null;
   }
 }
 
