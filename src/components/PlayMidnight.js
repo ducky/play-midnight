@@ -7,23 +7,21 @@ import Components from 'options/Components';
 import PlayMidnightOptions from './PlayMidnightOptions';
 import StyledPlayMidnight from './PlayMidnight.styled';
 
-@connect(null, {
-  fetchOptions: actions.fetchOptions,
-})
+@connect(null, { fetchOptions: actions.fetchOptions })
 class PlayMidnight extends PureComponent {
   componentDidMount() {
     this.props.fetchOptions();
   }
 
   render() {
-    const renderOptions = options => {
+    const renderComponents = () => {
       return Components.map((Component, i) => <Component key={i} />);
     };
 
     return (
       <StyledPlayMidnight>
         <PlayMidnightOptions />
-        {renderOptions()}
+        {renderComponents()}
       </StyledPlayMidnight>
     );
   }
