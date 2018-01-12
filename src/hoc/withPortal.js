@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { createPortal } from 'react-dom';
 
-import { injectElementAsync } from 'utils/injectElement';
+import awaitElement from 'utils/awaitElement';
 
 // There has to be a better way to do this... 😭
 const withPortal = (id, where) => Component => {
@@ -19,13 +19,7 @@ const withPortal = (id, where) => Component => {
       if (this.el) {
         this.setState({ render: true });
       } else {
-        this.el = await injectElementAsync(
-          'div',
-          {
-            id: `play-midnight-${id}`,
-          },
-          where
-        );
+        this.el = await awaitElement(where);
         this.setState({ render: true });
       }
     }
