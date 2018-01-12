@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import createStylesheet from 'utils/createStylesheet';
+
 export const StyledFAB = styled.div`
   width: 40px;
   height: 40px;
@@ -34,7 +36,7 @@ export const StyledFAB = styled.div`
   }
 `;
 
-const getStyles = () => css`
+const styles = () => css`
   #player #material-player-right-wrapper paper-icon-button[data-id='queue'] {
     margin: 8px;
   }
@@ -44,4 +46,4 @@ const getStyles = () => css`
   }
 `;
 
-export default getStyles;
+export default createStylesheet(styles);
