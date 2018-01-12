@@ -17,7 +17,7 @@ const ToastContainer = styled.div`
   position: fixed;
   top: 15px;
   right: 15px;
-  z-index: 9;
+  z-index: 119;
 `;
 
 const ToastConductor = ({ toasts = [] }) => {
