@@ -9,13 +9,13 @@ const mapStateToProps = state => ({
   accentColor: selectors.accentColor(state),
   options: selectors.options(state),
   sections: selectors.sortedOptions(state),
-  menuVisible: state.options.menuVisible
+  menuVisible: state.options.menuVisible,
 });
 
 @connect(mapStateToProps, {
   saveOptions: actions.saveOptions,
   toggleMenu: actions.toggleMenu,
-  updateOption: actions.updateOption
+  updateOption: actions.updateOption,
 })
 class PlayMidnightOptionsContainer extends PureComponent {
   updateTargetedOption = ({ target }) => {
@@ -34,14 +34,7 @@ class PlayMidnightOptionsContainer extends PureComponent {
   };
 
   render() {
-    const {
-      accentColor,
-      options,
-      sections,
-      menuVisible,
-      saveOptions,
-      toggleMenu
-    } = this.props;
+    const { accentColor, options, sections, menuVisible, saveOptions, toggleMenu } = this.props;
 
     return (
       <PlayMidnightOptions
