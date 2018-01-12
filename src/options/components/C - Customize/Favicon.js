@@ -18,6 +18,7 @@ const ICON_STORAGE = 'PM_ICON';
 @withStyles()
 class Favicon extends Component {
   updateFavicon = async (accent, useAccent) => {
+    const { commError } = this.props;
     const stored = localStorage.getItem(ICON_STORAGE) ? JSON.parse(localStorage.getItem(ICON_STORAGE)) : undefined;
 
     const cached = stored && stored.accent === accent.value;
@@ -40,15 +41,23 @@ class Favicon extends Component {
       if (cached) {
         createIcon(stored.url);
       } else {
-        const { url, accent } = await loadBackground(data);
-        localStorage.setItem(
-          ICON_STORAGE,
-          JSON.stringify({
-            url,
-            accent,
-          })
-        );
-        createIcon(url);
+        try {
+          const { url, accent } = await loadBackground(data);
+          localStorage.setItem(
+            ICON_STORAGE,
+            JSON.stringify({
+              url,
+              accent,
+            })
+          );
+          createIcon(url);
+        } catch (e) {
+          // Console error for now, Modal seems too intrusive for favicon
+          console.error(
+            `Play Midnight - Issue communcating with background page \
+            to update favicon. Refreshing page should fix this.`
+          );
+        }
       }
     }
   };

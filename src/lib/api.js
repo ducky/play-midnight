@@ -1,9 +1,9 @@
 const LOCAL_STORAGE_KEY = 'PLAY_MIDNIGHT';
-const IS_EXTENSION = chrome.storage !== undefined;
+const IS_EXTENSION = chrome.storage !== undefined; // Maybe Brittle?
 
 export const getUrl = url => {
-  if (chrome.extension) {
-    return chrome.extension.getURL(url);
+  if (IS_EXTENSION) {
+    return chrome.runtime.getURL(url);
   } else {
     return url;
   }
@@ -24,9 +24,14 @@ export const load = async data => {
 };
 
 export const loadBackground = async data => {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     if (IS_EXTENSION) {
-      return chrome.runtime.sendMessage(chrome.runtime.id, data, resolve);
+      try {
+        return chrome.runtime.sendMessage(chrome.runtime.id, data, resolve);
+      } catch (e) {
+        // Extension reloaded and can't reach background page
+        return reject(e);
+      }
     } else {
       console.log('Load Background Fallback!', data);
       resolve(data);
