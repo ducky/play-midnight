@@ -1,5 +1,5 @@
 import { createActions, handleActions } from 'redux-actions';
-import { all, put, call, takeEvery } from 'redux-saga/effects';
+import { all, put, select, call, takeEvery } from 'redux-saga/effects';
 import { createSelector } from 'reselect';
 import filter from 'lodash/filter';
 import find from 'lodash/find';
@@ -19,7 +19,8 @@ const defaultState = {
 
 // selectors
 export const selectors = {
-  options: state => state.options.data,
+  options: state => state.options.data.filter(o => !o.static),
+  allOptions: state => state.options.data,
 };
 
 selectors.accentColor = createSelector([selectors.options], options => {
@@ -30,6 +31,16 @@ selectors.accentColor = createSelector([selectors.options], options => {
 selectors.enabled = createSelector([selectors.options], options => {
   const enabledOption = find(options, { id: 'enabled' });
   return enabledOption ? enabledOption.value : false;
+});
+
+selectors.version = createSelector([selectors.allOptions], options => {
+  const versionOption = find(options, { id: 'version' });
+  return versionOption ? versionOption.value : undefined;
+});
+
+selectors.versionPrevious = createSelector([selectors.allOptions], options => {
+  const versionOption = find(options, { id: 'lastRun' });
+  return versionOption ? versionOption.value : undefined;
 });
 
 selectors.visibleMenus = createSelector([selectors.options], options => {
@@ -56,17 +67,18 @@ selectors.sortedOptions = createSelector([selectors.options], options =>
 
 // actions
 export const actions = createActions(
+  'CHECK_UPDATE',
   'FETCH_OPTIONS',
   'FETCH_OPTIONS_RESPONSE',
   'SAVE_OPTIONS',
   'SAVE_OPTIONS_RESPONSE',
   'TOGGLE_MENU',
-  'UPDATE_OPTION'
+  'UPDATE_OPTION',
+  'UPDATE_SAVE_OPTION',
 );
 
 const toObject = (options = []) =>
   options.reduce((obj, option) => {
-    if (option.static) return obj;
     if (option.type === 'string') return obj;
 
     const updated = {
@@ -90,12 +102,35 @@ const mapToValues = (options = [], values = {}) =>
   }));
 
 // sagas
+export function* checkUpdateSaga({ payload }) {
+  try {
+    const version = yield select(selectors.version);
+    const lastRun = yield select(selectors.versionPrevious);
+
+    if (lastRun === version) {
+      console.log(`Already up to date, enjoy your life!`);
+    } else {
+      yield put(
+        toastActions.createToast('success', {
+          id: 'PM_UPDATE',
+          title: 'Updated',
+          message: `Whoo, new toys! I'll be a modal soon!`,
+        })
+      );
+      yield put(actions.updateSaveOption({ id: 'lastRun', value: version }));
+    }
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 export function* fetchOptionsSaga() {
   try {
     const DEFAULT_OPTIONS = toObject(OPTIONS);
     const optionsValues = yield call(load, DEFAULT_OPTIONS);
     const options = mapToValues(OPTIONS, optionsValues);
     yield put(actions.fetchOptionsResponse(options));
+    yield put(actions.checkUpdate(options));
   } catch (e) {
     console.error(e);
   }
@@ -108,17 +143,36 @@ export function* saveOptionsSaga({ payload: optionsSave }) {
     yield put(actions.saveOptionsResponse(optionsSave));
     yield put(
       toastActions.createToast('success', {
-        title: 'Options Saved!',
-        message: `They're resting safely in the Google Cloud now.`,
+        title: 'Options Saved',
+        message: `They're resting safely in the Google Cloud now`,
       })
     );
   } catch (e) {
     console.error(e);
     yield put(
       toastActions.createToast('alert', {
-        title: 'Options Failure!',
-        message:
-          'There seems to be an issue saving your options. Please try again or refresh the page. Please contact me if this persists!',
+        title: 'Options Failure',
+        message: `There seems to be an issue saving your options. \
+        Please try again or refresh the page. Please contact me if this persists!`,
+        timeout: false,
+      })
+    );
+  }
+}
+
+export function* updateAndSaveOptionSaga({ payload: option }) {
+  try {
+    yield put(actions.updateOption(option));
+    const update = yield select(selectors.allOptions);
+    yield call(save, toObject(update));
+    yield put(actions.saveOptionsResponse(update));
+  } catch (e) {
+    console.error(e);
+    yield put(
+      toastActions.createToast('alert', {
+        title: 'Options Failure',
+        message: `There seems to be an issue saving your options. \
+        Please try again or refresh the page. Please contact me if this persists!`,
         timeout: false,
       })
     );
@@ -126,7 +180,12 @@ export function* saveOptionsSaga({ payload: optionsSave }) {
 }
 
 export function* optionsSaga() {
-  yield all([takeEvery(actions.fetchOptions, fetchOptionsSaga), takeEvery(actions.saveOptions, saveOptionsSaga)]);
+  yield all([
+    takeEvery(actions.checkUpdate, checkUpdateSaga),
+    takeEvery(actions.fetchOptions, fetchOptionsSaga),
+    takeEvery(actions.saveOptions, saveOptionsSaga),
+    takeEvery(actions.updateSaveOption, updateAndSaveOptionSaga),
+  ]);
 }
 
 // reducer
