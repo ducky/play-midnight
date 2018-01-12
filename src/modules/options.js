@@ -23,15 +23,26 @@ export const selectors = {
   allOptions: state => state.options.data,
 };
 
-selectors.accentColor = createSelector([selectors.options], options => {
-  const accentOption = find(options, { id: 'accent' });
-  return accentOption ? find(accentOption.values, { id: accentOption.value }) : { value: DEFAULT_ACCENT };
-});
-
 selectors.enabled = createSelector([selectors.options], options => {
   const enabledOption = find(options, { id: 'enabled' });
   return enabledOption ? enabledOption.value : false;
 });
+
+selectors.enabledAccents = createSelector([selectors.options], options => {
+  const enabledOption = find(options, { id: 'accentsOnly' });
+  return enabledOption ? enabledOption.value : false;
+});
+
+selectors.accentColor = createSelector(
+  [selectors.enabled, selectors.enabledAccents, selectors.options],
+  (enabled, enabledAccents, options) => {
+    const isEnabled = enabled || enabledAccents;
+    const accentOption = find(options, { id: 'accent' });
+    return isEnabled && accentOption
+      ? find(accentOption.values, { id: accentOption.value })
+      : { value: DEFAULT_ACCENT };
+  }
+);
 
 selectors.version = createSelector([selectors.allOptions], options => {
   const versionOption = find(options, { id: 'version' });
@@ -74,7 +85,7 @@ export const actions = createActions(
   'SAVE_OPTIONS_RESPONSE',
   'TOGGLE_MENU',
   'UPDATE_OPTION',
-  'UPDATE_SAVE_OPTION',
+  'UPDATE_SAVE_OPTION'
 );
 
 const toObject = (options = []) =>
