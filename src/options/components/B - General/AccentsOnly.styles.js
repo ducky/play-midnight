@@ -1,9 +1,12 @@
 import { css } from 'styled-components';
 
-const getStyles = accentColor => css`
+import { colors } from 'style/theme';
+import createStylesheet from 'utils/createStylesheet';
+
+const styles = accentColor => css`
   body {
     font-style: italic;
   }
 `;
 
-export default getStyles;
+export default createStylesheet(styles);
