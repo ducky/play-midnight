@@ -12,6 +12,10 @@
   background: lighten($background_player, 5%);
 }
 
+#player:hover #material-player-progress:not([disabled]) #progressContainer {
+  background: transparent;
+}
+
 #material-player-left-wrapper #playerSongInfo #player-artist,
 #material-player-left-wrapper #playerSongInfo .player-album,
 #material-player-left-wrapper #playerSongInfo .player-dash {
