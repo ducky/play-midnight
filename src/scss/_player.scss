@@ -33,8 +33,7 @@ paper-slider::shadow .ring > #sliderKnob > #sliderKnobInner {
   cursor: not-allowed !important;
 }
 
-#player.material .material-player-middle paper-icon-button[data-id='play-pause'] iron-icon,
-#player.material .material-player-middle sj-icon-button[data-id='play-pause']::shadow core-icon {
+#player.material .material-player-middle paper-icon-button[data-id="play-pause"] iron-icon {
   g {
     path:nth-child(2) {
       fill: $background_player;
