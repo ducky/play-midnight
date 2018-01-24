@@ -1,14 +1,18 @@
 import { css } from 'styled-components';
 
 import { colors } from 'style/theme';
+import accents from 'style/sheets/accents';
 import createStylesheet from 'utils/createStylesheet';
 
 import { getUrl } from 'lib/api';
 import PlayMusicLogo from 'assets/images/play_music_logo_dark.png';
 
 const styles = accentColor => css`
+  ${accents(accentColor)};
+
   body {
-    background: #141517;
+    background: ${colors.background_dark};
+    color: ${colors.font_primary}
     transition: background 300ms;
   }
 
