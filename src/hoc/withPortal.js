@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import awaitElement from 'utils/awaitElement';
 
 // There has to be a better way to do this... 😭
-const withPortal = (id, where) => Component => {
+const withPortal = where => Component => {
   class PortalComponent extends PureComponent {
     state = {
       render: false,
