@@ -17,6 +17,7 @@ const StyledOptions = styled.div`
   bottom: 118px;
   width: 600px;
   height: calc(100vh - 110px - 137px);
+  min-height: 360px;
   max-height: 750px;
   z-index: 110;
   border-radius: 3px;
