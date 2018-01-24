@@ -3,13 +3,17 @@ import { all, put, select, call, takeEvery } from 'redux-saga/effects';
 import { createSelector } from 'reselect';
 import filter from 'lodash/filter';
 import find from 'lodash/find';
+import semver from 'semver';
 
 import AppInfo from '../../package.json';
 import { load, save } from 'lib/api';
+import store from 'lib/store';
 import { DEFAULT_ACCENT } from 'style/theme';
 import { updateItem } from 'utils/array';
 
 import OPTIONS, { SECTIONS } from 'options';
+import NOTIFICATIONS from 'notifications';
+import { actions as modalActions } from 'modules/modal';
 import { actions as toastActions } from 'modules/toast';
 
 // state
@@ -76,6 +80,7 @@ selectors.sortedOptions = createSelector([selectors.options], options =>
 // actions
 export const actions = createActions(
   'CHECK_UPDATE',
+  'CHECK_UPGRADE',
   'FETCH_OPTIONS',
   'FETCH_OPTIONS_RESPONSE',
   'SAVE_OPTIONS',
@@ -113,22 +118,42 @@ const mapToValues = (options = [], values = {}) =>
 export function* checkUpdateSaga({ payload }) {
   try {
     const version = yield select(selectors.version);
-    const lastRun = yield select(selectors.versionPrevious);
+    const versionPrevious = yield select(selectors.versionPrevious);
+    const notification = versionPrevious ? NOTIFICATIONS[version] : NOTIFICATIONS['default'];
 
-    if (lastRun === version) {
+    if (versionPrevious && semver.eq(versionPrevious, version)) {
       console.log(`Already up to date, enjoy your life!`);
     } else {
-      yield put(
-        toastActions.createToast('success', {
-          id: 'PM_UPDATE',
-          title: 'Updated',
-          message: `Whoo, new toys! I'll be a modal soon!`,
-        })
-      );
-      yield put(actions.updateSaveOption({ id: 'lastRun', value: version }));
+      if (notification) {
+        yield put(
+          modalActions.showModal('notification', {
+            id: 'PM_NOTIFICATION',
+            details: {
+              version,
+              notification,
+            },
+            onClose: () => {
+              // TODO - Has to be a better way
+              store.dispatch(actions.updateSaveOption({ id: 'lastRun', value: version }));
+            },
+          })
+        );
+      } else {
+        console.log(
+          `No update notification found for v${version}. Updating lastRun (${versionPrevious} -> ${version}).`
+        );
+        yield put(actions.updateSaveOption({ id: 'lastRun', value: version }));
+      }
     }
   } catch (e) {
     console.error(e);
+  }
+}
+
+export function* checkUpgradeSaga() {
+  const versionPrevious = yield select(selectors.versionPrevious);
+  if (versionPrevious && semver.lt(versionPrevious, '3.0.0')) {
+    // Update any breaking changes < v3.0.0 here
   }
 }
 
@@ -138,6 +163,7 @@ export function* fetchOptionsSaga() {
     const optionsValues = yield call(load, DEFAULT_OPTIONS);
     const options = mapToValues(OPTIONS, optionsValues);
     yield put(actions.fetchOptionsResponse(options));
+    yield put(actions.checkUpgrade());
     yield put(actions.checkUpdate(options));
   } catch (e) {
     console.error(e);
@@ -190,6 +216,7 @@ export function* updateAndSaveOptionSaga({ payload: option }) {
 export function* optionsSaga() {
   yield all([
     takeEvery(actions.checkUpdate, checkUpdateSaga),
+    takeEvery(actions.checkUpgrade, checkUpgradeSaga),
     takeEvery(actions.fetchOptions, fetchOptionsSaga),
     takeEvery(actions.saveOptions, saveOptionsSaga),
     takeEvery(actions.updateSaveOption, updateAndSaveOptionSaga),
