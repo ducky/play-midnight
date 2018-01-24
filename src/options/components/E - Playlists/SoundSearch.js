@@ -6,13 +6,13 @@ import withPortal from 'hoc/withPortal';
 const OPTION_ID = 'soundSearch';
 
 @withOptions
-@withPortal(OPTION_ID, '#playlist-drawer .autoplaylist-section')
+@withPortal('#playlist-drawer .autoplaylist-section')
 class soundSearch extends PureComponent {
   render() {
     const { isActive } = this.props;
 
     return isActive(OPTION_ID) ? (
-      <div className="playlist-drawer-item " data-type="ap" data-id="sound-search">
+      <div className="playlist-drawer-item" data-type="ap" data-id="sound-search">
         <iron-icon icon="search" />
         <sj-play-button
           data-id="play"
@@ -25,7 +25,7 @@ class soundSearch extends PureComponent {
           elevation="0"
           aria-label="Play Sound Search"
         />
-        <a className="playlist-wrapper" href="">
+        <a className="playlist-wrapper">
           <div className="playlist-title">Sound search</div>
         </a>
       </div>
