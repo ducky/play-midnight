@@ -11,22 +11,22 @@ export const ModalBackdrop = styled.div`
   z-index: 209;
   padding: 100px;
   overflow: auto;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
 
-  &.modal-enter {
+  .modal-enter & {
     opacity: 0.01;
   }
 
-  &.modal-enter.modal-enter-active {
+  .modal-enter.modal-enter-active & {
     opacity: 1;
     transition: opacity 0.3s;
   }
 
-  &.modal-leave {
+  .modal-leave & {
     opacity: 1;
   }
 
-  &.modal-leave.modal-leave-active {
+  .modal-leave.modal-leave-active & {
     opacity: 0.01;
     transition: opacity 0.2s;
   }
@@ -65,6 +65,16 @@ const Modal = styled.div`
     &:last-child {
       margin: 0;
     }
+  }
+
+  .Modal__footNote {
+    position: absolute;
+    left: 50%;
+    font-size: 12px;
+    font-weight: 300;
+    font-style: italic;
+    text-align: center;
+    transform: translateX(-50%) translateY(100%);
   }
 
   .modal-enter & {

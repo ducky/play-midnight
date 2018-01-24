@@ -15,7 +15,6 @@ class ModalWrapper extends PureComponent {
 
   // Wrap Action with close event
   withClose = (action, useReduxCloseAction = false) => () => {
-    // TODO - add edited check
     const { id, close } = this.props;
     const modalAction = isFunction(action) ? action : noop;
 
@@ -50,7 +49,7 @@ class ModalWrapper extends PureComponent {
     alert: type === 'alert',
     info: type === 'info',
     success: type === 'success',
-    noAccent: !['alert', 'info', 'success'].includes(type),
+    noAccent: type === 'noAccent',
   });
 
   componentDidMount() {
@@ -71,6 +70,7 @@ class ModalWrapper extends PureComponent {
       closeText,
       cancelButton,
       closeButton,
+      footNote,
       useCloseAction,
       useCancelAction,
       locked,
@@ -89,7 +89,7 @@ class ModalWrapper extends PureComponent {
         action: onClose,
         useReduxAction: useCloseAction,
         text: closeText,
-        type: cancelButton ? type || 'info' : null,
+        type: type || 'info',
         disabled: !valid,
       });
     }
@@ -98,6 +98,7 @@ class ModalWrapper extends PureComponent {
       modalButtons.push({
         action: onCancel,
         useReduxAction: useCancelAction,
+        type: 'noAccent',
         text: cancelText,
       });
     }
@@ -106,24 +107,27 @@ class ModalWrapper extends PureComponent {
 
     return (
       <ModalBackdrop key={id} onClick={!locked ? this.handleBackgroundClick : noop}>
-        <StyledModal style={{ width: width ? `${width}px` : '100%' }} type={type} collapse={collapse}>
+        <StyledModal className="Modal" style={{ width: width ? `${width}px` : '100%' }} type={type} collapse={collapse}>
           {title && <div className="Modal__header">{title}</div>}
           <div className="Modal__content">{children}</div>
           {modalActions.length > 0 && (
-            <ModalActions length={modalActions.length}>
-              {modalActions.map(({ action, type, text, useReduxAction, ...props }, i) => (
-                <Button
-                  className="Modal__action"
-                  key={i}
-                  onClick={this.withClose(action, useReduxAction)}
-                  {...this.getButtonType(type)}
-                  {...props}
-                >
-                  {text}
-                </Button>
-              ))}
-            </ModalActions>
+            <div className="Modal__footer">
+              <ModalActions className="Modal__actions" length={modalActions.length}>
+                {modalActions.map(({ action, type, text, useReduxAction, ...props }, i) => (
+                  <Button
+                    className="Modal__action"
+                    key={i}
+                    onClick={this.withClose(action, useReduxAction)}
+                    {...this.getButtonType(type)}
+                    {...props}
+                  >
+                    {text}
+                  </Button>
+                ))}
+              </ModalActions>
+            </div>
           )}
+          {footNote && <div className="Modal__footNote">{footNote}</div>}
         </StyledModal>
       </ModalBackdrop>
     );
