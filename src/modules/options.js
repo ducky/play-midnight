@@ -4,6 +4,7 @@ import { createSelector } from 'reselect';
 import filter from 'lodash/filter';
 import find from 'lodash/find';
 
+import AppInfo from '../../package.json';
 import { load, save } from 'lib/api';
 import { DEFAULT_ACCENT } from 'style/theme';
 import { updateItem } from 'utils/array';
@@ -19,6 +20,7 @@ const defaultState = {
 
 // selectors
 export const selectors = {
+  version: () => AppInfo.version,
   options: state => state.options.data.filter(o => !o.static),
   allOptions: state => state.options.data,
 };
@@ -43,11 +45,6 @@ selectors.accentColor = createSelector(
       : { value: DEFAULT_ACCENT };
   }
 );
-
-selectors.version = createSelector([selectors.allOptions], options => {
-  const versionOption = find(options, { id: 'version' });
-  return versionOption ? versionOption.value : undefined;
-});
 
 selectors.versionPrevious = createSelector([selectors.allOptions], options => {
   const versionOption = find(options, { id: 'lastRun' });
