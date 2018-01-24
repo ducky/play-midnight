@@ -15,7 +15,7 @@ export const StyledFAB = styled.div`
   opacity: 0.9;
   color: ${props => (props.accent ? `${props.accent.value}` : '#dcdcdc')};
   border-radius: 50%;
-  transition: opacity 300ms, transform 300ms;
+  transition: color 300ms, opacity 300ms, transform 300ms;
 
   &:hover {
     opacity: 1;
@@ -33,6 +33,7 @@ export const StyledFAB = styled.div`
     width: 100%;
     height: 100%;
     fill: currentcolor;
+    transition: fill 300ms;
   }
 `;
 

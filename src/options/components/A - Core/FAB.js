@@ -9,19 +9,22 @@ import { actions } from 'modules/options';
 
 import styles, { StyledFAB } from './FAB.styles';
 
-const OPTION_ID = 'fab';
+const mapStateToProps = ({ options }) => ({
+  menuVisible: options.menuVisible,
+});
 
 @withOptions
 @withStyles(styles)
-@withPortal(OPTION_ID, '#material-player-right-wrapper')
-@connect(null, { toggleMenu: actions.toggleMenu })
+@withPortal('#material-player-right-wrapper')
+@connect(mapStateToProps, { toggleMenu: actions.toggleMenu })
 class FAB extends PureComponent {
   render() {
-    const { accentColor, toggleMenu, Stylesheet } = this.props;
+    const { accentColor, menuVisible, toggleMenu, Stylesheet } = this.props;
 
     return (
       <Fragment>
-        <StyledFAB accent={accentColor} onClick={() => toggleMenu()}>
+        {/* TODO - Update accent to be color and obey enabled/disabled colors */}
+        <StyledFAB accent={menuVisible ? accentColor : null} onClick={() => toggleMenu()}>
           <div className="FAB__icon">
             <svg
               viewBox="0 0 24 24"
