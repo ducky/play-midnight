@@ -6,12 +6,14 @@ import AlertModal from 'components/Modals/AlertModal';
 import ColorDeleteModal from 'components/Modals/ColorDeleteModal';
 import ColorPickerModal from 'components/Modals/ColorPickerModal';
 import ConfirmModal from 'components/Modals/ConfirmModal';
+import NotificationModal from 'components/Modals/NotificationModal';
 
 const types = {
   alert: <AlertModal />,
   confirm: <ConfirmModal />,
   colorDelete: <ColorDeleteModal />,
   colorPicker: <ColorPickerModal />,
+  notification: <NotificationModal />,
 };
 
 const ModalConductor = ({ modals = [] }) => {
