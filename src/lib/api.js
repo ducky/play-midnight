@@ -1,5 +1,5 @@
 const LOCAL_STORAGE_KEY = 'PLAY_MIDNIGHT';
-const IS_EXTENSION = chrome.storage !== undefined; // Maybe Brittle?
+const IS_EXTENSION = window.chrome && chrome.runtime && chrome.runtime.id;
 
 export const getUrl = url => {
   if (IS_EXTENSION) {
