@@ -3,6 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import { stripTransition, TRANSITION_FAST, TRANSITION_MEDIUM } from 'style/theme';
 import AlertToast from 'components/Toasts/AlertToast';
 import InfoToast from 'components/Toasts/InfoToast';
 import SuccessToast from 'components/Toasts/SuccessToast';
@@ -25,7 +26,11 @@ const ToastConductor = ({ toasts = [] }) => {
 
   return (
     <ToastContainer>
-      <ReactCSSTransitionGroup transitionName="toast" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+      <ReactCSSTransitionGroup
+        transitionName="toast"
+        transitionEnterTimeout={stripTransition(TRANSITION_MEDIUM)}
+        transitionLeaveTimeout={stripTransition(TRANSITION_FAST)}
+      >
         {toasts.map(toast => {
           const Toast = getToastComponent(toast.type);
 
@@ -33,6 +38,8 @@ const ToastConductor = ({ toasts = [] }) => {
             ? React.cloneElement(Toast, {
                 key: toast.id,
                 id: toast.id,
+                transitionEnter: TRANSITION_MEDIUM,
+                transitionLeave: TRANSITION_FAST,
                 ...toast.options,
               })
             : null;

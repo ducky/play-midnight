@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 import isNaN from 'lodash/isNaN';
 import noop from 'lodash/noop';
 
+import withTheme from 'hoc/withTheme';
+
 import { actions } from 'modules/toast';
-import { colors } from 'style/theme';
 
 const DEFAULT_TIMEOUT = 4000;
 
@@ -14,16 +15,16 @@ const Toast = styled.div`
   position: relative;
   width: 300px;
   border-radius: 5px;
-  background: ${colors.background_menu};
-  color: ${colors.font_primary};
+  background: ${props => props.theme.background_menu};
+  color: ${props => props.theme.font_primary};
   padding: 20px 20px 35px;
   margin: 0 0 15px;
   cursor: pointer;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
-  ${props => props.type === 'info' && `border-top: 10px solid ${colors.blue}`};
-  ${props => props.type === 'success' && `border-top: 10px solid ${colors.green}`};
-  ${props => props.type === 'alert' && `border-top: 10px solid ${colors.red}`};
+  ${props => props.type === 'info' && `border-top: 10px solid ${props.theme.blue}`};
+  ${props => props.type === 'success' && `border-top: 10px solid ${props.theme.accent}`};
+  ${props => props.type === 'alert' && `border-top: 10px solid ${props.theme.red}`};
 
   &:after {
     position: absolute;
@@ -50,7 +51,7 @@ const Toast = styled.div`
   &.toast-enter.toast-enter-active {
     transform: scale(1);
     opacity: 1;
-    transition: transform 0.5s, opacity 0.5s;
+    transition: transform ${props => props.transitionEnter}, opacity ${props => props.transitionEnter};
   }
 
   &.toast-leave {
@@ -61,7 +62,7 @@ const Toast = styled.div`
   &.toast-leave.toast-leave-active {
     transform: scale(0);
     opacity: 0.01;
-    transition: transform 0.3s, opacity 0.3s;
+    transition: transform ${props => props.transitionLeave}, opacity ${props => props.transitionLeave};
   }
 
   .Toast__header {
@@ -77,6 +78,7 @@ const Toast = styled.div`
   }
 `;
 
+@withTheme
 class ToastWrapper extends PureComponent {
   static propTypes = {
     children: PropTypes.oneOfType([PropTypes.array, PropTypes.element, PropTypes.string]).isRequired,
@@ -131,10 +133,18 @@ class ToastWrapper extends PureComponent {
   }
 
   render() {
-    const { children, title, type, onClose } = this.props;
+    const { children, theme, title, type, onClose, transitionEnter, transitionLeave } = this.props;
 
     return (
-      <Toast type={type} onClick={this.withClose(onClose)} onMouseEnter={this.stopTimer} onMouseLeave={this.startTimer}>
+      <Toast
+        type={type}
+        theme={theme}
+        onClick={this.withClose(onClose)}
+        onMouseEnter={this.stopTimer}
+        onMouseLeave={this.startTimer}
+        transitionEnter={transitionEnter}
+        transitionLeave={transitionLeave}
+      >
         <div className="Toast__header">Play Midnight - {title}</div>
         <div className="Toast__content">{children}</div>
       </Toast>
