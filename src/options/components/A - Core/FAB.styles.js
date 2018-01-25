@@ -14,7 +14,7 @@ export const StyledFAB = styled.div`
   cursor: pointer;
   visibility: visible;
   opacity: 0.9;
-  color: ${props => (props.useAccent ? props.theme.accent : props.theme.font_primary)};
+  color: ${props => (props.useAccent ? props.theme.A500 : props.theme.font_primary)};
   border-radius: 50%;
   transition: color ${TRANSITION_FAST}, opacity ${TRANSITION_FAST}, transform ${TRANSITION_FAST};
 
