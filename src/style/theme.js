@@ -1,5 +1,19 @@
 import color from 'tinycolor2';
 
+export const transparentize = (c, amount) => {
+  return color(c)
+    .setAlpha(amount)
+    .toString();
+};
+
+export const isDark = c => {
+  return color(c).getBrightness() <= 165;
+};
+
+export const isLight = c => {
+  return color(c).getBrightness() > 165;
+};
+
 export const darken = (c, amount) => {
   return color(c)
     .darken(amount)
@@ -13,6 +27,11 @@ export const lighten = (c, amount) => {
 };
 
 export const DEFAULT_ACCENT = '#ec4e28';
+export const DEFAULT_BACKGROUND = '#141517';
+export const TRANSITION_LIGHTNING = '200ms';
+export const TRANSITION_FAST = '300ms';
+export const TRANSITION_MEDIUM = '500ms';
+export const TRANSITION_SLOW = '700ms';
 
 export const colors = {
   background_dark: '#141517',
