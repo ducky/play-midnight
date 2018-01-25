@@ -5,18 +5,16 @@ import styled from 'styled-components';
 
 import { stripTransition, TRANSITION_FAST, TRANSITION_MEDIUM } from 'style/theme';
 import AlertToast from 'components/Toasts/AlertToast';
-import InfoToast from 'components/Toasts/InfoToast';
 import SuccessToast from 'components/Toasts/SuccessToast';
 
 const types = {
   alert: <AlertToast />,
-  info: <InfoToast />,
   success: <SuccessToast />,
 };
 
 const ToastContainer = styled.div`
   position: fixed;
-  top: 15px;
+  top: 79px;
   right: 15px;
   z-index: 119;
 `;

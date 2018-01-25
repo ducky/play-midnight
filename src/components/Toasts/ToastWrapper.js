@@ -15,15 +15,14 @@ const Toast = styled.div`
   position: relative;
   width: 300px;
   border-radius: 5px;
-  background: ${props => props.theme.background_menu};
+  background: ${props => props.theme.B300};
   color: ${props => props.theme.font_primary};
   padding: 20px 20px 35px;
   margin: 0 0 15px;
   cursor: pointer;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
-  ${props => props.type === 'info' && `border-top: 10px solid ${props.theme.blue}`};
-  ${props => props.type === 'success' && `border-top: 10px solid ${props.theme.accent}`};
+  ${props => props.type === 'success' && `border-top: 10px solid ${props.theme.A500}`};
   ${props => props.type === 'alert' && `border-top: 10px solid ${props.theme.red}`};
 
   &:after {
@@ -36,7 +35,7 @@ const Toast = styled.div`
     padding: 8px;
     font-size: 10px;
     font-style: italic;
-    color: rgba(255, 255, 255, 0.3);
+    color: ${props => props.theme.font_secondary};
   }
 
   &:last-child {
