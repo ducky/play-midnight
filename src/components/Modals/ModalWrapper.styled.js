@@ -33,7 +33,7 @@ export const ModalBackdrop = styled.div`
 `;
 
 const Modal = styled.div`
-  background: ${props => props.theme.background_menu};
+  background: ${props => props.theme.B300};
   color: ${props => props.theme.font_primary};
   border-radius: 5px;
   box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);

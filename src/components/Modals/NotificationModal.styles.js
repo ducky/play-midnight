@@ -2,8 +2,6 @@ import styled from 'styled-components';
 
 import withTheme from 'hoc/withTheme';
 
-import { lighten } from 'style/theme';
-
 const NotificationModal = styled.div`
   a {
     color: ${props => props.theme.font_primary};
@@ -15,9 +13,9 @@ const NotificationModal = styled.div`
 
   .Modal__header {
     text-align: center;
-    background: ${lighten(props => props.theme.background_dark, 8)};
-    color: #fff;
-    border-bottom: 1px solid ${props => props.theme.border_page};
+    background: ${props => props.theme.B200};
+    color: ${props => props.font_primary};
+    border-bottom: 1px solid ${props => props.theme.B600};
     flex: 0 0 auto;
     padding: 15px 25px;
     margin: 0;
@@ -46,7 +44,7 @@ const NotificationModal = styled.div`
     }
 
     a {
-      color: #fff;
+      color: ${props => props.font_primary};
       text-decoration: none;
 
       &:hover {
@@ -75,12 +73,12 @@ const NotificationModal = styled.div`
     }
 
     .Modal__title {
-      background: ${lighten(props => props.theme.background_dark, 8)};
+      background: ${props => props.theme.B200};
       font-size: 16px;
       font-weight: 700;
       padding: 15px 25px;
       margin: 0 0 25px;
-      border-bottom: 1px solid #141517;
+      border-bottom: 1px solid ${props => props.theme.B500};
 
       &:last-child {
         margin: 0;
@@ -96,7 +94,7 @@ const NotificationModal = styled.div`
     .Modal__release {
       padding: 15px 25px;
       margin: 0;
-      border-bottom: 1px solid #141517;
+      border-bottom: 1px solid ${props => props.theme.B500};
 
       &-title {
         font-weight: 700;
@@ -120,7 +118,7 @@ const NotificationModal = styled.div`
 
   .Modal__footer {
     padding: 15px 25px;
-    background: ${lighten(props => props.theme.background_dark, 8)};
+    background: ${props => props.theme.B200};
   }
 
   .Modal__actions {
