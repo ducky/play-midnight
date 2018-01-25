@@ -7,6 +7,7 @@ import { TRANSITION_FAST } from 'style/theme';
 
 const StyledLogo = styled.svg`
   margin-top: -6px;
+  margin-left: 2px;
   width: 170px;
   height: 60px;
 
@@ -20,7 +21,7 @@ const StyledLogo = styled.svg`
   }
 
   .Logo__product {
-    fill: ${props => props.theme.accent};
+    fill: ${props => props.theme.A500};
   }
 `;
 
