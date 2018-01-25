@@ -8,7 +8,8 @@ import semver from 'semver';
 import AppInfo from '../../package.json';
 import { load, save } from 'lib/api';
 import store from 'lib/store';
-import { DEFAULT_ACCENT } from 'style/theme';
+import { createTheme, DEFAULT_BACKGROUND, DEFAULT_ACCENT } from 'style/theme';
+import getArrayValue from 'utils/getArrayValue';
 import { updateItem } from 'utils/array';
 
 import OPTIONS, { SECTIONS } from 'options';
@@ -24,9 +25,9 @@ const defaultState = {
 
 // selectors
 export const selectors = {
-  version: () => AppInfo.version,
-  options: state => state.options.data.filter(o => !o.static),
   allOptions: state => state.options.data,
+  options: state => state.options.data.filter(o => !o.static),
+  version: () => AppInfo.version,
 };
 
 selectors.enabled = createSelector([selectors.options], options => {
@@ -39,16 +40,11 @@ selectors.enabledAccents = createSelector([selectors.options], options => {
   return enabledOption ? enabledOption.value : false;
 });
 
-selectors.accentColor = createSelector(
-  [selectors.enabled, selectors.enabledAccents, selectors.options],
-  (enabled, enabledAccents, options) => {
-    const isEnabled = enabled || enabledAccents;
-    const accentOption = find(options, { id: 'accent' });
-    return isEnabled && accentOption
-      ? find(accentOption.values, { id: accentOption.value })
-      : { value: DEFAULT_ACCENT };
-  }
-);
+selectors.theme = createSelector([selectors.options], options => {
+  const accent = getArrayValue(options, 'accent', DEFAULT_ACCENT);
+  const background = getArrayValue(options, 'background', DEFAULT_BACKGROUND);
+  return createTheme(background, accent);
+});
 
 selectors.versionPrevious = createSelector([selectors.allOptions], options => {
   const versionOption = find(options, { id: 'lastRun' });

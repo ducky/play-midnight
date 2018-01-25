@@ -33,34 +33,36 @@ export const TRANSITION_FAST = '300ms';
 export const TRANSITION_MEDIUM = '500ms';
 export const TRANSITION_SLOW = '700ms';
 
-export const colors = {
-  background_dark: '#141517',
-  background_light: '#ececec',
-  font_primary: '#ececec',
-  font_secondary: '#888',
+export const stripTransition = transition => parseInt(transition.replace('ms', ''), 10);
+
+export const createTheme = (background = DEFAULT_BACKGROUND, accent = DEFAULT_ACCENT) => ({
+  accent,
+  background,
+  font_primary: isLight(background) ? '#141517' : '#ececec',
+  font_secondary: isLight(background) ? '#555' : '#888',
   blue: '#007AA5',
   green: '#009d00',
   red: '#9d0000',
-};
 
-// Nav
-colors.background_nav = lighten(colors.background_dark, 3);
-colors.border_nav = darken(colors.background_nav, 5);
+  // Nav
+  background_nav: lighten(background, 3),
+  border_nav: darken(background, 3),
 
-// Page
-colors.background_page = lighten(colors.background_dark, 3);
-colors.border_page = darken(colors.background_page, 5);
+  // Page
+  background_page: lighten(background, 3),
+  border_page: darken(background, 3),
 
-// Cards
-colors.background_card = lighten(colors.background_dark, 3);
+  // Cards
+  background_card: lighten(background, 3),
 
-// Player
-colors.background_player = lighten(colors.background_dark, 5);
+  // Player
+  background_player: lighten(background, 5),
 
-// Menu
-colors.background_menu = lighten(colors.background_dark, 5);
-colors.border_menu = darken(colors.background_menu, 5);
+  // Menu
+  background_menu: lighten(background, 5),
+  border_menu: darken(background, 1),
 
-// Search
-colors.background_search = lighten(colors.background_dark, 8);
-colors.border_search = darken(colors.background_search, 3);
+  // Search
+  background_search: lighten(background, 8),
+  border_search: lighten(background, 2),
+});
