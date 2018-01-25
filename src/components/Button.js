@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import color from 'tinycolor2';
 
 import withTheme from 'hoc/withTheme';
 
-import { TRANSITION_FAST } from 'style/theme';
+import { isLight, FONT_LIGHT, FONT_DARK, TRANSITION_FAST } from 'style/theme';
 
 const StyledButton = styled.button`
   display: inline-flex;
@@ -20,12 +19,12 @@ const StyledButton = styled.button`
   border: none;
   outline: none;
   box-shadow: none;
-  background: #ccc;
-  color: #333;
+  background: ${props => props.theme.B25};
+  color: ${props => props.theme.font_primary};
   transition: background ${TRANSITION_FAST}, opacity ${TRANSITION_FAST};
 
-  ${props => props.useAccent && `background: ${props.theme.accent}`};
-  ${props => props.useAccent && `color: ${color(props.theme.accent).getBrightness() > 165 ? '#141517' : '#fff'}`};
+  ${props => props.useAccent && `background: ${props.theme.A500}`};
+  ${props => props.useAccent && `color: ${isLight(props.theme.A500) ? FONT_LIGHT : FONT_DARK}`};
 
   &:hover {
     opacity: 1;
