@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 
+import { TRANSITION_FAST } from 'style/theme';
 import createStylesheet from 'utils/createStylesheet';
 
 export const StyledFAB = styled.div`
@@ -13,9 +14,9 @@ export const StyledFAB = styled.div`
   cursor: pointer;
   visibility: visible;
   opacity: 0.9;
-  color: ${props => (props.accent ? `${props.accent.value}` : '#dcdcdc')};
+  color: ${props => (props.useAccent ? props.theme.accent : props.theme.font_primary)};
   border-radius: 50%;
-  transition: color 300ms, opacity 300ms, transform 300ms;
+  transition: color ${TRANSITION_FAST}, opacity ${TRANSITION_FAST}, transform ${TRANSITION_FAST};
 
   &:hover {
     opacity: 1;
@@ -33,11 +34,11 @@ export const StyledFAB = styled.div`
     width: 100%;
     height: 100%;
     fill: currentcolor;
-    transition: fill 300ms;
+    transition: fill ${TRANSITION_FAST};
   }
 `;
 
-const styles = () => css`
+const styles = theme => css`
   #player #material-player-right-wrapper paper-icon-button[data-id='queue'] {
     margin: 8px;
   }

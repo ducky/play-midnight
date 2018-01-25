@@ -3,6 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { getUrl } from 'lib/api';
 
+import { stripTransition, TRANSITION_FAST } from 'style/theme';
 import Button from 'components/Button';
 import PlayMidnightLogo from 'assets/images/play-logo-dark.png';
 
@@ -18,7 +19,7 @@ const OPTION_TYPES = {
 };
 
 const PlayMidnightOptions = ({
-  accent,
+  theme,
   visible,
   sections,
   onArrayChange,
@@ -32,10 +33,14 @@ const PlayMidnightOptions = ({
   };
 
   return (
-    <ReactCSSTransitionGroup transitionName="animate" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+    <ReactCSSTransitionGroup
+      transitionName="animate"
+      transitionEnterTimeout={stripTransition(TRANSITION_FAST)}
+      transitionLeaveTimeout={stripTransition(TRANSITION_FAST)}
+    >
       {visible ? (
         <Backdrop onClick={handleBackgroundClick}>
-          <StyledOptions accent={accent}>
+          <StyledOptions transitionEnter={TRANSITION_FAST} transitionLeave={TRANSITION_FAST} theme={theme}>
             <header className="PlayMidnightOptions__header">
               <div className="image-header">
                 <img
@@ -66,6 +71,7 @@ const PlayMidnightOptions = ({
                         return (
                           <Option
                             key={option.id}
+                            theme={theme}
                             options={options}
                             reliesOn={option.reliesOn}
                             onChange={onOptionChange}

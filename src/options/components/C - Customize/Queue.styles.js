@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 
 import createStylesheet from 'utils/createStylesheet';
 
-const styles = accentColor => css`
+const styles = theme => css`
   #queue-overlay {
     width: calc(100vw - 64px);
     max-width: 1000px;

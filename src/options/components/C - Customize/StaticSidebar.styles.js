@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 
 import createStylesheet from 'utils/createStylesheet';
 
-const styles = accentColor => css`
+const styles = theme => css`
   #left-nav-close-button,
   #material-one-left #left-nav-open-button {
     display: none;

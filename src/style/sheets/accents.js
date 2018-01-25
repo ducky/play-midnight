@@ -1,97 +1,87 @@
 import { css } from 'styled-components';
 
-import { colors } from 'style/theme';
-
-const styles = accentColor => css`
+const styles = theme => css`
   html:not([style-scope]):not(.style-scope) {
-    --default-primary-color: ${accentColor};
-    --primary-color: ${accentColor};
+    --default-primary-color: ${theme.accent};
+    --primary-color: ${theme.accent};
   }
 
   /*  Scrollbar */
   ::-webkit-scrollbar-thumb,
   ::shadow ::-webkit-scrollbar-thumb {
-    background-color: ${accentColor};
+    background-color: ${theme.accent};
   }
 
   .primary:not([style-scope]):not(.style-scope) {
-    color: ${accentColor} !important;
-  }
-
-  /*  Logo */
-  #material-app-bar #material-one-left {
-    /*  TODO - Update logo in future */
-    .music-logo-link {
-      display: none !important;
-    }
+    color: ${theme.accent} !important;
   }
 
   /*  Uploading Music */
   .material-transfer-radial-download-overlay,
   .material-transfer-radial-processing-overlay,
   .material-transfer-radial-upload-overlay {
-    background: ${accentColor};
+    background: ${theme.accent};
   }
 
   /*  Menu Selected */
   .goog-menu .goog-menuitem.selected .goog-menuitem-content:not([style-scope]):not(.style-scope) {
-    color: ${accentColor} !important;
+    color: ${theme.accent} !important;
 
     &:hover {
-      color: ${accentColor} !important;
+      color: ${theme.accent} !important;
     }
   }
 
   /*  Chevron Icons */
   .cluster.material-cluster .lane-button core-icon,
   .cluster.material-cluster .lane-button iron-icon {
-    color: ${accentColor};
+    color: ${theme.accent};
   }
 
   /*  Toggle Button */
   paper-toggle-button::shadow [checked] {
     .toggle {
-      background: ${accentColor};
+      background: ${theme.accent};
     }
 
     .toggle-ink {
-      color: ${accentColor};
+      color: ${theme.accent};
     }
   }
 
   paper-toggle-button[checked]:not([disabled]) {
     .toggle-bar.paper-toggle-button,
     .toggle-button.paper-toggle-button {
-      background-color: ${accentColor};
+      background-color: ${theme.accent};
     }
 
     .toggle-ink.paper-toggle-button {
-      color: ${accentColor};
+      color: ${theme.accent};
     }
   }
 
   /*  Checkbox */
   paper-checkbox::shadow {
     #checkbox.checked {
-      background-color: ${accentColor};
-      border-color: ${accentColor};
+      background-color: ${theme.accent};
+      border-color: ${theme.accent};
     }
 
     #ink[checked] {
-      color: ${accentColor};
+      color: ${theme.accent};
     }
   }
 
   paper-checkbox {
     #ink[checked],
     #ink[checked].paper-checkbox {
-      color: ${accentColor};
+      color: ${theme.accent};
     }
 
     #checkbox.checked,
     #checkbox.checked.paper-checkbox {
-      background-color: ${accentColor};
-      border-color: ${accentColor};
+      background-color: ${theme.accent};
+      border-color: ${theme.accent};
     }
   }
 
@@ -101,11 +91,11 @@ const styles = accentColor => css`
   paper-button.material-primary,
   paper-button.material-primary:not([raised])[focused],
   sj-paper-button.material-primary {
-    background: ${accentColor};
+    background: ${theme.accent};
     color: #fff;
 
     &:hover {
-      background: ${accentColor} !important;
+      background: ${theme.accent} !important;
     }
   }
 
@@ -115,41 +105,41 @@ const styles = accentColor => css`
   .ups.light iron-icon:not([style-scope]):not(.style-scope),
   paper-dialog .buttons paper-button:not([style-scope]):not(.style-scope):not([disabled]),
   paper-toast paper-button[data-action='button']:not([style-scope]):not(.style-scope) {
-    color: ${accentColor};
+    color: ${theme.accent};
   }
 
   paper-action-dialog sj-paper-button,
   paper-dialog .buttons paper-button:not([style-scope]):not(.style-scope):not([disabled]) {
-    color: ${accentColor};
+    color: ${theme.accent};
   }
 
   #music-content .material-banner.banner.new-user-quiz-card sj-paper-button,
   #music-content .material-banner.banner.ws-search-banner sj-paper-button,
   #music-content .material-banner.banner.ws-subscriber-card sj-paper-button {
-    color: ${accentColor};
+    color: ${theme.accent};
   }
 
   .more-songs-container.primary > paper-button {
-    color: ${accentColor};
+    color: ${theme.accent};
   }
 
   paper-toast [data-action='button'],
   paper-toast div[data-action='button'] {
-    color: ${accentColor};
+    color: ${theme.accent};
   }
 
   sj-callout {
-    background: ${accentColor} !important;
+    background: ${theme.accent} !important;
   }
 
   paper-icon-button.sj-callout-target:not([style-scope]):not(.style-scope) {
-    background-color: ${accentColor} !important;
+    background-color: ${theme.accent} !important;
   }
 
   gpm-bottom-sheet {
     #buttonRow {
       paper-button {
-        background-color: ${accentColor} !important;
+        background-color: ${theme.accent} !important;
 
         span {
           color: $font_primary !important;
@@ -159,7 +149,7 @@ const styles = accentColor => css`
           background-color: transparent !important;
 
           span {
-            color: ${accentColor} !important;
+            color: ${theme.accent} !important;
           }
         }
       }
@@ -167,7 +157,7 @@ const styles = accentColor => css`
   }
 
   sj-play-button #buttonContent.sj-play-button {
-    background-color: ${accentColor};
+    background-color: ${theme.accent};
   }
 
   /*  Playlist button */
@@ -175,16 +165,16 @@ const styles = accentColor => css`
   sj-paper-button#unsubscribe-playlist-button {
     .icon[icon='add-circle'],
     .playlist-subscribed {
-      color: ${accentColor};
+      color: ${theme.accent};
     }
   }
 
   .sj-play-button-0 #buttonContent.sj-play-button {
-    background: ${accentColor};
+    background: ${theme.accent};
   }
 
   .sj-play-button-0 #pulse.sj-play-button {
-    background: ${accentColor};
+    background: ${theme.accent};
     opacity: 0.3;
   }
 
@@ -195,39 +185,28 @@ const styles = accentColor => css`
   a {
     &.primary,
     &.primary:not([style-scope]):not(.style-scope) {
-      color: ${accentColor};
+      color: ${theme.accent};
     }
   }
 
   /*  Top Toolbar */
   #nav-container #music-content.material .material-cover {
-    background-color: ${accentColor};
-  }
-
-  /*  Logo */
-  .new-playlist-drawer #nav-container .nav-toolbar .menu-logo {
-    display: block;
-    box-sizing: border-box;
-    width: 170px;
-    height: 60px;
-    padding-left: 170px;
-    background: ${accentColor} url('{CHROME_DIR}/images/play_music_logo_light.png') no-repeat center center;
-    background-size: 170px auto;
+    background-color: ${theme.accent};
   }
 
   /*  Inputs */
   paper-input-container,
   paper-input-decorator {
     &::shadow .focused-underline {
-      background: ${accentColor};
+      background: ${theme.accent};
     }
 
     &[focused]::shadow .floated-label .label-text {
-      color: ${accentColor};
+      color: ${theme.accent};
     }
 
     .focused-line.paper-input-container {
-      background: ${accentColor};
+      background: ${theme.accent};
     }
 
     .add-on-content.is-highlighted.paper-input-container *,
@@ -235,7 +214,7 @@ const styles = accentColor => css`
     .input-content.label-is-floating.paper-input-container .paper-input-label,
     .input-content.label-is-highlighted.paper-input-container .paper-input-label,
     .input-content.label-is-highlighted.paper-input-container label {
-      color: ${accentColor};
+      color: ${theme.accent};
     }
   }
 
@@ -244,91 +223,91 @@ const styles = accentColor => css`
   paper-action-dialog {
     paper-input-decorator {
       &::shadow .focused-underline {
-        background: ${accentColor};
+        background: ${theme.accent};
       }
 
       &[focused]::shadow .floated-label .label-text {
-        color: ${accentColor};
+        color: ${theme.accent};
       }
     }
 
     sj-paper-button {
-      color: ${accentColor};
+      color: ${theme.accent};
     }
 
     .buttons {
-      color: ${accentColor};
+      color: ${theme.accent};
     }
   }
 
   /*  Dragging Songs Icon */
   .material-drag .song-drag-label {
-    background: ${accentColor};
+    background: ${theme.accent};
   }
 
   /*  Slider */
   paper-slider {
     paper-ripple.paper-slider {
-      color: ${accentColor};
+      color: ${theme.accent};
     }
   }
 
   paper-slider #sliderKnob.paper-slider.style-scope > #sliderKnobInner.paper-slider.style-scope,
   paper-slider .slider-knob-inner.paper-slider {
-    background-color: ${accentColor};
-    border: 2px solid ${accentColor};
+    background-color: ${theme.accent};
+    border: 2px solid ${theme.accent};
   }
 
   paper-slider .ring.paper-slider > .slider-knob.paper-slider > .slider-knob-inner.paper-slider {
-    background-color: ${accentColor};
+    background-color: ${theme.accent};
     border-color: transparent;
   }
 
   paper-progress #primaryProgress.paper-progress {
-    background-color: ${accentColor};
+    background-color: ${theme.accent};
   }
 
   /*  Loading Progress */
   #current-loading-progress {
-    background: ${accentColor};
+    background: ${theme.accent};
   }
 
   /*  Loading Overlay */
   #loading-overlay paper-spinner-lite .circle,
   #loading-overlay paper-spinner-lite .spinner-layer.paper-spinner-lite {
-    border-color: ${accentColor};
+    border-color: ${theme.accent};
   }
 
   .primary-background:not([style-scope]):not(.style-scope) {
-    background-color: ${accentColor} !important;
+    background-color: ${theme.accent} !important;
   }
 
   paper-spinner .spinner-layer {
-    border-color: ${accentColor} !important;
+    border-color: ${theme.accent} !important;
   }
 
   .upload-dialog {
     .upload-dialog-title {
-      background: ${accentColor};
+      background: ${theme.accent};
     }
   }
 
   .upload-dialog-dragover {
-    border-color: ${accentColor} !important;
+    border-color: ${theme.accent} !important;
 
     &:not([style-scope]):not(.style-scope) {
-      border-color: ${accentColor} !important;
+      border-color: ${theme.accent} !important;
     }
 
     .upload-dialog-description {
-      color: ${accentColor} !important;
+      color: ${theme.accent} !important;
     }
   }
 
   .progress-bar-vertical,
   .progress-bar-horizontal {
     .progress-bar-thumb {
-      background-color: ${accentColor} !important;
+      background-color: ${theme.accent} !important;
     }
   }
 
@@ -338,7 +317,7 @@ const styles = accentColor => css`
   .material .song-row .explicit,
   .material-card .explicit,
   .podcast-series-view .material-container-details .info .title .explicit {
-    background: ${accentColor};
+    background: ${theme.accent};
   }
 
   /*  Sidebar Navigation */
@@ -346,23 +325,23 @@ const styles = accentColor => css`
   a.nav-item-container.tooltip:not([style-scope]):not(.style-scope) {
     &.selected {
       font-weight: 700;
-      color: ${accentColor};
-      border-left: 2px solid ${accentColor};
+      color: ${theme.accent};
+      border-left: 2px solid ${theme.accent};
 
       core-icon,
       iron-icon {
-        color: ${accentColor};
+        color: ${theme.accent};
       }
     }
   }
 
   .solid-hero core-image#material-hero-image,
   .solid-hero iron-image#material-hero-image {
-    background-color: ${accentColor} !important;
+    background-color: ${theme.accent} !important;
   }
 
   .material-detail-view .material-container-details .read-more-button {
-    color: ${accentColor};
+    color: ${theme.accent};
   }
 
   /*  Page Play Button (Top Right) */
@@ -370,41 +349,41 @@ const styles = accentColor => css`
   .material-container-details sj-fab,
   .paper-fab-0,
   paper-fab {
-    background: ${accentColor};
+    background: ${theme.accent};
   }
 
   /*  Progress/Volume */
   #sliderBar::shadow #activeProgress,
   paper-slider::shadow #sliderBar::shadow #activeProgress,
   paper-slider::shadow #sliderKnobInner {
-    background: ${accentColor};
+    background: ${theme.accent};
   }
 
   /*  Various Music Buttons */
   #player.material #material-player-right-wrapper paper-icon-button[data-id='queue'].opened iron-icon,
   #player.material .material-player-middle paper-icon-button[data-id='repeat'].active iron-icon,
   #player.material .material-player-middle paper-icon-button[data-id='shuffle'].active iron-icon {
-    color: ${accentColor} !important;
+    color: ${theme.accent} !important;
   }
 
   #player.material sj-icon-button[data-id='cast']::shadow core-icon[aria-label='cast-connected'],
   #player.material sj-icon-button[data-id='cast']::shadow iron-icon[aria-label='cast-connected'] {
-    color: ${accentColor} !important;
+    color: ${theme.accent} !important;
   }
 
   #player.material .material-player-middle paper-icon-button[data-id='play-pause']:not([disabled]) iron-icon,
   #player.material .material-player-middle sj-icon-button[data-id='play-pause']:not([disabled]) {
-    color: ${accentColor};
+    color: ${theme.accent};
   }
 
   sj-play-button #pulse.sj-play-button {
-    background: ${accentColor} !important;
+    background: ${theme.accent} !important;
   }
 
   /*  Homepage Scrolling Module */
   sj-scrolling-module {
     .module-title-underline {
-      background: ${accentColor} !important;
+      background: ${theme.accent} !important;
     }
   }
 
@@ -413,7 +392,7 @@ const styles = accentColor => css`
     sj-page-indicator {
       .sj-page-tab.sj-page-indicator.iron-selected {
         iron-icon {
-          color: ${accentColor} !important;
+          color: ${theme.accent} !important;
         }
       }
     }
@@ -423,24 +402,24 @@ const styles = accentColor => css`
   .material-card .details .left-items .index,
   .top-charts-view .song-row [data-col='index'] .column-content:not([style-scope]):not(.style-scope),
   .top-charts-view .song-row [data-col='index'] .content {
-    color: ${accentColor};
+    color: ${theme.accent};
   }
 
   /*  Subscribe Icon */
   core-icon[icon='sj:subscribed'] svg,
   iron-icon[icon='sj:subscribed'] svg {
     path:nth-child(2) {
-      fill: ${accentColor};
+      fill: ${theme.accent};
     }
 
     path:nth-child(3) {
-      stroke: ${accentColor};
+      stroke: ${theme.accent};
     }
   }
 
   /*  Queue Reorder Target Line */
   .dragging-target-line {
-    border-top-color: ${accentColor};
+    border-top-color: ${theme.accent};
   }
 `;
 

@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { actions } from 'modules/modal';
@@ -85,7 +85,7 @@ class Option extends PureComponent {
   };
 
   render() {
-    const { id, title, description, value, values, onTargetedChange } = this.props;
+    const { id, title, description, theme, value, values, onTargetedChange } = this.props;
 
     return (
       <StyledOption>
@@ -108,6 +108,7 @@ class Option extends PureComponent {
               key={colorId}
               background={colorValue}
               selected={value === colorId}
+              theme={theme}
             >
               <input
                 name={id}

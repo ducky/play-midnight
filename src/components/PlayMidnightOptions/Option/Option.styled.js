@@ -2,8 +2,12 @@ import styled from 'styled-components';
 
 import { getUrl } from 'lib/api';
 
+import withTheme from 'hoc/withTheme';
+
 import iconPencil from 'assets/images/icon-pencil.svg';
 import iconTrash from 'assets/images/icon-trash.svg';
+
+import { TRANSITION_FAST } from 'style/theme';
 
 export const CollectionItem = styled.label`
   position: relative;
@@ -14,7 +18,7 @@ export const CollectionItem = styled.label`
   flex: 1;
   min-width: 33.33%;
   height: 85px;
-  transition: all 0.5s;
+  transition: all ${TRANSITION_FAST};
   padding: 8px;
   cursor: pointer;
   overflow: hidden;
@@ -29,8 +33,8 @@ export const CollectionItem = styled.label`
     visibility: hidden;
     opacity: 0;
     transform: scale3d(0.7, 0.7, 0.7);
-    text-shadow: 1px 1px 0 #141517;
-    transition: all 0.5s;
+    text-shadow: 1px 1px 0 ${props => props.theme.background};
+    transition: all ${TRANSITION_FAST};
     color: #fff;
     padding: 8px 10px;
     text-align: center;
@@ -52,19 +56,19 @@ export const CollectionItem = styled.label`
 
   &:after {
     position: absolute;
-    content: 'CURRENT ACCENT';
+    content: 'ACTIVE SELECTION';
     bottom: 0;
     left: 0;
     right: 0;
     background: rgba(0, 0, 0, 0.25);
     color: #fff;
-    text-shadow: 1px 1px 0 #141517;
+    text-shadow: 1px 1px 0 ${props => props.theme.background};
     padding: 3px 10px;
     font-size: 10px;
     text-align: center;
     transform: scale3d(1.1, 1.1, 1.1);
     opacity: 0;
-    transition: all 0.5s;
+    transition: all ${TRANSITION_FAST};
 
     ${props => props.selected && `opacity: 1`};
     ${props => props.selected && `transform: scale3d(1, 1, 1)`};
@@ -96,7 +100,7 @@ export const CollectionItem = styled.label`
     background-repeat: no-repeat;
     opacity: 0;
     transform: scale3d(0.75, 0.75, 0.75);
-    transition: all 0.5s;
+    transition: all ${TRANSITION_FAST};
 
     &:hover {
       transform: scale3d(1.15, 1.15, 1.15);
@@ -122,7 +126,10 @@ export const CollectionItem = styled.label`
 `;
 
 const StyledOption = styled.div`
-  border-bottom: 1px solid #141517;
+  background: ${props => props.theme.background_menu};
+  border-bottom: 1px solid ${props => props.theme.background};
+  transition: background ${TRANSITION_FAST}, color ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};
+
 
   &:last-child {
     border: none;
@@ -143,8 +150,8 @@ const StyledOption = styled.div`
   }
 
   .Option__action-button {
-    font-size: 28px;
-    line-height: 1;
+    font-size: 10px;
+    line-height: 1.2;
     align-self: stretch;
   }
 
@@ -172,4 +179,4 @@ const StyledOption = styled.div`
   }
 `;
 
-export default StyledOption;
+export default withTheme(StyledOption);
