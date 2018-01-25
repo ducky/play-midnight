@@ -1,9 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 import color from 'tinycolor2';
 
-import { selectors } from 'modules/options';
+import withTheme from 'hoc/withTheme';
+
+import { TRANSITION_FAST } from 'style/theme';
 
 const StyledButton = styled.button`
   display: inline-flex;
@@ -21,24 +22,20 @@ const StyledButton = styled.button`
   box-shadow: none;
   background: #ccc;
   color: #333;
-  transition: background 500ms, opacity 500ms;
+  transition: background ${TRANSITION_FAST}, opacity ${TRANSITION_FAST};
 
-  ${props => props.accent && `background: ${props.accent.value}`};
-  ${props => props.accent && `color: ${color(props.accent.value).getBrightness() > 165 ? '#141517' : '#fff'}`};
+  ${props => props.useAccent && `background: ${props.theme.accent}`};
+  ${props => props.useAccent && `color: ${color(props.theme.accent).getBrightness() > 165 ? '#141517' : '#fff'}`};
 
   &:hover {
     opacity: 1;
   }
 `;
 
-const Button = ({ accentColor, noAccent, children, ...rest }) => (
-  <StyledButton accent={!noAccent && accentColor} {...rest}>
+const Button = ({ theme, noAccent, children, ...rest }) => (
+  <StyledButton theme={theme} useAccent={!noAccent} {...rest}>
     {children}
   </StyledButton>
 );
 
-const mapStateToProps = state => ({
-  accentColor: selectors.accentColor(state),
-});
-
-export default connect(mapStateToProps)(Button);
+export default withTheme(Button);
