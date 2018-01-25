@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { darken, lighten, TRANSITION_FAST } from 'style/theme';
+import { TRANSITION_FAST } from 'style/theme';
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -24,7 +24,7 @@ const StyledOptions = styled.div`
   z-index: 110;
   border-radius: 3px;
   color: ${props => props.theme.font_primary};
-  background: ${props => props.theme.background_menu};
+  background: ${props => props.theme.B300};
   box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19);
   transform-origin: center bottom 0;
   transition: background ${TRANSITION_FAST}, color ${TRANSITION_FAST};
@@ -40,7 +40,7 @@ const StyledOptions = styled.div`
     transform-origin: 50% 50%;
     transform: rotate(-45deg);
     border: 8px solid transparent;
-    border-color: ${props => `transparent transparent ${props.theme.background_page} ${props.theme.background_page}`};
+    border-color: ${props => `transparent transparent ${props.theme.B400} ${props.theme.B400}`};
     box-shadow: -12px 12px 15px 0 rgba(0, 0, 0, 0.24);
     transition: border-color ${TRANSITION_FAST};
   }
@@ -71,8 +71,8 @@ const StyledOptions = styled.div`
     text-align: center;
     flex: 0 0 auto;
     border-radius: 3px 3px 0 0;
-    background: ${props => lighten(props.theme.background, 5)};
-    border-bottom: 1px solid ${props => props.theme.border_page};
+    background: ${props => props.theme.B400};
+    border-bottom: 1px solid ${props => props.theme.B600};
     padding: 15px 25px;
     transition: background ${TRANSITION_FAST}, color ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};
 
@@ -104,11 +104,11 @@ const StyledOptions = styled.div`
     }
 
     .PlayMidnightOptions__section-title {
-      background: ${props => props.theme.background_page};
+      background: ${props => props.theme.B400};
       margin: 0;
       padding: 15px 20px;
       font-weight: 700;
-      border-bottom: 1px solid ${props => props.theme.background};
+      border-bottom: 1px solid ${props => props.theme.B500};
       transition: background ${TRANSITION_FAST}, color ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};
 
       &:last-child {
@@ -117,7 +117,7 @@ const StyledOptions = styled.div`
     }
 
     .PlayMidnightOptions__section-options {
-      border-bottom: 1px solid ${props => props.theme.background};
+      border-bottom: 1px solid ${props => props.theme.B500};
       transition: border-color ${TRANSITION_FAST};
 
       &:empty {
@@ -145,8 +145,8 @@ const StyledOptions = styled.div`
   .PlayMidnightOptions__footer {
     flex: 0 0 auto;
     border-radius: 0 0 3px 3px;
-    background: ${props => props.theme.background_page};
-    border-top: 1px solid ${props => props.theme.background};
+    background: ${props => props.theme.B400};
+    border-top: 1px solid ${props => props.theme.B500};
     padding: 15px 25px;
     text-align: center;
     transition: background ${TRANSITION_FAST}, color ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};

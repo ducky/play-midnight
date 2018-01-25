@@ -33,9 +33,9 @@ export const CollectionItem = styled.label`
     visibility: hidden;
     opacity: 0;
     transform: scale3d(0.7, 0.7, 0.7);
-    text-shadow: 1px 1px 0 ${props => props.theme.background};
+    text-shadow: 1px 1px 0 ${props => props.theme.black};
     transition: all ${TRANSITION_FAST};
-    color: #fff;
+    color: ${props => props.theme.white};
     padding: 8px 10px;
     text-align: center;
   }
@@ -61,8 +61,8 @@ export const CollectionItem = styled.label`
     left: 0;
     right: 0;
     background: rgba(0, 0, 0, 0.25);
-    color: #fff;
-    text-shadow: 1px 1px 0 ${props => props.theme.background};
+    color: ${props => props.theme.white};
+    text-shadow: 1px 1px 0 ${props => props.theme.black};
     padding: 3px 10px;
     font-size: 10px;
     text-align: center;
@@ -126,10 +126,9 @@ export const CollectionItem = styled.label`
 `;
 
 const StyledOption = styled.div`
-  background: ${props => props.theme.background_menu};
-  border-bottom: 1px solid ${props => props.theme.background};
+  background: ${props => props.theme.B300};
+  border-bottom: 1px solid ${props => props.theme.B500};
   transition: background ${TRANSITION_FAST}, color ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};
-
 
   &:last-child {
     border: none;
