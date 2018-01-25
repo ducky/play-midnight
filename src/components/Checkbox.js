@@ -21,8 +21,8 @@ const StyledCheckbox = styled.div`
     left: 0;
     right: 0;
     bottom: 3px;
-    background: ${props => props.theme.background};
-    border: 1px solid ${props => props.theme.background};
+    background: ${props => props.theme.B500};
+    border: 1px solid ${props => props.theme.B500};
     border-radius: 25px;
     transition: background ${TRANSITION_FAST}, border-color ${TRANSITION_FAST}, opacity ${TRANSITION_FAST};
   }
@@ -32,7 +32,7 @@ const StyledCheckbox = styled.div`
     left: -2px;
     width: 20px;
     height: 20px;
-    background: ${props => props.theme.font_primary};
+    background: ${props => props.theme.B200};
     border-radius: 50%;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.6);
     transform: translateX(0);
@@ -40,15 +40,14 @@ const StyledCheckbox = styled.div`
   }
 
   input:checked + .Checkbox__container .Checkbox__track {
-    ${props => `background: ${props.theme.accent}`};
-    ${props => `border-color: ${props.theme.accent}`};
-    /* TODO - Darken Border */
+    ${props => `background: ${props.theme.A500}`};
+    ${props => `border-color: ${props.theme.A600}`};
     opacity: 0.5;
   }
 
   input:checked + .Checkbox__container .Checkbox__knob {
-    ${props => `background: ${props.theme.accent}`};
-    ${props => `border-color: ${props.theme.accent}`};
+    ${props => `background: ${props.theme.A500}`};
+    ${props => `border-color: ${props.theme.A500}`};
     transform: translateX(100%);
   }
 
