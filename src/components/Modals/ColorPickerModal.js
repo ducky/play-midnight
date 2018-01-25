@@ -3,6 +3,8 @@ import { PhotoshopPicker } from 'react-color';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import withTheme from 'hoc/withTheme';
+
 import { DEFAULT_ACCENT } from 'style/theme';
 import { actions } from 'modules/modal';
 
@@ -14,8 +16,8 @@ const FancyInput = styled.input`
   background: transparent;
   outline: none;
   box-shadow: none;
-  color: #ececec;
-  text-shadow: 0px 3px #141517;
+  color: ${props => props.theme.font_primary};
+  text-shadow: 0px 3px ${props => props.theme.B500};
   border: none;
   font-size: 24px;
   font-weight: 700;
@@ -24,10 +26,11 @@ const FancyInput = styled.input`
 
 const PickerWrapper = styled.div`
   box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
-  color: #000;
+  color: ${props => props.theme.black};
   margin: 0 0 10px;
 `;
 
+@withTheme
 @connect(null, { close: actions.closeModal })
 class ColorPickerModal extends PureComponent {
   constructor(props) {
@@ -67,6 +70,7 @@ class ColorPickerModal extends PureComponent {
 
   render() {
     const { color, name } = this.state;
+    const { theme } = this.props;
 
     return (
       <ModalWrapper {...this.props} closeButton={false} cancelButton={false} width={513}>
@@ -77,8 +81,9 @@ class ColorPickerModal extends PureComponent {
           onChange={this.onTitleChange}
           value={name}
           type="text"
+          theme={theme}
         />
-        <PickerWrapper>
+        <PickerWrapper theme={theme}>
           <PhotoshopPicker
             header="Beautiful Color Decider"
             color={color}
