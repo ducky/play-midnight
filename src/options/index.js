@@ -36,7 +36,7 @@ const OPTIONS = [
     defaultValues: [
       { id: 'default', name: 'Midnight (Default)', value: '#141517' },
       { id: 'dusk', name: 'Dusk', value: '#171C2A' },
-      { id: 'coffee', name: 'Cafe', value: '#804D13' },
+      { id: 'plum-berries', name: 'Plum Berries', value: '#1D1723' },
     ],
   },
   {
@@ -50,7 +50,7 @@ const OPTIONS = [
     defaultValues: [
       { id: 'default', name: 'Play Music (Default)', value: '#ec4e28' },
       { id: 'blue-abyss', name: 'Blue Abyss', value: '#007AA5' },
-      { id: 'midnight-oil', name: 'Midnight Oil', value: '#8400a3' },
+      { id: 'midnight-oil', name: 'Midnight Oil', value: '#6B2F79' },
       { id: 'prince-purple', name: 'Prince Purple', value: '#673ab7' },
       { id: 'redrum', name: 'Redrum', value: '#8E3055' },
       { id: 'rusty-spoon', name: 'Rusty Spoon', value: '#4c9014' },
