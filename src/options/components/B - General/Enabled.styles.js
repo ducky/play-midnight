@@ -1,64 +1,92 @@
 import { css } from 'styled-components';
 
-import { colors } from 'style/theme';
+import { transparentize } from 'style/theme';
 import accents from 'style/sheets/accents';
 import createStylesheet from 'utils/createStylesheet';
 
-import { getUrl } from 'lib/api';
-import PlayMusicLogo from 'assets/images/play_music_logo_dark.png';
+import { TRANSITION_FAST } from 'style/theme';
 
-const styles = accentColor => css`
-  ${accents(accentColor)};
+const styles = theme => css`
+  ${accents(theme)};
 
-  body {
-    background: ${colors.background_dark};
-    color: ${colors.font_primary}
-    transition: background 300ms;
+  html:not([style-scope]):not(.style-scope) {
+    --light-theme-text-color: ${theme.font_primary};
+    --light-theme-secondary-color: ${theme.font_secondary};
   }
 
-  body.qp #material-app-bar #material-one-left {
-    .music-logo-link {
-      display: none;
-      width: 170px;
-      height: 60px;
-      margin-top: -6px;
+  body,
+  body.material {
+    background-color: ${theme.background};
+    color: ${theme.font_primary};
+    transition: background ${TRANSITION_FAST};
+  }
+
+  ::-webkit-scrollbar-track,
+  ::shadow ::-webkit-scrollbar-track {
+    background-color: ${transparentize(theme.background_page, 0.6)};
+
+    &:hover {
+      background-color: ${transparentize(theme.background_page, 0.7)};
     }
 
-    .music-logo {
-      width: 170px;
-      height: 60px;
-      background: ${accentColor} url(${getUrl(PlayMusicLogo)}) no-repeat center center;
-      background-size: 170px auto;
+    &:active {
+      background-color: ${transparentize(theme.background_page, 0.65)};
+    }
+  }
+
+  #music-content {
+    color: ${theme.font_primary};
+  }
+
+  /* Links */
+  .music-source-empty-message,
+  .nav-item-container,
+  .simple-dialog a,
+  a {
+    color: ${theme.font_primary} !important;
+  }
+
+  body #material-app-bar #material-one-left,
+  body.qp #material-app-bar #material-one-left,
+  body #drawer,
+  body.qp #drawer {
+    .music-logo-link {
+      height: 48px !important;
+    }
+
+    .music-logo,
+    .menu-logo {
+      display: none !important;
     }
   }
 
   #material-app-bar {
-    background: ${colors.background_nav};
-    border-bottom-color: ${colors.border_nav} !important;
-    transition: background 300ms;
+    background: ${theme.background_nav};
+    border-bottom-color: ${theme.border_nav} !important;
+    transition: background ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};
   }
 
   #player {
-    background: ${colors.background_player};
-    transition: background 300ms;
+    background: ${theme.background_player};
+    transition: background ${TRANSITION_FAST};
   }
 
   /* Background Panes - Fading */
   sj-home {
     #backgroundContainer #backgroundColor {
-      background-color: ${colors.background_dark};
+      background-color: ${theme.background};
     }
 
     #backgroundContainer #backgroundImageContainer {
-      transition: opacity 300ms;
+      transition: opacity ${TRANSITION_FAST};
     }
   }
 
   sj-home[selected='0'],
   sj-home[selected='1'] {
     #backgroundContainer #backgroundColor {
-      background-color: ${colors.background_dark} !important;
-      transition: background-color 300ms;
+      background-color: ${theme.background} !important;
+      transition: background-color ${TRANSITION_FAST};
     }
 
     #backgroundContainer #backgroundImageContainer {
