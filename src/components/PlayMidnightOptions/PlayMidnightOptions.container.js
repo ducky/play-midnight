@@ -42,7 +42,7 @@ class PlayMidnightOptionsContainer extends PureComponent {
         visible={menuVisible}
         sections={sections}
         onClose={() => toggleMenu(false)}
-        onSave={() => saveOptions(options)}
+        onSave={saveOptions}
         onArrayChange={this.updateArray}
         onOptionChange={this.updateOption}
         onTargetedChange={this.updateTargetedOption}

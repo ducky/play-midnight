@@ -26,6 +26,20 @@ const OPTIONS = [
 
   // Section - Colorize
   {
+    id: 'background',
+    plural: 'backgrounds',
+    section: 'colorize',
+    type: 'array',
+    title: 'Background Colors',
+    description: `Not a fan of midnight? Well then let us change that!`,
+    defaultValue: 'default',
+    defaultValues: [
+      { id: 'default', name: 'Midnight (Default)', value: '#141517' },
+      { id: 'dusk', name: 'Dusk', value: '#171C2A' },
+      { id: 'coffee', name: 'Cafe', value: '#804D13' },
+    ],
+  },
+  {
     id: 'accent',
     plural: 'accents',
     section: 'colorize',
@@ -38,7 +52,7 @@ const OPTIONS = [
       { id: 'blue-abyss', name: 'Blue Abyss', value: '#007AA5' },
       { id: 'midnight-oil', name: 'Midnight Oil', value: '#8400a3' },
       { id: 'prince-purple', name: 'Prince Purple', value: '#673ab7' },
-      { id: 'redrum', name: 'Redrum', value: '#981046' },
+      { id: 'redrum', name: 'Redrum', value: '#8E3055' },
       { id: 'rusty-spoon', name: 'Rusty Spoon', value: '#4c9014' },
     ],
   },

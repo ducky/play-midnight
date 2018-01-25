@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 
 import withOptions from 'hoc/withOptions';
 import withStyles from 'hoc/withStyles';
