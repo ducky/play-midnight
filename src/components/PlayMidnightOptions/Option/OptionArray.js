@@ -96,7 +96,7 @@ class Option extends PureComponent {
           </div>
           <div className="Option__action">
             <Button className="Option__action-button" onClick={this.editColor}>
-              +
+              NEW<br />COLOR
             </Button>
           </div>
         </div>

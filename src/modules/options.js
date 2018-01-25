@@ -166,8 +166,9 @@ export function* fetchOptionsSaga() {
   }
 }
 
-export function* saveOptionsSaga({ payload: optionsSave }) {
+export function* saveOptionsSaga() {
   try {
+    const optionsSave = yield select(selectors.allOptions);
     yield call(save, toObject(optionsSave));
     yield put(actions.toggleMenu(false));
     yield put(actions.saveOptionsResponse(optionsSave));
