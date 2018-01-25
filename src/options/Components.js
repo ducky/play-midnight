@@ -1,5 +1,6 @@
 import Core from './components/A - Core/Core';
 import FAB from './components/A - Core/FAB';
+import Logo from './components/A - Core/Logo';
 import AccentsOnly from './components/B - General/AccentsOnly';
 import Enabled from './components/B - General/Enabled';
 import Favicon from './components/C - Customize/Favicon';
@@ -8,7 +9,7 @@ import Menus from './components/D - Menus/Menus';
 import Playlists from './components/E - Playlists/Playlists';
 import SoundSearch from './components/E - Playlists/SoundSearch';
 
-const CORE = [Core, FAB];
+const CORE = [Core, FAB, Logo];
 const GENERAL = [AccentsOnly, Enabled];
 const CUSTOMIZE = [Favicon, Queue];
 const MENUS = [Menus];
