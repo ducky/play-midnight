@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { colors } from 'style/theme';
+import withTheme from 'hoc/withTheme';
 
 export const ModalBackdrop = styled.div`
   position: fixed;
@@ -19,7 +19,7 @@ export const ModalBackdrop = styled.div`
 
   .modal-enter.modal-enter-active & {
     opacity: 1;
-    transition: opacity 0.3s;
+    transition: opacity ${props => props.transitionEnter};
   }
 
   .modal-leave & {
@@ -28,13 +28,13 @@ export const ModalBackdrop = styled.div`
 
   .modal-leave.modal-leave-active & {
     opacity: 0.01;
-    transition: opacity 0.2s;
+    transition: opacity ${props => props.transitionLeave};
   }
 `;
 
 const Modal = styled.div`
-  background: ${colors.background_menu};
-  color: ${colors.font_primary};
+  background: ${props => props.theme.background_menu};
+  color: ${props => props.theme.font_primary};
   border-radius: 5px;
   box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
   padding: ${props => (props.collapse ? '0' : '36px')};
@@ -85,7 +85,7 @@ const Modal = styled.div`
   .modal-enter.modal-enter-active & {
     transform: scale(1);
     opacity: 1;
-    transition: transform 300ms, opacity 300ms;
+    transition: transform ${props => props.transitionEnter}, opacity ${props => props.transitionEnter};
   }
 
   .modal-leave & {
@@ -96,7 +96,7 @@ const Modal = styled.div`
   .modal-leave.modal-leave-active & {
     transform: scale(0.7);
     opacity: 0.01;
-    transition: transform 200ms, opacity 200ms;
+    transition: transform ${props => props.transitionLeave}, opacity ${props => props.transitionLeave};
   }
 `;
 
@@ -106,4 +106,4 @@ export const ModalActions = styled.div`
   grid-gap: 0 6px;
 `;
 
-export default Modal;
+export default withTheme(Modal);

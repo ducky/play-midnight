@@ -80,6 +80,8 @@ class ModalWrapper extends PureComponent {
       valid,
       onCancel,
       onClose,
+      transitionEnter,
+      transitionLeave,
     } = this.props;
 
     const modalButtons = [];
@@ -106,8 +108,20 @@ class ModalWrapper extends PureComponent {
     const modalActions = [...buttons, ...modalButtons];
 
     return (
-      <ModalBackdrop key={id} onClick={!locked ? this.handleBackgroundClick : noop}>
-        <StyledModal className="Modal" style={{ width: width ? `${width}px` : '100%' }} type={type} collapse={collapse}>
+      <ModalBackdrop
+        key={id}
+        onClick={!locked ? this.handleBackgroundClick : noop}
+        transitionEnter={transitionEnter}
+        transitionLeave={transitionLeave}
+      >
+        <StyledModal
+          className="Modal"
+          style={{ width: width ? `${width}px` : '100%' }}
+          type={type}
+          collapse={collapse}
+          transitionEnter={transitionEnter}
+          transitionLeave={transitionLeave}
+        >
           {title && <div className="Modal__header">{title}</div>}
           <div className="Modal__content">{children}</div>
           {modalActions.length > 0 && (
