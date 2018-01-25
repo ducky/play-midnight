@@ -46,20 +46,6 @@ const styles = theme => css`
     color: ${theme.font_primary} !important;
   }
 
-  body #material-app-bar #material-one-left,
-  body.qp #material-app-bar #material-one-left,
-  body #drawer,
-  body.qp #drawer {
-    .music-logo-link {
-      height: 48px !important;
-    }
-
-    .music-logo,
-    .menu-logo {
-      display: none !important;
-    }
-  }
-
   #material-app-bar {
     background: ${theme.background_nav};
     border-bottom-color: ${theme.border_nav} !important;
