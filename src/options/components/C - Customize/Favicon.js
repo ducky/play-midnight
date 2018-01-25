@@ -66,14 +66,14 @@ class Favicon extends Component {
     const prevFavicon = filter(prevOptions, o => ['favicon', 'faviconAccent'].includes(o.id));
     const favicon = filter(options, o => ['favicon', 'faviconAccent'].includes(o.id));
 
-    return !isEqual(prevTheme.accent, theme.accent) || !isEqual(prevFavicon, favicon);
+    return !isEqual(prevTheme.A500, theme.A500) || !isEqual(prevFavicon, favicon);
   }
 
   render() {
     const { theme, isActive } = this.props;
     const accented = isActive('faviconAccent');
 
-    if (isActive(OPTION_ID)) this.updateFavicon(theme.accent, accented);
+    if (isActive(OPTION_ID)) this.updateFavicon(theme.A500, accented);
 
     return null;
   }
