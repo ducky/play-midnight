@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
-import { darken, lighten, colors } from 'style/theme';
+import withTheme from 'hoc/withTheme';
+
+import { lighten } from 'style/theme';
 
 const NotificationModal = styled.div`
   a {
-    color: ${colors.font_primary};
+    color: ${props => props.theme.font_primary};
   }
 
   .Modal {
@@ -13,9 +15,9 @@ const NotificationModal = styled.div`
 
   .Modal__header {
     text-align: center;
-    background: ${lighten(colors.background_dark, 8)};
+    background: ${lighten(props => props.theme.background_dark, 8)};
     color: #fff;
-    border-bottom: 1px solid ${colors.border_page};
+    border-bottom: 1px solid ${props => props.theme.border_page};
     flex: 0 0 auto;
     padding: 15px 25px;
     margin: 0;
@@ -73,7 +75,7 @@ const NotificationModal = styled.div`
     }
 
     .Modal__title {
-      background: ${lighten(colors.background_dark, 8)};
+      background: ${lighten(props => props.theme.background_dark, 8)};
       font-size: 16px;
       font-weight: 700;
       padding: 15px 25px;
@@ -118,7 +120,7 @@ const NotificationModal = styled.div`
 
   .Modal__footer {
     padding: 15px 25px;
-    background: ${lighten(colors.background_dark, 8)};
+    background: ${lighten(props => props.theme.background_dark, 8)};
   }
 
   .Modal__actions {
@@ -132,4 +134,4 @@ const NotificationModal = styled.div`
   }
 `;
 
-export default NotificationModal;
+export default withTheme(NotificationModal);

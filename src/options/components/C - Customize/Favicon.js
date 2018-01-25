@@ -3,7 +3,7 @@ import filter from 'lodash/filter';
 import isEqual from 'lodash/isEqual';
 
 import withOptions from 'hoc/withOptions';
-import withStyles from 'hoc/withStyles';
+import withTheme from 'hoc/withTheme';
 
 import { getUrl, loadBackground } from 'lib/api';
 import removeAllElements from 'utils/removeAllElements';
@@ -14,17 +14,16 @@ import injectElement from 'utils/injectElement';
 const OPTION_ID = 'favicon';
 const ICON_STORAGE = 'PM_ICON';
 
+@withTheme
 @withOptions
-@withStyles()
 class Favicon extends Component {
   updateFavicon = async (accent, useAccent) => {
-    const { commError } = this.props;
     const stored = localStorage.getItem(ICON_STORAGE) ? JSON.parse(localStorage.getItem(ICON_STORAGE)) : undefined;
 
-    const cached = stored && stored.accent === accent.value;
+    const cached = stored && stored.accent === accent;
     const data = {
       url: getUrl(FaviconImage),
-      accent: accent.value,
+      accent: accent,
     };
 
     const createIcon = href => {
@@ -62,19 +61,19 @@ class Favicon extends Component {
     }
   };
 
-  shouldComponentUpdate({ accent: prevAccent, options: prevOptions }) {
-    const { accentColor, options } = this.props;
+  shouldComponentUpdate({ theme: prevTheme, options: prevOptions }) {
+    const { theme, options } = this.props;
     const prevFavicon = filter(prevOptions, o => ['favicon', 'faviconAccent'].includes(o.id));
     const favicon = filter(options, o => ['favicon', 'faviconAccent'].includes(o.id));
 
-    return !isEqual(prevAccent, accentColor) || !isEqual(prevFavicon, favicon);
+    return !isEqual(prevTheme.accent, theme.accent) || !isEqual(prevFavicon, favicon);
   }
 
   render() {
-    const { accentColor, isActive } = this.props;
+    const { theme, isActive } = this.props;
     const accented = isActive('faviconAccent');
 
-    if (isActive(OPTION_ID)) this.updateFavicon(accentColor, accented);
+    if (isActive(OPTION_ID)) this.updateFavicon(theme.accent, accented);
 
     return null;
   }

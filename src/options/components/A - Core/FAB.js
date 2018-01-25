@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import withOptions from 'hoc/withOptions';
 import withPortal from 'hoc/withPortal';
 import withStyles from 'hoc/withStyles';
+import withTheme from 'hoc/withTheme';
 
 import { actions } from 'modules/options';
 
@@ -13,18 +14,19 @@ const mapStateToProps = ({ options }) => ({
   menuVisible: options.menuVisible,
 });
 
+@withTheme
 @withOptions
 @withStyles(styles)
 @withPortal('#material-player-right-wrapper')
 @connect(mapStateToProps, { toggleMenu: actions.toggleMenu })
 class FAB extends PureComponent {
   render() {
-    const { accentColor, menuVisible, toggleMenu, Stylesheet } = this.props;
+    const { theme, menuVisible, toggleMenu, Stylesheet } = this.props;
 
     return (
       <Fragment>
         {/* TODO - Update accent to be color and obey enabled/disabled colors */}
-        <StyledFAB accent={menuVisible ? accentColor : null} onClick={() => toggleMenu()}>
+        <StyledFAB useAccent={menuVisible} theme={theme} onClick={() => toggleMenu()}>
           <div className="FAB__icon">
             <svg
               viewBox="0 0 24 24"
