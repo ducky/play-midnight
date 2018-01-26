@@ -78,8 +78,6 @@ class Option extends PureComponent {
     const name = validateTitle(rawName);
     const id = validateId(name);
 
-    console.log(id, name);
-
     onChangeValues({
       id: plural,
       value: insertAt(values, { id, name, value: color }, index),
