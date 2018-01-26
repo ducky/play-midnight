@@ -12,6 +12,10 @@
   background: lighten($background_player, 5%);
 }
 
+#player:hover #material-player-progress:not([disabled]) #progressContainer {
+  background: transparent;
+}
+
 #material-player-left-wrapper #playerSongInfo #player-artist,
 #material-player-left-wrapper #playerSongInfo .player-album,
 #material-player-left-wrapper #playerSongInfo .player-dash {
@@ -33,8 +37,7 @@ paper-slider::shadow .ring > #sliderKnob > #sliderKnobInner {
   cursor: not-allowed !important;
 }
 
-#player.material .material-player-middle paper-icon-button[data-id='play-pause'] iron-icon,
-#player.material .material-player-middle sj-icon-button[data-id='play-pause']::shadow core-icon {
+#player.material .material-player-middle paper-icon-button[data-id="play-pause"] iron-icon {
   g {
     path:nth-child(2) {
       fill: $background_player;
