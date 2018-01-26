@@ -1,12 +1,19 @@
 const LOCAL_STORAGE_KEY = 'PLAY_MIDNIGHT';
 const IS_EXTENSION = window.chrome && chrome.runtime && chrome.runtime.id;
 
+const urlCache = {};
+
 export const getUrl = url => {
+  // Cache url to prevent hitting Chrome all the time
+  if (urlCache[url]) return urlCache[url];
+
   if (IS_EXTENSION) {
-    return chrome.runtime.getURL(url);
+    urlCache[url] = chrome.runtime.getURL(url);
   } else {
-    return url;
+    urlCache[url] = url;
   }
+
+  return urlCache[url];
 };
 
 export const load = async data => {
