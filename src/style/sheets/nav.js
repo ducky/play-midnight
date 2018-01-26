@@ -1,8 +1,14 @@
 import { css } from 'styled-components';
 
-import { transparentize } from 'style/theme';
+import { transparentize, isDark, TRANSITION_FAST } from 'style/theme';
 
 const styles = theme => css`
+  #material-app-bar {
+    background: ${theme.B400};
+    border-bottom-color: ${theme.B600} !important;
+    transition: background ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};
+  }
+
   #nav_collections .nav-item-container,
   .nav-item-container,
   .playlists-container .nav-item-container {
@@ -123,6 +129,17 @@ const styles = theme => css`
 
   .my-devices-card .device-list-item:not(:last-child) {
     border-bottom: 1px solid ${theme.B700};
+  }
+
+  /* Google Stuff */
+  paper-toolbar #material-one-right #gb {
+    a {
+      color: ${theme.black} !important;
+    }
+
+    .gb_dc {
+      filter: ${isDark(theme.B500) ? 'invert(100%)' : 'none'};
+    }
   }
 `;
 

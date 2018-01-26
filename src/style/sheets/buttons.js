@@ -10,9 +10,26 @@ const styles = theme => css`
     background-color: ${theme.font_primary};
   }
 
+  /* Toggle Button */
+  paper-toggle-button {
+    &[disabled] {
+      cursor: not-allowed;
+    }
+
+    .toggle-bar.paper-toggle-button,
+    .toggle-button.paper-toggle-button {
+      background: ${theme.B500} !important;
+      border: 1px solid ${theme.B500} !important;
+    }
+
+    .toggle-ink.paper-toggle-button {
+      color: ${theme.B200} !important;
+    }
+  }
+
   /* Checkbox */
   paper-checkbox #checkboxLabel.paper-checkbox {
-    color: ${theme.font_primary};
+    color: ${theme.font_primary} !important;
   }
 
   /* Buttons */

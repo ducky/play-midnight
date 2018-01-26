@@ -80,11 +80,17 @@ const styles = theme => css`
   /* Context Menus */
   .goog-menu,
   .goog-menuitem,
-  .now-playing-menu .goog-menuitem,
-  .now-playing-menu .goog-submenu,
-  .now-playing-menu .goog-submenu .goog-submenu-arrow {
+  .now-playing-menu.goog-menu,
+  .now-playing-menu.goog-menu .goog-menuitem,
+  .now-playing-menu.goog-menu .goog-submenu,
+  .now-playing-menu.goog-menu .goog-submenu .goog-submenu-arrow {
     background-color: ${theme.B300} !important;
     color: ${theme.font_primary} !important;
+  }
+
+  .goog-menu,
+  .now-playing-menu.goog-menu {
+    border-color: transparent !important;
   }
 
   .goog-menuitem {

@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-import { transparentize } from 'style/theme';
+import { transparentize, TRANSITION_FAST } from 'style/theme';
 
 const styles = theme => css`
   #drawer-panel #material-hero-image {
@@ -52,7 +52,8 @@ const styles = theme => css`
 
   gpm-vertical-list {
     #items.gpm-vertical-list {
-      background: ${theme.B400};
+      background-color: ${theme.B400} !important;
+      color: ${theme.font_primary} !important;
 
       & > *:hover,
       & > *[focused] {
@@ -147,22 +148,36 @@ const styles = theme => css`
   }
 
   /* Playlist/Artist/Albums Header */
-  .gpm-detail-page-header div.gpm-detail-page-header > [slot='title'] {
-    color: ${transparentize(theme.font_primary, 0.87)}; /* Maybe Important? */
+  .gpm-detail-page-header div.gpm-detail-page-header [slot='title'] {
+    color: ${transparentize(theme.font_primary, 0.87)} !important;
   }
 
-  gpm-detail-page-header div.gpm-detail-page-header > [slot='subtitle'],
-  gpm-detail-page-header div.gpm-detail-page-header > [slot='description'],
-  gpm-detail-page-header div.gpm-detail-page-header > [slot='metadata'] {
-    color: ${transparentize(theme.font_primary, 0.54)}; /* Maybe Important? */
+  gpm-detail-page-header div.gpm-detail-page-header [slot='subtitle'],
+  gpm-detail-page-header div.gpm-detail-page-header [slot='description'],
+  gpm-detail-page-header div.gpm-detail-page-header [slot='metadata'] {
+    color: ${transparentize(theme.font_primary, 0.54)} !important;
+  }
+
+  gpm-detail-page-header[description-overflows] #descriptionWrapper.gpm-detail-page-header {
+    background: transparent !important;
+    border-color: transparent;
+    margin-bottom: 4px;
+    transition: border ${TRANSITION_FAST}, padding ${TRANSITION_FAST};
+    cursor: pointer;
+
+    & > [slot='description'] {
+      margin: 0 !important;
+    }
   }
 
   gpm-detail-page-header[description-overflows] #descriptionWrapper.gpm-detail-page-header:hover {
-    background: ${theme.B300}; /* Maybe Important */
+    background: transparent !important;
+    padding-left: 8px;
+    border-left: 3px solid ${theme.A500};
   }
 
-  .gpm-detail-page-header div.gpm-detail-page-header > [slot='buttons'] {
-    color: ${transparentize(theme.font_primary, 0.87)}; /* Maybe Important */
+  .gpm-detail-page-header div.gpm-detail-page-header [slot='buttons'] {
+    color: ${transparentize(theme.font_primary, 0.87)} !important;
   }
 
   .station-container-content-wrapper .material-container-details {

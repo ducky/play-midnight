@@ -32,18 +32,18 @@ const styles = theme => css`
     .input-content.paper-input-container input,
     .input-content.paper-input-container iron-autogrow-textarea,
     .input-content.paper-input-container textarea {
-      color: ${theme.font_primary};
+      color: ${theme.font_primary} !important;
     }
   }
 
   .material-share-options #sharing-option-label {
-    color: ${theme.font_primary};
+    color: ${theme.font_primary} !important;
   }
 
   .error,
   .label-text,
   .material-share-options #sharing-option-description {
-    color: ${theme.font_secondary};
+    color: ${theme.font_secondary} !important;
   }
 `;
 

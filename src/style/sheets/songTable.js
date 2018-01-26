@@ -3,6 +3,8 @@ import { css } from 'styled-components';
 import { transparentize } from 'style/theme';
 import { getUrl } from 'lib/api';
 
+import { TRANSITION_FAST } from 'style/theme';
+
 import LoadingWhite from 'assets/images/sprites/ani_loading_white.gif';
 import EqualWhite from 'assets/images/sprites/ani_equalizer_white.gif';
 import EqualWhiteStatic from 'assets/images/sprites/equalizer_white.png';
@@ -42,6 +44,7 @@ const styles = theme => css`
       td {
         background-color: ${theme.B400} !important;
         color: ${theme.font_primary} !important;
+        transition: background ${TRANSITION_FAST};
       }
 
       &.currently-playing {
@@ -143,6 +146,14 @@ const styles = theme => css`
     [data-col='title'],
     th {
       color: ${theme.font_primary};
+    }
+  }
+
+  .top-tracks {
+    .song-row {
+      .hover-button[data-id="play"] {
+        background: ${theme.B200} !important;
+      }
     }
   }
 

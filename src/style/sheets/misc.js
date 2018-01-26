@@ -41,11 +41,11 @@ const styles = theme => css`
       }
 
       .lab-description {
-        color: ${theme.font_primary};
+        color: ${theme.font_primary} !important;
       }
 
       &:not(:last-child) {
-        border-bottom: 1px solid ${theme.B700};
+        border-bottom: 1px solid ${theme.B500} !important;
       }
     }
   }
@@ -146,7 +146,7 @@ const styles = theme => css`
 
   /* Share Buttons */
   .share-buttons {
-    border-bottom: 1px solid ${theme.B700};
+    border-bottom: 1px solid ${theme.B500};
 
     .share-button .button-label {
       color: ${theme.font_primary};
