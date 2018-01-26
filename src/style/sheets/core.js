@@ -1,8 +1,33 @@
 import { css } from 'styled-components';
 
-import { transparentize } from 'style/theme';
+import { transparentize, TRANSITION_FAST } from 'style/theme';
 
 const styles = theme => css`
+  html:not([style-scope]):not(.style-scope) {
+    --light-theme-text-color: ${theme.font_primary};
+    --light-theme-secondary-color: ${theme.font_secondary};
+  }
+
+  body,
+  body.material {
+    background-color: ${theme.B500};
+    color: ${theme.font_primary};
+    transition: background ${TRANSITION_FAST};
+  }
+
+  ::-webkit-scrollbar-track,
+  ::shadow ::-webkit-scrollbar-track {
+    background-color: ${transparentize(theme.B400, 0.6)};
+
+    &:hover {
+      background-color: ${transparentize(theme.B400, 0.7)};
+    }
+
+    &:active {
+      background-color: ${transparentize(theme.B400, 0.65)};
+    }
+  }
+
   #sliding-action-bar-container {
     background-color: ${theme.B400} !important;
     color: ${theme.font_primary} !important;
@@ -15,6 +40,18 @@ const styles = theme => css`
         opacity: 0.4;
       }
     }
+  }
+
+  #music-content {
+    color: ${theme.font_primary};
+  }
+
+  /* Links */
+  .music-source-empty-message,
+  .nav-item-container,
+  .simple-dialog a,
+  a {
+    color: ${theme.font_primary} !important;
   }
 
   /* Top Toolbar */
@@ -169,7 +206,20 @@ const styles = theme => css`
     &[selected='9'] .home-palette-id-2,
     &[selected='10'] .home-palette-id-2,
     &[selected='11'] .home-palette-id-2,
-    &[selected='12'] .home-palette-id-2 {
+    &[selected='12'] .home-palette-id-2,
+    &[selected='0'] .home-palette-id-3,
+    &[selected='1'] .home-palette-id-3,
+    &[selected='2'] .home-palette-id-3,
+    &[selected='3'] .home-palette-id-3,
+    &[selected='4'] .home-palette-id-3,
+    &[selected='5'] .home-palette-id-3,
+    &[selected='6'] .home-palette-id-3,
+    &[selected='7'] .home-palette-id-3,
+    &[selected='8'] .home-palette-id-3,
+    &[selected='9'] .home-palette-id-3,
+    &[selected='10'] .home-palette-id-3,
+    &[selected='11'] .home-palette-id-3,
+    &[selected='12'] .home-palette-id-3 {
       color: ${theme.font_secondary} !important;
     }
   }

@@ -25,12 +25,19 @@ const styles = theme => css`
       background: ${theme.B400};
     }
 
-    &[data-type='album'] .details .fade-out:after,
-    &[data-type='artist'] .details .fade-out:after {
+    &[data-type='album'] .details .fade-out:after {
       background: linear-gradient(
         to right,
         ${transparentize(theme.B400, 0)} 0%,
         ${transparentize(theme.B400, 0.999)} 100%
+      );
+    }
+
+    &[data-type='artist'] .details .fade-out:after {
+      background: linear-gradient(
+        to right,
+        ${transparentize(theme.B500, 0)} 0%,
+        ${transparentize(theme.B500, 0.999)} 100%
       );
     }
 

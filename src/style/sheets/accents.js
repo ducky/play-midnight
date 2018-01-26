@@ -26,7 +26,10 @@ const styles = theme => css`
   }
 
   /*  Menu Selected */
-  .goog-menu .goog-menuitem.selected .goog-menuitem-content:not([style-scope]):not(.style-scope) {
+  .goog-menu .goog-menuitem.selected .goog-menuitem-content:not([style-scope]):not(.style-scope),
+  .goog-menu:not([style-scope]):not(.style-scope)
+    .goog-menuitem.selected:not([style-scope]):not(.style-scope)
+    .goog-menuitem-content:not([style-scope]):not(.style-scope) {
     color: ${theme.A500} !important;
 
     &:hover {
@@ -41,49 +44,33 @@ const styles = theme => css`
   }
 
   /*  Toggle Button */
-  paper-toggle-button::shadow [checked] {
-    .toggle {
-      background: ${theme.A500};
-    }
-
-    .toggle-ink {
-      color: ${theme.A500};
-    }
-  }
-
   paper-toggle-button[checked]:not([disabled]) {
     .toggle-bar.paper-toggle-button,
     .toggle-button.paper-toggle-button {
-      background-color: ${theme.A500};
+      background-color: ${theme.A500} !important;
     }
 
     .toggle-ink.paper-toggle-button {
-      color: ${theme.A500};
+      color: ${theme.A500} !important;
     }
   }
 
   /*  Checkbox */
-  paper-checkbox::shadow {
-    #checkbox.checked {
-      background-color: ${theme.A500};
-      border-color: ${theme.A500};
-    }
-
-    #ink[checked] {
-      color: ${theme.A500};
-    }
-  }
-
   paper-checkbox {
+    #checkbox.checked {
+      background-color: ${theme.A500} !important;
+      border-color: ${theme.A500} !important;
+    }
+
     #ink[checked],
     #ink[checked].paper-checkbox {
-      color: ${theme.A500};
+      color: ${theme.A500} !important;
     }
 
     #checkbox.checked,
     #checkbox.checked.paper-checkbox {
-      background-color: ${theme.A500};
-      border-color: ${theme.A500};
+      background-color: ${theme.A500} !important;
+      border-color: ${theme.A500} !important;
     }
   }
 
@@ -93,8 +80,8 @@ const styles = theme => css`
   paper-button.material-primary,
   paper-button.material-primary:not([raised])[focused],
   sj-paper-button.material-primary {
-    background: ${theme.A500};
-    color: ${isLight(theme.A500) ? FONT_LIGHT : FONT_DARK};
+    background: ${theme.A500} !important;
+    color: ${isLight(theme.A500) ? FONT_LIGHT : FONT_DARK} !important;
 
     &:hover {
       background: ${theme.A500} !important;
@@ -107,27 +94,27 @@ const styles = theme => css`
   .ups.light iron-icon:not([style-scope]):not(.style-scope),
   paper-dialog .buttons paper-button:not([style-scope]):not(.style-scope):not([disabled]),
   paper-toast paper-button[data-action='button']:not([style-scope]):not(.style-scope) {
-    color: ${theme.A500};
+    color: ${theme.A500} !important;
   }
 
   paper-action-dialog sj-paper-button,
   paper-dialog .buttons paper-button:not([style-scope]):not(.style-scope):not([disabled]) {
-    color: ${theme.A500};
+    color: ${theme.A500} !important;
   }
 
   #music-content .material-banner.banner.new-user-quiz-card sj-paper-button,
   #music-content .material-banner.banner.ws-search-banner sj-paper-button,
   #music-content .material-banner.banner.ws-subscriber-card sj-paper-button {
-    color: ${theme.A500};
+    color: ${theme.A500} !important;
   }
 
   .more-songs-container.primary > paper-button {
-    color: ${theme.A500};
+    color: ${theme.A500} !important;
   }
 
   paper-toast [data-action='button'],
   paper-toast div[data-action='button'] {
-    color: ${theme.A500};
+    color: ${theme.A500} !important;
   }
 
   sj-callout {
@@ -158,8 +145,9 @@ const styles = theme => css`
     }
   }
 
-  sj-play-button #buttonContent.sj-play-button {
-    background-color: ${theme.A500};
+  sj-play-button #buttonContent.sj-play-button,
+  .sj-play-button-0 #buttonContent.sj-play-button {
+    background-color: ${theme.A500} !important;
   }
 
   /*  Playlist button */
@@ -169,10 +157,6 @@ const styles = theme => css`
     .playlist-subscribed {
       color: ${theme.A500};
     }
-  }
-
-  .sj-play-button-0 #buttonContent.sj-play-button {
-    background: ${theme.A500};
   }
 
   .sj-play-button-0 #pulse.sj-play-button {
@@ -200,15 +184,15 @@ const styles = theme => css`
   paper-input-container,
   paper-input-decorator {
     &::shadow .focused-underline {
-      background: ${theme.A500};
+      background: ${theme.A500} !important;
     }
 
     &[focused]::shadow .floated-label .label-text {
-      color: ${theme.A500};
+      color: ${theme.A500} !important;
     }
 
     .focused-line.paper-input-container {
-      background: ${theme.A500};
+      background: ${theme.A500} !important;
     }
 
     .add-on-content.is-highlighted.paper-input-container *,
@@ -216,7 +200,7 @@ const styles = theme => css`
     .input-content.label-is-floating.paper-input-container .paper-input-label,
     .input-content.label-is-highlighted.paper-input-container .paper-input-label,
     .input-content.label-is-highlighted.paper-input-container label {
-      color: ${theme.A500};
+      color: ${theme.A500} !important;
     }
   }
 
@@ -250,18 +234,18 @@ const styles = theme => css`
   /*  Slider */
   paper-slider {
     paper-ripple.paper-slider {
-      color: ${theme.A500};
+      color: ${theme.A500} !important;
     }
   }
 
   paper-slider #sliderKnob.paper-slider.style-scope > #sliderKnobInner.paper-slider.style-scope,
   paper-slider .slider-knob-inner.paper-slider {
-    background-color: ${theme.A500};
-    border: 2px solid ${theme.A500};
+    background-color: ${theme.A500} !important;
+    border: 2px solid ${theme.A500} !important;
   }
 
   paper-slider .ring.paper-slider > .slider-knob.paper-slider > .slider-knob-inner.paper-slider {
-    background-color: ${theme.A500};
+    background-color: ${theme.A500} !important;
     border-color: transparent;
   }
 
@@ -291,7 +275,7 @@ const styles = theme => css`
 
   .upload-dialog {
     .upload-dialog-title {
-      background: ${theme.A500};
+      background: ${theme.A500} !important;
     }
   }
 
@@ -336,6 +320,10 @@ const styles = theme => css`
         color: ${theme.A500};
       }
     }
+  }
+
+  gpm-quick-nav .items.gpm-quick-nav > [selected] {
+    color: ${theme.A500} !important;
   }
 
   .solid-hero core-image#material-hero-image,

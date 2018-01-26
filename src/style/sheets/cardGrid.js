@@ -7,17 +7,17 @@ const styles = theme => css`
   gpm-now-card-grid {
     sj-play-button {
       #buttonContent.sj-play-button {
-        background: ${theme.B25};
+        background: ${theme.B25} !important;
       }
 
       #icon.sj-play-button {
-        fill: ${theme.font_primary};
+        fill: ${theme.font_primary} !important;
       }
     }
 
     [slot='title'],
     #gridTitle {
-      color: ${theme.font_primary};
+      color: ${theme.font_primary} !important;
     }
 
     sj-card {

@@ -26,8 +26,8 @@ const styles = theme => css`
   }
 
   gpm-loading-indicator #contentWrapper.gpm-loading-indicator {
-    background: ${theme.B500};
-    color: ${theme.font_primary};
+    background: ${theme.B500} !important;
+    color: ${theme.font_primary} !important;
   }
 `;
 
