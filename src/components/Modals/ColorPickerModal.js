@@ -82,6 +82,8 @@ class ColorPickerModal extends PureComponent {
           value={name}
           type="text"
           theme={theme}
+          autoComplete="off"
+          autoFocus
         />
         <PickerWrapper theme={theme}>
           <PhotoshopPicker
