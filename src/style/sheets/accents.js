@@ -9,9 +9,16 @@ const styles = theme => css`
   }
 
   /*  Scrollbar */
-  ::-webkit-scrollbar-thumb,
-  ::shadow ::-webkit-scrollbar-thumb {
+  ::-webkit-scrollbar-thumb {
     background-color: ${theme.A500};
+
+    &:hover {
+      background: ${theme.A400};
+    }
+
+    &:active {
+      background: ${theme.A300};
+    }
   }
 
   .primary:not([style-scope]):not(.style-scope) {
@@ -341,6 +348,11 @@ const styles = theme => css`
   .paper-fab-0,
   paper-fab {
     background: ${theme.A500};
+
+    &:hover,
+    &.keyboard-focus {
+      background: ${theme.A400};
+    }
   }
 
   /*  Progress/Volume */
