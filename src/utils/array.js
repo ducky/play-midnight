@@ -8,6 +8,12 @@ export const findItem = (arr = [], item = {}, key = 'id') =>
     return current[key] === item[key] || current[key] === item[key];
   });
 
+export const insertAt = (arr = [], item = {}, index = -1) => {
+  return index > -1
+    ? [...arr.slice(0, index + 1), item, ...arr.slice(index + 1)]
+    : [...arr, item];
+};
+
 export const replaceItem = (arr = [], item = {}, key = 'id') => {
   const index = getIndex(arr, item, key);
   return index > -1
