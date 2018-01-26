@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 
-import { getUrl } from 'lib/api';
-
 import withTheme from 'hoc/withTheme';
-
-import iconPencil from 'assets/images/icon-pencil.svg';
-import iconTrash from 'assets/images/icon-trash.svg';
 
 import { TRANSITION_FAST } from 'style/theme';
 
@@ -19,7 +14,7 @@ export const CollectionItem = styled.label`
   min-width: 33.33%;
   height: 85px;
   transition: all ${TRANSITION_FAST};
-  padding: 8px;
+  padding: 8px 32px;
   cursor: pointer;
   overflow: hidden;
   background: ${props => props.background || 'transparent'};
@@ -36,7 +31,6 @@ export const CollectionItem = styled.label`
     text-shadow: 1px 1px 0 ${props => props.theme.black};
     transition: all ${TRANSITION_FAST};
     color: ${props => props.theme.white};
-    padding: 8px 10px;
     text-align: center;
   }
 
@@ -81,20 +75,22 @@ export const CollectionItem = styled.label`
       opacity: 1;
     }
 
-    .CollectionItem__edit,
-    .CollectionItem__remove {
+    .CollectionItem__icon {
       opacity: 0.8;
       transform: scale3d(1, 1, 1);
     }
   }
 
-  .CollectionItem__edit,
-  .CollectionItem__remove {
+  .CollectionItem__icon {
     position: absolute;
-    top: 4px;    
-    background-color: rgba(0,0,0,0.25);
+    top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 24px;
     height: 24px;
+    color: ${props => props.theme.white};
+    background-color: rgba(0, 0, 0, 0.25);
     cursor: pointer;
     background-position: center center;
     background-repeat: no-repeat;
@@ -109,14 +105,15 @@ export const CollectionItem = styled.label`
 
   .CollectionItem__edit {
     left: 4px;
-    background-image: url('${getUrl(iconPencil)}');
-    background-size: 14px 14px;
+  }
+
+  .CollectionItem__copy {
+    left: 4px;
+    top: 32px;
   }
 
   .CollectionItem__remove {
     right: 4px;
-    background-image: url('${getUrl(iconTrash)}');
-    background-size: 14px 14px;
   }
 
   &:active,

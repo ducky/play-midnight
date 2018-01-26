@@ -25,7 +25,8 @@ const StyledOptions = styled.div`
   border-radius: 3px;
   color: ${props => props.theme.font_primary};
   background: ${props => props.theme.B300};
-  box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12),
+    0 8px 10px -5px rgba(0, 0, 0, 0.4);
   transform-origin: center bottom 0;
   transition: background ${TRANSITION_FAST}, color ${TRANSITION_FAST};
 
@@ -41,7 +42,7 @@ const StyledOptions = styled.div`
     transform: rotate(-45deg);
     border: 8px solid transparent;
     border-color: ${props => `transparent transparent ${props.theme.B400} ${props.theme.B400}`};
-    box-shadow: -12px 12px 15px 0 rgba(0, 0, 0, 0.24);
+    box-shadow: -12px 12px 15px 0px rgba(0, 0, 0, 0.24);
     transition: border-color ${TRANSITION_FAST};
   }
 
