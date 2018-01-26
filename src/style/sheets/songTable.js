@@ -38,13 +38,18 @@ const styles = theme => css`
         filter: invert(100%);
       }
 
-      .column-content,
+      td,
       .content,
-      .title-right-items,
-      td {
+      .column-content,
+      .song-indicator,
+      .title-right-items {
         background-color: ${theme.B400} !important;
         color: ${theme.font_primary} !important;
         transition: background ${TRANSITION_FAST};
+      }
+
+      .title-right-items {
+        line-height: 39px;
       }
 
       &.currently-playing {
@@ -59,7 +64,6 @@ const styles = theme => css`
       }
 
       .song-indicator {
-        background-color: ${theme.B400} !important;
         background-size: 24px 24px !important;
       }
 
@@ -86,14 +90,11 @@ const styles = theme => css`
       }
 
       &:nth-child(odd) {
-        .column-content,
+        td,
         .content,
-        .title-right-items,
-        td {
-          background-color: ${theme.B300} !important;
-        }
-
-        .song-indicator {
+        .column-content,
+        .song-indicator,
+        .title-right-items {
           background-color: ${theme.B300} !important;
         }
 
@@ -109,15 +110,16 @@ const styles = theme => css`
       &.hover,
       &.selected-song-row,
       &:hover {
-        .column-content,
+        td,
         .content,
-        .title-right-items,
-        td {
+        .column-content,
+        .song-indicator,
+        .title-right-items {
           background-color: ${theme.B200} !important;
         }
 
-        .song-indicator {
-          background-color: ${theme.B200} !important;
+        .title-right-items {
+          line-height: 39px;
         }
 
         .fade-out:after {
@@ -151,7 +153,7 @@ const styles = theme => css`
 
   .top-tracks {
     .song-row {
-      .hover-button[data-id="play"] {
+      .hover-button[data-id='play'] {
         background: ${theme.B200} !important;
       }
     }
