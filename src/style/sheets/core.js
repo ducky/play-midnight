@@ -15,16 +15,40 @@ const styles = theme => css`
     transition: background ${TRANSITION_FAST};
   }
 
-  ::-webkit-scrollbar-track,
-  ::shadow ::-webkit-scrollbar-track {
-    background-color: ${transparentize(theme.B400, 0.6)};
+  ::-webkit-scrollbar {
+    width: 11px;
+    background: ${transparentize(theme.B400, 0.6)};
 
     &:hover {
-      background-color: ${transparentize(theme.B400, 0.7)};
+      background: ${transparentize(theme.B400, 0.7)};
     }
 
     &:active {
-      background-color: ${transparentize(theme.B400, 0.65)};
+      background: ${transparentize(theme.B400, 0.65)};
+    }
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${transparentize(theme.B400, 0.6)};
+
+    &:hover {
+      background: ${transparentize(theme.B400, 0.7)};
+    }
+
+    &:active {
+      background: ${transparentize(theme.B400, 0.65)};
+    }
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 0.8;
+    }
+    &:active {
+      opacity: 0.75;
     }
   }
 
@@ -126,12 +150,6 @@ const styles = theme => css`
       .sub-match.sj-search-suggestion {
         color: ${theme.font_primary} !important;
       }
-    }
-
-    .paper-fab-0 iron-icon,
-    paper-fab iron-icon,
-    sj-fab iron-icon {
-      color: ${theme.B500} !important;
     }
   }
 
