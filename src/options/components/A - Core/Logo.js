@@ -7,17 +7,21 @@ import withStyles from 'hoc/withStyles';
 import PlayMusicLogo from 'components/PlayMusicLogo';
 import styles from './Logo.styles';
 
+@withOptions
 @withPortal('#topBar .music-logo-link')
 class TopLogo extends PureComponent {
   render() {
-    return <PlayMusicLogo />;
+    const { isActive } = this.props;
+    return <PlayMusicLogo enabled={isActive('enabled')} />;
   }
 }
 
+@withOptions
 @withPortal('#drawer .music-logo-link')
 class MenuLogo extends PureComponent {
   render() {
-    return <PlayMusicLogo />;
+    const { isActive } = this.props;
+    return <PlayMusicLogo enabled={isActive('enabled')} />;
   }
 }
 

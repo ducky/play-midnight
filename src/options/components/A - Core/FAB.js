@@ -21,12 +21,11 @@ const mapStateToProps = ({ options }) => ({
 @connect(mapStateToProps, { toggleMenu: actions.toggleMenu })
 class FAB extends PureComponent {
   render() {
-    const { theme, menuVisible, toggleMenu, Stylesheet } = this.props;
+    const { isActive, theme, menuVisible, toggleMenu, Stylesheet } = this.props;
 
     return (
       <Fragment>
-        {/* TODO - Update accent to be color and obey enabled/disabled colors */}
-        <StyledFAB useAccent={menuVisible} theme={theme} onClick={() => toggleMenu()}>
+        <StyledFAB useAccent={menuVisible} enabled={isActive('enabled')} theme={theme} onClick={() => toggleMenu()}>
           <div className="FAB__icon">
             <svg
               viewBox="0 0 24 24"
