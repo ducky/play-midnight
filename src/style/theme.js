@@ -28,7 +28,7 @@ export const lighten = (c, amount) => {
 
 export const DEFAULT_ACCENT = '#ec4e28';
 export const DEFAULT_BACKGROUND = '#141517';
-export const FONT_LIGHT = '#141517';
+export const FONT_LIGHT = '#212121';
 export const FONT_DARK = '#ececec';
 export const TRANSITION_LIGHTNING = '200ms';
 export const TRANSITION_FAST = '300ms';
@@ -40,6 +40,7 @@ export const stripTransition = transition => parseInt(transition.replace('ms', '
 export const createTheme = (background = DEFAULT_BACKGROUND, accent = DEFAULT_ACCENT) => ({
   black: '#000',
   white: '#fff',
+  font_google: '#212121',
   font_primary: isLight(background) ? FONT_LIGHT : FONT_DARK,
   font_secondary: isLight(background) ? lighten(FONT_LIGHT, 25) : darken(FONT_DARK, 25),
   red: '#9d0000',
