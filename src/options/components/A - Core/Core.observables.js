@@ -27,8 +27,7 @@ export const paneBackgrounds = (enabled, theme) => {
         .toRgbString()
     : 'rgba(250, 250, 250, 1)';
 
-  for (let i = 0, len = panes.length; i < len; i++) {
-    const pane = panes[i];
+  for (const pane of panes) {
     if (pane.getAttribute('background-color') !== backgroundColor) {
       pane.setAttribute('background-color', backgroundColor);
     }
