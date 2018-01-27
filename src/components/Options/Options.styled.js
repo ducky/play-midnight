@@ -68,22 +68,25 @@ const StyledOptions = styled.div`
     transition: transform ${props => props.transitionLeave}, opacity ${props => props.transitionLeave};
   }
 
-  .PlayMidnightOptions__header {
+  .Options__header {
+    position: relative;
     text-align: center;
     flex: 0 0 auto;
     border-radius: 3px 3px 0 0;
     background: ${props => props.theme.B400};
     border-bottom: 1px solid ${props => props.theme.B600};
     padding: 15px 25px;
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.12);
+    z-index: 1;
     transition: background ${TRANSITION_FAST}, color ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};
 
-    .PlayMidnightOptions__header-logo {
+    .Options__header-logo {
       height: 50px;
       width: auto;
       margin: 0 0 10px;
     }
 
-    .PlayMidnightOptions__header-title {
+    .Options__header-title {
       font-weight: 300;
       font-size: 28px;
       margin: 0 0 5px;
@@ -93,47 +96,18 @@ const StyledOptions = styled.div`
       }
     }
 
-    .PlayMidnightOptions__header-version {
+    .Options__header-version {
       font-size: 10px;
       font-weight: 700;
     }
   }
 
-  .PlayMidnightOptions__section {
-    &:last-child .PlayMidnightOptions__section-options {
-      border: none;
-    }
-
-    .PlayMidnightOptions__section-title {
-      background: ${props => props.theme.B400};
-      margin: 0;
-      padding: 15px 20px;
-      font-weight: 700;
-      border-bottom: 1px solid ${props => props.theme.B500};
-      transition: background ${TRANSITION_FAST}, color ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};
-
-      &:last-child {
-        border: none;
-      }
-    }
-
-    .PlayMidnightOptions__section-options {
-      border-bottom: 1px solid ${props => props.theme.B500};
-      transition: border-color ${TRANSITION_FAST};
-
-      &:empty {
-        border: none;
-      }
-    }
-  }
-
-  .PlayMidnightOptions__options {
+  .Options__options {
     position: relative;
     flex: 1 1 auto;
     overflow: hidden;
-    box-shadow: inset 0 5px 25px 0 rgba(0, 0, 0, 0.12), inset 0 -5px 25px 0 rgba(0, 0, 0, 0.12);
 
-    .PlayMidnightOptions__options-container {
+    .Options__options-container {
       position: absolute;
       top: 0;
       right: 0;
@@ -143,11 +117,14 @@ const StyledOptions = styled.div`
     }
   }
 
-  .PlayMidnightOptions__footer {
+  .Options__footer {
+    position: relative;
     flex: 0 0 auto;
     border-radius: 0 0 3px 3px;
     background: ${props => props.theme.B400};
     border-top: 1px solid ${props => props.theme.B500};
+    box-shadow: 0 -5px 25px 0 rgba(0, 0, 0, 0.12);
+    z-index: 1;
     padding: 15px 25px;
     text-align: center;
     transition: background ${TRANSITION_FAST}, color ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};

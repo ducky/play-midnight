@@ -1,23 +1,24 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
+import withTheme from 'hoc/withTheme';
+
 import { actions, selectors } from 'modules/options';
 
-import PlayMidnightOptions from './PlayMidnightOptions';
+import Options from './Options';
 
 const mapStateToProps = state => ({
-  theme: selectors.theme(state),
-  options: selectors.options(state),
   sections: selectors.sortedOptions(state),
   menuVisible: state.options.menuVisible,
 });
 
+@withTheme
 @connect(mapStateToProps, {
   saveOptions: actions.saveOptions,
   toggleMenu: actions.toggleMenu,
   updateOption: actions.updateOption,
 })
-class PlayMidnightOptionsContainer extends PureComponent {
+class OptionsContainer extends PureComponent {
   updateTargetedOption = ({ target }) => {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const id = target.name;
@@ -34,10 +35,10 @@ class PlayMidnightOptionsContainer extends PureComponent {
   };
 
   render() {
-    const { options, sections, theme, menuVisible, saveOptions, toggleMenu } = this.props;
+    const { sections, theme, menuVisible, saveOptions, toggleMenu } = this.props;
 
     return (
-      <PlayMidnightOptions
+      <Options
         theme={theme}
         visible={menuVisible}
         sections={sections}
@@ -51,4 +52,4 @@ class PlayMidnightOptionsContainer extends PureComponent {
   }
 }
 
-export default PlayMidnightOptionsContainer;
+export default OptionsContainer;
