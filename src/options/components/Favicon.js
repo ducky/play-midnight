@@ -23,7 +23,7 @@ class Favicon extends Component {
     const cached = stored && stored.accent === accent;
     const data = {
       url: getUrl(FaviconImage),
-      accent: accent,
+      accent,
     };
 
     const createIcon = href => {
@@ -41,7 +41,7 @@ class Favicon extends Component {
         createIcon(stored.url);
       } else {
         try {
-          const { url, accent } = await loadBackground(data);
+          const { url } = await loadBackground(data);
           localStorage.setItem(
             ICON_STORAGE,
             JSON.stringify({
