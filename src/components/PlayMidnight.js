@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { actions } from 'modules/options';
 import Components from 'options/Components';
 
-import PlayMidnightOptions from './PlayMidnightOptions';
 import StyledPlayMidnight from './PlayMidnight.styled';
+import Options from './Options';
 
 @connect(null, { fetchOptions: actions.fetchOptions })
 class PlayMidnight extends PureComponent {
@@ -20,7 +20,7 @@ class PlayMidnight extends PureComponent {
 
     return (
       <StyledPlayMidnight>
-        <PlayMidnightOptions />
+        <Options />
         {renderComponents()}
       </StyledPlayMidnight>
     );

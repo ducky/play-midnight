@@ -159,6 +159,7 @@ const StyledOption = styled.div`
 
   .Option__description {
     font-size: 13px;
+    line-height: 1.6;
     font-weight: 300;
   }
 
