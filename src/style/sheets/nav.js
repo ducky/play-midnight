@@ -90,6 +90,16 @@ const styles = theme => css`
   }
 
   #playlist-drawer {
+    .playlist-title,
+    #mainPanel iron-icon,
+    #playlist-drawer-header {
+      color: ${theme.font_primary} !important;
+    }
+
+    .playlist-owner {
+      color: ${theme.font_secondary} !important;
+    }
+
     paper-header-panel[at-top] paper-toolbar,
     #recent-playlists-container,
     .autoplaylist-section {
@@ -97,6 +107,8 @@ const styles = theme => css`
     }
 
     .playlist-drawer-item {
+      color: ${theme.font_primary} !important;
+
       .playlist-wrapper {
         &:active,
         &:focus,
