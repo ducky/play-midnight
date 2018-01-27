@@ -71,10 +71,15 @@ const styles = theme => css`
   }
 
   /* Links */
+  .settings-footer a.footer-link,
   .music-source-empty-message,
   .nav-item-container,
   .simple-dialog a {
     color: ${theme.font_primary} !important;
+  }
+
+  a {
+    color: ${theme.font_primary};
   }
 
   /* Top Toolbar */
