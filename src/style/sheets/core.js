@@ -73,8 +73,7 @@ const styles = theme => css`
   /* Links */
   .music-source-empty-message,
   .nav-item-container,
-  .simple-dialog a,
-  a {
+  .simple-dialog a {
     color: ${theme.font_primary} !important;
   }
 
@@ -154,8 +153,8 @@ const styles = theme => css`
   }
 
   .sj-search-box sj-entity-suggestion.sj-search-box:last-of-type {
-    border-bottom: none;
-    box-shadow: 0px 3px 3px 0px ${theme.B100};
+    border-bottom: 2px solid ${theme.B300} !important;
+    box-shadow: 0 1px 0 0 ${transparentize(theme.B400, 0.5)} !important;
   }
 
   .sj-search-box[opened]:not([num-suggestions='0']) #suggestionList.sj-search-box {
@@ -163,11 +162,11 @@ const styles = theme => css`
   }
 
   sj-entity-suggestion #title.sj-entity-suggestion {
-    color: $font-primary !important;
+    color: ${theme.font_primary} !important;
   }
 
   sj-entity-suggestion #subtitle.sj-entity-suggestion {
-    color: $font-secondary !important;
+    color: ${theme.font_secondary} !important;
   }
 
   sj-entity-suggestion:hover,
