@@ -1,5 +1,6 @@
 import { createActions, handleActions } from 'redux-actions';
 import { all, put, select, call, takeEvery } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import { createSelector } from 'reselect';
 import filter from 'lodash/filter';
 import find from 'lodash/find';
@@ -121,6 +122,7 @@ export function* checkUpdateSaga({ payload }) {
       console.log(`Already up to date, enjoy your life!`);
     } else {
       if (notification) {
+        yield delay(5000);
         yield put(
           modalActions.showModal('notification', {
             id: 'PM_NOTIFICATION',
