@@ -71,49 +71,6 @@ const NotificationModal = styled.div`
       padding: 25px 0;
       overflow: auto;
     }
-
-    .Modal__title {
-      background: ${props => props.theme.B200};
-      font-size: 16px;
-      font-weight: 700;
-      padding: 15px 25px;
-      margin: 0 0 25px;
-      border-bottom: 1px solid ${props => props.theme.B500};
-
-      &:last-child {
-        margin: 0;
-      }
-    }
-
-    .Modal__list {
-      .Modal__title {
-        margin: 0;
-      }
-    }
-
-    .Modal__release {
-      padding: 15px 25px;
-      margin: 0;
-      border-bottom: 1px solid ${props => props.theme.B500};
-
-      &-title {
-        font-weight: 700;
-        margin: 0 0 5px;
-      }
-
-      &:last-child {
-        border: none;
-      }
-    }
-
-    .Modal__text {
-      padding: 0 25px;
-      margin: 0 0 25px;
-
-      &:last-child {
-        margin: 0;
-      }
-    }
   }
 
   .Modal__footer {
