@@ -6,9 +6,7 @@ export const recentActivity = () => {
   const urlRegex = /(=s90)/;
   const gridItems = document.querySelectorAll('sj-scrolling-module[module-token="CLIENT_SIDE_RECENTS"] sj-card');
 
-  for (let i = 0, len = gridItems.length; i < len; i++) {
-    const item = gridItems[i];
-
+  for (const item of gridItems) {
     if (!item) continue;
 
     const img = item.querySelector('img');
