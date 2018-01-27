@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import withTheme from 'hoc/withTheme';
+import { transparentize } from 'style/theme';
 
 export const ModalBackdrop = styled.div`
   position: fixed;
@@ -11,7 +11,7 @@ export const ModalBackdrop = styled.div`
   z-index: 209;
   padding: 100px;
   overflow: auto;
-  background: rgba(0, 0, 0, 0.5);
+  background: ${props => transparentize(props.theme.B800, 0.7)};
 
   .modal-enter & {
     opacity: 0.01;
@@ -106,4 +106,4 @@ export const ModalActions = styled.div`
   grid-gap: 0 6px;
 `;
 
-export default withTheme(Modal);
+export default Modal;
