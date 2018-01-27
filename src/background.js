@@ -1,33 +1,29 @@
 const getIcon = ({ accent, url }, sender, cb) => {
-  let context;
-  const img = document.createElement('img');
-  const canvas = document.createElement('canvas');
-  const width = 96;
-  const height = 96;
+  const img = new Image();
 
-  const createIcon = () => {
-    let icon;
+  img.onload = function() {
+    const canvas = document.createElement('canvas');
+
+    canvas.width = this.naturalWidth;
+    canvas.height = this.naturalHeight;
+    canvas.setAttribute('crossOrigin', 'anonymous');
+
+    const context = canvas.getContext('2d');
 
     // Create Colored Icon
-    context.drawImage(img, 0, 0);
+    context.drawImage(this, 0, 0);
     context.globalCompositeOperation = 'source-in';
     context.fillStyle = accent;
-    context.fillRect(0, 0, width, height);
+    context.fillRect(0, 0, this.naturalWidth, this.naturalHeight);
     context.fill();
 
-    icon = canvas.toDataURL();
+    const icon = canvas.toDataURL();
 
     console.log(icon);
 
     cb({ url: icon });
   };
 
-  canvas.width = width;
-  canvas.height = height;
-  canvas.setAttribute('crossOrigin', 'anonymous');
-  context = canvas.getContext('2d');
-
-  img.addEventListener('load', createIcon);
   img.src = url;
 
   return true;
