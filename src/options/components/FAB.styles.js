@@ -4,13 +4,10 @@ import { TRANSITION_FAST } from 'style/theme';
 import createStylesheet from 'utils/createStylesheet';
 
 export const StyledFAB = styled.div`
-  width: 40px;
-  height: 40px;
-  z-index: 108;
+  display: inline-flex;
   margin: 4px;
   margin-right: 32px;
   padding: 8px;
-  box-sizing: border-box;
   cursor: pointer;
   visibility: visible;
   opacity: 0.9;
@@ -28,14 +25,6 @@ export const StyledFAB = styled.div`
   &:focus {
     opacity: 0.8;
     transform: scale3d(0.95, 0.95, 0.95);
-  }
-
-  .FAB__icon {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    fill: currentcolor;
-    transition: fill ${TRANSITION_FAST};
   }
 `;
 

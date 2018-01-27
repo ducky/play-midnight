@@ -199,14 +199,6 @@ const OPTIONS = [
     title: `Free and Purchased`,
     description: `The music you've paid for or collected over time`,
   },
-
-  // Section - Default
-  {
-    id: 'devNote',
-    type: 'string',
-    title: 'Thanks!',
-    description: `Here's a big old thanks for all you do!`,
-  },
 ];
 
 export const SECTIONS = [

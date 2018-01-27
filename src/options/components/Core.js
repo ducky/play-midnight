@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import isEqual from 'lodash/isEqual';
 
 import withOptions from 'hoc/withOptions';
 import withStyles from 'hoc/withStyles';
@@ -10,19 +11,25 @@ import styles from './Core.styles';
 @withTheme
 @withOptions
 @withStyles(styles)
-class Core extends PureComponent {
+class Core extends Component {
+  observe = () => {
+    const { isActive, theme } = this.props;
+    const enabled = isActive('enabled');
+    observables.forEach(observable => observable(enabled, theme));
+  };
+
   componentWillUnmount() {
     this.bodyObserver.disconnect();
   }
 
   componentDidMount() {
-    const { isActive, theme } = this.props;
-
-    this.bodyObserver = new MutationObserver(() => {
-      observables.forEach(observable => observable(isActive('enabled'), theme));
-    });
-
+    this.bodyObserver = new MutationObserver(this.observe);
     this.bodyObserver.observe(document.body, { attributes: true, childList: true, subtree: true });
+  }
+
+  shouldComponentUpdate({ theme: nextTheme }) {
+    const { theme } = this.props;
+    return !isEqual(nextTheme, theme);
   }
 
   render() {
