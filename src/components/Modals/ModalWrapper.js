@@ -3,12 +3,18 @@ import { connect } from 'react-redux';
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
 
+import withTheme from 'hoc/withTheme';
+
 import { actions } from 'modules/modal';
 
 import Button from 'components/Button';
 import { propTypes, defaultProps } from './ModalWrapper.statics';
 import StyledModal, { ModalActions, ModalBackdrop } from './ModalWrapper.styled';
 
+@withTheme
+@connect(null, {
+  close: actions.closeModal,
+})
 class ModalWrapper extends PureComponent {
   static defaultProps = defaultProps;
   static propTypes = propTypes;
@@ -74,6 +80,7 @@ class ModalWrapper extends PureComponent {
       useCloseAction,
       useCancelAction,
       locked,
+      theme,
       title,
       type,
       width,
@@ -111,6 +118,7 @@ class ModalWrapper extends PureComponent {
       <ModalBackdrop
         key={id}
         onClick={!locked ? this.handleBackgroundClick : noop}
+        theme={theme}
         transitionEnter={transitionEnter}
         transitionLeave={transitionLeave}
       >
@@ -119,6 +127,7 @@ class ModalWrapper extends PureComponent {
           style={{ width: width ? `${width}px` : '100%' }}
           type={type}
           collapse={collapse}
+          theme={theme}
           transitionEnter={transitionEnter}
           transitionLeave={transitionLeave}
         >
@@ -148,6 +157,4 @@ class ModalWrapper extends PureComponent {
   }
 }
 
-export default connect(null, {
-  close: actions.closeModal,
-})(ModalWrapper);
+export default ModalWrapper;
