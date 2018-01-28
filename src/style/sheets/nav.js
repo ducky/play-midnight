@@ -143,6 +143,11 @@ const styles = theme => css`
     border-bottom: 1px solid ${theme.B700};
   }
 
+  /* Quick Nav */
+  gpm-quick-nav #label {
+    color: ${theme.font_primary};
+  }
+
   /* Google Stuff */
   paper-toolbar #material-one-right #gb {
     a {
