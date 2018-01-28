@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-import { transparentize, TRANSITION_FAST } from 'style/theme';
+import { isLight, transparentize, FONT_DARK, FONT_LIGHT, TRANSITION_FAST } from 'style/theme';
 
 const styles = theme => css`
   html:not([style-scope]):not(.style-scope) {
@@ -263,6 +263,10 @@ const styles = theme => css`
   iron-icon,
   sj-icon-button {
     color: ${theme.font_primary};
+  }
+
+  paper-header-panel#content-container #iflFab iron-icon {
+    color: ${isLight(theme.A500) ? FONT_LIGHT : FONT_DARK} !important;
   }
 
   div.icon {
