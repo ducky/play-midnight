@@ -44,8 +44,8 @@ export const Template = () => (
     </Text>
     <Text>
       Play Midnight activates itself automatically when you visit Google Play Music, so you won't have to mess with it
-      too much. You'll be able to easily change things via the Play Midnight options. To access the options, look for
-      this little guy on the right side of your player bar (near the volume and queue buttons):
+      too much. You'll also be able to easily change things via the Play Midnight options. To access the options, look
+      for this little guy on the right side of your player bar (near the volume and queue buttons):
     </Text>
     <Text style={{ margin: '30px 0', textAlign: 'center' }}>
       <div>
@@ -64,7 +64,7 @@ export const Template = () => (
         <Text nopad>Allows you to temporarily enable/disable Play Midnight if you're not feeling it.</Text>
         <Text nopad>
           <strong>Note</strong> - I'm aware of a small issue that exists when you disable/enable Play Midnight where the
-          home screen stays dark/light. For now if you just scroll down and back up it should fix itself.
+          home screen stays dark/light. For now if you just switch to your library and back to home it should be okay.
         </Text>
       </ListItem>
 
@@ -72,9 +72,10 @@ export const Template = () => (
         This enables you to keep your accent color while Play Midnight is disabled.
       </ListItem>
 
-      <ListItem title="Background Colors">Customize the main background color to make yourself right at home.</ListItem>
-
-      <ListItem title="Accent Colors">Customize accent colors to fit whatever mood you're in.</ListItem>
+      <ListItem title="Themes">
+        Customize the look and feel of Play Music to look exactly how you want. Allows you to update background and
+        accent colors.
+      </ListItem>
 
       <ListItem title="Play Midnight Favicon">
         Modifies the Orange headphone favicon on your url tab to be dark.

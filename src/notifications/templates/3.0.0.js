@@ -10,7 +10,7 @@ export const Template = () => (
   <Fragment>
     <Text>
       Welcome to the all new Play Midnight! I took the old version of Play Midnight and threw it straight into the
-      garbage where it belonged. I'm so happy to be done with my past self's codebase.
+      garbage where it belonged. I think you'll enjoy your stay here.
     </Text>
     <Text>
       For those that are interested in development, I rewrote the entire extension from the ground up with React which
@@ -27,15 +27,15 @@ export const Template = () => (
         Basically everything is brand spanking new and was rewritten from the ground up. So far in my testing everything
         has been running much smoother, but please let me know if you encounter any issues.
       </ListItem>
-      <ListItem title="Background Colors">
+      <ListItem title="Themes">
         <Text nopad>
-          You can now set a background color to change the entire site to be your own color! Not a fan of straight
-          black? How about a nice cool blue, or even purple? This feature has been something I've wanted to do for a
-          long time, but wasn't going to be very easy to implement in the older code. The feature you never knew you
-          wanted is finally here!
+          You can now create a theme with a background color and accent to tweak the entire site to be your own personal
+          playground! Not a fan of straight black? How about a nice cool blue, or even purple? This feature has been
+          something I've wanted to do for a long time, but wasn't going to be very easy to implement in the older code.
+          The feature you never knew you wanted is finally here!
         </Text>
         <Text nopad>
-          I really want to see what you guys come up with, so if you post backgrounds/accent combos on{' '}
+          I really want to see what you guys come up with, so if you post theme combos on{' '}
           <a href="http://reddit.com/r/PlayMidnight" target="_blank" rel="noopener noreferrer">
             Reddit
           </a>{' '}
@@ -48,9 +48,9 @@ export const Template = () => (
       </ListItem>
       <ListItem title="Instant Updates">
         <Text nopad>
-          This is probably my second favorite part about the new setup (after those sick backgrounds!). All changes you
-          make in the options now take effect <em>instantly</em>. However, you'll still need to click{' '}
-          <strong>save</strong> in order to persist them in Chrome.
+          This is probably my second favorite part about the new setup (after those sick themes!). All changes you make
+          in the options now take effect <em>instantly</em>. However, you'll still need to click <strong>save</strong>{' '}
+          in order to persist them in Chrome.
         </Text>
         <Text nopad>
           The best part? No more page refreshes.{' '}
@@ -58,16 +58,22 @@ export const Template = () => (
             😌
           </span>
         </Text>
+        <Text nopad>
+          <strong>Note</strong> - I'm aware of a small issue that exists when you disable/enable Play Midnight where the
+          home screen stays dark/light. For now if you just switch to your library and back to home it should be okay.
+        </Text>
       </ListItem>
       <ListItem title="Options Button">
         <Text nopad>One of the most jarring changes will probably be the new location of the settings.</Text>
         <Text nopad>
-          You should now see a little settings cog right next to your queue/volume buttons on the player.
+          You should now see a little settings cog right next to your queue/volume buttons on the player. There were
+          some issues with the old floating button that were annoying to fix. Plus I feel like it fits it much better on
+          the player.
         </Text>
       </ListItem>
       <ListItem title="Color Picker/Edit Colors">
         Yay! You can now finally use a color picker rather than just guessing with your sick HEX/RGB skills. You can
-        also edit existing colors and their names! You can also duplicate an existing color to make minor changes, wow!
+        also edit existing colors and their names! You can even duplicate an existing color to make minor changes, wow!
       </ListItem>
       <ListItem title="Removed Options">
         I did go ahead and remove some no longer relevant options, or ones that I felt didn't fit well with how Play
