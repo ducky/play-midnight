@@ -189,7 +189,8 @@ export function* checkUpgradeSaga({ payload: options }) {
 export function* fetchOptionsSaga() {
   try {
     const DEFAULT_OPTIONS = toObject(OPTIONS);
-    const optionsValues = yield call(load, DEFAULT_OPTIONS);
+    const allOptions = yield call(load);
+    const optionsValues = { ...DEFAULT_OPTIONS, ...allOptions };
     const options = mapToValues(OPTIONS, optionsValues);
     yield put(actions.fetchOptionsResponse(options));
     yield put(actions.checkUpgrade(optionsValues));

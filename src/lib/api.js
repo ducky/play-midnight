@@ -16,16 +16,15 @@ export const getUrl = url => {
   return urlCache[url];
 };
 
-export const load = async data => {
+export const load = async () => {
   return new Promise(resolve => {
     if (IS_EXTENSION) {
-      return chrome.storage.sync.get(data, resolve);
+      return chrome.storage.sync.get(null, resolve);
     } else {
       const storageContents = localStorage.getItem(LOCAL_STORAGE_KEY);
-      const storageData = storageContents ? JSON.parse(storageContents) : data;
-      const merged = { ...data, ...storageData };
-      console.log('Fetching from Local Storage!', merged);
-      resolve(merged);
+      const storageData = storageContents ? JSON.parse(storageContents) : {};
+      console.log('Fetching from Local Storage!', storageData);
+      resolve(storageData);
     }
   });
 };
