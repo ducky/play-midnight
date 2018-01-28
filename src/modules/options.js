@@ -23,12 +23,15 @@ import { actions as toastActions } from 'modules/toast';
 const defaultState = {
   data: [],
   menuVisible: false,
+  optionsChanged: false,
 };
 
 // selectors
 export const selectors = {
   allOptions: state => state.options.data,
+  menuVisible: state => state.options.menuVisible,
   options: state => state.options.data.filter(o => !o.static),
+  optionsChanged: state => state.options.optionsChanged,
   version: () => AppInfo.version,
 };
 
@@ -112,33 +115,55 @@ const mapToValues = (options = [], values = {}) =>
   }));
 
 // sagas
-export function* checkUpdateSaga({ payload }) {
+export function* checkSaveSaga({ payload: toggleState }) {
+  const optionsChanged = yield select(selectors.optionsChanged);
+  const menuVisible = yield select(selectors.menuVisible);
+
+  if (optionsChanged && !menuVisible) {
+    yield put(
+      toastActions.createToast('success', {
+        title: 'Unsaved Options',
+        message: `Just a friendly reminder that you closed the options without
+        saving. Closing or refreshing the page without saving will result in losing
+        any options you've changed.`,
+        timeout: 4000,
+      })
+    );
+  }
+}
+
+export function* checkUpdateSaga() {
   try {
     const version = yield select(selectors.version);
     const versionPrevious = yield select(selectors.versionPrevious);
     const notification = versionPrevious ? NOTIFICATIONS[version] : NOTIFICATIONS['default'];
 
-    if (versionPrevious && semver.eq(versionPrevious, version)) {
-      console.log(`Already up to date, enjoy your life!`);
-    } else {
+    const showModal = function*(version, notification) {
+      yield delay(5000);
+      yield put(
+        modalActions.showModal('notification', {
+          id: 'PM_NOTIFICATION',
+          details: {
+            version,
+            notification,
+          },
+          onClose: () => {
+            // TODO - Has to be a better way
+            store.dispatch(actions.updateSaveOption({ id: 'lastRun', value: version }));
+          },
+        })
+      );
+    };
+
+    if (!versionPrevious) {
+      yield showModal(version, notification);
+    } else if (semver.lt(versionPrevious, version)) {
       if (notification) {
-        yield delay(5000);
-        yield put(
-          modalActions.showModal('notification', {
-            id: 'PM_NOTIFICATION',
-            details: {
-              version,
-              notification,
-            },
-            onClose: () => {
-              // TODO - Has to be a better way
-              store.dispatch(actions.updateSaveOption({ id: 'lastRun', value: version }));
-            },
-          })
-        );
+        yield showModal(version, notification);
       } else {
         console.log(
-          `No update notification found for v${version}. Updating lastRun (${versionPrevious} -> ${version}).`
+          `No update notification found for v${version}.`,
+          `Updating lastRun (${versionPrevious} -> ${version}).`
         );
         yield put(actions.updateSaveOption({ id: 'lastRun', value: version }));
       }
@@ -204,8 +229,8 @@ export function* saveOptionsSaga() {
   try {
     const optionsSave = yield select(selectors.allOptions);
     yield call(save, toObject(optionsSave));
-    yield put(actions.toggleMenu(false));
     yield put(actions.saveOptionsResponse(optionsSave));
+    yield put(actions.toggleMenu(false));
     yield put(
       toastActions.createToast('success', {
         title: 'Options Saved',
@@ -250,6 +275,7 @@ export function* optionsSaga() {
     takeEvery(actions.checkUpgrade, checkUpgradeSaga),
     takeEvery(actions.fetchOptions, fetchOptionsSaga),
     takeEvery(actions.saveOptions, saveOptionsSaga),
+    takeEvery(actions.toggleMenu, checkSaveSaga),
     takeEvery(actions.updateSaveOption, updateAndSaveOptionSaga),
   ]);
 }
@@ -261,17 +287,18 @@ export default handleActions(
       return { ...state, data };
     },
     [actions.saveOptionsResponse](state, { payload: data }) {
-      return { ...state, data };
+      return { ...state, data, optionsChanged: false };
     },
     [actions.updateOption](state, { payload: { id, value, isArray = false } }) {
       if (isArray) {
         return {
           ...state,
           data: updateItem(state.data, { plural: id, values: value }, 'plural'),
+          optionsChanged: true,
         };
       }
 
-      return { ...state, data: updateItem(state.data, { id, value }) };
+      return { ...state, data: updateItem(state.data, { id, value }), optionsChanged: true };
     },
     [actions.toggleMenu](state, { payload: toggleState }) {
       return {
