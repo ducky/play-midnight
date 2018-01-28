@@ -26,8 +26,13 @@ const StyledButton = styled.button`
   ${props => props.useAccent && `background: ${props.theme.A500}`};
   ${props => props.useAccent && `color: ${isLight(props.theme.A500) ? FONT_LIGHT : FONT_DARK}`};
 
-  &:hover {
+  &:not([disabled]):hover {
     opacity: 1;
+  }
+
+  &[disabled] {
+    opacity: 0.7;
+    cursor: not-allowed;
   }
 `;
 
