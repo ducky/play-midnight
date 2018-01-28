@@ -15,7 +15,7 @@ const types = {
 const ToastContainer = styled.div`
   position: fixed;
   top: 79px;
-  right: 15px;
+  right: 26px;
   z-index: 119;
 `;
 
