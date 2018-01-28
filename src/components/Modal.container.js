@@ -9,6 +9,8 @@ import ColorDeleteModal from 'components/Modals/ColorDeleteModal';
 import ColorPickerModal from 'components/Modals/ColorPickerModal';
 import ConfirmModal from 'components/Modals/ConfirmModal';
 import NotificationModal from 'components/Modals/NotificationModal';
+import ThemeDeleteModal from 'components/Modals/ThemeDeleteModal';
+import ThemePickerModal from 'components/Modals/ThemePickerModal';
 
 const types = {
   alert: <AlertModal />,
@@ -16,6 +18,8 @@ const types = {
   colorDelete: <ColorDeleteModal />,
   colorPicker: <ColorPickerModal />,
   notification: <NotificationModal />,
+  themeDelete: <ThemeDeleteModal />,
+  themePicker: <ThemePickerModal />,
 };
 
 const ModalConductor = ({ modals = [] }) => {

@@ -8,7 +8,7 @@ import Button from 'components/Button';
 import PlayMidnightLogo from 'assets/images/play-logo-dark.png';
 
 import StyledOptions, { Backdrop } from './Options.styled';
-import { OptionArray, OptionCheckbox, OptionString } from './Option';
+import { OptionArray, OptionCheckbox, OptionString, OptionThemes } from './Option';
 import Section from './Section';
 
 const VERSION_NUMBER = '3.0.0';
@@ -17,6 +17,7 @@ const OPTION_TYPES = {
   array: OptionArray,
   boolean: OptionCheckbox,
   string: OptionString,
+  themes: OptionThemes,
 };
 
 const Options = ({ theme, visible, sections, onArrayChange, onOptionChange, onTargetedChange, onClose, onSave }) => {

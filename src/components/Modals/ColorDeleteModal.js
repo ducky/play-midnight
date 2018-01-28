@@ -23,7 +23,7 @@ export const PrettyColor = styled.div`
   }
 `;
 
-const ConfirmModal = ({ ...props }) => {
+const ColorDeleteModal = ({ ...props }) => {
   const name = props.details.name ? props.details.name : props.details.color;
 
   return (
@@ -46,4 +46,4 @@ const ConfirmModal = ({ ...props }) => {
   );
 };
 
-export default ConfirmModal;
+export default ColorDeleteModal;
