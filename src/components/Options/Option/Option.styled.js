@@ -25,13 +25,22 @@ export const CollectionItem = styled.label`
   }
 
   .CollectionItem__fields {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    content: '';
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
     visibility: hidden;
     opacity: 0;
-    transform: scale3d(0.7, 0.7, 0.7);
+    transform: scale3d(1.3, 1.3, 1.3);
     text-shadow: 1px 1px 0 ${props => props.theme.black};
     transition: all ${TRANSITION_FAST};
     color: ${props => props.theme.white};
-    text-align: center;
   }
 
   .CollectionItem__field {
@@ -46,6 +55,17 @@ export const CollectionItem = styled.label`
     &:last-child {
       margin: 0;
     }
+  }
+
+  &:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: ${props => props.accent || 'transparent'};
+    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
   }
 
   &:after {

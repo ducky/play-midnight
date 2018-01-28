@@ -12,6 +12,7 @@ import store from 'lib/store';
 import { createTheme, DEFAULT_BACKGROUND, DEFAULT_ACCENT } from 'style/theme';
 import getArrayValue from 'utils/getArrayValue';
 import { updateItem } from 'utils/array';
+import { validateId, validateTitle } from 'utils/validation';
 
 import OPTIONS, { SECTIONS } from 'options';
 import NOTIFICATIONS from 'notifications';
@@ -42,9 +43,8 @@ selectors.enabledAccents = createSelector([selectors.options], options => {
 });
 
 selectors.theme = createSelector([selectors.options], options => {
-  const accent = getArrayValue(options, 'accent', DEFAULT_ACCENT);
-  const background = getArrayValue(options, 'background', DEFAULT_BACKGROUND);
-  return createTheme(background, accent);
+  const theme = getArrayValue(options, 'theme', { accent: DEFAULT_ACCENT, background: DEFAULT_BACKGROUND }, false);
+  return createTheme(theme.background, theme.accent);
 });
 
 selectors.versionPrevious = createSelector([selectors.allOptions], options => {
@@ -148,10 +148,41 @@ export function* checkUpdateSaga({ payload }) {
   }
 }
 
-export function* checkUpgradeSaga() {
+// Migrate Old Settings to Newer Version
+export function* checkUpgradeSaga({ payload: options }) {
   const versionPrevious = yield select(selectors.versionPrevious);
-  if (versionPrevious && semver.lt(versionPrevious, '3.0.0')) {
-    // Update any breaking changes < v3.0.0 here
+
+  try {
+    // Version < 3.0.0 - Convert accents to themes
+    if (versionPrevious && semver.lt(versionPrevious, '3.0.0')) {
+      const accents = options && options.accents ? options.accents : [];
+
+      if (accents.length === 0) return;
+
+      let currentValue = null;
+      const newThemes = accents.map(item => {
+        const id = validateId(item.id);
+
+        if (item.id === options.accent) {
+          currentValue = id;
+        }
+
+        return {
+          id,
+          accent: item.value,
+          background: DEFAULT_BACKGROUND,
+          name: validateTitle(item.name),
+        };
+      });
+
+      const newValues = [...newThemes, ...options.themes];
+      const newValue = currentValue ? currentValue : newValues[0].id;
+
+      yield put(actions.updateOption({ id: 'themes', value: newValues, isArray: true }));
+      yield put(actions.updateOption({ id: 'theme', value: newValue }));
+    }
+  } catch (e) {
+    console.error(e);
   }
 }
 
@@ -161,8 +192,8 @@ export function* fetchOptionsSaga() {
     const optionsValues = yield call(load, DEFAULT_OPTIONS);
     const options = mapToValues(OPTIONS, optionsValues);
     yield put(actions.fetchOptionsResponse(options));
-    yield put(actions.checkUpgrade());
-    yield put(actions.checkUpdate(options));
+    yield put(actions.checkUpgrade(optionsValues));
+    yield put(actions.checkUpdate());
   } catch (e) {
     console.error(e);
   }
