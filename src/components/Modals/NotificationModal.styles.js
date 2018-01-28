@@ -12,10 +12,13 @@ const NotificationModal = styled.div`
   }
 
   .Modal__header {
+    position: relative;
     text-align: center;
     background: ${props => props.theme.B200};
+    border-bottom: 1px solid ${props => props.theme.B400};
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.3);
     color: ${props => props.font_primary};
-    border-bottom: 1px solid ${props => props.theme.B600};
+    z-index: 1;
     flex: 0 0 auto;
     padding: 15px 25px;
     margin: 0;
@@ -60,7 +63,6 @@ const NotificationModal = styled.div`
     overflow: hidden;
     flex: 1 1 auto;
     margin: 0;
-    box-shadow: inset 0 5px 25px 0 rgba(0, 0, 0, 0.12), inset 0 -5px 25px 0 rgba(0, 0, 0, 0.12);
 
     &-container {
       position: absolute;
@@ -74,8 +76,11 @@ const NotificationModal = styled.div`
   }
 
   .Modal__footer {
+    position: relative;
     padding: 15px 25px;
     background: ${props => props.theme.B200};
+    box-shadow: 0 -5px 25px 0 rgba(0, 0, 0, 0.3);
+    z-index: 1;
   }
 
   .Modal__actions {

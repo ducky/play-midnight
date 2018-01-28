@@ -76,7 +76,7 @@ const StyledOptions = styled.div`
     background: ${props => props.theme.B400};
     border-bottom: 1px solid ${props => props.theme.B600};
     padding: 15px 25px;
-    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.3);
     z-index: 1;
     transition: background ${TRANSITION_FAST}, color ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};
 
@@ -123,7 +123,7 @@ const StyledOptions = styled.div`
     border-radius: 0 0 3px 3px;
     background: ${props => props.theme.B400};
     border-top: 1px solid ${props => props.theme.B500};
-    box-shadow: 0 -5px 25px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 -5px 25px 0 rgba(0, 0, 0, 0.3);
     z-index: 1;
     padding: 15px 25px;
     text-align: center;
