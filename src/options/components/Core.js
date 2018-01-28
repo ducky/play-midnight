@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import isEqual from 'lodash/isEqual';
 
 import withOptions from 'hoc/withOptions';
 import withStyles from 'hoc/withStyles';
@@ -27,13 +26,9 @@ class Core extends Component {
     this.bodyObserver.observe(document.body, { attributes: true, childList: true, subtree: true });
   }
 
-  shouldComponentUpdate({ theme: nextTheme }) {
-    const { theme } = this.props;
-    return !isEqual(nextTheme, theme);
-  }
-
   render() {
     const { Stylesheet } = this.props;
+    this.observe();
     return <Stylesheet />;
   }
 }
