@@ -3,12 +3,12 @@ import uuid from 'uuid/v4';
 
 import { replaceItem, removeItem } from 'utils/array';
 
-// default state
+// State
 const defaultState = {
   modals: [],
 };
 
-// actions
+// Actios
 export const actions = createActions(
   {
     SHOW_MODAL: (type, options) => ({
@@ -19,12 +19,13 @@ export const actions = createActions(
   'CLOSE_MODAL'
 );
 
-// reducer
+// Helpers
 const updateOrCreateModal = (modals, modal) => {
   const id = modal.id ? modal.id : uuid();
   return replaceItem(modals, { ...modal, id });
 };
 
+// Reducer
 export default handleActions(
   {
     [actions.showModal](state, { payload: { type, options: { id, ...options } } }) {
