@@ -39,9 +39,9 @@
   },
   "scripts": {
     "start": "parcel build src/background.js --out-dir dist && parcel --no-hmr src/index.html",
-    "development":
+    "dev":
       "parcel build src/index.js --no-minify --out-dir build && parcel build src/background.js --no-minify --out-dir build",
-    "production": "node ./scripts/production.js"
+    "prod": "node ./scripts/production.js"
   },
   "babel": {
     "plugins": [
