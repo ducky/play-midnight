@@ -153,8 +153,8 @@ class ColorPickerModal extends PureComponent {
         useCloseAction
         valid={name.length > 0}
         onClose={() => this.closeModal(true)}
-        closeText="Love It!"
-        cancelText="Nevermind"
+        closeText="Save, It's Beautiful"
+        cancelText="Cancel, Nevermind"
         width={475}
         locked
       >
