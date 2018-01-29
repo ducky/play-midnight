@@ -28,7 +28,7 @@ Play Midnight is currently running using Node.js/Parcel bundler. You'll have to 
 
 ##### Play Music Updates
 
-1. To build changes for Play Music, you'll need to run `yarn build` after you're ready to test it.
+1. To build changes for Play Music, you'll need to run `yarn dev` after you're ready to test it.
 1. In Chrome, go to `chrome://extensions` and toggle the Developer Mode` option (top right) to "On"
 1. Click `Load Unpacked Extension` and load up your main Play Midnight folder (the one containing `manifest.json`)
 1. Make changes at your leisure! Note: You'll have to click refresh (or Ctrl/Cmd + R) to reload the extension on the `chrome:extensions` page if you rebuild.
