@@ -2,6 +2,7 @@ import { createActions, handleActions } from 'redux-actions';
 import { all, put, select, call, takeEvery } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { createSelector } from 'reselect';
+import isEqual from 'lodash/isEqual';
 import filter from 'lodash/filter';
 import find from 'lodash/find';
 import semver from 'semver';
@@ -28,6 +29,7 @@ import { actions as toastActions, TOAST_STANDARD } from 'modules/toast';
 // State
 const defaultState = {
   data: [],
+  dataCache: [],
   menuVisible: false,
   optionsChanged: false,
 };
@@ -37,7 +39,7 @@ export const selectors = {
   allOptions: state => state.options.data,
   menuVisible: state => state.options.menuVisible,
   options: state => state.options.data.filter(o => !o.static),
-  optionsChanged: state => state.options.optionsChanged,
+  optionsChanged: state => !isEqual(state.options.data, state.options.dataCache),
   version: () => AppInfo.version,
 };
 
@@ -121,22 +123,6 @@ const mapToValues = (options = [], values = {}) =>
     values: values[option.plural],
   }));
 
-export function* checkSaveSaga({ payload: toggleState }) {
-  const optionsChanged = yield select(selectors.optionsChanged);
-  const menuVisible = yield select(selectors.menuVisible);
-
-  if (optionsChanged && !menuVisible) {
-    yield put(
-      toastActions.createToast('success', {
-        title: 'Unsaved Options',
-        message: `Just a friendly reminder that you closed the options without
-        saving. Closing or refreshing the page without saving will result in losing
-        any options you've changed.`,
-        timeout: 4000,
-      })
-    );
-  }
-}
 // Sagas
 
 // Check for Update Modal
@@ -242,6 +228,7 @@ export function* saveOptionsSaga() {
     yield put(actions.toggleMenu(false));
     yield put(
       toastActions.createToast('success', {
+        id: TOAST_STANDARD,
         title: 'Options Saved',
         message: `They're resting safely in the Google Cloud now`,
       })
@@ -278,6 +265,25 @@ export function* updateAndSaveOptionSaga({ payload: option }) {
   }
 }
 
+// Warn User if Changed Options and Closed Menu
+export function* checkSaveSaga({ payload: toggleState }) {
+  const optionsChanged = yield select(selectors.optionsChanged);
+  const menuVisible = yield select(selectors.menuVisible);
+
+  if (optionsChanged && !menuVisible) {
+    yield put(
+      toastActions.createToast('success', {
+        id: TOAST_STANDARD,
+        title: 'Unsaved Options',
+        message: `Just a friendly reminder that you closed the options without
+        saving. Be sure to save your changes or you'll lose anything you've 
+        changed the next time you refresh/close the page.`,
+        timeout: 7500,
+      })
+    );
+  }
+}
+
 // Root Saga
 export function* optionsSaga() {
   yield all([
@@ -295,10 +301,18 @@ export default handleActions(
   {
     // Options Related
     [actions.fetchOptionsResponse](state, { payload: data }) {
-      return { ...state, data };
+      return {
+        ...state,
+        data,
+        dataCache: data,
+      };
     },
     [actions.saveOptionsResponse](state, { payload: data }) {
-      return { ...state, data, optionsChanged: false };
+      return {
+        ...state,
+        data,
+        dataCache: data,
+      };
     },
     [actions.updateOption](state, { payload: { id, value, isArray = false } }) {
       // Update Plural / Values
@@ -306,11 +320,11 @@ export default handleActions(
         return {
           ...state,
           data: updateItem(state.data, { plural: id, values: value }, 'plural'),
-          optionsChanged: true,
         };
       }
 
-      return { ...state, data: updateItem(state.data, { id, value }), optionsChanged: true };
+      // Update Single / Value
+      return { ...state, data: updateItem(state.data, { id, value }) };
     },
 
     // Menu
