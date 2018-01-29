@@ -157,6 +157,16 @@ const styles = theme => css`
   .goog-menuseparator {
     border-top: 1px solid ${theme.B500} !important;
   }
+
+  /* Paper Menu */
+  paper-menu {
+    background-color: ${theme.B300} !important;
+    color: ${theme.font_primary} !important;
+
+    [secondary] {
+      color: ${theme.font_secondary} !important;
+    }
+  }
 `;
 
 export default styles;
