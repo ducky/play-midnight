@@ -13,7 +13,7 @@ const styles = theme => css`
   /* Toggle Button */
   paper-toggle-button {
     &[disabled] {
-      cursor: not-allowed;
+      cursor: not-allowed !important;
     }
 
     .toggle-bar.paper-toggle-button,
@@ -41,9 +41,10 @@ const styles = theme => css`
     opacity: 0.9;
 
     &[disabled] {
-      background: ${theme.B500};
-      color: ${theme.font_secondary};
-      cursor: not-allowed;
+      background: transparent !important;
+      color: ${theme.font_secondary} !important;
+      cursor: not-allowed !important;
+      opacity: 0.3;
     }
 
     &:hover {
