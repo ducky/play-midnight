@@ -6,27 +6,33 @@ import filter from 'lodash/filter';
 import find from 'lodash/find';
 import semver from 'semver';
 
-import AppInfo from '../../package.json';
+// Lib
 import { load, save } from 'lib/api';
 import store from 'lib/store';
+
+// Styling
 import { createTheme, DEFAULT_BACKGROUND, DEFAULT_ACCENT } from 'style/theme';
-import getArrayValue from 'utils/getArrayValue';
+
+// Utils
 import { updateItem } from 'utils/array';
+import getArrayValue from 'utils/getArrayValue';
 import { validateId, validateTitle } from 'utils/validation';
 
+// Redux/Options Related
+import AppInfo from '../../package.json';
 import OPTIONS, { SECTIONS } from 'options';
 import NOTIFICATIONS from 'notifications';
 import { actions as modalActions } from 'modules/modal';
-import { actions as toastActions } from 'modules/toast';
+import { actions as toastActions, TOAST_STANDARD } from 'modules/toast';
 
-// state
+// State
 const defaultState = {
   data: [],
   menuVisible: false,
   optionsChanged: false,
 };
 
-// selectors
+// Selectors
 export const selectors = {
   allOptions: state => state.options.data,
   menuVisible: state => state.options.menuVisible,
@@ -77,7 +83,7 @@ selectors.sortedOptions = createSelector([selectors.options], options =>
   })
 );
 
-// actions
+// Actions
 export const actions = createActions(
   'CHECK_UPDATE',
   'CHECK_UPGRADE',
@@ -90,6 +96,7 @@ export const actions = createActions(
   'UPDATE_SAVE_OPTION'
 );
 
+// Helpers
 const toObject = (options = []) =>
   options.reduce((obj, option) => {
     if (option.type === 'string') return obj;
@@ -114,7 +121,6 @@ const mapToValues = (options = [], values = {}) =>
     values: values[option.plural],
   }));
 
-// sagas
 export function* checkSaveSaga({ payload: toggleState }) {
   const optionsChanged = yield select(selectors.optionsChanged);
   const menuVisible = yield select(selectors.menuVisible);
@@ -131,7 +137,9 @@ export function* checkSaveSaga({ payload: toggleState }) {
     );
   }
 }
+// Sagas
 
+// Check for Update Modal
 export function* checkUpdateSaga() {
   try {
     const version = yield select(selectors.version);
@@ -211,6 +219,7 @@ export function* checkUpgradeSaga({ payload: options }) {
   }
 }
 
+// Fetching/Saving
 export function* fetchOptionsSaga() {
   try {
     const DEFAULT_OPTIONS = toObject(OPTIONS);
@@ -269,6 +278,7 @@ export function* updateAndSaveOptionSaga({ payload: option }) {
   }
 }
 
+// Root Saga
 export function* optionsSaga() {
   yield all([
     takeEvery(actions.checkUpdate, checkUpdateSaga),
@@ -280,9 +290,10 @@ export function* optionsSaga() {
   ]);
 }
 
-// reducer
+// Reducer
 export default handleActions(
   {
+    // Options Related
     [actions.fetchOptionsResponse](state, { payload: data }) {
       return { ...state, data };
     },
@@ -290,6 +301,7 @@ export default handleActions(
       return { ...state, data, optionsChanged: false };
     },
     [actions.updateOption](state, { payload: { id, value, isArray = false } }) {
+      // Update Plural / Values
       if (isArray) {
         return {
           ...state,
@@ -300,6 +312,8 @@ export default handleActions(
 
       return { ...state, data: updateItem(state.data, { id, value }), optionsChanged: true };
     },
+
+    // Menu
     [actions.toggleMenu](state, { payload: toggleState }) {
       return {
         ...state,
