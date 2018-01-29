@@ -8,10 +8,12 @@ export const DETAILS = {
 
 export const Template = () => (
   <Fragment>
-    <Text>Welcome to the all new Play Midnight!</Text>
     <Text>
-      I took the old version of Play Midnight and threw it straight into the garbage where it belonged. I think you'll
-      enjoy your stay here.
+      <strong>Welcome to the all new Play Midnight!</strong>
+    </Text>
+    <Text>
+      I took the old version and threw it straight into the garbage where it belonged. Regardless, I think you'll enjoy
+      your stay here.
     </Text>
     <Text>
       For those that are interested in development, I rewrote the entire extension from the ground up with React which
