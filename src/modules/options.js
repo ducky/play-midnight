@@ -125,6 +125,45 @@ const mapToValues = (options = [], values = {}) =>
 
 // Sagas
 
+// Migrate Old Settings to Newer Version
+export function* checkUpgradeSaga({ payload: options }) {
+  const versionPrevious = yield select(selectors.versionPrevious);
+
+  try {
+    // Version < 3.0.0 - Convert accents to themes
+    if (versionPrevious && semver.lt(versionPrevious, '3.0.0')) {
+      const accents = options && options.accents ? options.accents : [];
+
+      if (accents.length === 0) return;
+
+      let currentValue = null;
+      const newThemes = accents.map(accent => {
+        const id = validateId(accent.id);
+
+        // Keep Old Selection if Found
+        if (accent.selected === undefined) {
+          currentValue = id;
+        }
+
+        return {
+          id,
+          accent: accent.color,
+          background: DEFAULT_BACKGROUND,
+          name: validateTitle(accent.name),
+        };
+      });
+
+      const newValues = [...newThemes, ...options.themes];
+      const newValue = currentValue ? currentValue : 'play-music';
+
+      yield put(actions.updateOption({ id: 'themes', value: newValues, isArray: true }));
+      yield put(actions.updateOption({ id: 'theme', value: newValue }));
+    }
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 // Check for Update Modal
 export function* checkUpdateSaga() {
   try {
@@ -161,44 +200,6 @@ export function* checkUpdateSaga() {
         );
         yield put(actions.updateSaveOption({ id: 'lastRun', value: version }));
       }
-    }
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-// Migrate Old Settings to Newer Version
-export function* checkUpgradeSaga({ payload: options }) {
-  const versionPrevious = yield select(selectors.versionPrevious);
-
-  try {
-    // Version < 3.0.0 - Convert accents to themes
-    if (versionPrevious && semver.lt(versionPrevious, '3.0.0')) {
-      const accents = options && options.accents ? options.accents : [];
-
-      if (accents.length === 0) return;
-
-      let currentValue = null;
-      const newThemes = accents.map(item => {
-        const id = validateId(item.id);
-
-        if (item.id === options.accent) {
-          currentValue = id;
-        }
-
-        return {
-          id,
-          accent: item.value,
-          background: DEFAULT_BACKGROUND,
-          name: validateTitle(item.name),
-        };
-      });
-
-      const newValues = [...newThemes, ...options.themes];
-      const newValue = currentValue ? currentValue : newValues[0].id;
-
-      yield put(actions.updateOption({ id: 'themes', value: newValues, isArray: true }));
-      yield put(actions.updateOption({ id: 'theme', value: newValue }));
     }
   } catch (e) {
     console.error(e);
