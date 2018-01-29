@@ -13,21 +13,29 @@ Play Midnight is a different take on the standard theme that is used on Google P
 
 ### Developing
 
-Play Midnight is currently using a `gulp` setup, so getting started is relatively easy. You'll have to follow these few steps and you should be up and running:
+Play Midnight is currently running using Node.js/Parcel bundler. You'll have to follow these few steps and you should be up and running.
 
 1. Clone Repository
-2. Install Dependencies
-3. Optionally install yarn if you don't have it yet `brew install yarn` if you have homebrew, or `npm install -g yarn`
-4. `cd` into the directory and run `yarn` (or `npm install` if you don't want to use yarn)
-5. Build Changes
-6. To build your changes, run `yarn start` (or `npm run start`) and it should process everything.
-7. In Chrome, go to `chrome://extensions` and toggle the `Developer Mode` option (top right) to "On"
-8. Click `Load Unpacked Extension` and load up your main Play Midnight folder (the one containing `manifest.json`)
-9. Make changes at your leisure!
+1. Optionally install `yarn` if you don't have it yet.
+   * `brew install yarn` if you have homebrew, or `npm install -g yarn`
+1. `cd` into the directory and run `yarn` (or `npm install`)
+
+##### Core Updates
+
+1. To build work on core changes, run `yarn start` (or `npm run start`) and it should process everything.
+1. In your browser, if you visit `localhost:1234` you'll have a little sandbox you can use for testing core related features
+1. This script will recompile automatically so you can just refresh on save.
+
+##### Play Music Updates
+
+1. To build changes for Play Music, you'll need to run `yarn build` after you're ready to test it.
+1. In Chrome, go to `chrome://extensions` and toggle the Developer Mode` option (top right) to "On"
+1. Click `Load Unpacked Extension` and load up your main Play Midnight folder (the one containing `manifest.json`)
+1. Make changes at your leisure! Note: You'll have to click refresh (or Ctrl/Cmd + R) to reload the extension on the `chrome:extensions` page if you rebuild.
 
 ### About
 
-The Chrome Extension for Play Midnight uses CSS generated via SASS for the different color options. These files are all self-contained in the /sass folder and should be commented somewhat to help you understand where each of the settings are.
+The Chrome Extension for Play Midnight uses CSS stored inside the `src/style/sheets/` folder. These files have a theme (from `src/style/theme.js`) injected into them where you have access to the users current Background/Accent colors.
 
 ### License
 
