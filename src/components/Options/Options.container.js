@@ -9,42 +9,50 @@ import Options from './Options';
 
 const mapStateToProps = state => ({
   sections: selectors.sortedOptions(state),
+  values: selectors.optionsValues(state),
   menuVisible: state.options.menuVisible,
 });
 
 @withTheme
 @connect(mapStateToProps, {
-  saveOptions: actions.saveOptions,
-  toggleMenu: actions.toggleMenu,
-  updateOption: actions.updateOption,
+  onSave: actions.saveOptions,
+  onToggle: actions.toggleMenu,
+  onUpdate: actions.updateOption,
 })
 class OptionsContainer extends PureComponent {
+  closeOptions = () => {
+    const { onToggle } = this.props;
+    onToggle(false);
+  };
+
+  saveOptions = () => {
+    const { values, onSave } = this.props;
+    onSave(values);
+  };
+
   updateTargetedOption = ({ target }) => {
+    const { onUpdate } = this.props;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const id = target.name;
-    this.props.updateOption({ id, value });
+    onUpdate({ id, value });
   };
 
   updateOption = ({ id, value }) => {
-    this.props.updateOption({ id, value });
-  };
-
-  updateArray = ({ id, value }) => {
-    const { updateOption } = this.props;
-    updateOption({ id, value, isArray: true });
+    const { onUpdate } = this.props;
+    onUpdate({ id, value });
   };
 
   render() {
-    const { sections, theme, menuVisible, saveOptions, toggleMenu } = this.props;
+    const { sections, theme, menuVisible, values } = this.props;
 
     return (
       <Options
         theme={theme}
         visible={menuVisible}
+        values={values}
         sections={sections}
-        onClose={() => toggleMenu(false)}
-        onSave={saveOptions}
-        onArrayChange={this.updateArray}
+        onClose={this.closeOptions}
+        onSave={this.saveOptions}
         onOptionChange={this.updateOption}
         onTargetedChange={this.updateTargetedOption}
       />

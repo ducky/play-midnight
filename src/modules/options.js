@@ -15,8 +15,6 @@ import store from 'lib/store';
 import { createTheme, DEFAULT_BACKGROUND, DEFAULT_ACCENT } from 'style/theme';
 
 // Utils
-import { updateItem } from 'utils/array';
-import getArrayValue from 'utils/getArrayValue';
 import { validateId, validateTitle } from 'utils/validation';
 
 // Redux/Options Related
@@ -28,47 +26,29 @@ import { actions as toastActions, TOAST_STANDARD } from 'modules/toast';
 
 // State
 const defaultState = {
-  data: [],
-  dataCache: [],
+  data: {},
+  dataCache: {},
   menuVisible: false,
-  optionsChanged: false,
 };
 
 // Selectors
 export const selectors = {
-  allOptions: state => state.options.data,
   menuVisible: state => state.options.menuVisible,
-  options: state => state.options.data.filter(o => !o.static),
+  options: state => OPTIONS.filter(o => !o.static),
+  optionsAll: state => OPTIONS,
+  optionsValues: state => state.options.data,
   optionsChanged: state => !isEqual(state.options.data, state.options.dataCache),
   version: () => AppInfo.version,
 };
 
-selectors.enabled = createSelector([selectors.options], options => {
-  const enabledOption = find(options, { id: 'enabled' });
-  return enabledOption ? enabledOption.value : false;
-});
-
-selectors.enabledAccents = createSelector([selectors.options], options => {
-  const enabledOption = find(options, { id: 'accentsOnly' });
-  return enabledOption ? enabledOption.value : false;
-});
-
-selectors.theme = createSelector([selectors.options], options => {
-  const theme = getArrayValue(options, 'theme', { accent: DEFAULT_ACCENT, background: DEFAULT_BACKGROUND }, false);
+selectors.theme = createSelector([selectors.optionsValues], options => {
+  const foundTheme = find(options.themes, { id: options.theme });
+  const theme = foundTheme ? foundTheme : { accent: DEFAULT_ACCENT, background: DEFAULT_BACKGROUND };
   return createTheme(theme.background, theme.accent);
 });
 
-selectors.versionPrevious = createSelector([selectors.allOptions], options => {
-  const versionOption = find(options, { id: 'lastRun' });
-  return versionOption ? versionOption.value : undefined;
-});
-
-selectors.visibleMenus = createSelector([selectors.options], options => {
-  return filter(options, { section: 'visibleMenus' });
-});
-
-selectors.visiblePlaylists = createSelector([selectors.options], options => {
-  return filter(options, { section: 'visiblePlaylists' });
+selectors.versionPrevious = createSelector([selectors.optionsValues], options => {
+  return options ? options.lastRun : undefined;
 });
 
 selectors.sortedOptions = createSelector([selectors.options], options =>
@@ -103,25 +83,17 @@ const toObject = (options = []) =>
   options.reduce((obj, option) => {
     if (option.type === 'string') return obj;
 
-    const updated = {
-      ...obj,
-      [option.id]: option.value !== undefined ? option.value : option.defaultValue,
-    };
-
     return !option.plural
-      ? updated
+      ? {
+          ...obj,
+          [option.id]: option.defaultValue,
+        }
       : {
-          ...updated,
-          [option.plural]: option.values !== undefined ? option.values : option.defaultValues,
+          ...obj,
+          [option.id]: option.defaultValue,
+          [option.plural]: option.defaultValues,
         };
   }, {});
-
-const mapToValues = (options = [], values = {}) =>
-  options.map(option => ({
-    ...option,
-    value: values[option.id],
-    values: values[option.plural],
-  }));
 
 // Sagas
 
@@ -156,7 +128,7 @@ export function* checkUpgradeSaga({ payload: options }) {
       const newValues = [...newThemes, ...options.themes];
       const newValue = currentValue ? currentValue : 'play-music';
 
-      yield put(actions.updateOption({ id: 'themes', value: newValues, isArray: true }));
+      yield put(actions.updateOption({ id: 'themes', value: newValues }));
       yield put(actions.updateOption({ id: 'theme', value: newValue }));
     }
   } catch (e) {
@@ -211,20 +183,18 @@ export function* fetchOptionsSaga() {
   try {
     const DEFAULT_OPTIONS = toObject(OPTIONS);
     const allOptions = yield call(load);
-    const optionsValues = { ...DEFAULT_OPTIONS, ...allOptions };
-    const options = mapToValues(OPTIONS, optionsValues);
+    const options = { ...DEFAULT_OPTIONS, ...allOptions };
     yield put(actions.fetchOptionsResponse(options));
-    yield put(actions.checkUpgrade(optionsValues));
+    yield put(actions.checkUpgrade(options));
     yield put(actions.checkUpdate());
   } catch (e) {
     console.error(e);
   }
 }
 
-export function* saveOptionsSaga() {
+export function* saveOptionsSaga({ payload: optionsSave }) {
   try {
-    const optionsSave = yield select(selectors.allOptions);
-    yield call(save, toObject(optionsSave));
+    yield call(save, optionsSave);
     yield put(actions.saveOptionsResponse(optionsSave));
     yield put(actions.toggleMenu(false));
     yield put(
@@ -250,8 +220,8 @@ export function* saveOptionsSaga() {
 export function* updateAndSaveOptionSaga({ payload: option }) {
   try {
     yield put(actions.updateOption(option));
-    const update = yield select(selectors.allOptions);
-    yield call(save, toObject(update));
+    const update = yield select(selectors.optionValues);
+    yield call(save, update);
     yield put(actions.saveOptionsResponse(update));
   } catch (e) {
     console.error(e);
@@ -315,17 +285,14 @@ export default handleActions(
         dataCache: data,
       };
     },
-    [actions.updateOption](state, { payload: { id, value, isArray = false } }) {
-      // Update Plural / Values
-      if (isArray) {
-        return {
-          ...state,
-          data: updateItem(state.data, { plural: id, values: value }, 'plural'),
-        };
-      }
-
-      // Update Single / Value
-      return { ...state, data: updateItem(state.data, { id, value }) };
+    [actions.updateOption](state, { payload: { id, value } }) {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          [id]: value,
+        },
+      };
     },
 
     // Menu

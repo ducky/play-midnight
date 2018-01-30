@@ -20,7 +20,17 @@ const OPTION_TYPES = {
   themes: OptionThemes,
 };
 
-const Options = ({ theme, visible, sections, onArrayChange, onOptionChange, onTargetedChange, onClose, onSave }) => {
+const Options = ({
+  theme,
+  visible,
+  sections,
+  values,
+  onArrayChange,
+  onOptionChange,
+  onTargetedChange,
+  onClose,
+  onSave,
+}) => {
   const handleBackgroundClick = e => {
     if (e.target === e.currentTarget) onClose();
   };
@@ -38,7 +48,7 @@ const Options = ({ theme, visible, sections, onArrayChange, onOptionChange, onTa
                 options={options}
                 reliesOn={option.reliesOn}
                 onChange={onOptionChange}
-                onChangeValues={onArrayChange}
+                values={values}
                 onTargetedChange={onTargetedChange}
                 {...option}
               />

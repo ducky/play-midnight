@@ -9,9 +9,9 @@ const OPTION_ID = 'soundSearch';
 @withPortal('#playlist-drawer .autoplaylist-section')
 class soundSearch extends PureComponent {
   render() {
-    const { isActive } = this.props;
+    const { options } = this.props;
 
-    return isActive(OPTION_ID) ? (
+    return options[OPTION_ID] ? (
       <div className="playlist-drawer-item" data-type="ap" data-id="sound-search">
         <iron-icon icon="search" />
         <sj-play-button

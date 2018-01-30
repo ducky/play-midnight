@@ -15,24 +15,26 @@ import IconTrash from 'components/Icons/IconTrash';
 // TODO - Update to be dynamic and allow for createable - false
 @connect(null, { showModal: actions.showModal })
 class Option extends PureComponent {
-  removeColor = (e, { id, name, accent, background }) => {
-    const { id: optionId, defaultValues, plural, value, values, onChange, onChangeValues, showModal } = this.props;
+  removeColor = (e, { id: colorId, name, accent, background }) => {
+    const { id, defaultValues, plural, values, onChange, showModal } = this.props;
+    const singleValue = values[id];
+    const arrayValue = values[plural];
 
     e.preventDefault();
 
     const remove = () => {
       // Remove Item or Reset Default if Empty
-      const updatedValues = values.length > 1 ? removeItem(values, { id }) : [...defaultValues];
+      const updatedValues = arrayValue.length > 1 ? removeItem(arrayValue, { id: colorId }) : [...defaultValues];
 
       // Deleting Current Accent, reset to first in array
-      if (value === id) {
+      if (singleValue === colorId) {
         onChange({
-          id: optionId,
+          id,
           value: updatedValues[0].id,
         });
       }
 
-      onChangeValues({
+      onChange({
         id: plural,
         value: updatedValues,
       });
@@ -47,34 +49,36 @@ class Option extends PureComponent {
     });
   };
 
-  saveColor = ({ id: existingId, name: rawName, accent, background }) => {
-    const { id: optionId, plural, values, onChange, onChangeValues } = this.props;
+  saveColor = ({ id: existingColorId, name: rawName, accent, background }) => {
+    const { id, plural, values, onChange } = this.props;
+    const arrayValue = values[plural];
 
     const name = validateTitle(rawName);
-    const id = existingId ? existingId : validateId(name);
+    const colorId = existingColorId ? existingColorId : validateId(name);
 
-    onChangeValues({
+    onChange({
       id: plural,
-      value: replaceItem(values, { id, name, accent, background }),
+      value: replaceItem(arrayValue, { id: colorId, name, accent, background }),
     });
 
     onChange({
-      id: optionId,
-      value: id,
+      id,
+      value: colorId,
     });
   };
 
   duplicateColor = (e, { name: rawName, accent, background }, index) => {
     e.preventDefault();
 
-    const { plural, values, onChangeValues, showModal } = this.props;
+    const { plural, values, onChange, showModal } = this.props;
+    const arrayValue = values[plural];
 
     const name = validateTitle(`${rawName} Copy`);
     const id = validateId(name);
 
-    onChangeValues({
+    onChange({
       id: plural,
-      value: insertAt(values, { id, name, accent, background }, index),
+      value: insertAt(arrayValue, { id, name, accent, background }, index),
     });
 
     showModal('themePicker', {
@@ -94,17 +98,10 @@ class Option extends PureComponent {
     });
   };
 
-  updateOption = ({ target }) => {
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState(() => ({
-      [name]: value,
-    }));
-  };
-
   render() {
-    const { id, title, description, theme, value, values, onTargetedChange } = this.props;
+    const { id, plural, title, description, theme, values, onTargetedChange } = this.props;
+    const singleValue = values[id];
+    const arrayValues = values[plural];
 
     const renderItems = items =>
       items.map((item, i) => {
@@ -116,13 +113,13 @@ class Option extends PureComponent {
             key={colorId}
             accent={accent}
             background={background}
-            selected={value === colorId}
+            selected={singleValue === colorId}
             theme={theme}
           >
             <input
               name={id}
               value={colorId}
-              defaultChecked={value === colorId}
+              defaultChecked={singleValue === colorId}
               onClick={onTargetedChange}
               type="radio"
             />
@@ -172,7 +169,7 @@ class Option extends PureComponent {
           </div>
         </div>
 
-        <div className="Option__body Option__collection">{renderItems(values)}</div>
+        <div className="Option__body Option__collection">{renderItems(arrayValues)}</div>
       </StyledOption>
     );
   }

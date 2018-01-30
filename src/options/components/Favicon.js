@@ -63,17 +63,16 @@ class Favicon extends Component {
 
   shouldComponentUpdate({ theme: prevTheme, options: prevOptions }) {
     const { theme, options } = this.props;
-    const prevFavicon = filter(prevOptions, o => ['favicon', 'faviconAccent'].includes(o.id));
-    const favicon = filter(options, o => ['favicon', 'faviconAccent'].includes(o.id));
+    const prevFavicon = [prevOptions.favicon, prevOptions.faviconAccent];
+    const favicon = [options.favicon, options.faviconAccent];
 
     return !isEqual(prevTheme.A500, theme.A500) || !isEqual(prevFavicon, favicon);
   }
 
   render() {
-    const { theme, isActive } = this.props;
-    const accented = isActive('faviconAccent');
+    const { theme, options } = this.props;
 
-    if (isActive(OPTION_ID)) this.updateFavicon(theme.A500, accented);
+    if (options[OPTION_ID]) this.updateFavicon(theme.A500, options.faviconAccent);
 
     return null;
   }

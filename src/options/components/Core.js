@@ -12,9 +12,8 @@ import styles from './Core.styles';
 @withStyles(styles)
 class Core extends Component {
   observe = () => {
-    const { isActive, theme } = this.props;
-    const enabled = isActive('enabled');
-    observables.forEach(observable => observable(enabled, theme));
+    const { options, theme } = this.props;
+    observables.forEach(observable => observable(options.enabled, theme));
   };
 
   componentWillUnmount() {

@@ -11,8 +11,8 @@ const OPTION_ID = 'queue';
 @withStyles(styles)
 class Queue extends PureComponent {
   render() {
-    const { isActive, Stylesheet } = this.props;
-    return isActive(OPTION_ID) ? <Stylesheet /> : null;
+    const { options, Stylesheet } = this.props;
+    return options[OPTION_ID] ? <Stylesheet /> : null;
   }
 }
 

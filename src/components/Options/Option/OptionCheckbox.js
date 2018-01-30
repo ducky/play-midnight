@@ -4,14 +4,13 @@ import find from 'lodash/find';
 import Checkbox from 'components/Checkbox';
 import StyledOption from './Option.styled';
 
-const Option = ({ id, title, description, options, reliesOn, value: setValue, onTargetedChange }) => {
+const Option = ({ id, title, description, reliesOn, values, onTargetedChange }) => {
   let disabled = false;
-  let value = setValue;
+  let value = values[id];
 
   if (reliesOn) {
-    const reliedOption = find(options, { id: reliesOn });
-    disabled = reliedOption && reliedOption.value === false;
-    value = reliedOption ? (reliedOption.value === true ? value : false) : value;
+    disabled = values[reliesOn] === false;
+    value = values[reliesOn] === true ? value : false;
   }
 
   return (

@@ -11,8 +11,8 @@ import styles from './Logo.styles';
 @withPortal('#topBar .music-logo-link')
 class TopLogo extends PureComponent {
   render() {
-    const { isActive } = this.props;
-    return <PlayMusicLogo enabled={isActive('enabled')} />;
+    const { options } = this.props;
+    return <PlayMusicLogo enabled={options.enabled} />;
   }
 }
 
@@ -20,8 +20,8 @@ class TopLogo extends PureComponent {
 @withPortal('#drawer .music-logo-link')
 class MenuLogo extends PureComponent {
   render() {
-    const { isActive } = this.props;
-    return <PlayMusicLogo enabled={isActive('enabled')} />;
+    const { options } = this.props;
+    return <PlayMusicLogo enabled={options.enabled} />;
   }
 }
 
@@ -29,8 +29,8 @@ class MenuLogo extends PureComponent {
 @withStyles(styles)
 class Logo extends PureComponent {
   render() {
-    const { isActive, Stylesheet } = this.props;
-    const enabled = isActive('enabled') || isActive('accentsOnly');
+    const { options, Stylesheet } = this.props;
+    const enabled = options.enabled || options.accentsOnly;
 
     return enabled ? (
       <Fragment>

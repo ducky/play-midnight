@@ -11,8 +11,8 @@ const OPTION_ID = 'accentsOnly';
 @withStyles(styles)
 class AccentsOnly extends PureComponent {
   render() {
-    const { isActive, Stylesheet } = this.props;
-    return !isActive('enabled') && isActive(OPTION_ID) ? <Stylesheet /> : null;
+    const { options, Stylesheet } = this.props;
+    return !options.enabled && options[OPTION_ID] ? <Stylesheet /> : null;
   }
 }
 
