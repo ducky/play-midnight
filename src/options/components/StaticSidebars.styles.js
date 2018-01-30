@@ -12,7 +12,7 @@ const styles = theme => ({
       height: calc(100% - 90px);
 
       #topBar {
-        background: ${theme.B300} !important;
+        background: ${theme.enabled ? theme.B300 : '#fff'} !important;
       }
 
       #drawer {
@@ -67,7 +67,7 @@ const styles = theme => ({
     }
 
     #drawer paper-toolbar {
-      background: ${theme.B300} !important;
+      background: ${theme.enabled ? theme.B300 : '#fff'} !important;
     }
 
     paper-drawer-panel .left-drawer.narrow-layout.paper-drawer-panel {

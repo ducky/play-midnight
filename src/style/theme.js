@@ -37,7 +37,8 @@ export const TRANSITION_SLOW = '700ms';
 
 export const stripTransition = transition => parseInt(transition.replace('ms', ''), 10);
 
-export const createTheme = (background = DEFAULT_BACKGROUND, accent = DEFAULT_ACCENT) => ({
+export const createTheme = (enabled = false, background = DEFAULT_BACKGROUND, accent = DEFAULT_ACCENT) => ({
+  enabled,
   black: '#000',
   white: '#fff',
   font_google: '#212121',
