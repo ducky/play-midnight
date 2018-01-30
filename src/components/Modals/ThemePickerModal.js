@@ -159,14 +159,16 @@ class ColorPickerModal extends PureComponent {
           type="text"
           value={name}
         />
-        <PrettyTheme background={background}>
-          <Checkbox style={{ marginBottom: 10 }} background={accent} />
-          <Button style={{ marginBottom: 10 }} background={accent}>
-            Such Button, Wow!
-          </Button>
-          <div style={{ color: isLight(background) ? FONT_LIGHT : FONT_DARK }}>Some Text!</div>
-        </PrettyTheme>
-        <Grid>
+        <div>
+          <h4 style={{ textAlign: 'center' }}>Theme Preview</h4>
+          <PrettyTheme background={background}>
+            <Checkbox style={{ marginBottom: 10 }} background={accent} />
+            <Button style={{ marginBottom: 10 }} background={accent}>
+              Such Button, Wow!
+            </Button>
+            <div style={{ color: isLight(background) ? FONT_LIGHT : FONT_DARK }}>Some Text!</div>
+          </PrettyTheme>
+        </div>
           <div>
             <h4 style={{ textAlign: 'center' }}>Background Color</h4>
             <PickerWrapper theme={theme}>
