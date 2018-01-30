@@ -10,6 +10,7 @@ import { actions } from 'modules/modal';
 
 import Button from 'components/Button';
 import Checkbox from 'components/Checkbox';
+import Grid from 'components/Grid';
 import ModalWrapper from './ModalWrapper';
 
 const PrettyTheme = styled.div`
@@ -23,12 +24,6 @@ const PrettyTheme = styled.div`
   background: ${props => props.background};
   box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
   margin: 0 0 15px;
-`;
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 25px;
 `;
 
 const FancyInput = styled.input`
@@ -169,16 +164,21 @@ class ColorPickerModal extends PureComponent {
             <div style={{ color: isLight(background) ? FONT_LIGHT : FONT_DARK }}>Some Text!</div>
           </PrettyTheme>
         </div>
+        <Grid span="3">
           <div>
             <h4 style={{ textAlign: 'center' }}>Background Color</h4>
             <PickerWrapper theme={theme}>
-              <ChromePicker color={background} disableAlpha={true} onChange={this.onColorChange('background')} />
+              <ChromePicker
+                color={background}
+                disableAlpha={true}
+                onChangeComplete={this.onColorChange('background')}
+              />
             </PickerWrapper>
           </div>
           <div>
             <h4 style={{ textAlign: 'center' }}>Accent Color</h4>
             <PickerWrapper theme={theme}>
-              <ChromePicker color={accent} disableAlpha={true} onChange={this.onColorChange('accent')} />
+              <ChromePicker color={accent} disableAlpha={true} onChangeComplete={this.onColorChange('accent')} />
             </PickerWrapper>
           </div>
         </Grid>
