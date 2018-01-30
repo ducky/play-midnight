@@ -8,6 +8,7 @@ import Playlists from './components/Playlists';
 import Queue from './components/Queue';
 import Settings from './components/Settings';
 import SoundSearch from './components/SoundSearch';
+import StaticSidebars from './components/StaticSidebars';
 
 export default [
   // Core
@@ -22,6 +23,7 @@ export default [
   // Customize
   Favicon,
   Queue,
+  StaticSidebars,
 
   // Menus
   Menus,

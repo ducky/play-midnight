@@ -72,6 +72,22 @@ const OPTIONS = [
     title: 'Enable Larger Queue',
     description: `Makes the now playing queue span across your screen further to prevent cutting off song titles`,
   },
+  {
+    id: 'staticSidebar',
+    section: 'customize',
+    type: 'boolean',
+    defaultValue: false,
+    title: 'Enable Static Sidebar',
+    description: `Show the left main sidebar permanently`,
+  },
+  {
+    id: 'staticPlaylists',
+    section: 'customize',
+    type: 'boolean',
+    defaultValue: false,
+    title: 'Enable Static Playlists',
+    description: `Show the right playlists sidebar permanently`,
+  },
 
   // Section - Visible Menus
   {
