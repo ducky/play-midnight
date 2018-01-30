@@ -1,5 +1,4 @@
 import React from 'react';
-import find from 'lodash/find';
 
 import Checkbox from 'components/Checkbox';
 import StyledOption from './Option.styled';

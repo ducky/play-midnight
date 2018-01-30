@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import noop from 'lodash/noop';
 
 import withTheme from 'hoc/withTheme';
-import { TRANSITION_FAST } from 'style/theme';
+import { darken, lighten, TRANSITION_FAST } from 'style/theme';
 
 const StyledCheckbox = styled.div`
   display: inline-flex;
@@ -26,8 +26,8 @@ const StyledCheckbox = styled.div`
     border-radius: 25px;
     transition: background ${TRANSITION_FAST}, border-color ${TRANSITION_FAST}, opacity ${TRANSITION_FAST};
 
-    ${props => props.background && `background: ${props.background}`};
-    ${props => props.background && `border-color: ${props.background}`};
+    ${props => props.background && `background: ${darken(props.background, 3)}`};
+    ${props => props.background && `border-color: ${darken(props.background, 3)}`};
   }
 
   .Checkbox__knob {
@@ -41,18 +41,22 @@ const StyledCheckbox = styled.div`
     transform: translateX(0);
     transition: transform ${TRANSITION_FAST}, background ${TRANSITION_FAST};
 
-    ${props => props.background && `background: ${props.background}`};
+    ${props => props.background && `background: ${lighten(props.background, 7)}`};
   }
 
   input:checked + .Checkbox__container .Checkbox__track {
     ${props => `background: ${props.theme.A500}`};
     ${props => `border-color: ${props.theme.A600}`};
+    ${props => props.accent && `background: ${props.accent}`};
+    ${props => props.accent && `border-color: ${darken(props.accent, 3)}`};
     opacity: 0.5;
   }
 
   input:checked + .Checkbox__container .Checkbox__knob {
     ${props => `background: ${props.theme.A500}`};
     ${props => `border-color: ${props.theme.A500}`};
+    ${props => props.accent && `background: ${props.accent}`};
+    ${props => props.accent && `border-color: ${props.accent}`};
     transform: translateX(100%);
   }
 
@@ -69,8 +73,19 @@ const StyledCheckbox = styled.div`
   }
 `;
 
-const Checkbox = ({ background, style, theme, checked, disabled, defaultChecked, onChange, dispatch, ...rest }) => (
-  <StyledCheckbox background={background} style={style} theme={theme}>
+const Checkbox = ({
+  accent,
+  background,
+  dispatch,
+  style,
+  theme,
+  checked,
+  disabled,
+  defaultChecked,
+  onChange,
+  ...rest
+}) => (
+  <StyledCheckbox accent={accent} background={background} style={style} theme={theme}>
     <label>
       <input
         type="checkbox"
