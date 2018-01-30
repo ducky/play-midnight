@@ -4,8 +4,9 @@ import { transparentize, isDark, TRANSITION_FAST } from 'style/theme';
 
 const styles = theme => css`
   #material-app-bar {
-    background: ${theme.B400};
-    border-bottom-color: ${theme.B600} !important;
+    background: ${theme.B300};
+    color: ${theme.font_primary};
+    border-bottom-color: ${theme.B400} !important;
     transition: background ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};
   }
 
@@ -62,7 +63,7 @@ const styles = theme => css`
   }
 
   .nav-section-divider {
-    border-bottom: 1px solid ${theme.B600} !important;
+    border-bottom: 1px solid ${theme.B500} !important;
   }
 
   .new-playlist-drawer {

@@ -55,6 +55,10 @@ const styles = theme => css`
       background-color: ${theme.B400} !important;
       color: ${theme.font_primary} !important;
 
+      a {
+        color: ${theme.font_primary} !important;
+      }
+
       & > *:hover,
       & > *[focused] {
         background-color: ${theme.B200} !important;
