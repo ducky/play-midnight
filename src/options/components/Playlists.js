@@ -1,35 +1,31 @@
 import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import isEqual from 'lodash/isEqual';
 
 import withOptions from 'hoc/withOptions';
 import withStyles from 'hoc/withStyles';
 
-import { selectors } from 'modules/options';
 import styles from './Playlists.styles';
-
-const mapStateToProps = state => ({
-  visiblePlaylists: selectors.visiblePlaylists(state),
-});
 
 @withOptions
 @withStyles(styles)
-@connect(mapStateToProps)
 class Playlists extends Component {
-  shouldComponentUpdate({ visiblePlaylists: nextPlaylists }) {
-    const { visiblePlaylists } = this.props;
-    return !isEqual(nextPlaylists, visiblePlaylists);
-  }
+  relatedOptions = ['thumbsUp', 'soundSearch', 'lastAdded', 'freePurchased'];
 
   render() {
-    const { isActive, Stylesheet: StylesheetList } = this.props;
+    const { options, Stylesheet: StylesheetList } = this.props;
+
+    const enabledList = this.relatedOptions
+      .filter(id => !options[id])
+      .map(id => ({ id, Stylesheet: StylesheetList[id] }));
+
+    const renderAll = (enabledList, relatedOptions) => {
+      const Stylesheet = StylesheetList['all'];
+      return enabledList.length === relatedOptions.length && Stylesheet ? <Stylesheet /> : null;
+    };
 
     return (
       <Fragment>
-        {Object.keys(StylesheetList).map(id => {
-          const Stylesheet = StylesheetList[id];
-          return !isActive(id) ? <Stylesheet key={id} /> : null;
-        })}
+        {enabledList.map(({ id, Stylesheet }) => (Stylesheet ? <Stylesheet key={id} /> : null))}
+        {renderAll(enabledList, this.relatedOptions)}
       </Fragment>
     );
   }
