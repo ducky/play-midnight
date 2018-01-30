@@ -44,7 +44,7 @@ export const selectors = {
 selectors.theme = createSelector([selectors.optionsValues], options => {
   const foundTheme = find(options.themes, { id: options.theme });
   const theme = foundTheme ? foundTheme : { accent: DEFAULT_ACCENT, background: DEFAULT_BACKGROUND };
-  return createTheme(theme.background, theme.accent);
+  return createTheme(options.enabled, theme.background, theme.accent);
 });
 
 selectors.versionPrevious = createSelector([selectors.optionsValues], options => {
@@ -220,7 +220,7 @@ export function* saveOptionsSaga({ payload: optionsSave }) {
 export function* updateAndSaveOptionSaga({ payload: option }) {
   try {
     yield put(actions.updateOption(option));
-    const update = yield select(selectors.optionValues);
+    const update = yield select(selectors.optionsValues);
     yield call(save, update);
     yield put(actions.saveOptionsResponse(update));
   } catch (e) {
