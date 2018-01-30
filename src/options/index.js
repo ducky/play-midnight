@@ -73,6 +73,14 @@ const OPTIONS = [
     description: `Makes the now playing queue span across your screen further to prevent cutting off song titles`,
   },
   {
+    id: 'largeTable',
+    section: 'customize',
+    type: 'boolean',
+    defaultValue: false,
+    title: 'Enable Larger Song Table',
+    description: `Makes the heights of the song rows larger`,
+  },
+  {
     id: 'staticSidebar',
     section: 'customize',
     type: 'boolean',

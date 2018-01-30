@@ -5,6 +5,8 @@ import { getUrl } from 'lib/api';
 
 import { TRANSITION_FAST } from 'style/theme';
 
+import ThumbsUp from 'assets/images/icon-thumbs-up.svg';
+import ThumbsDown from 'assets/images/icon-thumbs-down.svg';
 import LoadingWhite from 'assets/images/sprites/ani_loading_white.gif';
 import EqualWhite from 'assets/images/sprites/ani_equalizer_white.gif';
 import EqualWhiteStatic from 'assets/images/sprites/equalizer_white.png';
@@ -22,10 +24,10 @@ const styles = theme => css`
 
     .song-row {
       background: ${theme.B400};
-      color: ${theme.font_primary};
+      color: ${theme.font_primary} !important;
 
       td a {
-        color: ${theme.font_secondary};
+        color: ${theme.font_secondary} !important;
       }
 
       [data-col='index'] .hover-button[data-id='play'],
@@ -36,6 +38,36 @@ const styles = theme => css`
       .rating-container.thumbs li {
         background-color: transparent;
         filter: invert(100%);
+      }
+
+      .rating-container.thumbs {
+        li[data-rating='5'] {
+          margin-top: 0;
+          margin-left: 25px;
+        }
+
+        li[data-rating='1'] {
+          margin-top: 0;
+          margin-left: 8px;
+        }
+      }
+
+      [data-col='rating'][data-rating='4'],
+      [data-col='rating'][data-rating='5'] {
+        background-color: inherit;
+        background-image: url(${getUrl(ThumbsUp)}) !important;
+        background-repeat: no-repeat !important;
+        background-position: 26px 8px !important;
+        background-size: 24px 24px !important;
+      }
+
+      [data-col='rating'][data-rating='1'],
+      [data-col='rating'][data-rating='2'] {
+        background-color: inherit;
+        background-image: url(${getUrl(ThumbsDown)}) !important;
+        background-repeat: no-repeat !important;
+        background-position: 58px 8px !important;
+        background-size: 24px 24px !important;
       }
 
       td,
@@ -60,7 +92,7 @@ const styles = theme => css`
 
       .song-details-wrapper .song-artist-album,
       .song-details-wrapper .song-artist-album a {
-        color: ${theme.font_secondary};
+        color: ${theme.font_secondary} !important;
       }
 
       .song-indicator {

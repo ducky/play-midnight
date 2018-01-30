@@ -2,6 +2,7 @@ import AccentsOnly from './components/AccentsOnly';
 import Core from './components/Core';
 import Enabled from './components/Enabled';
 import Favicon from './components/Favicon';
+import LargeTable from './components/LargeTable';
 import Logo from './components/Logo';
 import Menus from './components/Menus';
 import Playlists from './components/Playlists';
@@ -23,6 +24,7 @@ export default [
   // Customize
   Favicon,
   Queue,
+  LargeTable,
   StaticSidebars,
 
   // Menus
