@@ -64,6 +64,10 @@ const styles = theme => css`
         }
       }
 
+      .title-right-items {
+        line-height: 64px !important;
+      }
+
       paper-icon-button[data-id='menu'] {
         margin: 12px 0 0 0 !important;
       }
