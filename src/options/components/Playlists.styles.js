@@ -18,6 +18,12 @@ const styles = () => ({
       display: none;
     }
   `,
+  all: css`
+    #auto-playlists-header,
+    .autoplaylist-section {
+      display: none;
+    }
+  `,
 });
 
 export default createStylesheet(styles);
