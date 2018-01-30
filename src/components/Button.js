@@ -26,6 +26,9 @@ const StyledButton = styled.button`
   ${props => props.useAccent && `background: ${props.theme.A500}`};
   ${props => props.useAccent && `color: ${isLight(props.theme.A500) ? FONT_LIGHT : FONT_DARK}`};
 
+  ${props => props.background && `background: ${props.background}`};
+  ${props => props.background && `color: ${isLight(props.background) ? FONT_LIGHT : FONT_DARK}`};
+
   &:not([disabled]):hover {
     opacity: 1;
   }
@@ -36,8 +39,8 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ theme, noAccent, children, ...rest }) => (
-  <StyledButton theme={theme} useAccent={!noAccent} {...rest}>
+const Button = ({ background, theme, noAccent, children, ...rest }) => (
+  <StyledButton background={background} theme={theme} useAccent={!noAccent} {...rest}>
     {children}
   </StyledButton>
 );
