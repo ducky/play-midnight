@@ -1,14 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { isLight, FONT_LIGHT, FONT_DARK } from 'style/theme';
+
+import Button from 'components/Button';
+import Checkbox from 'components/Checkbox';
 import ModalWrapper from './ModalWrapper';
 
 export const PrettyTheme = styled.div`
   position: relative;
   display: flex;
+  flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
-  height: 100px;
+  height: 125px;
   border-radius: 5px;
   background: ${props => props.background};
   box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
@@ -16,26 +21,6 @@ export const PrettyTheme = styled.div`
 
   strong {
     font-weight: 900;
-  }
-
-  &:before {
-    position: absolute;
-    content: '';
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-radius: 5px;
-    overflow: hidden;
-    background: ${props => props.accent || 'transparent'};
-    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-  }
-
-  &:after {
-    position: relative;
-    z-index: 1;
-    content: '😎';
-    font-size: 36px;
   }
 `;
 
@@ -54,7 +39,13 @@ const ThemeDeleteModal = ({ ...props }) => {
         </strong>{' '}
         be undone, so just be sure about this.
       </p>
-      <PrettyTheme accent={props.details.accent} background={props.details.background} />
+      <PrettyTheme background={props.details.background}>
+        <Checkbox style={{ marginBottom: 10 }} background={props.details.accent} />
+        <Button style={{ marginBottom: 10 }} background={props.details.accent}>
+          Such Button, Wow!
+        </Button>
+        <div style={{ color: isLight(props.details.background) ? FONT_LIGHT : FONT_DARK }}>Some Text!</div>
+      </PrettyTheme>
       <p>
         <small style={{ display: 'block', textAlign: 'center' }}>Take a second look. Beautiful, innit?</small>
       </p>

@@ -5,34 +5,24 @@ import styled from 'styled-components';
 
 import withTheme from 'hoc/withTheme';
 
-import { DEFAULT_ACCENT, DEFAULT_BACKGROUND, TRANSITION_FAST } from 'style/theme';
+import { isLight, FONT_LIGHT, FONT_DARK, DEFAULT_ACCENT, DEFAULT_BACKGROUND, TRANSITION_FAST } from 'style/theme';
 import { actions } from 'modules/modal';
 
+import Button from 'components/Button';
+import Checkbox from 'components/Checkbox';
 import ModalWrapper from './ModalWrapper';
 
 const PrettyTheme = styled.div`
   position: relative;
   display: flex;
+  flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
-  height: 100px;
+  height: 125px;
   border-radius: 5px;
   background: ${props => props.background};
   box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
   margin: 0 0 15px;
-
-  &:before {
-    position: absolute;
-    content: '';
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-radius: 5px;
-    overflow: hidden;
-    background: ${props => props.accent || 'transparent'};
-    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-  }
 `;
 
 const Grid = styled.div`
@@ -169,7 +159,13 @@ class ColorPickerModal extends PureComponent {
           type="text"
           value={name}
         />
-        <PrettyTheme accent={accent} background={background} />
+        <PrettyTheme background={background}>
+          <Checkbox style={{ marginBottom: 10 }} background={accent} />
+          <Button style={{ marginBottom: 10 }} background={accent}>
+            Such Button, Wow!
+          </Button>
+          <div style={{ color: isLight(background) ? FONT_LIGHT : FONT_DARK }}>Some Text!</div>
+        </PrettyTheme>
         <Grid>
           <div>
             <h4 style={{ textAlign: 'center' }}>Background Color</h4>
