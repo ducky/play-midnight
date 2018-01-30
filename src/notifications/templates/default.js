@@ -89,6 +89,22 @@ export const Template = () => (
         This extends the now playing popup queue to be wider so your songs don't get cut off.
       </ListItem>
 
+      <ListItem title="Larger Song Table">
+        Makes the song table rows and text much larger if you prefer it to be less cramped.
+      </ListItem>
+
+      <ListItem title="Static Playlists">
+        Allows you to lock the playlists sidebar to the right side of the screen.
+      </ListItem>
+
+      <ListItem title="Larger Queue">
+        <Text nopad>Allows you to lock the main left sidebar to the left side of the screen.</Text>
+        <Text nopad>
+          <strong>Note</strong> - Using both static options together can cause some bugginess with the content since
+          Google has set widths on a few things. I'd stick to one or the other unless you have a huge screen.
+        </Text>
+      </ListItem>
+
       <ListItem title="Visible Menus">Allows you to customize which menus are shown on the left-side menu.</ListItem>
 
       <ListItem title="Visible Auto-Playlists">
