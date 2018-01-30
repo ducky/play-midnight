@@ -10,6 +10,7 @@
 /deploy
 /build
 /dist
+deploy.zip
 
 # misc
 /.cache
