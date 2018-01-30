@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { TRANSITION_FAST } from 'style/theme';
 import createStylesheet from 'utils/createStylesheet';
 
-export const StyledFAB = styled.div`
+export const StyledSettings = styled.div`
   display: inline-flex;
   margin: 4px;
   margin-right: 32px;

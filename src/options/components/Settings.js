@@ -8,7 +8,7 @@ import withTheme from 'hoc/withTheme';
 
 import { actions } from 'modules/options';
 
-import styles, { StyledFAB } from './FAB.styles';
+import styles, { StyledSettings } from './Settings.styles';
 import IconGear from 'components/Icons/IconGear';
 
 const mapStateToProps = ({ options }) => ({
@@ -20,19 +20,19 @@ const mapStateToProps = ({ options }) => ({
 @withStyles(styles)
 @withPortal('#material-player-right-wrapper')
 @connect(mapStateToProps, { toggleMenu: actions.toggleMenu })
-class FAB extends PureComponent {
+class Settings extends PureComponent {
   render() {
-    const { isActive, theme, menuVisible, toggleMenu, Stylesheet } = this.props;
+    const { options, theme, menuVisible, toggleMenu, Stylesheet } = this.props;
 
     return (
       <Fragment>
-        <StyledFAB useAccent={menuVisible} enabled={isActive('enabled')} theme={theme} onClick={() => toggleMenu()}>
+        <StyledSettings useAccent={menuVisible} enabled={options.enabled} theme={theme} onClick={() => toggleMenu()}>
           <IconGear />
-        </StyledFAB>
+        </StyledSettings>
         <Stylesheet />
       </Fragment>
     );
   }
 }
 
-export default FAB;
+export default Settings;
