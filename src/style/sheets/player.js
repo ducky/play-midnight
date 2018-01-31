@@ -15,6 +15,7 @@ const styles = theme => css`
 
   paper-slider #sliderBar #progressContainer {
     background: ${theme.B200} !important;
+    transition: background ${TRANSITION_FAST};
   }
 
   #player.material:hover #material-player-progress #sliderContainer:not(.disabled) #sliderBar #progressContainer {
@@ -47,6 +48,19 @@ const styles = theme => css`
 
   #player paper-icon-button[data-id='show-miniplayer'] {
     z-index: 1;
+  }
+
+  #time_container_current,
+  #time_container_duration {
+    color: ${theme.font_secondary};
+  }
+
+  #sliderKnob {
+    display: none;
+  }
+
+  #player:hover #sliderKnob {
+    display: block;
   }
 `;
 

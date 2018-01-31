@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-import { isLight, FONT_DARK, FONT_LIGHT } from 'style/theme';
+import { isLight, FONT_DARK, FONT_LIGHT, TRANSITION_FAST } from 'style/theme';
 
 const styles = theme => css`
   html:not([style-scope]):not(.style-scope) {
@@ -11,6 +11,7 @@ const styles = theme => css`
   /*  Scrollbar */
   ::-webkit-scrollbar-thumb {
     background-color: ${theme.A500};
+    transition: background ${TRANSITION_FAST};
 
     &:hover {
       background: ${theme.A400};
@@ -23,6 +24,7 @@ const styles = theme => css`
 
   .primary:not([style-scope]):not(.style-scope) {
     color: ${theme.A500} !important;
+    transition: background ${TRANSITION_FAST};
   }
 
   /*  Uploading Music */
@@ -30,6 +32,7 @@ const styles = theme => css`
   .material-transfer-radial-processing-overlay,
   .material-transfer-radial-upload-overlay {
     background: ${theme.A500};
+    transition: background ${TRANSITION_FAST};
   }
 
   /*  Menu Selected */
@@ -38,6 +41,7 @@ const styles = theme => css`
     .goog-menuitem.selected:not([style-scope]):not(.style-scope)
     .goog-menuitem-content:not([style-scope]):not(.style-scope) {
     color: ${theme.A500} !important;
+    transition: color ${TRANSITION_FAST};
 
     &:hover {
       color: ${theme.A500} !important;
@@ -48,6 +52,7 @@ const styles = theme => css`
   .cluster.material-cluster .lane-button core-icon,
   .cluster.material-cluster .lane-button iron-icon {
     color: ${theme.A500};
+    transition: background ${TRANSITION_FAST};
   }
 
   /*  Toggle Button */
@@ -55,10 +60,12 @@ const styles = theme => css`
     .toggle-bar.paper-toggle-button,
     .toggle-button.paper-toggle-button {
       background-color: ${theme.A500} !important;
+      transition: background ${TRANSITION_FAST};
     }
 
     .toggle-ink.paper-toggle-button {
       color: ${theme.A500} !important;
+      transition: color ${TRANSITION_FAST};
     }
   }
 
@@ -67,17 +74,20 @@ const styles = theme => css`
     #checkbox.checked {
       background-color: ${theme.A500} !important;
       border-color: ${theme.A500} !important;
+      transition: border-color ${TRANSITION_FAST}, background ${TRANSITION_FAST};
     }
 
     #ink[checked],
     #ink[checked].paper-checkbox {
       color: ${theme.A500} !important;
+      transition: background ${TRANSITION_FAST};
     }
 
     #checkbox.checked,
     #checkbox.checked.paper-checkbox {
       background-color: ${theme.A500} !important;
       border-color: ${theme.A500} !important;
+      transition: border-color ${TRANSITION_FAST}, background ${TRANSITION_FAST};
     }
   }
 
@@ -89,6 +99,7 @@ const styles = theme => css`
   sj-paper-button.material-primary {
     background: ${theme.A500} !important;
     color: ${isLight(theme.A500) ? FONT_LIGHT : FONT_DARK} !important;
+    transition: background ${TRANSITION_FAST}, color ${TRANSITION_FAST};
 
     &:hover {
       background: ${theme.A500} !important;
@@ -102,43 +113,52 @@ const styles = theme => css`
   paper-dialog .buttons paper-button:not([style-scope]):not(.style-scope):not([disabled]),
   paper-toast paper-button[data-action='button']:not([style-scope]):not(.style-scope) {
     color: ${theme.A500} !important;
+    transition: color ${TRANSITION_FAST};
   }
 
   paper-action-dialog sj-paper-button,
   paper-dialog .buttons paper-button:not([style-scope]):not(.style-scope):not([disabled]) {
     color: ${theme.A500} !important;
+    transition: color ${TRANSITION_FAST};
   }
 
   #music-content .material-banner.banner.new-user-quiz-card sj-paper-button,
   #music-content .material-banner.banner.ws-search-banner sj-paper-button,
   #music-content .material-banner.banner.ws-subscriber-card sj-paper-button {
     color: ${theme.A500} !important;
+    transition: color ${TRANSITION_FAST};
   }
 
   .more-songs-container.primary > paper-button {
     color: ${theme.A500} !important;
+    transition: color ${TRANSITION_FAST};
   }
 
   paper-toast [data-action='button'],
   paper-toast div[data-action='button'] {
     color: ${theme.A500} !important;
+    transition: color ${TRANSITION_FAST};
   }
 
   sj-callout {
     background: ${theme.A500} !important;
+    transition: background ${TRANSITION_FAST};
   }
 
   paper-icon-button.sj-callout-target:not([style-scope]):not(.style-scope) {
     background-color: ${theme.A500} !important;
+    transition: background ${TRANSITION_FAST};
   }
 
   gpm-bottom-sheet {
     #buttonRow {
       paper-button {
         background-color: ${theme.A500} !important;
+        transition: background ${TRANSITION_FAST};
 
         span {
           color: ${isLight(theme.A500) ? FONT_LIGHT : FONT_DARK} !important;
+          transition: color ${TRANSITION_FAST};
         }
 
         &:first-child {
@@ -155,6 +175,7 @@ const styles = theme => css`
   sj-play-button #buttonContent.sj-play-button,
   .sj-play-button-0 #buttonContent.sj-play-button {
     background-color: ${theme.A500} !important;
+    transition: background ${TRANSITION_FAST};
   }
 
   /*  Playlist button */
@@ -163,12 +184,14 @@ const styles = theme => css`
     .icon[icon='add-circle'],
     .playlist-subscribed {
       color: ${theme.A500};
+      transition: color ${TRANSITION_FAST};
     }
   }
 
   .sj-play-button-0 #pulse.sj-play-button {
     background: ${theme.A500};
     opacity: 0.3;
+    transition: background ${TRANSITION_FAST};
   }
 
   /*  Links */
@@ -179,12 +202,14 @@ const styles = theme => css`
     &.primary,
     &.primary:not([style-scope]):not(.style-scope) {
       color: ${theme.A500};
+      transition: color ${TRANSITION_FAST};
     }
   }
 
   /*  Top Toolbar */
   #nav-container #music-content.material .material-cover {
     background-color: ${theme.A500};
+    transition: background ${TRANSITION_FAST};
   }
 
   /*  Inputs */
@@ -192,14 +217,17 @@ const styles = theme => css`
   paper-input-decorator {
     &::shadow .focused-underline {
       background: ${theme.A500} !important;
+      transition: background ${TRANSITION_FAST};
     }
 
     &[focused]::shadow .floated-label .label-text {
       color: ${theme.A500} !important;
+      transition: color ${TRANSITION_FAST};
     }
 
     .focused-line.paper-input-container {
       background: ${theme.A500} !important;
+      transition: background ${TRANSITION_FAST};
     }
 
     .add-on-content.is-highlighted.paper-input-container *,
@@ -208,6 +236,7 @@ const styles = theme => css`
     .input-content.label-is-highlighted.paper-input-container .paper-input-label,
     .input-content.label-is-highlighted.paper-input-container label {
       color: ${theme.A500} !important;
+      transition: color ${TRANSITION_FAST};
     }
   }
 
@@ -217,31 +246,37 @@ const styles = theme => css`
     paper-input-decorator {
       &::shadow .focused-underline {
         background: ${theme.A500};
+        transition: background ${TRANSITION_FAST};
       }
 
       &[focused]::shadow .floated-label .label-text {
         color: ${theme.A500};
+        transition: color ${TRANSITION_FAST};
       }
     }
 
     sj-paper-button {
       color: ${theme.A500};
+      transition: color ${TRANSITION_FAST};
     }
 
     .buttons {
       color: ${theme.A500};
+      transition: color ${TRANSITION_FAST};
     }
   }
 
   /*  Dragging Songs Icon */
   .material-drag .song-drag-label {
     background: ${theme.A500};
+    transition: background ${TRANSITION_FAST};
   }
 
   /*  Slider */
   paper-slider {
     paper-ripple.paper-slider {
       color: ${theme.A500} !important;
+      transition: color ${TRANSITION_FAST};
     }
   }
 
@@ -249,52 +284,63 @@ const styles = theme => css`
   paper-slider .slider-knob-inner.paper-slider {
     background-color: ${theme.A500} !important;
     border: 2px solid ${theme.A500} !important;
+    transition: background ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};
   }
 
   paper-slider .ring.paper-slider > .slider-knob.paper-slider > .slider-knob-inner.paper-slider {
     background-color: ${theme.A500} !important;
     border-color: transparent;
+    transition: background ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};
   }
 
   paper-progress #progressContainer #primaryProgress.paper-progress,
   paper-progress #progressContainer #primaryProgress {
     background-color: ${theme.A500} !important;
+    transition: background ${TRANSITION_FAST};
   }
 
   /*  Loading Progress */
   #current-loading-progress {
     background: ${theme.A500};
+    transition: background ${TRANSITION_FAST};
   }
 
   /*  Loading Overlay */
   #loading-overlay paper-spinner-lite .circle,
   #loading-overlay paper-spinner-lite .spinner-layer.paper-spinner-lite {
     border-color: ${theme.A500};
+    transition: border-color ${TRANSITION_FAST};
   }
 
   .primary-background:not([style-scope]):not(.style-scope) {
     background-color: ${theme.A500} !important;
+    transition: background ${TRANSITION_FAST};
   }
 
   paper-spinner .spinner-layer {
     border-color: ${theme.A500} !important;
+    transition: border-color ${TRANSITION_FAST};
   }
 
   .upload-dialog {
     .upload-dialog-title {
       background: ${theme.A500} !important;
+      transition: background ${TRANSITION_FAST};
     }
   }
 
   .upload-dialog-dragover {
     border-color: ${theme.A500} !important;
+    transition: border-color ${TRANSITION_FAST};
 
     &:not([style-scope]):not(.style-scope) {
       border-color: ${theme.A500} !important;
+      transition: border-color ${TRANSITION_FAST};
     }
 
     .upload-dialog-description {
       color: ${theme.A500} !important;
+      transition: color ${TRANSITION_FAST};
     }
   }
 
@@ -302,6 +348,7 @@ const styles = theme => css`
   .progress-bar-horizontal {
     .progress-bar-thumb {
       background-color: ${theme.A500} !important;
+      transition: background ${TRANSITION_FAST};
     }
   }
 
@@ -312,6 +359,7 @@ const styles = theme => css`
   .material-card .explicit,
   .podcast-series-view .material-container-details .info .title .explicit {
     background: ${theme.A500};
+    transition: background ${TRANSITION_FAST};
   }
 
   /*  Sidebar Navigation */
@@ -321,25 +369,30 @@ const styles = theme => css`
       font-weight: 700;
       color: ${theme.A500};
       border-left: 2px solid ${theme.A500};
+      transition: color ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};
 
       core-icon,
       iron-icon {
         color: ${theme.A500};
+        transition: color ${TRANSITION_FAST};
       }
     }
   }
 
   gpm-quick-nav .items.gpm-quick-nav > [selected] {
     color: ${theme.A500} !important;
+    transition: color ${TRANSITION_FAST};
   }
 
   .solid-hero core-image#material-hero-image,
   .solid-hero iron-image#material-hero-image {
     background-color: ${theme.A500} !important;
+    transition: background ${TRANSITION_FAST};
   }
 
   .material-detail-view .material-container-details .read-more-button {
     color: ${theme.A500};
+    transition: color ${TRANSITION_FAST};
   }
 
   /*  Page Play Button (Top Right) */
@@ -348,6 +401,7 @@ const styles = theme => css`
   .paper-fab-0,
   paper-fab {
     background: ${theme.A500};
+    transition: background ${TRANSITION_FAST};
 
     &:hover,
     &.keyboard-focus {
@@ -360,6 +414,7 @@ const styles = theme => css`
   paper-slider::shadow #sliderBar::shadow #activeProgress,
   paper-slider::shadow #sliderKnobInner {
     background: ${theme.A500};
+    transition: background ${TRANSITION_FAST};
   }
 
   /*  Various Music Buttons */
@@ -367,26 +422,31 @@ const styles = theme => css`
   #player.material .material-player-middle paper-icon-button[data-id='repeat'].active iron-icon,
   #player.material .material-player-middle paper-icon-button[data-id='shuffle'].active iron-icon {
     color: ${theme.A500} !important;
+    transition: color ${TRANSITION_FAST};
   }
 
   #player.material sj-icon-button[data-id='cast']::shadow core-icon[aria-label='cast-connected'],
   #player.material sj-icon-button[data-id='cast']::shadow iron-icon[aria-label='cast-connected'] {
     color: ${theme.A500} !important;
+    transition: color ${TRANSITION_FAST};
   }
 
   #player.material .material-player-middle paper-icon-button[data-id='play-pause']:not([disabled]) iron-icon,
   #player.material .material-player-middle sj-icon-button[data-id='play-pause']:not([disabled]) {
     color: ${theme.A500};
+    transition: color ${TRANSITION_FAST};
   }
 
   sj-play-button #pulse.sj-play-button {
     background: ${theme.A500} !important;
+    transition: background ${TRANSITION_FAST};
   }
 
   /*  Homepage Scrolling Module */
   sj-scrolling-module {
     .module-title-underline {
       background: ${theme.A500} !important;
+      transition: background ${TRANSITION_FAST};
     }
   }
 
@@ -396,6 +456,7 @@ const styles = theme => css`
       .sj-page-tab.sj-page-indicator.iron-selected {
         iron-icon {
           color: ${theme.A500} !important;
+          transition: color ${TRANSITION_FAST};
         }
       }
     }
@@ -406,6 +467,7 @@ const styles = theme => css`
   .top-charts-view .song-row [data-col='index'] .column-content:not([style-scope]):not(.style-scope),
   .top-charts-view .song-row [data-col='index'] .content {
     color: ${theme.A500};
+    transition: color ${TRANSITION_FAST};
   }
 
   /*  Subscribe Icon */
@@ -428,6 +490,7 @@ const styles = theme => css`
   /* Secondary Toolbar Tabs Indicator */
   #selectionBar {
     border-color: ${theme.A500} !important;
+    transition: border-color ${TRANSITION_FAST};
   }
 `;
 
