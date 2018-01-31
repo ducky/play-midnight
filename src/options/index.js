@@ -26,6 +26,14 @@ const OPTIONS = [
 
   // Section - Colorize
   {
+    id: 'albumAccents',
+    section: 'colorize',
+    type: 'boolean',
+    defaultValue: false,
+    title: 'Enable Now Playing Accents',
+    description: 'This enabled your accent color to change based on the current playing song similar to Android Oreo',
+  },
+  {
     id: 'theme',
     plural: 'themes',
     section: 'colorize',

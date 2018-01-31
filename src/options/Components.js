@@ -1,4 +1,5 @@
 import AccentsOnly from './components/AccentsOnly';
+import AlbumAccents from './components/AlbumAccents';
 import Core from './components/Core';
 import Enabled from './components/Enabled';
 import Favicon from './components/Favicon';
@@ -20,6 +21,9 @@ export default [
   // General
   AccentsOnly,
   Enabled,
+
+  // Colorize
+  AlbumAccents,
 
   // Customize
   Favicon,

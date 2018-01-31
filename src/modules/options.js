@@ -26,6 +26,7 @@ import { actions as toastActions, TOAST_STANDARD } from 'modules/toast';
 
 // State
 const defaultState = {
+  alternateAccent: null,
   data: {},
   dataCache: {},
   menuVisible: false,
@@ -33,6 +34,7 @@ const defaultState = {
 
 // Selectors
 export const selectors = {
+  alternateAccent: state => state.options.alternateAccent,
   menuVisible: state => state.options.menuVisible,
   options: state => OPTIONS.filter(o => !o.static),
   optionsAll: state => OPTIONS,
@@ -41,9 +43,14 @@ export const selectors = {
   version: () => AppInfo.version,
 };
 
-selectors.theme = createSelector([selectors.optionsValues], options => {
+selectors.theme = createSelector([selectors.optionsValues, selectors.alternateAccent], (options, alternateAccent) => {
   const foundTheme = find(options.themes, { id: options.theme });
   const theme = foundTheme ? foundTheme : { accent: DEFAULT_ACCENT, background: DEFAULT_BACKGROUND };
+
+  if (options.albumAccents && alternateAccent) {
+    return createTheme(options.enabled, theme.background, alternateAccent);
+  }
+
   return createTheme(options.enabled, theme.background, theme.accent);
 });
 
@@ -74,6 +81,7 @@ export const actions = createActions(
   'SAVE_OPTIONS',
   'SAVE_OPTIONS_RESPONSE',
   'TOGGLE_MENU',
+  'UPDATE_ALTERNATE_ACCENT',
   'UPDATE_OPTION',
   'UPDATE_SAVE_OPTION'
 );
@@ -293,6 +301,11 @@ export default handleActions(
           [id]: value,
         },
       };
+    },
+
+    // Accent
+    [actions.updateAlternateAccent](state, { payload: alternateAccent }) {
+      return { ...state, alternateAccent };
     },
 
     // Menu
