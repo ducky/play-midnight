@@ -11,8 +11,6 @@ import StyledOptions, { Backdrop } from './Options.styled';
 import { OptionArray, OptionCheckbox, OptionString, OptionThemes } from './Option';
 import Section from './Section';
 
-const VERSION_NUMBER = '3.0.0';
-
 const OPTION_TYPES = {
   array: OptionArray,
   boolean: OptionCheckbox,
@@ -25,6 +23,7 @@ const Options = ({
   visible,
   sections,
   values,
+  version,
   onArrayChange,
   onOptionChange,
   onTargetedChange,
@@ -75,7 +74,7 @@ const Options = ({
                 Play Midnight <span>Options</span>
               </div>
               <div className="Options__header-version">
-                v{VERSION_NUMBER} by{' '}
+                v{version} by{' '}
                 <a href="https://christieman.com/" rel="noopener noreferrer" target="_blank">
                   Chris Tieman
                 </a>
