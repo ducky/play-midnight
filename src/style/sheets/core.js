@@ -18,6 +18,7 @@ const styles = theme => css`
   ::-webkit-scrollbar {
     width: 11px;
     background: ${transparentize(theme.B400, 0.6)};
+    transition: background ${TRANSITION_FAST};
 
     &:hover {
       background: ${transparentize(theme.B400, 0.7)};
@@ -30,6 +31,7 @@ const styles = theme => css`
 
   ::-webkit-scrollbar-track {
     background: ${transparentize(theme.B400, 0.6)};
+    transition: background ${TRANSITION_FAST};
 
     &:hover {
       background: ${transparentize(theme.B400, 0.7)};
