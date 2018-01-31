@@ -13,7 +13,7 @@ const awaitElement = async (where = 'body') => {
       }
     });
 
-    observer.observe(document.body, { childList: true });
+    observer.observe(document.body, { childList: true, subtree: true });
   });
 };
 
