@@ -10,6 +10,7 @@ import Options from './Options';
 const mapStateToProps = state => ({
   sections: selectors.sortedOptions(state),
   values: selectors.optionsValues(state),
+  version: selectors.version(state),
   menuVisible: state.options.menuVisible,
 });
 
@@ -43,13 +44,14 @@ class OptionsContainer extends PureComponent {
   };
 
   render() {
-    const { sections, theme, menuVisible, values } = this.props;
+    const { sections, theme, menuVisible, values, version } = this.props;
 
     return (
       <Options
         theme={theme}
         visible={menuVisible}
         values={values}
+        version={version}
         sections={sections}
         onClose={this.closeOptions}
         onSave={this.saveOptions}
