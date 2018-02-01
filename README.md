@@ -1,5 +1,7 @@
 ## Play Midnight - Chrome Extension
 
+[![Join the chat at https://gitter.im/play-midnight/Lobby](https://badges.gitter.im/play-midnight/Lobby.svg)](https://gitter.im/play-midnight/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Install now.](https://img.shields.io/badge/chrome%20web%20store-download-blue.svg)](https://chrome.google.com/webstore/detail/play-midnight-for-google/ljmjmhjkcgfmfdhgplikncgndbdeckci)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/d/ljmjmhjkcgfmfdhgplikncgndbdeckci.svg)](https://chrome.google.com/webstore/detail/play-midnight-for-google/ljmjmhjkcgfmfdhgplikncgndbdeckci)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/ljmjmhjkcgfmfdhgplikncgndbdeckci.svg)](https://chrome.google.com/webstore/detail/play-midnight-for-google/ljmjmhjkcgfmfdhgplikncgndbdeckci)
