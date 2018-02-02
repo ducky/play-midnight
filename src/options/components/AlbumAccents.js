@@ -1,11 +1,27 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import Vibrant from 'node-vibrant';
+import forIn from 'lodash/forIn';
 
 import withOptions from 'hoc/withOptions';
 
 import awaitElement from 'utils/awaitElement';
 import { actions, selectors } from 'modules/options';
+
+const colorDebug = (swatches, src) => {
+  let str = '';
+  let colors = [];
+
+  forIn(swatches, (swatch, key) => {
+    if (swatch) {
+      str += `%c${key} `;
+      colors.push(`color: ${swatch.getHex()}; font-weight: 700; font-family: Helvetica;`);
+    }
+  });
+
+  console.log('%c   ', `font-size: 80px; background: url(${src}) no-repeat; background-size: 90px 90px;`);
+  console.log(str, ...colors);
+};
 
 const mapStateToProps = state => ({
   alternateAccent: selectors.alternateAccent(state),
@@ -18,10 +34,14 @@ class Core extends Component {
   getImageAccent = async src => {
     const swatches = await Vibrant.from(src).getPalette();
 
+    // colorDebug(swatches, src);
+
     if (!swatches) {
       return null;
     } else if (swatches.Vibrant) {
       return swatches.Vibrant.getHex();
+    } else if (swatches.LightVibrant) {
+      return swatches.LightVibrant.getHex();
     } else if (swatches.Muted) {
       return swatches.Muted.getHex();
     } else if (swatches.DarkVibrant) {
@@ -70,8 +90,13 @@ class Core extends Component {
   }
 
   // Invoke Enable/Disable on options change
-  componentWillReceiveProps({ options }) {
-    if (!options.albumAccents) {
+  componentWillReceiveProps({ options: nextOptions }) {
+    const { options } = this.props;
+
+    // Prevent unnecessary action on disable
+    if (options.albumAccents === nextOptions.albumAccents) return;
+
+    if (!nextOptions.albumAccents) {
       this.disable();
     } else {
       this.enable();
