@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 
+import { selectors } from 'modules/modal';
+
 import { stripTransition, TRANSITION_LIGHTNING, TRANSITION_FAST } from 'style/theme';
 
 import AlertModal from 'components/Modals/AlertModal';
@@ -50,6 +52,8 @@ const ModalConductor = ({ modals = [] }) => {
   );
 };
 
-const stateToProps = state => state.modal;
+const stateToProps = state => ({
+  modals: selectors.modals(state),
+});
 
 export default connect(stateToProps)(ModalConductor);
