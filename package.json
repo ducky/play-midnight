@@ -41,7 +41,7 @@
   "scripts": {
     "start": "parcel build src/background.js --out-dir dist && parcel --no-hmr src/index.html",
     "dev":
-      "parcel build src/index.js --no-minify --out-dir build && parcel build src/background.js --no-minify --out-dir build",
+      "parcel build src/play-midnight.js --no-minify --out-dir build && parcel build src/background.js --no-minify --out-dir build",
     "prod": "node ./scripts/production.js"
   },
   "babel": {

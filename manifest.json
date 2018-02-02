@@ -29,7 +29,7 @@
     {
       "matches": ["*://play.google.com/music/listen*"],
       "run_at": "document_end",
-      "js": ["build/index.js"]
+      "js": ["build/play-midnight.js"]
     }
   ],
 
