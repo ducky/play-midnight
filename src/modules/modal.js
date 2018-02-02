@@ -19,6 +19,11 @@ export const actions = createActions(
   'CLOSE_MODAL'
 );
 
+// Selectors
+export const selectors = {
+  modals: state => state.modal.modals,
+};
+
 // Helpers
 const updateOrCreateModal = (modals, modal) => {
   const id = modal.id ? modal.id : uuid();
