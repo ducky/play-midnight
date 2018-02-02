@@ -3,6 +3,9 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import { selectors as optionSelectors } from 'modules/options';
+import { selectors } from 'modules/toast';
+
 import { stripTransition, TRANSITION_FAST, TRANSITION_MEDIUM } from 'style/theme';
 import AlertToast from 'components/Toasts/AlertToast';
 import SuccessToast from 'components/Toasts/SuccessToast';
@@ -17,13 +20,15 @@ const ToastContainer = styled.div`
   top: 79px;
   right: 26px;
   z-index: 119;
+
+  ${props => props.hasSidebar && `right: 326px`};
 `;
 
-const ToastConductor = ({ toasts = [] }) => {
+const ToastConductor = ({ options = {}, toasts = [] }) => {
   const getToastComponent = type => types[type] || null;
 
   return (
-    <ToastContainer>
+    <ToastContainer hasSidebar={options.staticPlaylists}>
       <ReactCSSTransitionGroup
         transitionName="toast"
         transitionEnterTimeout={stripTransition(TRANSITION_MEDIUM)}
@@ -47,6 +52,9 @@ const ToastConductor = ({ toasts = [] }) => {
   );
 };
 
-const stateToProps = state => state.toast;
+const stateToProps = state => ({
+  options: optionSelectors.optionsValues(state),
+  toasts: selectors.toasts(state),
+});
 
 export default connect(stateToProps)(ToastConductor);
