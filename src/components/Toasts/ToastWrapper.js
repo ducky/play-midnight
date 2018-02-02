@@ -144,7 +144,7 @@ class ToastWrapper extends PureComponent {
         transitionEnter={transitionEnter}
         transitionLeave={transitionLeave}
       >
-        <div className="Toast__header">Play Midnight - {title}</div>
+        <div className="Toast__header">{title}</div>
         <div className="Toast__content">{children}</div>
       </Toast>
     );
