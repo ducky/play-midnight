@@ -3,13 +3,8 @@ import { createPortal } from 'react-dom';
 
 import awaitElement from 'utils/awaitElement';
 
-// There has to be a better way to do this... 😭
 const withPortal = where => Component => {
   class PortalComponent extends PureComponent {
-    state = {
-      render: false,
-    };
-
     constructor(props) {
       super(props);
       this.el = document.querySelector(where);
@@ -17,16 +12,15 @@ const withPortal = where => Component => {
 
     async componentDidMount() {
       if (this.el) {
-        this.setState({ render: true });
+        this.elementExists = true;
       } else {
         this.el = await awaitElement(where);
-        this.setState({ render: true });
+        this.elementExists = true;
       }
     }
 
     render() {
-      const { render } = this.state;
-      return render ? createPortal(<Component {...this.props} />, this.el) : null;
+      return this.elementExists ? createPortal(<Component {...this.props} />, this.el) : null;
     }
   }
 
