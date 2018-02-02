@@ -8,7 +8,7 @@ const BUILD_DIRECTORY = `deploy`;
 const NORMALIZED_ROOT = path.normalize(`${__dirname}/..`);
 const NORMALIZED_DIRECTORY = path.normalize(`${NORMALIZED_ROOT}/${BUILD_DIRECTORY}`);
 
-const BUILD_COMMAND = `parcel build src/index.js --no-cache --out-dir ${NORMALIZED_DIRECTORY}/build`;
+const BUILD_COMMAND = `parcel build src/play-midnight.js --no-cache --out-dir ${NORMALIZED_DIRECTORY}/build`;
 const BUILD_BG_COMMAND = `parcel build src/background.js --no-cache --out-dir ${NORMALIZED_DIRECTORY}/build`;
 
 const copyRoot = async fileName => {
