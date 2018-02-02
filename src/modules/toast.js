@@ -10,6 +10,11 @@ const defaultState = {
   toasts: [],
 };
 
+// Selectors
+export const selectors = {
+  toasts: state => state.toast.toasts,
+};
+
 // Actions
 export const actions = createActions(
   {
