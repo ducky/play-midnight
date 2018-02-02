@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const NOTIFICATION_TYPE = 'TOAST';
 
 export const DETAILS = {
-  title: 'Update v3.1.1',
+  title: 'Update v3.2.0',
 };
 
 const Wrapper = styled.div`
