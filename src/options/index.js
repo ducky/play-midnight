@@ -31,7 +31,8 @@ const OPTIONS = [
     type: 'boolean',
     defaultValue: false,
     title: 'Enable Now Playing Accents',
-    description: 'This enabled your accent color to change based on the current playing song similar to Android Oreo',
+    description:
+      'Changes your accent color based on the the more vibrant colors in the current album art, similar to Android Oreo.',
   },
   {
     id: 'theme',
