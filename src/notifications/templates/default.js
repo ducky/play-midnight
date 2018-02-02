@@ -74,6 +74,11 @@ export const Template = () => (
         This enables you to keep your accent color while Play Midnight is disabled.
       </ListItem>
 
+      <ListItem title="Album Accents">
+        Changes your accent color based on the currently playing song! This color comes from the dominant colors in the
+        album art, similar to Android Oreo.
+      </ListItem>
+
       <ListItem title="Themes">
         Customize the look and feel of Play Music to look exactly how you want. Allows you to update background and
         accent colors.
