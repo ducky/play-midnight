@@ -8,10 +8,12 @@ import { selectors } from 'modules/toast';
 
 import { stripTransition, TRANSITION_FAST, TRANSITION_MEDIUM } from 'style/theme';
 import AlertToast from 'components/Toasts/AlertToast';
+import NotificationToast from 'components/Toasts/NotificationToast';
 import SuccessToast from 'components/Toasts/SuccessToast';
 
 const types = {
   alert: <AlertToast />,
+  notification: <NotificationToast />,
   success: <SuccessToast />,
 };
 

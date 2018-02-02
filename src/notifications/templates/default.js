@@ -27,6 +27,8 @@ const FAB = withTheme(styled.div`
   }
 `);
 
+export const NOTIFICATION_TYPE = 'MODAL';
+
 export const DETAILS = {
   buttonText: 'Cool Beans!',
 };

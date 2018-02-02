@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 
 import { FootNote, List, ListItem, Text } from 'notifications/components';
 
+export const NOTIFICATION_TYPE = 'MODAL';
+
 export const DETAILS = {
   buttonText: 'Allons-y!',
 };

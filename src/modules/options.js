@@ -151,28 +151,41 @@ export function* checkUpdateSaga() {
     const versionPrevious = yield select(selectors.versionPrevious);
     const notification = versionPrevious ? NOTIFICATIONS[version] : NOTIFICATIONS['default'];
 
-    const showModal = function*(version, notification) {
+    const showNotification = function*(version, { NOTIFICATION_TYPE, ...notification }) {
       yield delay(5000);
-      yield put(
-        modalActions.showModal('notification', {
-          id: 'PM_NOTIFICATION',
-          details: {
-            version,
-            notification,
-          },
-          onClose: () => {
-            // TODO - Has to be a better way
-            store.dispatch(actions.updateSaveOption({ id: 'lastRun', value: version }));
-          },
-        })
-      );
+      if (NOTIFICATION_TYPE === 'MODAL') {
+        yield put(
+          modalActions.showModal('notification', {
+            id: 'PM_NOTIFICATION',
+            details: {
+              version,
+              notification,
+            },
+            onClose: () => {
+              store.dispatch(actions.updateSaveOption({ id: 'lastRun', value: version }));
+            },
+          })
+        );
+      } else {
+        yield put(
+          toastActions.createToast('notification', {
+            id: 'PM_NOTIFICATION',
+            details: {
+              version,
+              notification,
+            },
+            timeout: false,
+          })
+        );
+        yield put(actions.updateSaveOption({ id: 'lastRun', value: version }));
+      }
     };
 
     if (!versionPrevious) {
-      yield showModal(version, notification);
+      yield showNotification(version, notification);
     } else if (semver.lt(versionPrevious, version)) {
       if (notification) {
-        yield showModal(version, notification);
+        yield showNotification(version, notification);
       } else {
         console.log(
           `No update notification found for v${version}.`,
