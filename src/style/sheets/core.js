@@ -268,7 +268,7 @@ const styles = theme => css`
   }
 
   paper-header-panel#content-container #iflFab iron-icon {
-    color: ${isLight(theme.A500) ? FONT_LIGHT : FONT_DARK} !important;
+    color: ${theme.B500} !important;
   }
 
   div.icon {
