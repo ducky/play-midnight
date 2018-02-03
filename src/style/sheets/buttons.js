@@ -67,8 +67,17 @@ const styles = theme => css`
   }
 
   /* Play Button */
-  sj-play-button #pulse.sj-play-button {
-    opacity: 0.3;
+  sj-play-button {
+    background: transparent !important;
+
+    &:hover #pulse.sj-play-button {
+      transform: scale(1.15) !important;
+    }
+
+    #pulse.sj-play-button {
+      opacity: 0.3;
+      transform: scale(0.95) !important;
+    }
   }
 `;
 
