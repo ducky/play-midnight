@@ -116,8 +116,11 @@ class ToastWrapper extends PureComponent {
     }
   };
 
-  withClose = (action = noop) => () => {
+  withClose = (action = noop) => ({ target }) => {
     const { id, close } = this.props;
+
+    // Prevent close when clicking link
+    if (target.tagName.toLowerCase() === 'a') return;
 
     action();
     close(id);
