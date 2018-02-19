@@ -163,6 +163,12 @@ const styles = theme => css`
         }
       }
 
+      &.selected-song-row {
+        td[data-col='song-details'] {
+          border-left: 2px solid ${theme.A500};
+        }
+      }
+
       &.currently-playing,
       &.hover,
       &:hover {
