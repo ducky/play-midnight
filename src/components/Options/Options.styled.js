@@ -80,12 +80,6 @@ const StyledOptions = styled.div`
     z-index: 1;
     transition: background ${TRANSITION_FAST}, color ${TRANSITION_FAST}, border-color ${TRANSITION_FAST};
 
-    .Options__header-logo {
-      height: 50px;
-      width: auto;
-      margin: 0 0 10px;
-    }
-
     .Options__header-title {
       font-weight: 300;
       font-size: 28px;

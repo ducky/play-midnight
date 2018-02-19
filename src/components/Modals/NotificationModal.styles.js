@@ -23,12 +23,6 @@ const NotificationModal = styled.div`
     padding: 15px 25px;
     margin: 0;
 
-    .Modal__header-logo {
-      height: 55px;
-      width: auto;
-      margin: 0 0 10px;
-    }
-
     .Modal__header-title {
       background: none;
       padding: 0;

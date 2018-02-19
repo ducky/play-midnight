@@ -1,7 +1,7 @@
 import { injectGlobal } from 'styled-components';
 
 import { getUrl } from 'lib/api';
-import PlayMidnightLogo from 'assets/images/play-logo-dark.png';
+import PlayMidnightLogo from 'assets/images/Logo.svg';
 
 injectGlobal`
   body{
@@ -14,14 +14,14 @@ injectGlobal`
 
     &:before {
       position: absolute;
-      top: 0;
+      top: 90px;
       left: 50%;
       transform: translateX(-50%);
       content: '';
-      width: 256px;
-      height: 256px;
+      width: 228px;
+      height: 228px;
       background: url(${getUrl(PlayMidnightLogo)});
-      background-size: 256px 256px;
+      background-size: 228px 228px;
     }
 
     svg {

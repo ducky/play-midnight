@@ -3,15 +3,14 @@ import React, { Fragment } from 'react';
 import ModalWrapper from './ModalWrapper';
 import StyledNotification from './NotificationModal.styles';
 
-import PlayMidnightLogo from 'assets/images/play-logo-dark.png';
-import { getUrl } from 'lib/api';
+import PlayMidnightLogo from 'components/PlayMidnightLogo';
 
 const NotificationModal = ({ details, ...props }) => {
   const { DETAILS, Template } = details.notification;
   const title = (
     <Fragment>
       <div className="Modal__header-image">
-        <img className="Modal__header-logo" alt="Play Midnight Logo" src={getUrl(PlayMidnightLogo)} />
+        <PlayMidnightLogo style={{ marginBottom: 5 }} />
       </div>
       <h2 className="Modal__header-title">
         Play Midnight <em>Material</em>

@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import { getUrl } from 'lib/api';
-
 import { stripTransition, TRANSITION_FAST } from 'style/theme';
 import Button from 'components/Button';
-import PlayMidnightLogo from 'assets/images/play-logo-dark.png';
 
 import StyledOptions, { Backdrop } from './Options.styled';
 import { OptionArray, OptionCheckbox, OptionString, OptionThemes } from './Option';
+import PlayMidnightLogo from 'components/PlayMidnightLogo';
 import Section from './Section';
 
 const OPTION_TYPES = {
@@ -68,7 +66,7 @@ const Options = ({
           <StyledOptions transitionEnter={TRANSITION_FAST} transitionLeave={TRANSITION_FAST} theme={theme}>
             <header className="Options__header">
               <div className="image-header">
-                <img className="Options__header-logo" alt="Play Midnight Logo" src={getUrl(PlayMidnightLogo)} />
+                <PlayMidnightLogo style={{ marginBottom: 5 }} />
               </div>
               <div className="Options__header-title">
                 Play Midnight <span>Options</span>
