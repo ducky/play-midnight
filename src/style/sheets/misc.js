@@ -92,9 +92,10 @@ const styles = theme => css`
   #loading-overlay,
   #loading-overlay[data-type='full-loading-overlay'],
   #loading-overlay[data-type='regular-loading-overlay'],
+  #loading-overlay[data-type='ifl-loading-overlay'],
   .core-overlay-backdrop.core-opened,
   .zoomable-image-dialog-bg {
-    background: ${transparentize(theme.B25, 0.8)};
+    background-color: ${transparentize(theme.B25, 0.8)};
     opacity: 1;
   }
 
