@@ -148,17 +148,13 @@ class ColorPickerModal extends PureComponent {
           <div>
             <h4 style={{ textAlign: 'center' }}>Background Color</h4>
             <PickerWrapper theme={theme}>
-              <ChromePicker
-                color={background}
-                disableAlpha={true}
-                onChangeComplete={this.onColorChange('background')}
-              />
+              <ChromePicker color={background} disableAlpha={true} onChange={this.onColorChange('background')} />
             </PickerWrapper>
           </div>
           <div>
             <h4 style={{ textAlign: 'center' }}>Accent Color</h4>
             <PickerWrapper theme={theme}>
-              <ChromePicker color={accent} disableAlpha={true} onChangeComplete={this.onColorChange('accent')} />
+              <ChromePicker color={accent} disableAlpha={true} onChange={this.onColorChange('accent')} />
             </PickerWrapper>
           </div>
         </Grid>
