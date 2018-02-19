@@ -71,7 +71,8 @@ const styles = theme => css`
     }
 
     caption,
-    td {
+    td,
+    td:nth-child(2) {
       color: ${theme.font_primary};
     }
   }
