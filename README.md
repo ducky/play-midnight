@@ -5,7 +5,6 @@
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/ljmjmhjkcgfmfdhgplikncgndbdeckci.svg)](https://chrome.google.com/webstore/detail/play-midnight-for-google/ljmjmhjkcgfmfdhgplikncgndbdeckci)
 &nbsp;&nbsp;|&nbsp;&nbsp;
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/datducky)
-[![Donate](https://img.shields.io/badge/Donate-Coinbase-green.svg)](https://www.coinbase.com/christieman)
 
 ### A Nighttime Theme for Google Play Music
 
